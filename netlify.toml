@@ -1,13 +1,7 @@
-# The following is for netlify to automatically build and deploy the app with every 
-# github pull request that is merged
-[build]
-  base = "frontend/"
-  publish = "frontend/build"
-  command = "yarn build"
-
 # The following redirect is intended for use with most SPAs that handle
 # routing internally.
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  
