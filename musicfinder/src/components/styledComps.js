@@ -1,7 +1,7 @@
 import styled, {css} from 'styled-components';
 
 export const AuthForm = styled.form`
-	height: 150px;
+	height: fit-content;
 	width: 300px;
 	
 	display: flex;
@@ -15,6 +15,7 @@ export const Input = styled.input`
 	padding: 5px;
 	border: none;
 	border-radius: 5px;
+	margin: 5px 0;
 
 	:hover {
 		cursor: pointer;
