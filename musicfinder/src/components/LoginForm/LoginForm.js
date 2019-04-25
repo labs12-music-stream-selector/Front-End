@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 import {AuthForm, Input} from '../styledComps';
 
@@ -23,9 +24,24 @@ const LoginForm = (props) => {
 		</>
 	)
 
-	function handleLogin(username, password) {
+	async function handleLogin(username, password) {
 		// TODO: axios.post() to login route here
-		console.log(username, password)		
+		const url = process.env.BASEURL;
+		if(username.length === 0 || password.length === 0){
+			alert('Please provide username and password');
+			return;
+		}
+		
+		try {
+			const response = await axios.post(`${url}/login`, {
+				username,
+				password
+			});
+
+			localStorage.setItem('authToken', response.data);
+		} catch (error) {
+			alert(error);
+		}
 	}
 }
 
