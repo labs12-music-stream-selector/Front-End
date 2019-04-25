@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 import {AuthForm, Input} from '../styledComps';
 
@@ -13,6 +14,11 @@ const LoginForm = (props) => {
 				<Input value = {username} type = 'text' placeholder='username' onChange = {e => setUsername(e.target.value)}/>
 				<Input value = {password} type = 'password' placeholder='password' onChange = {e => setPassword(e.target.value)}/>
 				<Input bgColor = '#EB5757' type = 'submit' value = 'Login' onClick = {() => handleLogin(username, password)}/>
+				<Link to = '/register' style = {{color: 'white', 
+												fontSize: '.9em', 
+												textDecoration: 'none',
+												width: 'fitContent',
+    											alignSelf: 'flex-end'}}>SignUp</Link>
 			</AuthForm>
 		</>
 	)
