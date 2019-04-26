@@ -5,7 +5,6 @@
   "author": "Logan Hufstetler <logan.hufstetler@gmail.com>, Jonathan Bernal <jon@bluesandswebdesign.com>, Md Kawsar Hussen <kawsarhussen@gmail.com>, John Humphreys, Xander Jake de los Santos <13279523+xanderjakeq@users.noreply.github.com>, Sammy Lee, Davina Taylor <davinaleo2007@yahoo.com>",
   "dependencies": {
     "axios": "^0.18.0",
-    "dotenv": "^7.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
