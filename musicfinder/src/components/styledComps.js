@@ -1,8 +1,8 @@
 import styled, {css} from 'styled-components';
 
 export const AuthForm = styled.form`
-	height: 150px;
-	width: 300px;
+	height: fit-content;
+	width: fit-content;
 	
 	display: flex;
 	flex-direction: column;
@@ -11,16 +11,16 @@ export const AuthForm = styled.form`
 
 export const Input = styled.input`
 	height: 30px;
-	max-width: 100%;
+	min-width: 215px;
 	padding: 5px;
 	border: none;
 	border-radius: 5px;
-
-	:hover {
-		cursor: pointer;
-	}
+	margin: 5px 0;
 
 	${props => props.bgColor && css`
 		background-color: ${props.bgColor};
+		:hover {
+			cursor: pointer;
+		}
 	`}
 `
