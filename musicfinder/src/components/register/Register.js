@@ -30,7 +30,6 @@ class Register extends React.Component {
     return(
       <RegBar className ='login-box'>
           <form  className ='login-form' onSubmit={e => e.preventDefault()}>
-          <div className='input-box' >
               <input 
                   className ='input-form'
                   type="text"
@@ -40,8 +39,8 @@ class Register extends React.Component {
                   onChange={this.handleInput}
               />
               <input 
-                  className ='input-form'
-                  type="text"
+                  className='input-form'
+                  type="email"
                   placeholder="email"
                   name="email"
                   value={this.state.email}
@@ -49,7 +48,7 @@ class Register extends React.Component {
               />
               
               <input
-                  className ='input-form'
+                  className='input-form'
                   type= 'password'
                   placeholder= 'Password'
                   name='password'
@@ -57,7 +56,6 @@ class Register extends React.Component {
                   onChange={this.handleInput} 
               />  
               <button onClick={this.handleSubmit}> Register</button>  
-              </div>  
           </form>
       </RegBar>
     );
@@ -67,12 +65,23 @@ export default Register;
 
 
 const RegBar = styled.div`
+    height: 150px;
+    width: 600px;
     .input-form{
         margin: 5px;
+        height: 25px;
+        border: none;
+        border-radius: 5px;
+        text-align:center;
     }
     button{
       background: #EB5757;
       border-radius: 5px;
       color : white;
+      
+    }
+    button:hover{
+      background: black;
+      cursor : pointer;
     }
 `
