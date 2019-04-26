@@ -25,7 +25,7 @@ const LoginForm = (props) => {
 	)
 
 	async function handleLogin(username, password) {
-		const url = process.env.REACT_APP_BASEURL || 'http://localhost:5000';
+		const url = process.env.REACT_APP_FE_URL || 'http://localhost:5000';
 
 		if(username.length === 0 || password.length === 0){
 			alert('Please provide username and password');
@@ -37,7 +37,7 @@ const LoginForm = (props) => {
 				username: username,
 				password: password
 			});
-
+			alert('successfully logged in')
 			localStorage.setItem('authToken', response.data.token);
 		} catch (error) {
 			alert(error);
