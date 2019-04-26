@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-const baseUrl = process.env.REACT_APP_FE_URL || "https://fantabulous-music-finder.herokuapp.com/";
+import { Link } from 'react-router-dom';
+const baseUrl = process.env.REACT_APP_FE_URL || "https://fantabulous-music-finder.herokuapp.com";
 class Register extends React.Component {
   constructor() {
     super();
@@ -16,15 +17,17 @@ class Register extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   };
   handleSubmit = e => {
+    try {
       axios
         .post(`${baseUrl}/api/register`, this.state)
         .then(res => { 
-          console.log(res);
-          this.props.history.push(`/api/login`);
+          console.log("Registration Successful");
+          this.props.history.push(`/login`);
       })
-      .catch(err => console.log(err),
-      )
+    } catch(err){
+      console.log(err)
   }
+}
 
   render(){
     return(
@@ -55,8 +58,9 @@ class Register extends React.Component {
                   value={this.state.password}
                   onChange={this.handleInput} 
               />  
-              <button onClick={this.handleSubmit}> Register</button>  
+              <button onClick={this.handleSubmit}> Register</button>           
           </form>
+          <LoginLink to="/login">Already have an account? Log in Here!</LoginLink>
       </RegBar>
     );
   }
@@ -83,5 +87,15 @@ const RegBar = styled.div`
     button:hover{
       background: black;
       cursor : pointer;
+    }
+`
+const LoginLink = styled(Link)`
+    font-size: 1rem;
+    text-decoration: underline;
+    color: white;
+    text-decoration: none;
+    margin: 6px auto;
+    &:visited {
+        color: red;
     }
 `
