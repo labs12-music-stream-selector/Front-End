@@ -26,7 +26,7 @@ const LoginForm = (props) => {
 
 	async function handleLogin(username, password) {
 		// TODO: axios.post() to login route here
-		const url = process.env.BASEURL;
+		const url = process.env.REACT_APP_BASEURL || 'http://localhost:5000/';
 		if(username.length === 0 || password.length === 0){
 			alert('Please provide username and password');
 			return;
