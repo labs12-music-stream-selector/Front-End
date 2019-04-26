@@ -25,20 +25,20 @@ const LoginForm = (props) => {
 	)
 
 	async function handleLogin(username, password) {
-		// TODO: axios.post() to login route here
-		const url = process.env.REACT_APP_BASEURL || 'http://localhost:5000/';
+		const url = process.env.REACT_APP_BASEURL || 'http://localhost:5000';
+
 		if(username.length === 0 || password.length === 0){
 			alert('Please provide username and password');
 			return;
 		}
 		
 		try {
-			const response = await axios.post(`${url}/login`, {
-				username,
-				password
+			const response = await axios.post(`${url}/api/login`, {
+				username: username,
+				password: password
 			});
 
-			localStorage.setItem('authToken', response.data);
+			localStorage.setItem('authToken', response.data.token);
 		} catch (error) {
 			alert(error);
 		}
