@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 const baseUrl = process.env.REACT_APP_FE_URL || "https://fantabulous-music-finder.herokuapp.com";
 class Register extends React.Component {
   constructor() {
@@ -31,6 +32,7 @@ class Register extends React.Component {
 
   render(){
     return(
+      <Router>
       <RegBar className ='login-box'>
           <form  className ='login-form' onSubmit={e => e.preventDefault()}>
               <input 
@@ -62,6 +64,7 @@ class Register extends React.Component {
           </form>
           <LoginLink to="/login">Already have an account? Log in Here!</LoginLink>
       </RegBar>
+      </Router>
     );
   }
 }  

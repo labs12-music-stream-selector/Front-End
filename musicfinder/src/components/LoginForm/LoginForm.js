@@ -1,28 +1,27 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-
+import OAuthGoogle from './OAuthGoogle.js'
 import {AuthForm, Input} from '../styledComps';
 
 const LoginForm = (props) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-
+	
 	return(
 		<>
 			<h1>Login</h1>
 			<AuthForm onSubmit = {e => e.preventDefault()}>
 				<Input value = {username} type = 'text' placeholder='username' onChange = {e => setUsername(e.target.value)}/>
 				<Input value = {password} type = 'password' placeholder='password' onChange = {e => setPassword(e.target.value)}/>
-				<Input bgColor = '#EB5757' type = 'submit' value = 'Login' onClick = {() => handleLogin(username, password)}/>
-				<Link to = '/register' style = {{color: 'white', 
-												fontSize: '.9em', 
-												textDecoration: 'none',
-												width: 'fitContent',
-    											alignSelf: 'flex-end'}}>SignUp</Link>
+				<Input bgColor = '#EB5757' type = 'submit' value = 'Login' onClick = {() => handleLogin(username, password)}/>		
 			</AuthForm>
+			<OAuthGoogle/>
+			
+			<Link to="/register">Don't have an account? Register Here!</Link>
 		</>
 	)
+	
 
 	async function handleLogin(username, password) {
 		const url = process.env.REACT_APP_FE_URL || "https://fantabulous-music-finder.herokuapp.com";
