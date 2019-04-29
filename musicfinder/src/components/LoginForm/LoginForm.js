@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import GoogleLogin from 'react-google-login';
 
 import {AuthForm, Input} from '../styledComps';
 
 const LoginForm = (props) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const responseGoogle = (response) => {
+		console.log("google console");
+		console.log(response);
+		this.signup(response, 'google');
+	}
 
 	return(
 		<>
@@ -14,15 +20,18 @@ const LoginForm = (props) => {
 			<AuthForm onSubmit = {e => e.preventDefault()}>
 				<Input value = {username} type = 'text' placeholder='username' onChange = {e => setUsername(e.target.value)}/>
 				<Input value = {password} type = 'password' placeholder='password' onChange = {e => setPassword(e.target.value)}/>
-				<Input bgColor = '#EB5757' type = 'submit' value = 'Login' onClick = {() => handleLogin(username, password)}/>
-				<Link to = '/register' style = {{color: 'white', 
-												fontSize: '.9em', 
-												textDecoration: 'none',
-												width: 'fitContent',
-    											alignSelf: 'flex-end'}}>SignUp</Link>
+				<Input bgColor = '#EB5757' type = 'submit' value = 'Login' onClick = {() => handleLogin(username, password)}/>		
 			</AuthForm>
+			<GoogleLogin
+					clientId="Your Google ID"
+					buttonText="Login with Google"
+					onSuccess={responseGoogle}
+					onFailure={responseGoogle}/>
+			
+			<Link to="/register">Don't have an account? Register Here!</Link>
 		</>
 	)
+	
 
 	async function handleLogin(username, password) {
 		const url = process.env.REACT_APP_FE_URL || "https://fantabulous-music-finder.herokuapp.com";
