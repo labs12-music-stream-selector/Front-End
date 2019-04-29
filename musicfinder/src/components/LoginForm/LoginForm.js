@@ -1,19 +1,13 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import GoogleLogin from 'react-google-login';
-
+import OAuthGoogle from './OAuthGoogle.js'
 import {AuthForm, Input} from '../styledComps';
 
 const LoginForm = (props) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const responseGoogle = (response) => {
-		console.log("google console");
-		console.log(response);
-		this.signup(response, 'google');
-	}
-
+	
 	return(
 		<>
 			<h1>Login</h1>
@@ -22,11 +16,7 @@ const LoginForm = (props) => {
 				<Input value = {password} type = 'password' placeholder='password' onChange = {e => setPassword(e.target.value)}/>
 				<Input bgColor = '#EB5757' type = 'submit' value = 'Login' onClick = {() => handleLogin(username, password)}/>		
 			</AuthForm>
-			<GoogleLogin
-					clientId="Your Google ID"
-					buttonText="Login with Google"
-					onSuccess={responseGoogle}
-					onFailure={responseGoogle}/>
+			<OAuthGoogle/>
 			
 			<Link to="/register">Don't have an account? Register Here!</Link>
 		</>
