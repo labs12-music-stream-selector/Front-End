@@ -15,8 +15,7 @@ const YoutubePlayer = (props) => {
 
   return (
     <>
-      <h1>Player</h1>
-      <iframe width="400" height="300" src={`https://www.youtube.com/embed/${urlConstructor(url[0], playlist)}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="400" height="300" src={`https://www.youtube.com/embed/${urlConstructor(url, playlist)}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </>
   )
 }
