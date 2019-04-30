@@ -13,7 +13,7 @@ const DSdata = (props) => {
 		}).catch(err => {
 			console.log(err)
 		})
-	})
+	}, [])
 	
 	return (
 		<>
