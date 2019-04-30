@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import YouTube from 'react-youtube';
 
 const YoutubePlayer = (props) => {
 
