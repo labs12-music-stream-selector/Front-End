@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import YouTube from 'react-youtube';
 
 const YoutubePlayer = (props) => {
 
@@ -16,7 +17,7 @@ const YoutubePlayer = (props) => {
   return (
     <>
       <h1>Player</h1>
-      <iframe width="400" height="300" src={`https://www.youtube.com/embed/${urlConstructor(url[0], playlist)}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="400" height="300" src={`https://www.youtube.com/embed/${urlConstructor(props.url, props.playlist)}`} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
     </>
   )
 }
