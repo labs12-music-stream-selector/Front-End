@@ -1,4 +1,10 @@
 # Landing Page Content
+(possible TagLines)
+-	`Free music for everyone!`
+-	`Music by mood!`
+-	`Copyright free music for video creators!`
+
+idk
 
 ## Problem 
 -	Finding a cool music to use on a video and end up getting taken down because of copyrights.
