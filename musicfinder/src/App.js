@@ -8,6 +8,8 @@ import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer.js";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.js";
 import TermsOfService from "./components/TermsOfService/TermsOfService.js";
 
+import Browser from './components/Browser/Browser.js';
+
 function App() {
   return (
     <Router>
