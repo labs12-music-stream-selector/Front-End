@@ -3,7 +3,9 @@ import React from 'react';
 const Select = (props) => {
 
 	return (
-		<select onChange = {handleChange}>
+		<select onChange = {handleChange} style = {{
+			height: 'fit-content',
+		}}>
 			<option value = 'select'>Select Mood</option>
 			{props.options.map(option => {
 				return <option value = {option}>{option}</option>
@@ -13,7 +15,9 @@ const Select = (props) => {
 
 	function handleChange(e){
 		if(e.target.value !== 'select'){
-			props.getTracks(e.target.value);
+			// 
+			const url = `https://moody-beats-recommender-api.herokuapp.com/api/1/` // ${e.target.value}`;
+			props.getTracks(url);
 		}
 	}
 }
