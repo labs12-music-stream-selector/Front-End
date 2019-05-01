@@ -6,6 +6,7 @@ import Register from "./components/register/Register.js";
 import Login from "./components/LoginForm/LoginForm.js";
 import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer.js";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.js";
+import TermsOfService from "./components/TermsOfService/TermsOfService.js";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/player" component={YoutubePlayer} />
           <Route path="/privacypolicy" component={PrivacyPolicy} />
+          <Route path="/termsofservice" component={TermsOfService} />
         </header>
       </div>
     </Router>
