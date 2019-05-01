@@ -10,7 +10,6 @@ export default class OAuthGoogle extends Component {
                 redirect :false,
             };
     }
-
     signup = (res, type)=> {
         let postData;
 
@@ -25,15 +24,15 @@ export default class OAuthGoogle extends Component {
               };
         }
         if (postData) {
+            console.log(postData);
             PostData(postData).then((result) => {
-            let responseJson = result;
-            sessionStorage.setItem("userData", JSON.stringify(responseJson));
+            sessionStorage.setItem("token", result.data.token);
             this.setState({redirect: true});
             });
             } else {}
     }
     render() {
-        if (this.state.redirect || sessionStorage.getItem('userData')) {
+        if (this.state.redirect || sessionStorage.getItem('token')) {
             console.log("I am passes");
             return (<Redirect to={'/'}/>)
             
@@ -62,15 +61,13 @@ export function PostData(userData){
                  name: userData.name,
                  email: userData.email,
                  token: userData.token })
-            
-                .then((response) => console.log("success") ||console.log(response) )
                 .then((res) => {  resolve(res);}) 
                 .catch((error) => {reject(error);}); 
                 alert('successfully logged in');
-			    localStorage.setItem('token', response.data.token);         
+                localStorage.setItem('token', response.token);        
                 
         } catch(err){
-            console.log({Mesage: err});
+            console.log({Mesage: {err}});
         }
     });
 }
