@@ -9,7 +9,6 @@ const Browser = (props) => {
 	const [tracks, updateTracks] = useState([]);
 	const [tracksData, updateTracksData] = useState([]);
 	const [offset, updateOffset] = useState(0);
-	const [offsetMax, updateOffsetMax] = useState(6);
 
 	useEffect(() => {
 		// TODO: replace with correct url to get initial tracks
@@ -22,18 +21,29 @@ const Browser = (props) => {
 		<div style={{
 			display: 'flex',
 			flexWrap: 'wrap',
-			justifyContent: 'spaceBetween',
+			justifyContent: 'center',
 		}}>
-			<SearchBar searchTrack={searchTrack} />
-			<Select getTracks={getTracks} options={['sad', 'happy', 'sassy']} />
-			{tracks.map((track, index) => {
-				if (index <= offset + 5 && index >= offset) {
-					console.log(track);
-					return <YouTubePlayer key={track.url + index} url={track.url} />
-				} else {
-					return;
-				}
-			})}
+			<div style={{
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}>
+				<SearchBar searchTrack={searchTrack} />
+				<Select getTracks={getTracks} options={['sad', 'happy', 'sassy']} />
+			</div>
+			<div>
+				{tracks.map((track, index) => {
+					if (index <= offset + 5 && index >= offset) {
+						return <YouTubePlayer key={track.url + index} url={track.url} />
+					} else {
+						return;
+					}
+				})}
+			</div>
+			<div>
+				<button onClick={loadPrev}>Load Previous</button>
+				<button onClick={loadNext}>Load Next</button>
+			</div>
 
 		</div>
 	);
@@ -53,7 +63,7 @@ const Browser = (props) => {
 		const url = 'https://moody-beats-recommender-api.herokuapp.com/api/1/'
 		const res = await axios.get(url);
 		// return res.data;
-		console.log(res.data)
+		// console.log(res.data)
 	}
 
 	async function searchTrack(searchTerm) { // the fuzzy search goes here
@@ -63,6 +73,20 @@ const Browser = (props) => {
 		let fuse = new Fuse(tracksData, options);
 		// console.log(fuse.search(searchTerm));
 		updateTracks(fuse.search(searchTerm));
+		updateOffset(0);												// TODO: Double Check this worked!!!!!
+	}
+
+	function loadNext() {
+		console.log(tracks.length)
+		if (offset < tracks.length - 6) {
+			updateOffset(offset + 6);
+		}
+	}
+
+	function loadPrev() {
+		if (offset > 5) {
+			updateOffset(offset - 6);
+		}
 	}
 }
 
