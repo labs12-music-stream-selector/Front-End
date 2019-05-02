@@ -9,6 +9,9 @@ const Browser = (props) => {
 	const [tracks, updateTracks] = useState([]);
 	const [tracksData, updateTracksData] = useState([]);
 	const [offset, updateOffset] = useState(0);
+	const [offsetMax, updateOffsetMax] = useState(6);
+	const [relatedTracks, updateRelatedTracks] = useState([]);
+	const [otherRelatedTracks, updateOtherRelatedTracks] = useState([]);
 
 	useEffect(() => {
 		// TODO: replace with correct url to get initial tracks
@@ -16,13 +19,13 @@ const Browser = (props) => {
 		getTracks(url);
 	}, [])
 
-
 	return (
 		<div style={{
 			display: 'flex',
 			flexWrap: 'wrap',
 			justifyContent: 'center',
 		}}>
+
 			<div style={{
 				display: 'flex',
 				justifyContent: 'center',
@@ -34,7 +37,14 @@ const Browser = (props) => {
 			<div>
 				{tracks.map((track, index) => {
 					if (index <= offset + 5 && index >= offset) {
-						return <YouTubePlayer key={track.url + index} url={track.url} />
+						console.log(track)
+						return (
+							<>
+								<YouTubePlayer key={track.url + index} url={track.url} />
+								<button onClick = {e => getRelatedTracks(track.id)}> related tracks</button>
+								<button onClick = {e => getOtherRelatedTracks(track.track_title)}> other related tracks</button>
+							</>
+							)
 					} else {
 						return;
 					}
@@ -44,6 +54,20 @@ const Browser = (props) => {
 				<button onClick={loadPrev}>Load Previous</button>
 				<button onClick={loadNext}>Load Next</button>
 			</div>
+
+			<h3>related</h3>
+			<ul>
+				{relatedTracks.map(track => {
+					return <li>{track}</li>
+				})}
+			</ul>
+
+			<h3>other related</h3>
+			<ul>
+				{otherRelatedTracks.map(track => {
+					return <li>{track[0]}</li>
+				})}
+			</ul>
 
 		</div>
 	);
@@ -57,6 +81,34 @@ const Browser = (props) => {
 		})
 		updateTracks(data);
 		updateTracksData(data);
+	}
+
+	async function getRelatedTracks(id) {
+		const url = `https://moody-beats-recommender-api.herokuapp.com/api/${id}/`;
+		const res = await axios.get(url);
+		const relatedTracks = []; 
+		Object.keys(res.data).forEach(key => {
+			if(!['id', 'songs', 'mood', 'video_id'].includes(key) && res.data[key] !== null){
+				relatedTracks.push(res.data[key]);
+			}
+		});
+		console.log(relatedTracks);
+		updateRelatedTracks(relatedTracks)
+		return relatedTracks;
+	}
+
+	async function getOtherRelatedTracks(title) {
+		const url = `http://music-tracks-and-moods.herokuapp.com/api/${title}`;
+		const res = await axios.get(url);
+		const resTracks = []; 
+		Object.keys(res.data).forEach(key => {
+			res.data[key].forEach(track => {
+				resTracks.push(track);
+			})
+		});
+		console.log(resTracks);
+		updateOtherRelatedTracks(resTracks);
+		return resTracks;
 	}
 
 	async function getTracksByMood(mood) {
