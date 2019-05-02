@@ -22,8 +22,12 @@ function App() {
           <Route path="/player" component={YoutubePlayer} />
           <Route path="/privacypolicy" component={PrivacyPolicy} />
           <Route path="/termsofservice" component={TermsOfService} />
+<<<<<<< Updated upstream
           <Route path="/signout" component={SignOut} />
           <Route path="/browser" component={Browser} />
+=======
+
+>>>>>>> Stashed changes
         </header>
 
         <Route path='/' component={LandingPage}/>
