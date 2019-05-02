@@ -23,6 +23,7 @@ function App() {
           <Route path="/privacypolicy" component={PrivacyPolicy} />
           <Route path="/termsofservice" component={TermsOfService} />
           <Route path="/signout" component={SignOut} />
+          <Route path="/browser" component={Browser} />
         </header>
       </div>
     </Router>
