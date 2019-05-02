@@ -24,18 +24,15 @@ export default class OAuthGoogle extends Component {
               };
         }
         if (postData) {
-            console.log(postData);
             PostData(postData).then((result) => {
-            sessionStorage.setItem("token", result.data.token);
+            sessionStorage.setItem("token", result.data.token, "id" , result.data.id);
             this.setState({redirect: true});
             });
             } else {}
     }
     render() {
         if (this.state.redirect || sessionStorage.getItem('token')) {
-            console.log("I am passes");
-            return (<Redirect to={'/'}/>)
-            
+            return (<Redirect to={'/'}/>)           
         }
         const responseGoogle = (response) => {
 		this.signup(response, 'google');
@@ -56,15 +53,13 @@ export function PostData(userData){
     const url = process.env.REACT_APP_BE_URL || "https://fantabulous-music-finder.herokuapp.com/api/register/oauth";
     return new Promise((resolve, reject) =>{
         try{
-            console.log(userData);
-            const response = axios.post(`${url}` , {
+            axios.post(`${url}` , {
                  name: userData.name,
                  email: userData.email,
                  token: userData.token })
                 .then((res) => {  resolve(res);}) 
                 .catch((error) => {reject(error);}); 
-                alert('successfully logged in');
-                localStorage.setItem('token', response.token);        
+                alert('successfully logged in');      
                 
         } catch(err){
             console.log({Mesage: {err}});
