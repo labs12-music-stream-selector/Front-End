@@ -7,7 +7,7 @@ import Login from "./components/LoginForm/LoginForm.js";
 import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer.js";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.js";
 import TermsOfService from "./components/TermsOfService/TermsOfService.js";
-
+import SignOut from './components/SignOut/SignOut.js'
 import Browser from './components/Browser/Browser.js';
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Route path="/player" component={YoutubePlayer} />
           <Route path="/privacypolicy" component={PrivacyPolicy} />
           <Route path="/termsofservice" component={TermsOfService} />
+          <Route path="/signout" component={SignOut} />
         </header>
       </div>
     </Router>
