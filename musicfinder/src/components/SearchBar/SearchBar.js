@@ -1,26 +1,26 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 const SearchBar = (props) => {
 	const [term, updateTerm] = useState('');
-	
-	const debouncedTerm = useDebounce(term, 500);
+
+	const debouncedTerm = useDebounce(term, 500); // Change delay if necessary
 
 	useEffect(
 		() => {
-		  if (debouncedTerm) {
-			props.searchTrack(debouncedTerm);
-		  }
+			if (debouncedTerm) {
+				props.searchTrack(debouncedTerm);
+			}
 		},
 		[debouncedTerm]
-	  );
+	);
 
 	return (
-		<form onSubmit = {(e => e.preventDefault())}>
-			<input value = {term} onChange = {onChange} placeholder = 'search track'/>	
+		<form onSubmit={(e => e.preventDefault())}>
+			<input value={term} onChange={onChange} placeholder='search track' />
 		</form>
 	)
 
-	function onChange(e){
+	function onChange(e) {
 		updateTerm(e.target.value);
 	}
 }
@@ -34,15 +34,15 @@ function useDebounce(value, delay) {
 
 	useEffect(
 		() => {
-		const handler = setTimeout(() => {
-			setDebouncedValue(value);
-		}, delay);
-		
-		return () => {
-			clearTimeout(handler);
-		};
+			const handler = setTimeout(() => {
+				setDebouncedValue(value);
+			}, delay);
+
+			return () => {
+				clearTimeout(handler);
+			};
 		},
-		[value] 
+		[value]
 	);
 
 	return debouncedValue;
