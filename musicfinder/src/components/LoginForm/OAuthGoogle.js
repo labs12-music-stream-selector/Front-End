@@ -24,6 +24,7 @@ export default class OAuthGoogle extends Component {
               };
         }
         if (postData) {
+            console.log(postData);
             PostData(postData).then((result) => {
             sessionStorage.setItem("token", result.data.token, "id" , result.data.id);
             this.setState({redirect: true});
@@ -57,7 +58,11 @@ export function PostData(userData){
                  name: userData.name,
                  email: userData.email,
                  token: userData.token })
-                .then((res) => {  resolve(res);}) 
+                .then((res) => {  
+                    resolve(res)
+                    localStorage.setItem("token", res.data.token)
+                    localStorage.setItem("id", res.data.id)
+                }) 
                 .catch((error) => {reject(error);}); 
                 alert('successfully logged in');      
                 
