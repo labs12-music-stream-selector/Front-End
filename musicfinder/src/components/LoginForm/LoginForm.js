@@ -9,17 +9,17 @@ const LoginForm = (props) => {
 	const [password, setPassword] = useState('');
 	
 	return(
-		<>
-			<h1>Login</h1>
-			<AuthForm onSubmit = {e => e.preventDefault()}>
-				<Input value = {username} type = 'text' placeholder='username' onChange = {e => setUsername(e.target.value)}/>
-				<Input value = {password} type = 'password' placeholder='password' onChange = {e => setPassword(e.target.value)}/>
-				<Input bgColor = '#EB5757' type = 'submit' value = 'Login' onClick = {() => handleLogin(username, password)}/>		
-			</AuthForm>
-			<OAuthGoogle/>
+		// <>
+		// 	<h1>Login</h1>
+		// 	<AuthForm onSubmit = {e => e.preventDefault()}>
+		// 		<Input value = {username} type = 'text' placeholder='username' onChange = {e => setUsername(e.target.value)}/>
+		// 		<Input value = {password} type = 'password' placeholder='password' onChange = {e => setPassword(e.target.value)}/>
+		// 		<Input bgColor = '#EB5757' type = 'submit' value = 'Login' onClick = {() => handleLogin(username, password)}/>		
+		// 	</AuthForm>
+		 	<OAuthGoogle/>
 			
-			<Link to="/register">Don't have an account? Register Here!</Link>
-		</>
+		// 	<Link to="/register">Don't have an account? Register Here!</Link>
+		// </>
 	)
 	
 
