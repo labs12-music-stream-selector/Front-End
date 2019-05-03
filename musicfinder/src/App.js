@@ -9,6 +9,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.js";
 import TermsOfService from "./components/TermsOfService/TermsOfService.js";
 import SignOut from './components/SignOut/SignOut.js'
 import Browser from './components/Browser/Browser.js';
+import User from './components/user/User.js'
 import LandingPage from './components/LandingPage/LandingPage.js';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/privacypolicy" component={PrivacyPolicy} />
           <Route path="/termsofservice" component={TermsOfService} />
           <Route path="/signout" component={SignOut} />
+          <Route path="/user" component={User} />
           <Route path="/browser" component={Browser} />
         </header>
 
