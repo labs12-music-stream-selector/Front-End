@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import Register from "./components/register/Register.js";
 import Login from "./components/LoginForm/LoginForm.js";
@@ -17,7 +17,15 @@ function App() {
     <Router>
       <div className="App">
         <header className="">
-
+          <nav style={{ width: '100%', display: 'flex' }}>
+            <Link to='/'>Home</Link>
+            <Link to='/login'>Login</Link>
+            <Link to='/signout'>Log Out</Link>
+            <Link to='/browser'>Browse Songs</Link>
+            <Link to='/privacypolicy'>Legal Stuff</Link>
+            <Link to='/termsofservice'>More Legal Stuff</Link>
+            <Link to='/user'>Your Profile</Link>
+          </nav>
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/player" component={YoutubePlayer} />
@@ -28,7 +36,7 @@ function App() {
           <Route path="/browser" component={Browser} />
         </header>
 
-        <Route exact path='/' component={LandingPage}/>
+        <Route exact path='/' component={LandingPage} />
 
       </div>
     </Router>
