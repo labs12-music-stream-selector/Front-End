@@ -100,7 +100,11 @@ export default User;
 
 
 const UserBar = styled.div`
-    width: 600px;
+    width: 500px;
+    background: pink;
+    margin : auto;
+    border-radius: 5px;
+    padding: 20px;
     .input{
         margin: 5px;
         height: 25px;
@@ -114,10 +118,12 @@ const UserBar = styled.div`
       border-radius: 5px;
       color : white;
       margin: 10px;
+      height: 30px;
       
     }
     button:hover{
       background: black;
       cursor : pointer;
+      font-size : 14px;
     }
 `
