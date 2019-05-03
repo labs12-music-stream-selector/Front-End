@@ -11,11 +11,11 @@ const Browser = (props) => {
 	const [offset, updateOffset] = useState(0);
 	const [offsetMax, updateOffsetMax] = useState(6);
 	const [relatedTracks, updateRelatedTracks] = useState([]);
-	const [otherRelatedTracks, updateOtherRelatedTracks] = useState([]);
+	const [tracksByMood, updateTracksByMood] = useState([]);
 
 	useEffect(() => {
 		// TODO: replace with correct url to get initial tracks
-		const url = `${process.env.REACT_APP_BE_URL}/api/song-list`;
+		const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
 		getTracks(url);
 	}, [])
 
@@ -32,7 +32,7 @@ const Browser = (props) => {
 				alignItems: 'center',
 			}}>
 				<SearchBar searchTrack={searchTrack} />
-				<Select getTracks={getTracks} options={['sad', 'happy', 'sassy']} />
+				<Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />
 			</div>
 			<div>
 				{tracks.map((track, index) => {
@@ -41,8 +41,7 @@ const Browser = (props) => {
 						return (
 							<>
 								<YouTubePlayer key={track.url + index} url={track.url} />
-								<button onClick = {e => getRelatedTracks(track.id)}> related tracks</button>
-								<button onClick = {e => getOtherRelatedTracks(track.track_title)}> other related tracks</button>
+								<button onClick = {e => getRelatedTracks(track.id)}>kNN suggested tracks</button>
 							</>
 							)
 					} else {
@@ -62,16 +61,15 @@ const Browser = (props) => {
 				})}
 			</ul>
 
-			<h3>other related</h3>
+			<h3>other Tracks by mood</h3>
 			<ul>
-				{otherRelatedTracks.map(track => {
-					return <li>{track[0]}</li>
+				{tracksByMood.map(track => {
+					return <li>{track.title}</li>
 				})}
 			</ul>
 
 		</div>
 	);
-
 
 	async function getTracks(url) {
 		const res = await axios.get(url);
@@ -96,26 +94,12 @@ const Browser = (props) => {
 		updateRelatedTracks(relatedTracks)
 		return relatedTracks;
 	}
-
-	async function getOtherRelatedTracks(title) {
-		const url = `http://music-tracks-and-moods.herokuapp.com/api/${title}`;
-		const res = await axios.get(url);
-		const resTracks = []; 
-		Object.keys(res.data).forEach(key => {
-			res.data[key].forEach(track => {
-				resTracks.push(track);
-			})
-		});
-		console.log(resTracks);
-		updateOtherRelatedTracks(resTracks);
-		return resTracks;
-	}
+	
 
 	async function getTracksByMood(mood) {
-		const url = 'https://moody-beats-recommender-api.herokuapp.com/api/1/'
+		const url = `https://john-moody-beats-recommender.herokuapp.com/api/${mood}`;
 		const res = await axios.get(url);
-		// return res.data;
-		// console.log(res.data)
+		updateTracksByMood(res.data)
 	}
 
 	async function searchTrack(searchTerm) { // the fuzzy search goes here
@@ -123,7 +107,6 @@ const Browser = (props) => {
 			keys: ['artist', 'mood', 'track_title', 'url']
 		}
 		let fuse = new Fuse(tracksData, options);
-		// console.log(fuse.search(searchTerm));
 		updateTracks(fuse.search(searchTerm));
 		updateOffset(0);												// TODO: Double Check this worked!!!!!
 	}
