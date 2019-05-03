@@ -32,7 +32,7 @@ const Browser = (props) => {
 				alignItems: 'center',
 			}}>
 				<SearchBar searchTrack={searchTrack} />
-				<Select getTracks={getTracksByMood} options={['sad', 'happy', 'sassy']} />
+				<Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />
 			</div>
 			<div>
 				{tracks.map((track, index) => {
