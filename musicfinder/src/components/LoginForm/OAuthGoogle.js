@@ -63,7 +63,7 @@ export function PostData(userData) {
   return new Promise((resolve, reject) => {
     try {
       axios
-        .post(`${url}`, {
+        .post(url, {
           name: userData.name,
           email: userData.email,
           token: userData.token
