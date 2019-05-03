@@ -59,13 +59,11 @@ export default class OAuthGoogle extends Component {
 
 export function PostData(userData) {
   const url =
-    process.env.REACT_APP_BE_URL ||
-    "https://fantabulous-music-finder.herokuapp.com";
-  const endpoint = `${url}/api/register/oauth`;
+    /*process.env.REACT_APP_BE_URL ||*/ "https://fantabulous-music-finder.herokuapp.com/api/register/oauth";
   return new Promise((resolve, reject) => {
     try {
       axios
-        .post(`${endpoint}`, {
+        .post(`${url}`, {
           name: userData.name,
           email: userData.email,
           token: userData.token
