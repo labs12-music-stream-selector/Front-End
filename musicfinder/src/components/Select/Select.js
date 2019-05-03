@@ -15,9 +15,7 @@ const Select = (props) => {
 
 	function handleChange(e) {
 		if (e.target.value !== 'select') {
-			// 
-			const url = `https://moody-beats-recommender-api.herokuapp.com/api/1/` // ${e.target.value}`;
-			props.getTracks(url);
+			props.getTracks(e.target.value);
 		}
 	}
 }
