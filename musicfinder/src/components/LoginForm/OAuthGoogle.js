@@ -24,9 +24,8 @@ export default class OAuthGoogle extends Component {
               };
         }
         if (postData) {
-            console.log(postData);
             PostData(postData).then((result) => {
-            sessionStorage.setItem("token", result.data.token, "id" , result.data.id);
+            sessionStorage.setItem("token", result.data.token);
             this.setState({redirect: true});
             });
             } else {}
