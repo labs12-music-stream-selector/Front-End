@@ -9,13 +9,14 @@ import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.js";
 import TermsOfService from "./components/TermsOfService/TermsOfService.js";
 import SignOut from './components/SignOut/SignOut.js'
 import Browser from './components/Browser/Browser.js';
+import User from './components/user/User.js'
+import LandingPage from './components/LandingPage/LandingPage.js';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          <h1> Welcome to Music Finder</h1>
+        <header className="">
 
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
@@ -23,7 +24,12 @@ function App() {
           <Route path="/privacypolicy" component={PrivacyPolicy} />
           <Route path="/termsofservice" component={TermsOfService} />
           <Route path="/signout" component={SignOut} />
+          <Route path="/user" component={User} />
+          <Route path="/browser" component={Browser} />
         </header>
+
+        <Route exact path='/' component={LandingPage}/>
+
       </div>
     </Router>
   );
