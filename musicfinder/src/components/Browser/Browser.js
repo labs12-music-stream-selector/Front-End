@@ -16,7 +16,7 @@ const Browser = (props) => {
 	useEffect(() => {
 		// TODO: replace with correct url to get initial tracks
 		const url = `${process.env.REACT_APP_BE_URL}/api/song-list`;
-		updateTracksData(getTracks(url));
+		getTracks(url);
 	}, [])
 
 	return (
@@ -78,6 +78,7 @@ const Browser = (props) => {
 			return song
 		})
 		updateTracks(data);
+		updateTracksData(data);
 	}
 
 	async function getRelatedTracks(id) {
