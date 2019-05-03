@@ -41,7 +41,7 @@ const Browser = (props) => {
 						return (
 							<>
 								<YouTubePlayer key={track.url + index} url={track.url} />
-								<button onClick = {e => getRelatedTracks(track.id)}> related tracks</button>
+								<button onClick = {e => getRelatedTracks(track.id)}>kNN suggested tracks</button>
 							</>
 							)
 					} else {
