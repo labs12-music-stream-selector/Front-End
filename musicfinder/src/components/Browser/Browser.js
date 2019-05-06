@@ -89,9 +89,10 @@ const Browser = (props) => {
 		const url = `https://moody-beats-recommender-api.herokuapp.com/api/${id}/`;
 		const res = await axios.get(url);
 		const relatedTracks = []; 
+		
 		Object.keys(res.data).forEach(key => {
-			if(!['id', 'songs', 'mood', 'video_id'].includes(key) && res.data[key] !== null){
-				relatedTracks.push(res.data[key]);
+			if(!['id', 'songs', 'mood', 'video_id', ''].includes(key) && res.data[key] !== null && !key.includes('_link')){
+				relatedTracks.push({name: res.data[key], url: res.data[`${key}_link`]});
 			}
 		});
 		return relatedTracks;
