@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import styled from 'styled-components';
 
 import YouTubePlayer from '../YoutubePlayer/YoutubePlayer.js';
 
@@ -14,20 +15,40 @@ const Track = (props) => {
 	}, [])
 
 	return (
-		<div style ={{
-			maxWidth: 'min-content'
-		}}>
+		<TrackContainer>
 			<YouTubePlayer key={props.track.url + props.index} url={props.track.url} />
-			<ul>
+			<Ul>
 				{
 					related ? related.map(track => {
-						console.log(related);
 						return <li><a href = {track.url}>{track.name}</a></li>
 					}) : ''
 				}
-			</ul>
-		</div>
+			</Ul>
+		</TrackContainer>
 	)
 }
 
 export default Track;
+
+const TrackContainer = styled.div`
+	max-width: min-content;
+	@media screen and (max-width: 500px){
+		max-width: 100%;
+		iframe{
+			max-width: 100%;
+		}
+	}
+`;
+
+const Ul = styled.ul`
+	list-style: none;
+	text-align: left;
+	
+	li a{
+		text-decoration: none;
+		color: orange;
+		:hover{
+			color: #EB5757;
+		}
+	}
+`;
