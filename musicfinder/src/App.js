@@ -2,8 +2,7 @@ import React from "react";
 import "./App.css";
 import { Route, Link } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import Register from "./components/register/Register.js";
-import Login from "./components/LoginForm/LoginForm.js";
+import Login from "./components/LoginForm/OAuthGoogle.js";
 import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer.js";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.js";
 import TermsOfService from "./components/TermsOfService/TermsOfService.js";
@@ -27,7 +26,6 @@ function App() {
             <Link to='/user'>Your Profile</Link>
             <Link to='/signout'>Log Out</Link>
           </nav>
-          <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/player" component={YoutubePlayer} />
           <Route path="/privacypolicy" component={PrivacyPolicy} />
