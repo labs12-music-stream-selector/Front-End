@@ -12,6 +12,8 @@ import User from './components/user/User.js'
 import LandingPage from './components/LandingPage/LandingPage.js';
 import styled from 'styled-components';
 
+import PatreonButton from './components/Patreon/PatreonButton';
+
 function App() {
   return (
     <Router>
@@ -25,6 +27,7 @@ function App() {
             <Link to='/termsofservice'>Terms & Services</Link>
             <Link to='/user'>Your Profile</Link>
             <Link to='/signout'>Log Out</Link>
+            <PatreonButton />
           </nav>
           <Route path="/login" component={Login} />
           <Route path="/player" component={YoutubePlayer} />
