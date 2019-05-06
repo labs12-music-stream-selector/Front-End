@@ -91,7 +91,7 @@ const Browser = (props) => {
 		const relatedTracks = []; 
 		
 		Object.keys(res.data).forEach(key => {
-			if(!['id', 'songs', 'mood', 'video_id', ''].includes(key) && res.data[key] !== null && !key.includes('_link')){
+			if(!['id', 'songs', 'mood', 'video_id'].includes(key) && res.data[key] !== null && !key.includes('_link')){
 				relatedTracks.push({name: res.data[key], url: res.data[`${key}_link`]});
 			}
 		});
