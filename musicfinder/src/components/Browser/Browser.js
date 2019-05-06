@@ -28,6 +28,7 @@ const Browser = (props) => {
 			flexDirection: 'column',
 			flexWrap: 'wrap',
 			justifyContent: 'center',
+			width: '100%'
 		}}>
 
 			<div style={{

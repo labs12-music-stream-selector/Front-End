@@ -33,7 +33,7 @@ export default Track;
 const TrackContainer = styled.div`
 	max-width: min-content;
 	@media screen and (max-width: 500px){
-		max-width: 100%;
+		max-width: 95vw;
 		iframe{
 			max-width: 100%;
 		}
