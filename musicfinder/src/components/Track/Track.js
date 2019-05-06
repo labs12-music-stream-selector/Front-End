@@ -21,7 +21,8 @@ const Track = (props) => {
 			<ul>
 				{
 					related ? related.map(track => {
-						return <li>{track}</li>
+						console.log(related);
+						return <li><a href = {track.url}>{track.name}</a></li>
 					}) : ''
 				}
 			</ul>
