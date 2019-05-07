@@ -40,7 +40,6 @@ function App() {
           <Route path="/browser" component={Browser} />
           <Route path="/support-us" component={Patreon} />
         </header>
-        <NewPlaylist />;
         <Route exact path="/" component={LandingPage} />
       </RouterDiv>
     </Router>
