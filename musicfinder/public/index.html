@@ -218,6 +218,7 @@
     <script src="https://apis.google.com/js/api.js"></script>
     <!-- ************************************************************************************************************************
          * GET PLAYLIST BY ID -->
+    <script src="https://apis.google.com/js/api.js"></script>
     <script>
       /**
        * Sample JavaScript code for youtube.playlistItems.list
@@ -228,7 +229,9 @@
       function authenticate() {
         return gapi.auth2
           .getAuthInstance()
-          .signIn({ scope: "https://www.googleapis.com/auth/youtube.readonly" })
+          .signIn({
+            scope: "https://www.googleapis.com/auth/youtube.force-ssl"
+          })
           .then(
             function() {
               console.log("Sign-in successful");
@@ -254,7 +257,7 @@
       function execute() {
         return gapi.client.youtube.playlistItems
           .list({
-            part: "playlistItem",
+            part: "snippet, contentDetails, id, status",
             playlistId: "PLT6P9YWiSZdVoQmb5Qhi6CIWoznPY3z_M"
           })
           .then(
