@@ -5,8 +5,8 @@ export default class NewPlaylist extends Component {
   componentDidMount = () => {
     const authKey = axios.create({
       headers: {
-        Authorization: `Bearer ${localStorage.getItem(token)}`,
-        Accept: "application / json"
+        Authorization: `Bearer ya29.GlwCB9AkYBkW3pDMFIeA8owhWa2Dkvm5A1rV9cM_hlYAL…XjzVmjVASchh8zghURj5spNsMQSTZTqEaQRaf_3ghMv_oYHVA`,
+        Accept: "application/json"
       }
     });
     axios
