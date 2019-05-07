@@ -12,7 +12,14 @@ export default class NewPlaylist extends Component {
     });
     axios
       .get(
-        "https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?part=id&forUsername=jbernalwrc"
+        "https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?part=id&forUsername=jbernalwrc",
+        {
+          headers: {
+            Authorization: `Bearer ya29.GlwCB9AkYBkW3pDMFIeA8owhWa2Dkvm5A1rV9cM_hlYAL…XjzVmjVASchh8zghURj5spNsMQSTZTqEaQRaf_3ghMv_oYHVA`,
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": "https://musimood.netlify.com/"
+          }
+        }
       )
       .then(res => {
         console.log(res);
