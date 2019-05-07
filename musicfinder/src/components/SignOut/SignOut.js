@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import {Redirect, withRouter} from 'react-router-dom';
+import styled from 'styled-components';
 
 class SignOut extends Component {
   signMeOut = () =>{
       if(sessionStorage.getItem('token')){
         sessionStorage.removeItem('token');
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
         alert("You successfully Signed Out")
       }
   }
@@ -14,12 +17,28 @@ class SignOut extends Component {
         return  (<Redirect to={'/login'}/>)          
     }
     return (
-      <div>
+      <SignBar>
           <button onClick ={this.signMeOut}> SignOut</button>  
-      </div>
+      </SignBar>
     )
   }
 }
 
 export default withRouter(SignOut);
 
+const SignBar = styled.div`
+    button{
+      background: #EB5757;
+      border-radius: 5px;
+      color : white;
+      margin: 15px;
+      height : 40px;
+      font: bold;
+      width : 90px;
+    }
+    button:hover{
+      background: black;
+      cursor : pointer;
+      font-size: 17px;
+    }
+`

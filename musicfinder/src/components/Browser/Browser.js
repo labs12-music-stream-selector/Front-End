@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import YouTubePlayer from '../YoutubePlayer/YoutubePlayer.js';
+import Fuse from 'fuse.js';
+import styled from 'styled-components';
+
 import SearchBar from '../SearchBar/SearchBar.js';
 import Select from '../Select/Select.js';
-import Fuse from 'fuse.js';
+import Track from '../Track/Track.js';
+
 
 const Browser = (props) => {
 	const [tracks, updateTracks] = useState([]);
@@ -15,13 +18,14 @@ const Browser = (props) => {
 
 	useEffect(() => {
 		// TODO: replace with correct url to get initial tracks
-		const url = `${process.env.REACT_APP_BE_URL}/api/song-list`;
+		const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
 		getTracks(url);
 	}, [])
 
 	return (
 		<div style={{
 			display: 'flex',
+			flexDirection: 'column',
 			flexWrap: 'wrap',
 			justifyContent: 'center',
 		}}>
@@ -34,39 +38,39 @@ const Browser = (props) => {
 				<SearchBar searchTrack={searchTrack} />
 				<Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />
 			</div>
-			<div>
+			<Container>
 				{tracks.map((track, index) => {
 					if (index <= offset + 5 && index >= offset) {
-						console.log(track)
 						return (
-							<>
-								<YouTubePlayer key={track.url + index} url={track.url} />
-								<button onClick = {e => getRelatedTracks(track.id)}>kNN suggested tracks</button>
-							</>
+							<Track track = {track} index = {index} key ={index} getRelated = {getRelatedTracks}/>
 							)
 					} else {
 						return;
 					}
 				})}
-			</div>
-			<div>
+			</Container>
+			<div style={{
+				display: 'block'
+			}}>
 				<button onClick={loadPrev}>Load Previous</button>
 				<button onClick={loadNext}>Load Next</button>
 			</div>
+			
+			<div>
+				<h3>related</h3>
+				<ul>
+					{relatedTracks.map(track => {
+						return <li>{track}</li>
+					})}
+				</ul>
 
-			<h3>related</h3>
-			<ul>
-				{relatedTracks.map(track => {
-					return <li>{track}</li>
-				})}
-			</ul>
-
-			<h3>other Tracks by mood</h3>
-			<ul>
-				{tracksByMood.map(track => {
-					return <li>{track.title}</li>
-				})}
-			</ul>
+				<h3>other Tracks by mood</h3>
+				<ul>
+					{tracksByMood.map(track => {
+						return <li>{track.title}</li>
+					})}
+				</ul>
+			</div>
 
 		</div>
 	);
@@ -85,13 +89,12 @@ const Browser = (props) => {
 		const url = `https://moody-beats-recommender-api.herokuapp.com/api/${id}/`;
 		const res = await axios.get(url);
 		const relatedTracks = []; 
+		
 		Object.keys(res.data).forEach(key => {
-			if(!['id', 'songs', 'mood', 'video_id'].includes(key) && res.data[key] !== null){
-				relatedTracks.push(res.data[key]);
+			if(!['id', 'songs', 'mood', 'video_id'].includes(key) && res.data[key] !== null && !key.includes('_link')){
+				relatedTracks.push({name: res.data[key], url: res.data[`${key}_link`]});
 			}
 		});
-		console.log(relatedTracks);
-		updateRelatedTracks(relatedTracks)
 		return relatedTracks;
 	}
 	
@@ -126,3 +129,11 @@ const Browser = (props) => {
 }
 
 export default Browser;
+
+const Container = styled.div`
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+
+	margin: 0 auto;
+`;
