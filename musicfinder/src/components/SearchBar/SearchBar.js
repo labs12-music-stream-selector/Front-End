@@ -37,7 +37,17 @@ const SearchForm = styled.form`
 	width: 500px;
 	align-items: stretch;
 	input{
-		width: 80%;
+		width: 70%;
+		margin-right: 20px;
+		font-size: 12px;
+		@media(max-width: 479px){
+			margin-right: 2px;
+		}
+	}
+	@media(max-width: 479px){
+		width: 200px;
+		left : 20%;
+		top : 22px;
 	}
 `;
 
