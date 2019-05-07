@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import SearchBar from '../SearchBar/SearchBar.js';
 import Select from '../Select/Select.js';
 import Track from '../Track/Track.js';
+import InfiniteScroll from 'react-infinite-scroller';
 
 
 const Browser = (props) => {
@@ -15,6 +16,7 @@ const Browser = (props) => {
 	const [offsetMax, updateOffsetMax] = useState(6);
 	const [relatedTracks, updateRelatedTracks] = useState([]);
 	const [tracksByMood, updateTracksByMood] = useState([]);
+	const [hasMore, updateHasMore] = useState(true);
 
 	useEffect(() => {
 		// TODO: replace with correct url to get initial tracks
@@ -23,56 +25,39 @@ const Browser = (props) => {
 	}, [])
 
 	return (
-		<div style={{
-			display: 'flex',
-			flexDirection: 'column',
-			flexWrap: 'wrap',
-			justifyContent: 'center',
-		}}>
-
-			<div style={{
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-			}}>
-				<SearchBar searchTrack={searchTrack} />
-				<Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />
-			</div>
-			<Container>
-				{tracks.map((track, index) => {
-					if (index <= offset + 5 && index >= offset) {
+		<BrowserContainer id ='browser-container'>
+			<SearchBar searchTrack={searchTrack} selectComp = {(props) => <Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />}/>
+			<InfiniteScroll
+				pageStart={0}
+				loadMore={loadNext}
+				hasMore={hasMore}
+				loader={<div className="loader" key={0}>Loading ...</div>}
+				threshold={150}
+			>
+				<Container>
+					{tracks.map((track, index) => {
 						return (
 							<Track track = {track} index = {index} key ={index} getRelated = {getRelatedTracks}/>
 							)
-					} else {
-						return;
-					}
-				})}
-			</Container>
-			<div style={{
-				display: 'block'
-			}}>
-				<button onClick={loadPrev}>Load Previous</button>
-				<button onClick={loadNext}>Load Next</button>
-			</div>
-			
-			<div>
-				<h3>related</h3>
-				<ul>
-					{relatedTracks.map(track => {
-						return <li>{track}</li>
-					})}
-				</ul>
+					})} 
+				</Container>
+				<div>
+					<h3>related</h3>
+					<ul>
+						{relatedTracks.map(track => {
+							return <li>{track}</li>
+						})}
+					</ul>
 
-				<h3>other Tracks by mood</h3>
-				<ul>
-					{tracksByMood.map(track => {
-						return <li>{track.title}</li>
-					})}
-				</ul>
-			</div>
-
-		</div>
+					<h3>other Tracks by mood</h3>
+					<ul>
+						{tracksByMood.map(track => {
+							return <li>{track.title}</li>
+						})}
+					</ul>
+				</div>
+			</InfiniteScroll>
+		</BrowserContainer>
 	);
 
 	async function getTracks(url) {
@@ -81,7 +66,7 @@ const Browser = (props) => {
 			song.url = song.url.substring(song.url.indexOf("=") + 1);
 			return song
 		})
-		updateTracks(data);
+		updateTracks(data.slice(0,12));
 		updateTracksData(data);
 	}
 
@@ -114,10 +99,14 @@ const Browser = (props) => {
 		updateOffset(0);												// TODO: Double Check this worked!!!!!
 	}
 
-	function loadNext() {
-		console.log(tracks.length)
-		if (offset < tracks.length - 6) {
-			updateOffset(offset + 6);
+	function loadNext(page) {
+		console.log(page, tracks)
+		// if (offset < tracks.length - 6) {
+		if (page*6 < tracksData.length - 6) {
+			// updateOffset(offset + 6);
+			updateTracks(tracksData.slice(0,page*6))
+		} else if(tracks.length > 0 && hasMore){
+			updateHasMore(false)
 		}
 	}
 
@@ -130,10 +119,22 @@ const Browser = (props) => {
 
 export default Browser;
 
+const BrowserContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	margin-top: 20px;
+
+	min-height: 100vh;
+`;
+
 const Container = styled.div`
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	flex-wrap: wrap;
 
 	margin: 0 auto;
+
 `;
