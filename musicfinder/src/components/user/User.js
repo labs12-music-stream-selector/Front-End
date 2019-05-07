@@ -110,9 +110,9 @@ const UserBar = styled.div`
         margin: 5px;
         height: 25px;
         width : 300px;
-        border: none;
         border-radius: 5px;
         text-align:center;
+
     }
     button{
       background: black;
