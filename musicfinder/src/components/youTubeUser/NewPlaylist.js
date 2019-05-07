@@ -11,7 +11,7 @@ export default class NewPlaylist extends Component {
     });
     axios
       .get(
-        "https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?part=id&forUsername=GoogleDevelopers"
+        "https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?part=id&forUsername=jbernalwrc"
       )
       .then(res => {
         console.log(res);
