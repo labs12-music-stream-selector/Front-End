@@ -23,22 +23,8 @@ const Browser = (props) => {
 	}, [])
 
 	return (
-		<div style={{
-			display: 'flex',
-			flexDirection: 'column',
-			flexWrap: 'wrap',
-			justifyContent: 'center',
-			width: '100%'
-		}}>
-
-			<div style={{
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-			}}>
-				<SearchBar searchTrack={searchTrack} />
-				<Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />
-			</div>
+		<BrowserContainer>
+			<SearchBar searchTrack={searchTrack} selectComp = {(props) => <Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />}/>
 			<Container>
 				{tracks.map((track, index) => {
 					if (index <= offset + 5 && index >= offset) {
@@ -73,7 +59,7 @@ const Browser = (props) => {
 				</ul>
 			</div>
 
-		</div>
+		</BrowserContainer>
 	);
 
 	async function getTracks(url) {
@@ -130,6 +116,15 @@ const Browser = (props) => {
 }
 
 export default Browser;
+
+const BrowserContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	margin-top: 20px;
+`;
 
 const Container = styled.div`
 	display: flex;
