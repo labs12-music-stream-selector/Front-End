@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
-import { Route, Link } from "react-router-dom";
+import { Route} from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+<<<<<<< HEAD
 import Login from "./components/LoginForm/OAuthGoogle.js";
 import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer.js";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.js";
@@ -15,11 +16,18 @@ import styled from "styled-components";
 import Patreon from "./components/Patreon/Patreon";
 
 import NewPlaylist from "./components/youTubeUser/NewPlaylist.js";
+=======
+import styled from 'styled-components';
+
+import LandingPage from './components/LandingPage/LandingPage.js';
+import Navigation from "./components/Navigation/Navigation";
+>>>>>>> 66de9baaa74befbdf994212527f20344c98d1378
 
 function App() {
   return (
     <Router>
       <RouterDiv className="App">
+<<<<<<< HEAD
         <header className="">
           <nav className="navBar" style={{ width: "100%", display: "flex" }}>
             <Link to="/">Home</Link>
@@ -41,6 +49,11 @@ function App() {
           <Route path="/support-us" component={Patreon} />
         </header>
         <Route exact path="/" component={LandingPage} />
+=======
+        <Route exact path='/' component={LandingPage} />
+        <Route exact path='/home' component={Navigation} />
+
+>>>>>>> 66de9baaa74befbdf994212527f20344c98d1378
       </RouterDiv>
     </Router>
   );
@@ -48,6 +61,7 @@ function App() {
 export default App;
 
 const RouterDiv = styled.div`
+<<<<<<< HEAD
   .navBar {
     display: flex;
     flex-wrap: warp;
@@ -59,6 +73,25 @@ const RouterDiv = styled.div`
       margin: 20px;
       min-height: 25px;
       color: white;
+=======
+    background: black;
+    .navBar{
+        display: flex;
+        flex-wrap: warp;
+        background : black;
+        width : 100%;
+        justify-content : space-between;
+        a{
+          text-decoration: none;
+          margin: 20px;
+          min-height : 25px;
+          color : white;
+        }
+        a:hover{
+          color : white;
+          border-radius : 5px;
+        }
+>>>>>>> 66de9baaa74befbdf994212527f20344c98d1378
     }
     a:hover {
       color: white;
