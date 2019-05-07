@@ -62,8 +62,9 @@ closeMenu=(event)=> {
         <NavDiv className="">
           <nav className="navBar" >
             <Link to='/home'>Home</Link>
-            <Link to="./donation"> Support Us </Link>
+            
             <div>
+            <Link to="./donation"> Support Us </Link>
               <button className ="userinfo" onClick={this.showMenu} > {this.state.name} </button>
                 {this.state.showMenu ? 
                 (<div className ='menu' >
@@ -103,9 +104,15 @@ const NavDiv = styled.div`
     border-radius: 5px;
     background: black;
     color: red;
-    font-size: 16px;
+    font-size: 12px;
     margin : 5px;
     color: red;
     cursor: pointer;
+    @media(max-width: 479px){
+    }
+  }
+  .userbtn:hover{
+    background: grey;
+    color: black;
   }
 `
