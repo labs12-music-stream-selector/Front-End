@@ -1,32 +1,26 @@
 import React, { Component } from "react";
-import axios from "axios";
 
 export default class NewPlaylist extends Component {
   componentDidMount = () => {
-    axios.create({
-      headers: {
-        Authorization: `Bearer ya29.GlwCB9AkYBkW3pDMFIeA8owhWa2Dkvm5A1rV9cM_hlYAL…XjzVmjVASchh8zghURj5spNsMQSTZTqEaQRaf_3ghMv_oYHVA`,
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": null
-      }
-    });
-    axios
-      .get(
-        "https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?part=id&forUsername=jbernalwrc",
-        {
-          headers: {
-            Authorization: `Bearer ya29.GlwCB9AkYBkW3pDMFIeA8owhWa2Dkvm5A1rV9cM_hlYAL…XjzVmjVASchh8zghURj5spNsMQSTZTqEaQRaf_3ghMv_oYHVA`,
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "https://musimood.netlify.com/"
-          }
-        }
-      )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // let gapi = window.gapi;
+    // console.log(gapi);
+    // console.log(process.env.API_KEY);
+    // gapi.load("client", () => {
+    //   gapi.client.setApiKey(process.env.API_KEY);
+    //   gapi.client.setClientId(process.env.CLIENT_ID);
+    //   gapi.client.setDiscoveryDocs(process.env.DISCOVERY_DOCS);
+    //   gapi.client.setScope(process.env.SCOPE);
+    //   gapi.client.load("client:auth2", "v3", () => {
+    //     console.log("gapi is ready");
+    //     this.setState({ gapiReady: true });
+    //   });
+    // });
+    // var user = gapi.auth2.getAuthInstance().currentUser.get();
+    // var oauthToken = user.getAuthResponse().access_token;
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("GET", "https://people.googleapis.com/v1/people/me/connections");
+    // xhr.setRequestHeader("Authorization", "Bearer " + oauthToken);
+    // xhr.send();
   };
 
   render() {
