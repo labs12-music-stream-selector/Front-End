@@ -22,6 +22,7 @@ export default App;
 
 
 const RouterDiv = styled.div`
+    background: black;
     .navBar{
         display: flex;
         flex-wrap: warp;
