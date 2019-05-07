@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Login from '../LoginForm/OAuthGoogle.js'
 const LandingPage = (props) => {
 	return (
 		<>
@@ -7,6 +7,7 @@ const LandingPage = (props) => {
 			<div>
 				<h2>Find copyright free music by mood.</h2>
 			</div>
+			<Login />
 		</>
 	)
 }
