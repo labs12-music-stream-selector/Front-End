@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import Login from "./components/LoginForm/OAuthGoogle.js";
 import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer.js";
