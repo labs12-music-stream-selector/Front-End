@@ -20,7 +20,7 @@ const Track = (props) => {
 			<Ul>
 				{
 					related ? related.map(track => {
-						return <li><a href = {track.url}>{track.name}</a></li>
+						return <li key = {track.url}><a href = {track.url}>{track.name}</a></li>
 					}) : ''
 				}
 			</Ul>
@@ -32,6 +32,9 @@ export default Track;
 
 const TrackContainer = styled.div`
 	max-width: min-content;
+	iframe{
+		border: none;
+	}
 	@media screen and (max-width: 500px){
 		max-width: 95vw;
 		iframe{
