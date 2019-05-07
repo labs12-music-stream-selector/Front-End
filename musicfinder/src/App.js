@@ -14,8 +14,6 @@ import styled from "styled-components";
 
 import Patreon from "./components/Patreon/Patreon";
 
-import NewPlaylist from "./components/youTubeUser/NewPlaylist.js";
-
 function App() {
   return (
     <Router>
