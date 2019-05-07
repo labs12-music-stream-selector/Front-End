@@ -133,7 +133,7 @@ export default Browser;
 
 const Container = styled.div`
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	flex-wrap: wrap;
 
 	margin: 0 auto;
