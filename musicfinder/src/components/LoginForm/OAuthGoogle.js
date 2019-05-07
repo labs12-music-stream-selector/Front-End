@@ -42,6 +42,8 @@ export default class OAuthGoogle extends Component {
       return <Redirect to={"/Home"} />;
     }
     const responseGoogle = response => {
+      console.log(response);
+      sessionStorage.setItem('response', response);
       this.signup(response, "google");
     };
     return (
