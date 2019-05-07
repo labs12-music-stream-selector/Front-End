@@ -56,8 +56,9 @@ class User extends React.Component {
                     sessionStorage.removeItem('token');
                     localStorage.removeItem('token');
                     alert("Your Account deleted Successfully")
+                    this.props.history.push('/');
                 })
-                this.props.history.push('/');
+                
 
         }catch(err){
             console.log(err);
@@ -101,7 +102,7 @@ export default User;
 
 const UserBar = styled.div`
     width: 500px;
-    background: pink;
+    border: 1px solid pink;
     margin : auto;
     border-radius: 5px;
     padding: 20px;
@@ -114,7 +115,7 @@ const UserBar = styled.div`
         text-align:center;
     }
     button{
-      background: #EB5757;
+      background: black;
       border-radius: 5px;
       color : white;
       margin: 10px;
@@ -124,6 +125,5 @@ const UserBar = styled.div`
     button:hover{
       background: black;
       cursor : pointer;
-      font-size : 14px;
     }
 `
