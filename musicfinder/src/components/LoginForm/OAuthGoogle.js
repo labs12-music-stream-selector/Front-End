@@ -39,7 +39,7 @@ export default class OAuthGoogle extends Component {
   };
   render() {
     if (this.state.redirect || sessionStorage.getItem("token")) {
-      return <Redirect to={"/"} />;
+      return <Redirect to={"/Home"} />;
     }
     const responseGoogle = response => {
       this.signup(response, "google");

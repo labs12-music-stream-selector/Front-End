@@ -53,11 +53,12 @@ class User extends React.Component {
             axios
                 .delete(url)
                 .then(res=>{
-                    sessionStorage.removeItem('token');
-                    localStorage.removeItem('token');
+                    localStorage.clear();
+                    sessionStorage.clear()
                     alert("Your Account deleted Successfully")
+                    this.props.history.push('/');
                 })
-                this.props.history.push('/');
+                
 
         }catch(err){
             console.log(err);
@@ -66,8 +67,9 @@ class User extends React.Component {
 
     render(){
         return (
+        <Wrapper>
             <UserBar>
-                <h1>Name : {this.state.name}</h1>
+                <h2>Name : {this.state.name}</h2>
                 <h3> Email : {this.state.email} </h3>
                 <form>
                     <input
@@ -86,44 +88,67 @@ class User extends React.Component {
                     />
                 </form>
                 
+                <div className= "btn">
+                    <button onClick = {this.deleteMyAccount}> Delete My Account permanantly</button>
+                    <button className= "updateBtn" onClick = {this.updateInfo}>Update</button>
+                </div>  
                 <>
-                <button onClick = {this.deleteMyAccount}> Delete My Account permanantly</button>
                 </>
-                <button onClick = {this.updateInfo}>Update</button>
-                
             </UserBar>
+        </Wrapper>
         )
     }
 }
 
 export default User;
-
-
+const Wrapper = styled.div`
+    width: 100%;
+    height: 100%;
+`
 const UserBar = styled.div`
-    width: 500px;
-    background: pink;
+    width: 400px;
+    border: 1px solid pink;
     margin : auto;
     border-radius: 5px;
     padding: 20px;
+    margin-bottom: 300px;
+    @media(max-width: 479px){
+        width : 300px;
+    }
+    h2, h3{  
+        color: white;
+        @media(max-width: 479px){
+            font-size: 14px;
+        }
+    }
     .input{
         margin: 5px;
         height: 25px;
         width : 300px;
-        border: none;
         border-radius: 5px;
         text-align:center;
+        @media(max-width: 479px){
+            width: 250px;
+        }
+
     }
     button{
-      background: #EB5757;
+      background: grey;
       border-radius: 5px;
       color : white;
       margin: 10px;
       height: 30px;
-      
+      border: none;       
     }
     button:hover{
-      background: black;
-      cursor : pointer;
-      font-size : 14px;
+        box-shadow: 0 5px pink;
+        cursor : pointer;
+        transition: all 0.4s
+    }
+    .btn{
+        @media(max-width: 479px){
+           display:flex;
+           flex-direction: column-reverse;
+        }
     }
 `

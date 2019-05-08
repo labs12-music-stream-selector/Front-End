@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 const SearchBar = (props) => {
 	const [term, updateTerm] = useState('');
@@ -15,9 +16,10 @@ const SearchBar = (props) => {
 	);
 
 	return (
-		<form onSubmit={(e => e.preventDefault())}>
+		<SearchForm onSubmit={(e => e.preventDefault())}>
 			<input value={term} onChange={onChange} placeholder='search track' />
-		</form>
+			{props.selectComp()}
+		</SearchForm>
 	)
 
 	function onChange(e) {
@@ -26,6 +28,28 @@ const SearchBar = (props) => {
 }
 
 export default SearchBar;
+
+const SearchForm = styled.form`
+	position: fixed;
+	top: 20px;
+	left: 10%;
+	display: flex;
+	width: 500px;
+	align-items: stretch;
+	input{
+		width: 70%;
+		margin-right: 20px;
+		font-size: 12px;
+		@media(max-width: 479px){
+			margin-right: 2px;
+		}
+	}
+	@media(max-width: 479px){
+		width: 200px;
+		left : 20%;
+		top : 22px;
+	}
+`;
 
 // Referenced: https://dev.to/gabe_ragland/debouncing-with-react-hooks-jci
 function useDebounce(value, delay) {
