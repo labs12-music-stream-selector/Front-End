@@ -47,8 +47,10 @@ export default class OAuthGoogle extends Component {
       <div>
         <GoogleLogin
           clientId="1023911349266-1shu9chae4s2otlf4rro221ectmoh8sb.apps.googleusercontent.com"
+          discoverDocs={[
+            "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+          ]}
           scope="https://www.googleapis.com/auth/youtube.force-ssl"
-          discoveryDocs="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
           buttonText="Login with Google"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
