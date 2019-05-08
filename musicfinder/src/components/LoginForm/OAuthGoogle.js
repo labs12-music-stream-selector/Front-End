@@ -38,7 +38,7 @@ export default class OAuthGoogle extends Component {
   };
   render() {
     if (this.state.redirect || sessionStorage.getItem("token")) {
-      return <Redirect to={"/Home"} />;
+      return <Redirect to={"/home"} />;
     }
     const responseGoogle = response => {
       this.signup(response, "google");
@@ -46,7 +46,9 @@ export default class OAuthGoogle extends Component {
     return (
       <div>
         <GoogleLogin
-          clientId="557783495237-jqq3d269c5ee4uvbg0bv74rs1sb91g90.apps.googleusercontent.com"
+          clientId="1023911349266-1shu9chae4s2otlf4rro221ectmoh8sb.apps.googleusercontent.com"
+          scope="https://www.googleapis.com/auth/youtube.force-ssl"
+          discoveryDocs="https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
           buttonText="Login with Google"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
