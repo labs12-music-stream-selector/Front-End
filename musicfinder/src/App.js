@@ -20,22 +20,9 @@ function App() {
 export default App;
 
 const RouterDiv = styled.div`
-  background: black;
-  .navBar {
-    display: flex;
-    flex-wrap: warp;
-    background: black;
-    width: 100%;
-    justify-content: space-between;
-    a {
-      text-decoration: none;
-      margin: 20px;
-      min-height: 25px;
-      color: white;
-    }
-    a:hover {
-      color: white;
-      border-radius: 5px;
-    }
-  }
-`;
+    witdth: 100%;
+    min-height: 100vh;
+    background: #705771;
+
+`
+ 

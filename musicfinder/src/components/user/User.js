@@ -39,7 +39,7 @@ class User extends React.Component {
             .then(res=>{
                 this.setState({name: res.data.name, email: res.data.email})
                 alert("Your Update Submitted Successfully");
-                this.props.history.push('/');
+                this.props.history.push('/home');
             })
         }catch(err){
             console.log(err);
@@ -57,9 +57,7 @@ class User extends React.Component {
                     sessionStorage.clear()
                     alert("Your Account deleted Successfully")
                     this.props.history.push('/');
-                })
-                
-
+                })           
         }catch(err){
             console.log(err);
         }
@@ -106,12 +104,12 @@ const Wrapper = styled.div`
     height: 100%;
 `
 const UserBar = styled.div`
+    text-align : center;
     width: 400px;
-    border: 1px solid pink;
-    margin : auto;
+    margin : 0 auto;
     border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 300px;
+    padding-top: 60px;
+    margin-bottom: 320px;
     @media(max-width: 479px){
         width : 300px;
     }
@@ -130,10 +128,9 @@ const UserBar = styled.div`
         @media(max-width: 479px){
             width: 250px;
         }
-
     }
     button{
-      background: grey;
+      background: purple;
       border-radius: 5px;
       color : white;
       margin: 10px;
@@ -141,7 +138,8 @@ const UserBar = styled.div`
       border: none;       
     }
     button:hover{
-        box-shadow: 0 5px pink;
+        box-shadow: 0 5px #f1f;
+        background: #f1f2;
         cursor : pointer;
         transition: all 0.4s
     }
