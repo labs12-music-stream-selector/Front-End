@@ -46,11 +46,11 @@ export default class OAuthGoogle extends Component {
     return (
       <div>
         <GoogleLogin
-          clientId="1023911349266-1shu9chae4s2otlf4rro221ectmoh8sb.apps.googleusercontent.com"
-          discoverDocs={[
-            "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
-          ]}
-          scope="https://www.googleapis.com/auth/youtube.force-ssl"
+          clientId="557783495237-jqq3d269c5ee4uvbg0bv74rs1sb91g90.apps.googleusercontent.com"
+          // discoverDocs={[
+          //   "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
+          // ]}
+          // scope="https://www.googleapis.com/auth/youtube.force-ssl"
           buttonText="Login with Google"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
