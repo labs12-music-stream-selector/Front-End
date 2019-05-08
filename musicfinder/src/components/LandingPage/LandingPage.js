@@ -3,6 +3,7 @@ import styled, {css} from 'styled-components';
 import {Link} from 'react-router-dom'
 
 import Login from '../LoginForm/OAuthGoogle.js'
+import PatreonButton from '../Patreon/PatreonButton.js';
 
 const LandingPage = (props) => {
 	return (
@@ -99,7 +100,7 @@ const LandingPage = (props) => {
                     <Link to = '/home'> legal stuff 2</Link>
                 </div>
                 <div>
-                    <a href = 'https://www.patreon.com/join/2781247/checkout'>Patreon Button</a>
+					<PatreonButton/>
                 </div>
             </Footer>
 		</LandingPageContainer>
@@ -278,6 +279,17 @@ const Footer = styled.footer`
     
     #legal-stuff{
         display: flex;
-        flex-direction: column;
+		flex-direction: column;
+		a{
+			text-decoration: none;
+			text-align: center;
+			color: inherit;
+			text-decoration: underline;
+			margin: 5px 0;
+			:hover{
+				cursor: pointer;
+			}
+		}
+
     }
 `;
