@@ -25,4 +25,3 @@ const RouterDiv = styled.div`
     background: #705771;
 
 `
- 
