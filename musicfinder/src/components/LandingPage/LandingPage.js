@@ -99,7 +99,7 @@ const LandingPage = (props) => {
                     <Link to = '/home'> legal stuff 2</Link>
                 </div>
                 <div>
-                    <a href = 'patreon.com'>Patreon Button</a>
+                    <a href = 'https://www.patreon.com/join/2781247/checkout'>Patreon Button</a>
                 </div>
             </Footer>
 		</LandingPageContainer>
