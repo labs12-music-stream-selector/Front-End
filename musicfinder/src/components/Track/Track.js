@@ -19,10 +19,10 @@ const Track = (props) => {
 			<YouTubePlayer key={props.track.url + props.index} url={props.track.url} />
 			<Ul>
 				{
-					related ? related.map(track => {
-						return <li key = {track.url}><a href = {track.url}>{track.name}</a></li>
-					}) : ''
-				}
+					// console.log("related") || related ? related.map(track => {
+					// 	return <li key = {track.url}><a href = {track.url}>{track.name}</a></li>
+				// 	}) : ''
+				 }
 			</Ul>
 		</TrackContainer>
 	)

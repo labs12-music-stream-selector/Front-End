@@ -31,13 +31,16 @@ export default SearchBar;
 
 const SearchForm = styled.form`
 	position: fixed;
-	top: 20px;
+	height: 20px;
+	top: 13px;
 	left: 10%;
 	display: flex;
 	width: 500px;
 	align-items: stretch;
 	input{
+		text-align: center;
 		width: 70%;
+		height: 20px;
 		margin-right: 20px;
 		font-size: 12px;
 		@media(max-width: 479px){
@@ -47,7 +50,6 @@ const SearchForm = styled.form`
 	@media(max-width: 479px){
 		width: 200px;
 		left : 20%;
-		top : 22px;
 	}
 `;
 
