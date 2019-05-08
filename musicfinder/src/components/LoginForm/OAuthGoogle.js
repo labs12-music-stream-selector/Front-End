@@ -12,19 +12,18 @@ export default class OAuthGoogle extends Component {
   }
   signup = (res, type) => {
     let postData;
-
     if (type === "google" && res.w3.U3) {
       postData = {
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
         provider_id: res.El,
-        token: res.Zi.access_token,
+        token: res.Zi.id_token,
         provider_pic: res.w3.Paa
       };
     }
     if (postData) {
-      console.log(postData);
+      // console.log(postData);
       PostData(postData).then(result => {
         sessionStorage.setItem(
           "token",
@@ -42,8 +41,6 @@ export default class OAuthGoogle extends Component {
       return <Redirect to={"/Home"} />;
     }
     const responseGoogle = response => {
-      console.log(response);
-      sessionStorage.setItem('response', response);
       this.signup(response, "google");
     };
     return (
