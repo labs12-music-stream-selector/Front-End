@@ -3,6 +3,7 @@ import styled, {css} from 'styled-components';
 import {Link} from 'react-router-dom'
 
 import Login from '../LoginForm/OAuthGoogle.js'
+
 const LandingPage = (props) => {
 	return (
 		<LandingPageContainer>

@@ -1,69 +1,29 @@
-import React from 'react';
-import {gapi} from 'googleapis';
+import React, { Component } from "react";
 
-export default function NewPlaylist() {
-  const YTAPI_KEY;
-  const YTCLIENT_ID;
+export default class NewPlaylist extends Component {
+  componentDidMount = () => {
+    // let gapi = window.gapi;
+    // console.log(gapi);
+    // console.log(process.env.API_KEY);
+    // gapi.load("client", () => {
+    //   gapi.client.setApiKey(process.env.API_KEY);
+    //   gapi.client.setClientId(process.env.CLIENT_ID);
+    //   gapi.client.setDiscoveryDocs(process.env.DISCOVERY_DOCS);
+    //   gapi.client.setScope(process.env.SCOPE);
+    //   gapi.client.load("client:auth2", "v3", () => {
+    //     console.log("gapi is ready");
+    //     this.setState({ gapiReady: true });
+    //   });
+    // });
+    // var user = gapi.auth2.getAuthInstance().currentUser.get();
+    // var oauthToken = user.getAuthResponse().access_token;
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("GET", "https://people.googleapis.com/v1/people/me/connections");
+    // xhr.setRequestHeader("Authorization", "Bearer " + oauthToken);
+    // xhr.send();
+  };
 
-  let isAuthorized;
-  let currentApiRequest;
-  
-  let GoogleAuth;
-  (function initClient() {
-    gapi.client.init({
-      'apiKey': YTAPI_KEY,
-      'clientId': YTCLIENT_ID,
-      'scope': 'https://www.googleapis.com/auth/youtube.force-ssl',
-      'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest']
-    }).then(res => {
-      GoogleAuth = gapi.auth2.getAuthInstance();
-  
-      // Listen for sign-in state changes.
-      GoogleAuth.isSignedIn.listen(updateSigninStatus);
-    }).catch(err => {
-      console.log(err);
-    })
-  })();
-
-  /**
-  * Store the request details. Then check to determine whether the user
-  * has authorized the application.
-  *   - If the user has granted access, make the API request.
-  *   - If the user has not granted access, initiate the sign-in flow.
-  */
-  function sendAuthorizedApiRequest(requestDetails) {
-    currentApiRequest = requestDetails;
-    if(isAuthorized) {
-      // Make API request
-      //gapi.client.request(requestDetails)
-
-      //Reset currentApiRequest variable.
-      currentApiRequest = {};
-    } else {
-      GoogleAuth.signIn();
-    }
+  render() {
+    return <div />;
   }
-
-  /**
-  * Listener called when user completes auth flow. If the currentApiRequest
-  * variable is set, then the user was prompted to authorize the application
-  * before the request executed. In that case, proceed with that API request.
-  */
-  function updateSigninStatus(isSignedIn) {
-    isAuthorized = true;
-    if(isSignedIn) {
-      isAuthorized = true;
-      if(currentApiRequest) {
-        sendAuthorizedApiRequest(currentApiRequest);
-      }
-    } else {
-      isAuthorized = false;
-    }
-  }
-
-  return (
-    <div>
-      <button onClick={GoogleAuth.signIn()}>Login with Google</button>
-    </div>
-  )
 }

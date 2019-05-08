@@ -61,18 +61,15 @@ closeMenu=(event)=> {
       <Router>
         <NavDiv className="">
           <nav className="navBar" >
-            <Link to='/home'>Home</Link>
-            
-            <div>
-            <Link to="./donation"> Support Us </Link>
-              <button className ="userinfo" onClick={this.showMenu} > {this.state.name} </button>
-                {this.state.showMenu ? 
-                (<div className ='menu' >
-                  <button className ="userbtn" ><Link to = '/user'> Update Profile </Link> </button>
-                  <button  className ="userbtn" onClick= {this.signMeOut}> Sign Out </button>
-                </div> ) : (null) }
+          <Link className="dropbtn"  to='/home'>Home</Link>
+            <div className="dropdown">
+                <button className="dropbtn">{this.state.name}</button>
+                <div className="dropdown-content">
+                  <Link to = '/user'> Update Profile </Link>
+                  <Link to="./donation"> Support Us </Link>
+                  <Button  className ="signoutBtn" onClick= {this.signMeOut}> Sign Out </Button>         
+                </div>
             </div>
-
           </nav>
           <Route path="/player" component={YoutubePlayer} />
           <Route path="/privacypolicy" component={PrivacyPolicy} />
@@ -88,31 +85,73 @@ closeMenu=(event)=> {
 
 const NavDiv = styled.div` 
   .navBar{
-    border-bottom: 1px solid pink;
-  }
-  .userinfo{
-    margin-top: 18px;
-    padding: 3px;
-    margin-right: 15px;
-    background: black;
-    font-size: 16px;
-    border: none;
-    color: white;
-    cursor: pointer;
-  }
-  .userbtn{
-    border-radius: 5px;
-    background: black;
-    color: red;
-    font-size: 12px;
-    margin : 5px;
-    color: red;
-    cursor: pointer;
-    @media(max-width: 479px){
+    top:0;
+    position: fixed;
+    display: flex;
+    flex-wrap: warp;
+    background : #3232;
+    width : 100%;
+    justify-content : space-between;
+    .dropbtn {
+      text-decoration: none;
+      background-color: #f1f4;
+      color: white;
+      padding: 14px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      @media(max-width: 479px){
+        font-size: 12px;
+      }
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #f9f;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .dropdown-content a:hover {
+      background-color: #f1d;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    .dropbtn:hover {
+      background-color: #f1f2;
     }
   }
-  .userbtn:hover{
-    background: grey;
-    color: black;
+  .dropdown-content .signoutBtn{
+    border-radius: 5px;
+    height: 25px;
   }
+`
+const Button= styled.div`
+  background: #f1f2;
+  border-radius: 5px;
+  margin: 10px;
+  height: 30px;
+  border: none;  
+  :hover{
+    background: purple;
+    color: white;
+  }     
 `
