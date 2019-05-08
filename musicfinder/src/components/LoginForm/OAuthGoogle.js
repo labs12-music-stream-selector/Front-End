@@ -12,7 +12,7 @@ export default class OAuthGoogle extends Component {
   }
   signup = (res, type) => {
     let postData;
-
+    console.log(res);
     if (type === "google" && res.w3.U3) {
       postData = {
         name: res.w3.ig,
@@ -42,8 +42,6 @@ export default class OAuthGoogle extends Component {
       return <Redirect to={"/"} />;
     }
     const responseGoogle = response => {
-      console.log(response);
-      sessionStorage.setItem('response', response);
       this.signup(response, "google");
     };
     return (
