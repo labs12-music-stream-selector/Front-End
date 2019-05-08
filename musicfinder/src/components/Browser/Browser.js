@@ -100,7 +100,7 @@ const Browser = (props) => {
 	}
 
 	function loadNext(page) {
-		console.log(page, tracks)
+		//console.log(page, tracks)
 		// if (offset < tracks.length - 6) {
 		if (page*6 < tracksData.length - 6) {
 			// updateOffset(offset + 6);
@@ -125,8 +125,6 @@ const BrowserContainer = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 	width: 100%;
-	margin-top: 20px;
-
 	min-height: 100vh;
 `;
 
@@ -134,7 +132,6 @@ const Container = styled.div`
 	display: flex;
 	justify-content: space-evenly;
 	flex-wrap: wrap;
-
-	margin: 0 auto;
+	margin: 60px auto;
 
 `;

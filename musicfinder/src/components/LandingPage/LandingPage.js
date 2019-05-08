@@ -2,6 +2,7 @@ import React from 'react';
 import styled, {css} from 'styled-components';
 
 import Login from '../LoginForm/OAuthGoogle.js'
+
 const LandingPage = (props) => {
 	return (
 		<LandingPageContainer>
