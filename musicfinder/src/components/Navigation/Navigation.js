@@ -4,11 +4,14 @@ import PrivacyPolicy from "../PrivacyPolicy/PrivacyPolicy.js";
 import TermsOfService from "../TermsOfService/TermsOfService.js";
 import Browser from '../Browser/Browser.js';
 import User from '../user/User.js'
+import Patreon from '../Patreon/Patreon.js'
+
+
 import { Route, Link } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import styled from 'styled-components';
 import axios from 'axios';
-import SearchBar from '../SearchBar/SearchBar.js'
+
 export default class Navigation extends Component {
   constructor() {
     super();  
@@ -43,7 +46,6 @@ signMeOut = () =>{
 }
 showMenu = (event) => {
   event.preventDefault();
-  
   this.setState({ showMenu: true }, () => {
     document.addEventListener('click', this.closeMenu);
   });
@@ -57,10 +59,12 @@ closeMenu=(event)=> {
   render() {
     return (
       <Router>
-        <RouterDiv className="">
+        <NavDiv className="">
           <nav className="navBar" >
             <Link to='/home'>Home</Link>
+            
             <div>
+            <Link to="./donation"> Support Us </Link>
               <button className ="userinfo" onClick={this.showMenu} > {this.state.name} </button>
                 {this.state.showMenu ? 
                 (<div className ='menu' >
@@ -74,14 +78,18 @@ closeMenu=(event)=> {
           <Route path="/privacypolicy" component={PrivacyPolicy} />
           <Route path="/termsofservice" component={TermsOfService} />
           <Route path="/user" component={User} />
+          <Route path="/donation" component={Patreon} />
           <Route exact path="/home" component={Browser} />
-        </RouterDiv>
+        </NavDiv>
       </Router>
     )
   }
 }
 
-const RouterDiv = styled.div` 
+const NavDiv = styled.div` 
+  .navBar{
+    border-bottom: 1px solid pink;
+  }
   .userinfo{
     margin-top: 18px;
     padding: 3px;
@@ -96,13 +104,15 @@ const RouterDiv = styled.div`
     border-radius: 5px;
     background: black;
     color: red;
-    font-size: 16px;
+    font-size: 12px;
     margin : 5px;
     color: red;
     cursor: pointer;
-
+    @media(max-width: 479px){
+    }
   }
-  
-
-
+  .userbtn:hover{
+    background: grey;
+    color: black;
+  }
 `
