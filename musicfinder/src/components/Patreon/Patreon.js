@@ -13,7 +13,7 @@ function PatreonSignup() {
     <SupportPageWrapper>
       <div className="container">
         <h1 className="support--h1">Support Moody Beats!</h1>
-        <p className="support--p">Love the project but don't know how to contribute? There are two great ways you can help.</p>
+        <h2 className="support--p">Love the project but don't know how to contribute? There are two great ways you can help.</h2>
         <ul className="support--ul">
           <li className="support--li">Submit music that is a Creative Commons licensed piece of work.  We're always looking to add to the collection for others!</li>
           <li className="support--li">Or help us out by supporting us on Patreon</li>
@@ -48,7 +48,7 @@ const SupportPageWrapper = styled.div`
     padding-top: 30px;
     color: white;
     font-size: 3rem;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     @media (max-width: 500px) {
       font-size: 2.25rem;
     }
