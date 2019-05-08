@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import YouTubePlayer from '../YoutubePlayer/YoutubePlayer.js';
@@ -19,10 +19,13 @@ const Track = (props) => {
 			<YouTubePlayer key={props.track.url + props.index} url={props.track.url} />
 			<Ul>
 				{
-					// console.log("related") || related ? related.map(track => {
-					// 	return <li key = {track.url}><a href = {track.url}>{track.name}</a></li>
-				// 	}) : ''
-				 }
+					console.log(related) ||
+						related ? related.map(track => {
+							if (track.url) {
+								return <li key={track.url}><a href={track.url}>{track.name}</a></li>
+							}
+						}) : ''
+				}
 			</Ul>
 		</TrackContainer>
 	)
