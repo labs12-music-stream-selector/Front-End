@@ -192,7 +192,12 @@ const Team = styled.div`
     justify-content: center;
     margin-top: 10px;
     min-height: 300px;
-    font-size: 1.5em;
+	font-size: 1.5em;
+	
+	h2{
+		text-align: center;
+	}
+
     ul{
         display: flex;
         justify-content: start;
