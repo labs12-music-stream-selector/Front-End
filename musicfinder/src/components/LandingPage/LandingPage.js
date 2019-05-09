@@ -120,6 +120,7 @@ export default LandingPage;
 
 const LandingPageContainer = styled.div`
 	color: ivory;
+	margin-top: -40px;
 	*{
 		margin: 0;
 	}
@@ -247,7 +248,7 @@ const Team = styled.div`
     a{
         text-decoration: none;
         text-align: center;
-        color: #009FB7;
+        color: inherit;
         text-decoration: underline;
         :hover{
             color: #007DA6;
