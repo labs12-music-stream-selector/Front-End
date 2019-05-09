@@ -191,6 +191,7 @@ const Header = styled.div`
 	padding: 10px 10px 0;
 
 	#text-container{
+		text-shadow: 0px 0px 16px rgba(0,0,0,0.71);
 		margin: 10px 0;
 		h1{
 			text-align:center;
