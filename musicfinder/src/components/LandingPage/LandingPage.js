@@ -1,6 +1,6 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
-import {Link} from 'react-router-dom'
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom'
 
 import Login from '../LoginForm/OAuthGoogle.js'
 
@@ -12,88 +12,88 @@ const LandingPage = (props) => {
 					<h1>MoodiBeats</h1>
 					<h2>Find copyright free music by mood.</h2>
 				</div>
-				<Login style = {{
+				<Login style={{
 					position: 'absolute',
-					top: '5px', 
+					top: '5px',
 					right: '5px'
-				}}/>
+				}} />
 			</Header>
 			<FeaturesContainer>
 				<Feature left>
-					<div className = 'feature-details'>
+					<div className='feature-details'>
 						<h2>Browse Free Curated Songs</h2>
 						<p>
 							over 60 curated songs guaranteed free to use on your stream or videos.
 						</p>
 					</div>
-					<div className = 'feature-img'>
-						<img src = 'https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80' alt = 'video creator'/>
+					<div className='feature-img'>
+						<img src='https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80' alt='video creator' />
 					</div>
 				</Feature>
 				<Feature right>
-					<div className = 'feature-img'>
-						<img src = 'https://images.unsplash.com/photo-1537884444401-d79ef2b2990d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80' alt = 'Painting'/>
+					<div className='feature-img'>
+						<img src='https://images.unsplash.com/photo-1537884444401-d79ef2b2990d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80' alt='Painting' />
 					</div>
-					<div className = 'feature-details'>
+					<div className='feature-details'>
 						<h2>Search songs by mood</h2>
 						<p>
 							Choose just the right music for the theme of your content.
 						</p>
 					</div>
 				</Feature>
-                <Feature left>
-                    <div className = 'feature-details'>
+				<Feature left>
+					<div className='feature-details'>
 						<h2>Create Playlists</h2>
 						<p>
-                            Group your favorite songs together. Dunno lol
+							Group your favorite songs together. Dunno lol
 						</p>
 					</div>
-					<div className = 'feature-img'>
-						<img src = 'https://images.unsplash.com/photo-1511233002817-99325d7cc2d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80' alt = 'Painting'/>
+					<div className='feature-img'>
+						<img src='https://images.unsplash.com/photo-1511233002817-99325d7cc2d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80' alt='Painting' />
 					</div>
 				</Feature>
 			</FeaturesContainer>
 			<Team>
-                <div>
-                    <h2>Team</h2>
-                    <ul>
-                        <li>
-                            <a href = 'github.com'>Kevin Brack</a>
-                        </li>
-                        <li>
-                            <a href = 'github.com'>Logan Hufstetler</a> 
-                        </li>
-                        <li>
-                            <a href = 'github.com'>Davina Taylor</a>
-                        </li>
-                        <li>
-                            <a href = 'github.com'>John Humphreys</a>
-                        </li>
-                        <li>
-                            <a href = 'github.com'>Md Kawsar Hussen</a>
-                        </li>
-                        <li>
-                            <a href = 'github.com'>Jonathan Bernal</a>
-                        </li>
-                        <li>
-                            <a href = 'github.com'>Sammy Lee</a>
-                        </li>
-                        <li>
-                            <a href = 'github.com'>Xander Jake de los Santos</a>
-                        </li>
-                    </ul>
-                </div>
+				<div>
+					<h2>Team</h2>
+					<ul>
+						<li>
+							<a href='github.com'>Kevin Brack</a>
+						</li>
+						<li>
+							<a href='github.com'>Logan Hufstetler</a>
+						</li>
+						<li>
+							<a href='github.com'>Davina Taylor</a>
+						</li>
+						<li>
+							<a href='github.com'>John Humphreys</a>
+						</li>
+						<li>
+							<a href='github.com'>Md Kawsar Hussen</a>
+						</li>
+						<li>
+							<a href='github.com'>Jonathan Bernal</a>
+						</li>
+						<li>
+							<a href='github.com'>Sammy Lee</a>
+						</li>
+						<li>
+							<a href='github.com'>Xander Jake de los Santos</a>
+						</li>
+					</ul>
+				</div>
 			</Team>
-            <Footer>
-                <div id = 'legal-stuff'>
-                    <h3>Legal Stuff</h3>
-                    <Link to = '/'> legal stuff 1</Link>
-                    <Link to = '/home'> legal stuff 2</Link>
-                </div>
-                <div>
-                    <a href = 'patreon.com'>Patreon Button</a>
-                </div>
-            </Footer>
+			<Footer>
+				<div id='legal-stuff'>
+					<h3>Legal Stuff</h3>
+					<Link to='/'> legal stuff 1</Link>
+					<Link to='/home'> legal stuff 2</Link>
+				</div>
+				<div>
+					<a href='patreon.com'>Patreon Button</a>
+				</div>
+			</Footer>
 		</LandingPageContainer>
 	)
 }
@@ -220,10 +220,10 @@ const Team = styled.div`
     a{
         text-decoration: none;
         text-align: center;
-        color: inherit;
+        color: #009FB7;
         text-decoration: underline;
         :hover{
-            color: orange;
+            color: #007DA6;
             cursor: pointer;
         }
     }
