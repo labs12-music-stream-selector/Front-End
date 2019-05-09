@@ -8,7 +8,7 @@ import Select from '../Select/Select.js';
 import Track from '../Track/Track.js';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import PostPlaylist from "../YoutubePlaylist/PostPlaylist.js";
+// import PostPlaylist from "../YoutubePlaylist/PostPlaylist.js";
 
 
 const Browser = (props) => {
@@ -30,7 +30,7 @@ const Browser = (props) => {
 	return (
 		<BrowserContainer id='browser-container'>
 			<SearchBar searchTrack={searchTrack} selectComp={(props) => <Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />} />
-			<PostPlaylist />
+			{/* <PostPlaylist /> */}
 			<InfiniteScroll
 				pageStart={0}
 				loadMore={loadNext}
