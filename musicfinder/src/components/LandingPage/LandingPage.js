@@ -59,36 +59,36 @@ const LandingPage = (props) => {
                     <h2>Team</h2>
                     <ul>
                         <li>
-							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Kevin Brack'/>
-                            <a href = 'github.com'>Kevin Brack</a>
+							<img src = 'https://avatars0.githubusercontent.com/u/13532991?s=400&v=4' alt = 'Kevin Brack'/>
+                            <a href = 'github.com/KevinBrack'>Kevin Brack</a>
                         </li>
                         <li>
-							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Logan Hufstetler'/>
-                            <a href = 'github.com'>Logan Hufstetler</a> 
+							<img src = 'https://avatars2.githubusercontent.com/u/46465575?s=400&v=4' alt = 'Logan Hufstetler'/>
+                            <a href = 'github.com/BlissCatalyst'>Logan Hufstetler</a>
                         </li>
                         <li>
-							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Davina Taylor'/>
-                            <a href = 'github.com'>Davina Taylor</a>
+							<img src = 'https://avatars0.githubusercontent.com/u/10713358?s=400&u=f3dd10a2ecfa7efa5b993fc63fd905cf14311fd3&v=4' alt = 'Davina Taylor'/>
+                            <a href = 'github.com/lilvina'>Davina Taylor</a>
                         </li>
                         <li>
 							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'John Humphreys'/>
-                            <a href = 'github.com'>John Humphreys</a>
+                            <a href = 'github.com/johnpharmd'>John Humphreys</a>
                         </li>
                         <li>
-							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Md Kawsar Hussen'/>
-                            <a href = 'github.com'>Md Kawsar Hussen</a>
+							<img src = 'https://avatars0.githubusercontent.com/u/46500263?s=400&v=4' alt = 'Md Kawsar Hussen'/>
+                            <a href = 'github.com/kkingbd'>Md Kawsar Hussen</a>
                         </li>
                         <li>
-							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Jonathan Bernal'/>
-                            <a href = 'github.com'>Jonathan Bernal</a>
+							<img src = 'https://avatars3.githubusercontent.com/u/42630698?s=400&v=4' alt = 'Jonathan Bernal'/>
+                            <a href = 'github.com/BlueSandWeb'>Jonathan Bernal</a>
                         </li>
                         <li>
-							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Sammy Lee'/>
-                            <a href = 'github.com'>Sammy Lee</a>
+							<img src = 'https://avatars1.githubusercontent.com/u/17155841?s=400&v=4' alt = 'Sammy Lee'/>
+                            <a href = 'github.com/Captmoonshot'>Sammy Lee</a>
                         </li>
                         <li>
 							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Xander Jake de los Santos'/>
-                            <a href = 'github.com'>Xander Jake de los Santos</a>
+                            <a href = 'github.com/xanderjakeq'>Xander Jake de los Santos</a>
                         </li>
                     </ul>
                 </div>
@@ -163,7 +163,7 @@ const Feature = styled.div`
 			text-shadow: 0px 0px 13px rgba(0, 0, 0, 0.76)
 		}
 	}
-	
+
 	.feature-img{
 		display: flex;
 		justify-content: center;
@@ -173,7 +173,7 @@ const Feature = styled.div`
 		max-height: 50vw;
 		overflow: hidden;
 		position: relative;
-		
+
 	}
 	.feature-img img{
 		height: 100%;
@@ -181,7 +181,7 @@ const Feature = styled.div`
 
 	@media (max-width: 500px) {
 		margin-top: 10px;
-		
+
 		font-size: 1em;
 		.feature-details{
 			position: unset;
@@ -202,7 +202,7 @@ const Team = styled.div`
     margin-top: 10px;
     min-height: 300px;
 	font-size: 1.5em;
-	
+
 	h2{
 		text-align: center;
 	}
@@ -228,7 +228,7 @@ const Team = styled.div`
         text-align: left;
         align-self: flex-start;
 	}
-	
+
 	img{
 		width: 100px;
 		height: auto;
@@ -246,7 +246,7 @@ const Team = styled.div`
         }
     }
 
-    
+
     @media (max-width: 830px) {
         ul{
             align-items: center;
@@ -276,7 +276,7 @@ const Footer = styled.footer`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    
+
     #legal-stuff{
         display: flex;
 		flex-direction: column;
