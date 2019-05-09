@@ -1,19 +1,16 @@
 import React from "react";
+import styled from 'styled-components';
+import { withRouter } from "react-router-dom";
 
-export default function TermsOfService() {
-  const TosStyle = {
-    color: "inherit",
-    textDecoration: "none",
-    cursor: "text"
-  };
+function TermsOfService() {
   return (
-    <div>
+    <Wrapper>
+      <div className="container">
       <h2>Welcome to MoodyBeats</h2>
       <p>
         These terms and conditions outline the rules and regulations for the use
         of MoodyBeats's Website.
       </p>
-      <br />
       <p>
         By accessing this website we assume you accept these terms and
         conditions in full. Do not continue to use MoodyBeats's website if you
@@ -81,7 +78,7 @@ export default function TermsOfService() {
           </ol>
         </li>
       </ol>
-      <ol start="2">
+      <ol >
         <li>
           These organizations may link to our home page, to publications or to
           other Web site information so long as the link: (a) is not in any way
@@ -226,12 +223,66 @@ export default function TermsOfService() {
       <h2>Credit & Contact Information</h2>
       <p>
         This Terms and conditions page was created at{" "}
-        <a style={TosStyle} href="https://termsandconditionstemplate.com">
+        <a  href="https://termsandconditionstemplate.com">
           termsandconditionstemplate.com
         </a>{" "}
         generator. If you have any queries regarding any of our terms, please
         contact us.
       </p>
-    </div>
+      </div>
+    </Wrapper>
   );
 }
+
+export default withRouter(TermsOfService);
+
+const Wrapper = styled.div`
+    margin-top: 0px;
+    width: 100%;
+    color: white;
+    min-height: 100vh;
+    padding-top: 10vh;
+    padding-bottom: 60px;
+    width: 100%;
+    text-align: left;
+    min-height: max-content;
+    ol, ul, li,a{
+      margin: 0;
+      padding: 0;
+    }   
+    ol,li,ul{
+      margin-left: 30px;
+      padding: 3px 0;
+    }
+    .container {
+      max-width: 1200px;
+      width: 90%;
+      margin: 0 auto;
+      padding-top: 20px;
+      color: white;
+      @media (max-width: 500px) {
+        width: 80%;
+        h1,h2,h3{
+          font-size: 14px;
+        }
+        p, ol, li, ul{
+          font-size: 10px;
+        }
+        ol,li,ul{
+          margin-left: 8px;
+          padding: 2px 0;
+        }
+      }
+    }
+    a{
+      text-decoration: none; 
+    }
+    a:hover{
+      color: #00f9b7;
+    }
+    p{
+      line-height: 1.5;
+    }
+ 
+`
+
