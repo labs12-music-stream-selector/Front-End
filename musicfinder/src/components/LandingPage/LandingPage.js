@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import {Grid, Cell} from 'styled-css-grid';
 
 import Login from '../LoginForm/OAuthGoogle.js'
 import PatreonButton from '../Patreon/PatreonButton.js';
@@ -9,7 +10,7 @@ const LandingPage = (props) => {
 	return (
 		<LandingPageContainer>
 			<Header>
-				<div>
+				<div id = 'text-container'>
 					<h1>MoodiBeats</h1>
 					<h2>Find copyright free music by mood.</h2>
 				</div>
@@ -118,10 +119,24 @@ const LandingPageContainer = styled.div`
 
 const Header = styled.div`
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 
-	padding: 0 10px;
+	background-image: url('https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80');
+	background-size: cover;
+	background-position: center;
+
+	height: 100vh;
+
+	padding: 10px 10px 0;
+
+	#text-container{
+		margin: 10px 0;
+		h1{
+			text-align:center;
+		}
+	}
 
 	@media (max-width: 500px) {
 		flex-direction: column;
@@ -146,20 +161,10 @@ const Feature = styled.div`
 	}
 
 	.feature-details{
-		position: relative;
-		z-index: 5;
+		
 
-
-		${props => props.left && css`
-			left: 20%;
-			text-align: left;
-		`}
-		${props => props.right && css`
-			right: 20%;
-			text-align: right;
-		`}
-
-		h1, p{
+		h2, p{
+			text-align: center;
 			text-shadow: 0px 0px 13px rgba(0, 0, 0, 0.76)
 		}
 	}
@@ -183,10 +188,7 @@ const Feature = styled.div`
 		margin-top: 10px;
 		
 		font-size: 1em;
-		.feature-details{
-			position: unset;
-			z-index: 5;
-		}
+		
 
 		.feature-img img{
 			height: 100%;
