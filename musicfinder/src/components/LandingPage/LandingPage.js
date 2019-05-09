@@ -37,7 +37,7 @@ const LandingPage = (props) => {
 				<Cell height = {1} center middle area = 'feature-1' className = 'feature-details'>
 					<h2>Browse Free Curated Songs</h2>
 					<p>
-						over 60 curated songs guaranteed free to use on your stream or videos.
+						Over 60 curated songs guaranteed free to use on your stream or videos.
 					</p>
 				</Cell>
 				<Cell height = {1} center middle area = 'img-1' className = 'feature-img'>
@@ -47,7 +47,7 @@ const LandingPage = (props) => {
 					<img src = {painting} alt = 'Painting'/>
 				</Cell>
 				<Cell height = {1}  center middle area = 'feature-2' className = 'feature-details'>
-					<h2>Search songs by mood</h2>
+					<h2>Search Songs by Mood</h2>
 					<p>
 						Choose just the right music for the theme of your content.
 					</p>
@@ -55,7 +55,7 @@ const LandingPage = (props) => {
 				<Cell height = {1} center middle area = 'feature-3' className = 'feature-details'>
 					<h2>Create Playlists</h2>
 					<p>
-						Group your favorite songs together.
+						Group Your Favorite Songs Together.
 					</p>
 				</Cell>
 				<Cell height = {1} center middle area = 'img-3' className = 'feature-img'>

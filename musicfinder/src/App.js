@@ -4,7 +4,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components";
 
 import LandingPage from "./components/LandingPage/LandingPage.js";
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./components/Navigation/Navigation.js";
+import TermsOfService from './components/TermsOfService/TermsOfService.js';
+import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy.js';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <RouterDiv className="App">
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/home" component={Navigation} />
+        <Route path="/termsofservice" component={TermsOfService} />
+        <Route path="/privacypolicy" component={PrivacyPolicy} />
       </RouterDiv>
     </Router>
   );
