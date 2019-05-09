@@ -269,12 +269,15 @@ const Team = styled.div`
 	}
 
     @media (max-width: 500px) {
-        font-size: 1em;
+        font-size: 1.2em;
 	    ul{
             width: 300px;
         }
         li{
 			width: 126px;
+			img{
+				margin-bottom: 10px;
+			}
         }
 	}
 `;
