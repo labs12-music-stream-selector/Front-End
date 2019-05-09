@@ -16,7 +16,7 @@ const YoutubePlayer = (props) => {
   return (
     <>
       <iframe
-        style={{ boxShadow: "0px 4px 8px #272727" }}
+        style={{ boxShadow: "0px 2px 4px #272727, 0px 4px 8px rgba(0,0,0,.5)" }}
         width="400"
         height="300"
         src={`https://www.youtube.com/embed/${urlConstructor(props.url, props.playlist)}`}
