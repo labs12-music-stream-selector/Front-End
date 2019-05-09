@@ -19,8 +19,8 @@ function App() {
 export default App;
 
 const RouterDiv = styled.div`
-  witdth: 100%;
-  min-height: 100vh;
-  background: #696773;
-  padding-top: 40px;
+    width: 100%;
+    min-height: 100vh;
+    background: #272727;
+    padding-top: 40px;
 `

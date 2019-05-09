@@ -17,6 +17,7 @@
     "react-test-renderer": "^16.8.6",
     "react-testing-library": "^7.0.0",
     "styled-components": "^4.2.0",
+    "styled-css-grid": "^1.2.1",
     "underscore": "^1.9.1"
   },
   "scripts": {
