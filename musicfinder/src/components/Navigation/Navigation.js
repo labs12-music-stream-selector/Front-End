@@ -93,6 +93,7 @@ const NavDiv = styled.div`
     background : #272727;
     width : 100%;
     justify-content : space-between;
+    box-shadow: 0px 2px 2px black;
     .dropbtn {
       text-decoration: none;
       background-color: #009FB7;
