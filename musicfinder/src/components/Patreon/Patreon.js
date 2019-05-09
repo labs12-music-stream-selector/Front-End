@@ -27,7 +27,7 @@ function PatreonSignup() {
 const SupportPageWrapper = styled.div`
   margin-top: 0px;
   color: white;
-  background-color: #323232;
+  background-color: #3232;
   height: 100vh;
   padding-top: 10vh;
   padding-bottom: 60px;
