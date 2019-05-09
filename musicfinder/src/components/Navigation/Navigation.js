@@ -55,7 +55,7 @@ export default class Navigation extends Component {
     this.setState({ showMenu: false }, () => {
       document.removeEventListener('click', this.closeMenu);
     });
-
+  }
   render() {
     return (
       <Router>
@@ -177,7 +177,7 @@ const Button= styled.div`
   }
 `
 
-    
+
 
   }
 `
@@ -188,6 +188,5 @@ const Button = styled.div`
   color: #EFF1F3;
   :hover{
     background-color: #009FB7;
-  }     
+  }
 `
-
