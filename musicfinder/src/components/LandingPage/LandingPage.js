@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom'
 
 import Login from '../LoginForm/OAuthGoogle.js'
+import PatreonButton from '../Patreon/PatreonButton.js';
 
 const LandingPage = (props) => {
 	return (
@@ -54,46 +55,54 @@ const LandingPage = (props) => {
 				</Feature>
 			</FeaturesContainer>
 			<Team>
-				<div>
-					<h2>Team</h2>
-					<ul>
-						<li>
-							<a href='github.com'>Kevin Brack</a>
-						</li>
-						<li>
-							<a href='github.com'>Logan Hufstetler</a>
-						</li>
-						<li>
-							<a href='github.com'>Davina Taylor</a>
-						</li>
-						<li>
-							<a href='github.com'>John Humphreys</a>
-						</li>
-						<li>
-							<a href='github.com'>Md Kawsar Hussen</a>
-						</li>
-						<li>
-							<a href='github.com'>Jonathan Bernal</a>
-						</li>
-						<li>
-							<a href='github.com'>Sammy Lee</a>
-						</li>
-						<li>
-							<a href='github.com'>Xander Jake de los Santos</a>
-						</li>
-					</ul>
-				</div>
+                <div>
+                    <h2>Team</h2>
+                    <ul>
+                        <li>
+							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Kevin Brack'/>
+                            <a href = 'github.com'>Kevin Brack</a>
+                        </li>
+                        <li>
+							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Logan Hufstetler'/>
+                            <a href = 'github.com'>Logan Hufstetler</a> 
+                        </li>
+                        <li>
+							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Davina Taylor'/>
+                            <a href = 'github.com'>Davina Taylor</a>
+                        </li>
+                        <li>
+							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'John Humphreys'/>
+                            <a href = 'github.com'>John Humphreys</a>
+                        </li>
+                        <li>
+							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Md Kawsar Hussen'/>
+                            <a href = 'github.com'>Md Kawsar Hussen</a>
+                        </li>
+                        <li>
+							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Jonathan Bernal'/>
+                            <a href = 'github.com'>Jonathan Bernal</a>
+                        </li>
+                        <li>
+							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Sammy Lee'/>
+                            <a href = 'github.com'>Sammy Lee</a>
+                        </li>
+                        <li>
+							<img src = 'https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt = 'Xander Jake de los Santos'/>
+                            <a href = 'github.com'>Xander Jake de los Santos</a>
+                        </li>
+                    </ul>
+                </div>
 			</Team>
-			<Footer>
-				<div id='legal-stuff'>
-					<h3>Legal Stuff</h3>
-					<Link to='/'> legal stuff 1</Link>
-					<Link to='/home'> legal stuff 2</Link>
-				</div>
-				<div>
-					<a href='patreon.com'>Patreon Button</a>
-				</div>
-			</Footer>
+            <Footer>
+                <div id = 'legal-stuff'>
+                    <h3>Legal Stuff</h3>
+                    <Link to = '/'> legal stuff 1</Link>
+                    <Link to = '/home'> legal stuff 2</Link>
+                </div>
+                <div>
+					<PatreonButton/>
+                </div>
+            </Footer>
 		</LandingPageContainer>
 	)
 }
@@ -211,11 +220,20 @@ const Team = styled.div`
     }
 
     li{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
         margin: 10px;
         width: 212px;
         text-align: left;
         align-self: flex-start;
-    }
+	}
+	
+	img{
+		width: 100px;
+		height: auto;
+		border-radius: 100%;
+	}
 
     a{
         text-decoration: none;
@@ -261,6 +279,17 @@ const Footer = styled.footer`
     
     #legal-stuff{
         display: flex;
-        flex-direction: column;
+		flex-direction: column;
+		a{
+			text-decoration: none;
+			text-align: center;
+			color: inherit;
+			text-decoration: underline;
+			margin: 5px 0;
+			:hover{
+				cursor: pointer;
+			}
+		}
+
     }
 `;

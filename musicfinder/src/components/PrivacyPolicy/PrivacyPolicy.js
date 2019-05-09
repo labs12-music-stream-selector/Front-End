@@ -1,16 +1,13 @@
 import React from "react";
+import styled from 'styled-components';
+import { withRouter } from "react-router-dom";
 
-export default function PrivacyPolicy() {
-  const policyStyle = {
-    color: "inherit",
-    textDecoration: "none"
-  };
+function PrivacyPolicy() {
   return (
-    <div>
-      <h1>Welcome to our Privacy Policy</h1>
+    <Wrapper>
+      <div className="container">
+      <h2>Welcome to our Privacy Policy</h2>
       <h3>Your privacy is critically important to us.</h3>
-      <br />
-
       <p>
         It is MoodyBeats's policy to respect your privacy regarding any
         information we may collect while operating our website. This Privacy
@@ -171,7 +168,6 @@ export default function PrivacyPolicy() {
       <p>
         This privacy policy was created at{" "}
         <a
-          style={policyStyle}
           href="https://termsandconditionstemplate.com/privacy-policy-generator/"
           title="Privacy policy template generator"
           target="_blank"
@@ -180,6 +176,43 @@ export default function PrivacyPolicy() {
         </a>
         .
       </p>
-    </div>
+      </div>
+    </Wrapper>
   );
 }
+
+export default withRouter(PrivacyPolicy);
+
+const Wrapper = styled.div`
+    margin-top: 0px;
+    color: white;
+    min-height: 100vh;
+    padding-top: 10vh;
+    padding-bottom: 60px;
+    width: 100%;
+    text-align: left;
+    min-height: max-content;
+    .container {
+      max-width: 1200px;
+      width: 90%;
+      margin: 0 auto;
+      padding-top: 20px;
+      color: white;
+      @media (max-width: 500px) {
+        width: 80%;
+        h1,h2,h3{
+          font-size: 14px;
+        }
+        p, ol, li, ul{
+          font-size: 10px;
+        }
+      }
+    }
+    a{
+      text-decoration: none;
+      
+    }
+    p{
+      line-height: 1.5;
+    }
+`
