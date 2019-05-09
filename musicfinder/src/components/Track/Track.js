@@ -21,7 +21,7 @@ const Track = (props) => {
 				{
 					console.log(related) ||
 						related ? related.map(track => {
-							if (track.url) {																												// remove this if when ds backend is fixed
+							if (track.url) {																												// remove this ifwhen ds backend is fixed
 								return <li key={track.url}><a href={track.url}>{track.name}</a></li>
 							}
 						}) : ''
@@ -52,9 +52,9 @@ const Ul = styled.ul`
 	
 	li a{
 		text-decoration: none;
-		color: orange;
+		color: #EFF1F3;
 		:hover{
-			color: #EB5757;
+			color: #009FB7;
 		}
 	}
 `;
