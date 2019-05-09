@@ -14,7 +14,7 @@ import axios from 'axios';
 
 export default class Navigation extends Component {
   constructor() {
-    super();  
+    super();
     this.state = {
       showMenu: false,
       name: '',
@@ -54,7 +54,7 @@ showMenu = (event) => {
 closeMenu=(event)=> {
     this.setState({ showMenu: false }, () => {
       document.removeEventListener('click', this.closeMenu);
-    });  
+    });
 }
   render() {
     return (
@@ -67,7 +67,7 @@ closeMenu=(event)=> {
                 <div className="dropdown-content">
                   <Link to = '/user'> Update Profile </Link>
                   <Link to="./donation"> Support Us </Link>
-                  <Button  className ="signoutBtn" onClick= {this.signMeOut}> Sign Out </Button>         
+                  <Button  className ="signoutBtn" onClick= {this.signMeOut}> Sign Out </Button>
                 </div>
             </div>
           </nav>
@@ -83,15 +83,15 @@ closeMenu=(event)=> {
   }
 }
 
-const NavDiv = styled.div` 
+const NavDiv = styled.div`
   .navBar{
     top:0;
     position: fixed;
     display: flex;
     flex-wrap: warp;
-    background : #3232;
-    width : 100%;
-    justify-content : space-between;
+    background: #3232;
+    width: 100%;
+    justify-content: space-between;
     .dropbtn {
       text-decoration: none;
       background-color: #f1f4;
@@ -104,12 +104,12 @@ const NavDiv = styled.div`
         font-size: 12px;
       }
     }
-    
+
     .dropdown {
       position: relative;
       display: inline-block;
     }
-    
+
     .dropdown-content {
       display: none;
       position: absolute;
@@ -119,22 +119,22 @@ const NavDiv = styled.div`
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
     }
-    
+
     .dropdown-content a {
       color: black;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
     }
-    
+
     .dropdown-content a:hover {
       background-color: #f1d;
     }
-    
+
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    
+
     .dropbtn:hover {
       background-color: #f1f2;
     }
@@ -149,9 +149,9 @@ const Button= styled.div`
   border-radius: 5px;
   margin: 10px;
   height: 30px;
-  border: none;  
+  border: none;
   :hover{
     background: purple;
     color: white;
-  }     
+  }
 `

@@ -41,6 +41,7 @@ const SearchForm = styled.form`
 		text-align: center;
 		width: 70%;
 		height: 20px;
+		margin-top: -4px;
 		margin-right: 20px;
 		font-size: 12px;
 		@media(max-width: 479px){
