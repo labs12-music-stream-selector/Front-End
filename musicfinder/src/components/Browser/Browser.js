@@ -21,7 +21,7 @@ const Browser = (props) => {
 	useEffect(() => {
 		// TODO: replace with correct url to get initial tracks
 		// const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
-		const url = `http://localhost:5000/api/song-list`;
+		const url = `http://localhost:5000/api/song-list`;															//TODO: remove this and uncomment above line before PR
 		getTracks(url);
 	}, [])
 
