@@ -6,6 +6,10 @@ import {Grid, Cell} from 'styled-css-grid';
 import Login from '../LoginForm/OAuthGoogle.js'
 import PatreonButton from '../Patreon/PatreonButton.js';
 
+import records from '../../imgs/recordCollection.jpg';
+import painting from '../../imgs/painting.jpg';
+import playlist from '../../imgs/playlist.jpg';
+
 const LandingPage = (props) => {
 	return (
 		<LandingPageContainer>
@@ -27,34 +31,35 @@ const LandingPage = (props) => {
 				'feature-3 img-3',
 				]}	
 				columns={"1fr 1fr"}
+				rows = {"minmax(45px,auto) minmax(45px,auto) minmax(45px,auto)"}
 				gap = '0'
 				id = 'grid'>
-				<Cell center middle area = 'feature-1' className = 'feature-details'>
+				<Cell height = {1} center middle area = 'feature-1' className = 'feature-details'>
 					<h2>Browse Free Curated Songs</h2>
 					<p>
 						over 60 curated songs guaranteed free to use on your stream or videos.
 					</p>
 				</Cell>
-				<Cell center middle area = 'img-1' className = 'feature-img'>
-						<img src = 'https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80' alt = 'video creator'/>
+				<Cell height = {1} center middle area = 'img-1' className = 'feature-img'>
+						<img src = {records} alt = 'records'/>
 				</Cell>
-				<Cell center middle area = 'img-2' className = 'feature-img'>
-					<img src = 'https://images.unsplash.com/photo-1537884444401-d79ef2b2990d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80' alt = 'Painting'/>
+				<Cell height = {1} center middle area = 'img-2' className = 'feature-img'>
+					<img src = {painting} alt = 'Painting'/>
 				</Cell>
-				<Cell center middle area = 'feature-2' className = 'feature-details'>
+				<Cell height = {1}  center middle area = 'feature-2' className = 'feature-details'>
 					<h2>Search songs by mood</h2>
 					<p>
 						Choose just the right music for the theme of your content.
 					</p>
 				</Cell>
-				<Cell center middle area = 'feature-3' className = 'feature-details'>
+				<Cell height = {1} center middle area = 'feature-3' className = 'feature-details'>
 					<h2>Create Playlists</h2>
 					<p>
 						Group your favorite songs together. Dunno lol
 					</p>
 				</Cell>
-				<Cell center middle area = 'img-3' className = 'feature-img'>
-					<img src = 'https://images.unsplash.com/photo-1511233002817-99325d7cc2d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80' alt = 'Painting'/>
+				<Cell height = {1} center middle area = 'img-3' className = 'feature-img'>
+					<img src = {playlist} alt = 'playlist'/>
 				</Cell>
 			</Grid>
 			<Team>
@@ -119,22 +124,37 @@ const LandingPageContainer = styled.div`
 	}
 
 	#grid{
-		margin: 20px;
-		img{
-			width: 100%;
-		}
+		margin: 20px 0 50px;
 		.feature-details, feature-img{
 			overflow: hidden;
 		}
 	}
-
+	
 	.feature-img{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		height: auto;
 		overflow: hidden;
-		img{
-			width: 100%
+		position: relative;
+		
+	}
+	.feature-img img{
+		width: 100%;
+	}
+
+	.feature-details{
+		font-size: 1.5em;
+		padding: 0 50px;
+		text-align: left;
+
+		h2{
+			margin-bottom: 10px;
 		}
 	}
-	@media(max-width: 500px) {
+	
+	@media(max-width: 750px) {
 		#grid{
 			margin: 0;
 			grid-template-areas: 
@@ -145,6 +165,13 @@ const LandingPageContainer = styled.div`
 				"feature-3"
 				"img-3";
 			grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+			.feature-details{
+				height: 500px;
+				max-height: 500px;
+				img{
+
+				}
+			}
 		}
 	}
 `;
