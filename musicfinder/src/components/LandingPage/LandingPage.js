@@ -231,10 +231,10 @@ const Team = styled.div`
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-        margin: 25px;
-        width: 232px;
+        margin: 15px 0;
+        width: 33.333%;
         text-align: left;
-        align-self: flex-start;
+		align-self: flex-start;
 	}
 
 	img{
@@ -262,7 +262,7 @@ const Team = styled.div`
         }
         li{
             align-self: unset;
-            width: 190px;
+			width: 190px;
         }
 	}
 
@@ -272,7 +272,7 @@ const Team = styled.div`
             width: 300px;
         }
         li{
-            width: 126px;
+			width: 126px;
         }
 	}
 `;
