@@ -40,18 +40,28 @@ const TrackContainer = styled.div`
 	}
 	@media screen and (max-width: 500px){
 		max-width: 95vw;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 		iframe{
 			max-width: 100%;
 		}
 	}
-`;
+	`;
 
 const Ul = styled.ul`
 	list-style: none;
 	text-align: left;
-	
+	margin-bottom: 60px;
+	@media (max-width: 500px) {
+		padding-inline-start: 0px;
+		text-align: center;
+	}
 	li a{
 		text-decoration: none;
+		font-weight: bold;
+		line-height: 1.25;
 		color: #EFF1F3;
 		:hover{
 			color: #009FB7;
