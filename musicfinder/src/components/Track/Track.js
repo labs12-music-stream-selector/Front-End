@@ -21,7 +21,7 @@ const Track = (props) => {
 				{
 					console.log(related) ||
 						related ? related.map(track => {
-							if (track.url) {
+							if (track.url) {																												// remove this ifwhen ds backend is fixed
 								return <li key={track.url}><a href={track.url}>{track.name}</a></li>
 							}
 						}) : ''
@@ -40,21 +40,31 @@ const TrackContainer = styled.div`
 	}
 	@media screen and (max-width: 500px){
 		max-width: 95vw;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 		iframe{
 			max-width: 100%;
 		}
 	}
-`;
+	`;
 
 const Ul = styled.ul`
 	list-style: none;
 	text-align: left;
-	
+	margin-bottom: 60px;
+	@media (max-width: 500px) {
+		padding-inline-start: 0px;
+		text-align: center;
+	}
 	li a{
 		text-decoration: none;
-		color: orange;
+		font-weight: bold;
+		line-height: 1.25;
+		color: #EFF1F3;
 		:hover{
-			color: #EB5757;
+			color: #009FB7;
 		}
 	}
 `;
