@@ -20,41 +20,43 @@ const LandingPage = (props) => {
 					right: '5px'
 				}}/>
 			</Header>
-			<FeaturesContainer>
-				<Feature left>
-					<div className = 'feature-details'>
-						<h2>Browse Free Curated Songs</h2>
-						<p>
-							over 60 curated songs guaranteed free to use on your stream or videos.
-						</p>
-					</div>
-					<div className = 'feature-img'>
+
+			<Grid areas = {[
+				'feature-1 img-1',
+				'img-2 feature-2',
+				'feature-3 img-3',
+				]}	
+				columns={"1fr 1fr"}
+				gap = '0'
+				id = 'grid'>
+				<Cell center middle area = 'feature-1' className = 'feature-details'>
+					<h2>Browse Free Curated Songs</h2>
+					<p>
+						over 60 curated songs guaranteed free to use on your stream or videos.
+					</p>
+				</Cell>
+				<Cell center middle area = 'img-1' className = 'feature-img'>
 						<img src = 'https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80' alt = 'video creator'/>
-					</div>
-				</Feature>
-				<Feature right>
-					<div className = 'feature-img'>
-						<img src = 'https://images.unsplash.com/photo-1537884444401-d79ef2b2990d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80' alt = 'Painting'/>
-					</div>
-					<div className = 'feature-details'>
-						<h2>Search songs by mood</h2>
-						<p>
-							Choose just the right music for the theme of your content.
-						</p>
-					</div>
-				</Feature>
-                <Feature left>
-                    <div className = 'feature-details'>
-						<h2>Create Playlists</h2>
-						<p>
-                            Group your favorite songs together. Dunno lol
-						</p>
-					</div>
-					<div className = 'feature-img'>
-						<img src = 'https://images.unsplash.com/photo-1511233002817-99325d7cc2d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80' alt = 'Painting'/>
-					</div>
-				</Feature>
-			</FeaturesContainer>
+				</Cell>
+				<Cell center middle area = 'img-2' className = 'feature-img'>
+					<img src = 'https://images.unsplash.com/photo-1537884444401-d79ef2b2990d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80' alt = 'Painting'/>
+				</Cell>
+				<Cell center middle area = 'feature-2' className = 'feature-details'>
+					<h2>Search songs by mood</h2>
+					<p>
+						Choose just the right music for the theme of your content.
+					</p>
+				</Cell>
+				<Cell center middle area = 'feature-3' className = 'feature-details'>
+					<h2>Create Playlists</h2>
+					<p>
+						Group your favorite songs together. Dunno lol
+					</p>
+				</Cell>
+				<Cell center middle area = 'img-3' className = 'feature-img'>
+					<img src = 'https://images.unsplash.com/photo-1511233002817-99325d7cc2d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80' alt = 'Painting'/>
+				</Cell>
+			</Grid>
 			<Team>
                 <div>
                     <h2>Team</h2>
@@ -114,6 +116,36 @@ const LandingPageContainer = styled.div`
 	color: ivory;
 	*{
 		margin: 0;
+	}
+
+	#grid{
+		margin: 20px;
+		img{
+			width: 100%;
+		}
+		.feature-details, feature-img{
+			overflow: hidden;
+		}
+	}
+
+	.feature-img{
+		overflow: hidden;
+		img{
+			width: 100%
+		}
+	}
+	@media(max-width: 500px) {
+		#grid{
+			margin: 0;
+			grid-template-areas: 
+				"feature-1"
+				"img-1"
+				"feature-2"
+				"img-2"
+				"feature-3"
+				"img-3";
+			grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+		}
 	}
 `;
 
