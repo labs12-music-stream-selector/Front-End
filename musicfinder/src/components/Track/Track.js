@@ -21,7 +21,7 @@ const Track = (props) => {
 				{
 					console.log(related) ||
 						related ? related.map(track => {
-							if (track.url) {
+							if (track.url) {																												// remove this if when ds backend is fixed
 								return <li key={track.url}><a href={track.url}>{track.name}</a></li>
 							}
 						}) : ''
