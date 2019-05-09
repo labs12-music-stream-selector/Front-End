@@ -67,7 +67,8 @@ export default class OAuthGoogle extends Component {
 
 export function PostData(userData) {
   const url =
-    /*process.env.REACT_APP_BE_URL ||*/ "https://fantabulous-music-finder.herokuapp.com/api/register/oauth";
+    // 'localhost:5000/api/register/oauth';
+    "https://fantabulous-music-finder.herokuapp.com/api/register/oauth";
   return new Promise((resolve, reject) => {
     try {
       axios
@@ -77,6 +78,7 @@ export function PostData(userData) {
           token: userData.token
         })
         .then(res => {
+          console.log('res');
           resolve(res);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("id", res.data.id);
@@ -84,7 +86,7 @@ export function PostData(userData) {
         .catch(error => {
           reject(error);
         });
-      alert("successfully logged in");
+      // alert("successfully logged in");
     } catch (err) {
       console.log({ Mesage: { err } });
     }

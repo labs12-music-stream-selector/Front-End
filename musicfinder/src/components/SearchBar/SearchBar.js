@@ -17,7 +17,7 @@ const SearchBar = (props) => {
 
 	return (
 		<SearchForm onSubmit={(e => e.preventDefault())}>
-			<input value={term} onChange={onChange} placeholder='search track' />
+			<input value={term} onChange={onChange} placeholder='Search Track' />
 			{props.selectComp()}
 		</SearchForm>
 	)
@@ -38,9 +38,14 @@ const SearchForm = styled.form`
 	width: 500px;
 	align-items: stretch;
 	input{
+		background-color: rgba(255,255,255,0.02);
+		color: #EFF1F3;
+		border: none;
+		border-bottom: 1px solid rgba(255,255,255,0.1);
 		text-align: center;
 		width: 70%;
 		height: 20px;
+		margin-top: -4px;
 		margin-right: 20px;
 		font-size: 12px;
 		@media(max-width: 479px){
