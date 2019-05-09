@@ -14,7 +14,7 @@ export default class GetUserPlaylists extends Component {
   initClient = () => {
     window.gapi.client
       .init({
-        apiKey: "AIzaSyAH1-rFnzv6nhFdVyw7SwTlSvuOi-ZpxYQ ",
+        apiKey: "AIzaSyAH1-rFnzv6nhFdVyw7SwTlSvuOi-ZpxYQ",
         clientId:
           "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com",
         scope: "https://www.googleapis.com/auth/youtube.force-ssl",
