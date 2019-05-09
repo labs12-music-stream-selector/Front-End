@@ -23,7 +23,7 @@ export default class GetUserPlaylists extends Component {
         ]
       })
       .then(res => {
-        console.log(res);
+        console.log(window.gapi.client);
       });
   };
 
