@@ -18,11 +18,11 @@ const LandingPage = (props) => {
 					<h1>MoodiBeats</h1>
 					<h2>Find copyright free music by mood.</h2>
 				</div>
-				<Login style = {{
+				<Login style={{
 					position: 'absolute',
 					top: '5px',
 					right: '5px'
-				}}/>
+				}} />
 			</Header>
 
 			<Grid areas = {[
@@ -62,6 +62,7 @@ const LandingPage = (props) => {
 					<img src = {playlist} alt = 'playlist'/>
 				</Cell>
 			</Grid>
+
 			<Team>
                 <div>
                     <h2>Team</h2>
@@ -246,10 +247,10 @@ const Team = styled.div`
     a{
         text-decoration: none;
         text-align: center;
-        color: inherit;
+        color: #009FB7;
         text-decoration: underline;
         :hover{
-            color: #009fb7;
+            color: #007DA6;
             cursor: pointer;
         }
     }
