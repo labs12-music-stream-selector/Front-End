@@ -20,55 +20,64 @@ export default class Navigation extends Component {
       name: '',
     };
   }
-  componentDidMount(){
+  componentDidMount() {
     let id = localStorage.getItem(`id`)
     const url = `https://fantabulous-music-finder.herokuapp.com/api/users/${id}`
-    this.setState({id : id});
-    try{
-        axios
+    this.setState({ id: id });
+    try {
+      axios
         .get(url)
         .then(res => {
-            this.setState({name: res.data.name})
+          this.setState({ name: res.data.name })
         })
-    } catch(err){
-        console.log(err);
+    } catch (err) {
+      console.log(err);
     }
-}
+  }
 
-signMeOut = () =>{
-    if(sessionStorage.getItem('token')){
+  signMeOut = () => {
+    if (sessionStorage.getItem('token')) {
       sessionStorage.removeItem('token');
       localStorage.removeItem('token');
       localStorage.removeItem('id');
       alert("You successfully Signed Out")
       this.props.history.push("/");
     }
-}
-showMenu = (event) => {
-  event.preventDefault();
-  this.setState({ showMenu: true }, () => {
-    document.addEventListener('click', this.closeMenu);
-  });
-}
+  }
+  showMenu = (event) => {
+    event.preventDefault();
+    this.setState({ showMenu: true }, () => {
+      document.addEventListener('click', this.closeMenu);
+    });
+  }
 
-closeMenu=(event)=> {
+  closeMenu = (event) => {
     this.setState({ showMenu: false }, () => {
       document.removeEventListener('click', this.closeMenu);
     });
-}
+
   render() {
     return (
       <Router>
         <NavDiv className="">
           <nav className="navBar" >
-          <Link className="dropbtn"  to='/home'>Home</Link>
+            <Link className="dropbtn" to='/home'>Home</Link>
             <div className="dropdown">
+
                 <button className="dropbtn">{this.state.name}</button>
                 <div className="dropdown-content">
                   <Link to = '/user'> Update Profile </Link>
                   <Link to="./donation"> Support Us </Link>
                   <Button  className ="signoutBtn" onClick= {this.signMeOut}> Sign Out </Button>
                 </div>
+
+              <button className="dropbtn">{this.state.name || 'Menu'}</button>
+              <div className="dropdown-content">
+                <Link to='/user'> Update Profile </Link>
+                <Link to="./donation"> Support Us </Link>
+                <Button className="signoutBtn" onClick={this.signMeOut}> Sign Out </Button>
+              </div>
+
             </div>
           </nav>
           <Route path="/player" component={YoutubePlayer} />
@@ -88,18 +97,29 @@ const NavDiv = styled.div`
     top:0;
     position: fixed;
     display: flex;
+
     flex-wrap: warp;
     background: #3232;
     width: 100%;
     justify-content: space-between;
+
+    flex-wrap: wrap;
+    flex-direction: row;
+    background : #272727;
+    width : 100%;
+    justify-content : space-between;
+    box-shadow: 0px 2px 2px black;
+
     .dropbtn {
       text-decoration: none;
-      background-color: #f1f4;
+      background-color: #009FB7;
       color: white;
-      padding: 14px;
+      padding: 16px;
       font-size: 14px;
+      font-weight: bold;
       border: none;
       cursor: pointer;
+      min-height: 100%;
       @media(max-width: 479px){
         font-size: 12px;
       }
@@ -114,26 +134,27 @@ const NavDiv = styled.div`
       display: none;
       position: absolute;
       right: 0;
-      background-color: #f9f;
+      background-color: #007DA6;
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
     }
 
     .dropdown-content a {
-      color: black;
+      color: #EFF1F3;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
     }
 
     .dropdown-content a:hover {
-      background-color: #f1d;
+      background-color: #009FB7;
     }
 
     .dropdown:hover .dropdown-content {
       display: block;
     }
+
 
     .dropbtn:hover {
       background-color: #f1f2;
@@ -155,3 +176,18 @@ const Button= styled.div`
     color: white;
   }
 `
+
+    
+
+  }
+`
+const Button = styled.div`
+  width: 100%;
+  padding 12px 16px;
+  border: none;
+  color: #EFF1F3;
+  :hover{
+    background-color: #009FB7;
+  }     
+`
+
