@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {Grid, Cell} from 'styled-css-grid';
 
@@ -55,7 +55,7 @@ const LandingPage = (props) => {
 				<Cell height = {1} center middle area = 'feature-3' className = 'feature-details'>
 					<h2>Create Playlists</h2>
 					<p>
-						Group your favorite songs together. Dunno lol
+						Group your favorite songs together.
 					</p>
 				</Cell>
 				<Cell height = {1} center middle area = 'img-3' className = 'feature-img'>
@@ -202,60 +202,6 @@ const Header = styled.div`
 	}
 `;
 
-const FeaturesContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
-const Feature = styled.div`
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	margin: 0 10px;
-
-	font-size: 1.5em;
-
-	div{
-		width: 50vw;
-	}
-
-	.feature-details{
-		
-
-		h2, p{
-			text-align: center;
-			text-shadow: 0px 0px 13px rgba(0, 0, 0, 0.76)
-		}
-	}
-
-	.feature-img{
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		height: auto;
-		max-height: 50vw;
-		overflow: hidden;
-		position: relative;
-
-	}
-	.feature-img img{
-		height: 100%;
-	}
-
-	@media (max-width: 500px) {
-		margin-top: 10px;
-
-		font-size: 1em;
-		
-
-		.feature-img img{
-			height: 100%;
-			transform: scale(.3);
-		}
-	}
-`;
-
 const Team = styled.div`
     display: flex;
     flex-direction: column;
@@ -306,7 +252,6 @@ const Team = styled.div`
             cursor: pointer;
         }
     }
-
 
     @media (max-width: 830px) {
         ul{
