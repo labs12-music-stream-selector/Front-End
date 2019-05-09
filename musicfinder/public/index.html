@@ -22,7 +22,6 @@
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
-
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
@@ -47,13 +46,11 @@
       //   // Call the initClient function after the modules load.
       //   gapi.load("client:auth2", initClient);
       // }
-
       // function initClient() {
       //   // Retrieve the discovery document for version 3 of YouTube Data API.
       //   // In practice, your app can retrieve one or more discovery documents.
       //   var discoveryUrl =
       //     "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest";
-
       //   // Initialize the gapi.client object, which app uses to make API requests.
       //   // Get API key and client ID from API Console.
       //   // 'scope' field specifies space-delimited list of access scopes.
@@ -69,14 +66,11 @@
       //     })
       //     .then(function() {
       //       GoogleAuth = gapi.auth2.getAuthInstance();
-
       //       // Listen for sign-in state changes.
       //       GoogleAuth.isSignedIn.listen(updateSigninStatus);
-
       //       // Handle initial sign-in state. (Determine if user is already signed in.)
       //       var user = GoogleAuth.currentUser.get();
       //       setSigninStatus();
-
       //       // Call handleAuthClick function when user clicks on
       //       //      "Sign In/Authorize" button.
       //       $("#sign-in-or-out-button").click(function() {
@@ -87,7 +81,6 @@
       //       });
       //     });
       // }
-
       // function handleAuthClick() {
       //   if (GoogleAuth.isSignedIn.get()) {
       //     // User is authorized and has clicked 'Sign out' button.
@@ -97,11 +90,9 @@
       //     GoogleAuth.signIn();
       //   }
       // }
-
       // function revokeAccess() {
       //   GoogleAuth.disconnect();
       // }
-
       // function setSigninStatus(isSignedIn) {
       //   var user = GoogleAuth.currentUser.get();
       //   var isAuthorized = user.hasGrantedScopes(SCOPE);
@@ -120,7 +111,6 @@
       //     );
       //   }
       // }
-
       // function updateSigninStatus(isSignedIn) {
       //   setSigninStatus();
       // }
@@ -132,7 +122,6 @@
     <button id="revoke-access-button" style="display: none; margin-left: 25px">
       Revoke access
     </button>
-
     <div id="auth-status" style="display: inline; padding-left: 25px"></div>
     <hr /> -->
 
@@ -147,14 +136,13 @@
     <!-- *******************************************************************************************************************************
          * GET ALL PLAYLISTS ASSOCIATED WITH USER -->
 
-    <script src="https://apis.google.com/js/api.js"></script>
+    <!-- <script src="https://apis.google.com/js/api.js"></script>
     <script>
       /**
        * Sample JavaScript code for youtube.playlists.list
        * See instructions for running APIs Explorer code samples locally:
        * https://developers.google.com/explorer-help/guides/code_samples#javascript
        */
-
       function authenticate() {
         return gapi.auth2
           .getAuthInstance()
@@ -206,11 +194,10 @@
         });
       });
     </script>
-
     <button onclick="authenticate().then(loadClient)">
       authorize and load
     </button>
-    <button onclick="execute()">execute</button>
+    <button onclick="execute()">execute</button> -->
 
     <!-- <script src="https://apis.google.com/js/api.js"></script> -->
     <!-- ************************************************************************************************************************
@@ -222,7 +209,6 @@
        * See instructions for running APIs Explorer code samples locally:
        * https://developers.google.com/explorer-help/guides/code_samples#javascript
        */
-
       function authenticate() {
         return gapi.auth2
           .getAuthInstance()
@@ -284,38 +270,12 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-      function start() {
-        // 2. Initialize the JavaScript client library.
-        console.log(PROCESS.ENV.YTKey)
-        gapi.client.init({
-          'apiKey': 'PROCESS.ENV.YTKey',
-          // clientId and scope are optional if auth is not required.
-          'clientId': 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
-          'scope': 'profile',
-        }).then(function() {
-          // 3. Initialize and make the API request.
-          return gapi.client.request({
-            'path': 'https://people.googleapis.com/v1/people/me?requestMask.includeField=person.names',
-          })
-        }).then(function(response) {
-          console.log(response.result);
-        }, function(reason) {
-          console.log('Error: ' + reason.result.error.message);
-        });
-      };
-      // 1. Load the JavaScript client library.
-      gapi.load('client', start);
-    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
-
       You can add webfonts, meta tags, or analytics to this file.
       The build step will place the bundled scripts into the <body> tag.
-
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
