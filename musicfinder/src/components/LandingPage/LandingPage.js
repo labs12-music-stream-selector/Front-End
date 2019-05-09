@@ -104,8 +104,8 @@ const LandingPage = (props) => {
             <Footer>
                 <div id = 'legal-stuff'>
                     <h3>Legal Stuff</h3>
-                    <Link to = '/'> legal stuff 1</Link>
-                    <Link to = '/home'> legal stuff 2</Link>
+                    <Link to = '/termsofservice'>Terms of Service</Link>
+                    <Link to = '/privacypolicy'>Privacy Policy</Link>
                 </div>
                 <div>
 					<PatreonButton/>
@@ -302,7 +302,7 @@ const Team = styled.div`
         color: inherit;
         text-decoration: underline;
         :hover{
-            color: orange;
+            color: #009fb7;
             cursor: pointer;
         }
     }
