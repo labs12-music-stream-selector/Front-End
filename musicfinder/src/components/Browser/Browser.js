@@ -8,6 +8,8 @@ import Select from '../Select/Select.js';
 import Track from '../Track/Track.js';
 import InfiniteScroll from 'react-infinite-scroller';
 
+import PostPlaylist from "../YoutubePlaylist/PostPlaylist.js";
+
 
 const Browser = (props) => {
 	const [tracks, updateTracks] = useState([]);
@@ -20,14 +22,15 @@ const Browser = (props) => {
 
 	useEffect(() => {
 		// TODO: replace with correct url to get initial tracks
-		// const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
-		const url = `http://localhost:5000/api/song-list`;															//TODO: remove this and uncomment above line before PR
+		const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
+		// const url = `http://localhost:5000/api/song-list`;															//TODO: remove this and uncomment above line before PR
 		getTracks(url);
 	}, [])
 
 	return (
 		<BrowserContainer id='browser-container'>
 			<SearchBar searchTrack={searchTrack} selectComp={(props) => <Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />} />
+			<PostPlaylist />
 			<InfiniteScroll
 				pageStart={0}
 				loadMore={loadNext}
@@ -62,7 +65,7 @@ const Browser = (props) => {
 	);
 
 	async function getTracks(url) {
-		console.log(localStorage.getItem('token'))
+		// console.log(localStorage.getItem('token'))
 		const res = await axios.get(url, { headers: { Authorization: localStorage.getItem('token') } });
 		const data = res.data.map(song => {
 			song.url = song.url.substring(song.url.indexOf("=") + 1);
