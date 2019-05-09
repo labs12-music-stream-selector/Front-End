@@ -20,13 +20,14 @@ const Browser = (props) => {
 
 	useEffect(() => {
 		// TODO: replace with correct url to get initial tracks
-		const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
+		// const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
+		const url = `http://localhost:5000/api/song-list`;
 		getTracks(url);
 	}, [])
 
 	return (
-		<BrowserContainer id ='browser-container'>
-			<SearchBar searchTrack={searchTrack} selectComp = {(props) => <Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />}/>
+		<BrowserContainer id='browser-container'>
+			<SearchBar searchTrack={searchTrack} selectComp={(props) => <Select getTracks={getTracksByMood} options={['sad', 'happy', 'confident-sassy', 'angry', 'in-love', 'peaceful']} />} />
 			<InfiniteScroll
 				pageStart={0}
 				loadMore={loadNext}
@@ -37,9 +38,9 @@ const Browser = (props) => {
 				<Container>
 					{tracks.map((track, index) => {
 						return (
-							<Track track = {track} index = {index} key ={index} getRelated = {getRelatedTracks}/>
-							)
-					})} 
+							<Track track={track} index={index} key={index} getRelated={getRelatedTracks} />
+						)
+					})}
 				</Container>
 				<div>
 					<h3>related</h3>
@@ -61,28 +62,29 @@ const Browser = (props) => {
 	);
 
 	async function getTracks(url) {
-		const res = await axios.get(url);
+		console.log(localStorage.getItem('token'))
+		const res = await axios.get(url, { headers: { Authorization: localStorage.getItem('token') } });
 		const data = res.data.map(song => {
 			song.url = song.url.substring(song.url.indexOf("=") + 1);
 			return song
 		})
-		updateTracks(data.slice(0,12));
+		updateTracks(data.slice(0, 12));
 		updateTracksData(data);
 	}
 
 	async function getRelatedTracks(id) {
 		const url = `https://moody-beats-recommender-api.herokuapp.com/api/${id}/`;
 		const res = await axios.get(url);
-		const relatedTracks = []; 
-		
+		const relatedTracks = [];
+
 		Object.keys(res.data).forEach(key => {
-			if(!['id', 'songs', 'mood', 'video_id'].includes(key) && res.data[key] !== null && !key.includes('_link')){
-				relatedTracks.push({name: res.data[key], url: res.data[`${key}_link`]});
+			if (!['id', 'songs', 'mood', 'video_id'].includes(key) && res.data[key] !== null && !key.includes('_link')) {
+				relatedTracks.push({ name: res.data[key], url: res.data[`${key}_link`] });
 			}
 		});
 		return relatedTracks;
 	}
-	
+
 
 	async function getTracksByMood(mood) {
 		const url = `https://john-moody-beats-recommender.herokuapp.com/api/${mood}`;
@@ -102,10 +104,10 @@ const Browser = (props) => {
 	function loadNext(page) {
 		//console.log(page, tracks)
 		// if (offset < tracks.length - 6) {
-		if (page*6 < tracksData.length - 6) {
+		if (page * 6 < tracksData.length - 6) {
 			// updateOffset(offset + 6);
-			updateTracks(tracksData.slice(0,page*6))
-		} else if(tracks.length > 0 && hasMore){
+			updateTracks(tracksData.slice(0, page * 6))
+		} else if (tracks.length > 0 && hasMore) {
 			updateHasMore(false)
 		}
 	}
