@@ -163,8 +163,8 @@ const NavDiv = styled.div`
   .dropdown-content .signoutBtn{
     border-radius: 5px;
     height: 25px;
-  }
-`
+  }`
+
 const Button= styled.div`
   background: #f1f2;
   border-radius: 5px;
@@ -174,19 +174,15 @@ const Button= styled.div`
   :hover{
     background: purple;
     color: white;
-  }
-`
+  }`
 
 
 
-  }
-`
-const Button = styled.div`
-  width: 100%;
-  padding 12px 16px;
-  border: none;
-  color: #EFF1F3;
-  :hover{
-    background-color: #009FB7;
-  }
-`
+// const Button = styled.div`
+//   width: 100%;
+//   padding 12px 16px;
+//   border: none;
+//   color: #EFF1F3;
+//   :hover{
+//     background-color: #009FB7;
+//   }`
