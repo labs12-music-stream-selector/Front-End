@@ -277,15 +277,15 @@ const Team = styled.div`
         padding: 0;
 
         width: fit-content;
-        max-width: 700px;
+        max-width: 846px;
     }
 
     li{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-        margin: 10px;
-        width: 212px;
+        margin: 25px;
+        width: 232px;
         text-align: left;
         align-self: flex-start;
 	}
