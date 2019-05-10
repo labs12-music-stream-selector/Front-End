@@ -20,6 +20,7 @@ const Browser = props => {
   const [relatedTracks, updateRelatedTracks] = useState([]);
   const [tracksByMood, updateTracksByMood] = useState([]);
   const [hasMore, updateHasMore] = useState(true);
+  const [searching, updateSearching] = useState(false);
 
   useEffect(() => {
     // TODO: replace with correct url to get initial tracks
@@ -97,7 +98,7 @@ const Browser = props => {
     const data = res.data.map(song => {
       song.url = song.url.substring(song.url.indexOf("=") + 1);
       return song;
-    });
+	});
     updateTracks(data.slice(0, 12));
     updateTracksData(data);
   }
@@ -129,24 +130,33 @@ const Browser = props => {
   }
 
   async function searchTrack(searchTerm) {
-    // the fuzzy search goes here
-    let options = {
-      keys: ["artist", "mood", "track_title", "url"]
-    };
-    let fuse = new Fuse(tracksData, options);
-    updateTracks(fuse.search(searchTerm));
-    updateOffset(0); // TODO: Double Check this worked!!!!!
+	// the fuzzy search goes here
+	console.log(searchTerm.length)
+	if(searchTerm.length === 0) {
+		updateSearching(false);
+	} else {
+		updateSearching(true);
+	}
+	let options = {
+	keys: ["artist", "mood", "track_title", "url"]
+	};
+	let fuse = new Fuse(tracksData, options);
+	updateTracks(fuse.search(searchTerm));
+	updateOffset(0); // TODO: Double Check this worked!!!!!
   }
 
   function loadNext(page) {
     //console.log(page, tracks)
     // if (offset < tracks.length - 6) {
-    if (page * 6 < tracksData.length - 6) {
-      // updateOffset(offset + 6);
-      updateTracks(tracksData.slice(0, page * 6));
-    } else if (tracks.length > 0 && hasMore) {
-      updateHasMore(false);
-    }
+	if(!searching){
+		if (page * 6 < tracksData.length - 6) {
+		// updateOffset(offset + 6);
+			updateTracks(tracksData.slice(0, page * 6));
+		} else if (tracks.length > 0 && hasMore) {
+			updateHasMore(false);
+		}
+	}
+    
   }
 
   function loadPrev() {
