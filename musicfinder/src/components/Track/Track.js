@@ -19,7 +19,6 @@ const Track = (props) => {
 			<YouTubePlayer key={props.track.url + props.index} url={props.track.url} />
 			<Ul>
 				{
-					console.log(related) ||
 						related ? related.map(track => {
 							if (track.url) {																												// remove this ifwhen ds backend is fixed
 								return <li key={track.url}><a href={track.url}>{track.name}</a></li>

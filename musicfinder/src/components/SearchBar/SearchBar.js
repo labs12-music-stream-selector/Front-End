@@ -8,9 +8,7 @@ const SearchBar = (props) => {
 
 	useEffect(
 		() => {
-			if (debouncedTerm) {
 				props.searchTrack(debouncedTerm);
-			}
 		},
 		[debouncedTerm]
 	);
