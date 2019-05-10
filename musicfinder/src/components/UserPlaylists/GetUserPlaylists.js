@@ -12,7 +12,7 @@ export default class GetUserPlaylists extends Component {
     });
   };
 
-  initClient = () => {
+  initClient = GoogleAuth => {
     window.gapi.client
       .init({
         apiKey: "AIzaSyAH1-rFnzv6nhFdVyw7SwTlSvuOi-ZpxYQ",
