@@ -64,13 +64,6 @@ export default class Navigation extends Component {
             <Link className="dropbtn" to='/home'>Home</Link>
             <div className="dropdown">
 
-                <button className="dropbtn">{this.state.name}</button>
-                <div className="dropdown-content">
-                  <Link to = '/user'> Update Profile </Link>
-                  <Link to="./donation"> Support Us </Link>
-                  <Button  className ="signoutBtn" onClick= {this.signMeOut}> Sign Out </Button>
-                </div>
-
               <button className="dropbtn">{this.state.name || 'Menu'}</button>
               <div className="dropdown-content">
                 <Link to='/user'> Update Profile </Link>
@@ -157,7 +150,7 @@ const NavDiv = styled.div`
 
 
     .dropbtn:hover {
-      background-color: #f1f2;
+      background-color: #007DA6;
     }
   }
   .dropdown-content .signoutBtn{
@@ -165,15 +158,12 @@ const NavDiv = styled.div`
     height: 25px;
   }`
 
-const Button= styled.div`
-  background: #f1f2;
-  border-radius: 5px;
-  margin: 10px;
-  height: 30px;
+const Button = styled.div`
+  padding: 12px 16px;
   border: none;
+  color: #EFF1F3;
   :hover{
-    background: purple;
-    color: white;
+    background-color: #009FB7;
   }`
 
 
