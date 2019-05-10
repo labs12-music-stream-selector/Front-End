@@ -56,7 +56,7 @@ export default class OAuthGoogle extends Component {
     return (
       <div>
         <GoogleLogin
-          clientId={CLIENTID_LOGAN}
+          clientId={CLIENTID_MD}
           buttonText="Login with Google"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
@@ -79,7 +79,7 @@ export function PostData(userData) {
           token: userData.token
         })
         .then(res => {
-          console.log('res');
+          console.log("res");
           resolve(res);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("id", res.data.id);

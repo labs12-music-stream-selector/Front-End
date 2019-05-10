@@ -1,17 +1,27 @@
 import React, { Component } from "react";
+import PlaylistSelect from "./PlaylistSelect.js";
 
 export default class GetUserPlaylists extends Component {
+  state = {
+    userPlaylists: []
+  };
+
   componentDidMount() {
-    this.loadClient();
+    let GoogleAuth;
+    this.loadClient(GoogleAuth);
   }
 
-  loadClient = () => {
+  componentDidUpdate() {
+    console.log(this.state);
+  }
+
+  loadClient = GoogleAuth => {
     window.gapi.load("client:auth2", () => {
-      this.initClient();
+      this.initClient(GoogleAuth);
     });
   };
 
-  initClient = () => {
+  initClient = GoogleAuth => {
     window.gapi.client
       .init({
         apiKey: "AIzaSyAH1-rFnzv6nhFdVyw7SwTlSvuOi-ZpxYQ",
@@ -22,10 +32,39 @@ export default class GetUserPlaylists extends Component {
           "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
         ]
       })
-      .then(res => {
-        console.log(window.gapi.client);
-      });
+      .then(() => {
+        GoogleAuth = window.gapi.auth2.getAuthInstance();
+
+        GoogleAuth.signIn().then(
+          res => {
+            console.log(window.gapi.auth2.getAuthInstance());
+            console.log(res);
+            this.request();
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      })
+      .catch(err => console.log(err));
   };
+
+  // updateSigninStatus = isSignedIn => {
+  //   if (isSignedIn) {
+  //     isAuthorized = true;
+  //     this.sendAuthorizedApiRequest();
+  //   } else {
+  //     isAuthorized = false;
+  //   }
+  // };
+
+  // sendAuthorizedApiRequest() {
+  //   if (isAuthorized) {
+  //     this.request();
+  //   } else {
+  //     //GoogleAuth.signIn();
+  //   }
+  // }
 
   request = () => {
     window.gapi.client
@@ -34,30 +73,17 @@ export default class GetUserPlaylists extends Component {
         method: "GET",
         params: {
           part: "contentDetails, id, snippet, status",
-          mine: true
+          mine: true,
+          maxResults: 25
         }
       })
       .execute(res => {
+        const { items } = res;
+        this.setState({ userPlaylists: items });
+        console.log(items);
         console.log(res);
+        console.log(this.state);
       });
-  };
-
-  getPlaylists = () => {
-    window.gapi.client.youtube.playlists
-      .list({
-        part: "snippet,contentDetails",
-        maxResults: 25,
-        mine: true
-      })
-      .then(
-        function(response) {
-          // Handle the results here (response.result has the parsed body).
-          console.log("Response", response.result);
-        },
-        function(err) {
-          console.error("Execute error", err);
-        }
-      );
   };
 
   render() {
