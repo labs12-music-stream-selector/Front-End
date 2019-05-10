@@ -40,6 +40,7 @@ export default class GetUserPlaylists extends Component {
           res => {
             this.setState({ userPlaylists: res.items });
             this.request();
+            console.log(res.items);
           },
           err => {
             console.log(err);
