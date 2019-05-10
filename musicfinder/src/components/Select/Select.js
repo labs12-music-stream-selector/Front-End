@@ -20,6 +20,7 @@ const Select = (props) => {
 }
 
 const MoodSelect = styled.select`
+	// display: none;
 	background-color: #009FB7;
 	border: none;
 	color: #EFF1F3;
