@@ -83,93 +83,93 @@ const LandingPage = props => {
           <h2>Team</h2>
           <ul>
             <li>
-              <img
-                src="https://avatars0.githubusercontent.com/u/13532991?s=400&v=4"
-                alt="Kevin Brack"
-              />
-              <a href="github.com/KevinBrack">Kevin Brack</a>
+              <img src='https://avatars0.githubusercontent.com/u/13532991?s=400&v=4' alt='Kevin Brack' />
+              <a href='github.com/KevinBrack'>Kevin Brack</a>
             </li>
             <li>
-              <img
-                src="https://avatars2.githubusercontent.com/u/46465575?s=400&v=4"
-                alt="Logan Hufstetler"
-              />
-              <a href="github.com/BlissCatalyst">Logan Hufstetler</a>
+              <img src='https://avatars2.githubusercontent.com/u/46465575?s=400&v=4' alt='Logan Hufstetler' />
+              <a href='github.com/BlissCatalyst'>Logan Hufstetler</a>
             </li>
             <li>
-              <img
-                src="https://avatars0.githubusercontent.com/u/10713358?s=400&u=f3dd10a2ecfa7efa5b993fc63fd905cf14311fd3&v=4"
-                alt="Davina Taylor"
-              />
-              <a href="github.com/lilvina">Davina Taylor</a>
+              <img src='https://avatars0.githubusercontent.com/u/10713358?s=400&u=f3dd10a2ecfa7efa5b993fc63fd905cf14311fd3&v=4' alt='Davina Taylor' />
+              <a href='github.com/lilvina'>Davina Taylor</a>
             </li>
             <li>
-              <img
-                src="https://avatars2.githubusercontent.com/u/13279523?s=460&v=4"
-                alt="John Humphreys"
-              />
-              <a href="github.com/johnpharmd">John Humphreys</a>
+              <img src='https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt='John Humphreys' />
+              <a href='github.com/johnpharmd'>John Humphreys</a>
             </li>
             <li>
-              <img
-                src="https://avatars0.githubusercontent.com/u/46500263?s=400&v=4"
-                alt="Md Kawsar Hussen"
-              />
-              <a href="github.com/kkingbd">Md Kawsar Hussen</a>
+              <img src='https://avatars0.githubusercontent.com/u/46500263?s=400&v=4' alt='Md Kawsar Hussen' />
+              <a href='github.com/kkingbd'>Md Kawsar Hussen</a>
             </li>
             <li>
-              <img
-                src="https://avatars3.githubusercontent.com/u/42630698?s=400&v=4"
-                alt="Jonathan Bernal"
-              />
-              <a href="github.com/BlueSandWeb">Jonathan Bernal</a>
+              <img src='https://avatars3.githubusercontent.com/u/42630698?s=400&v=4' alt='Jonathan Bernal' />
+              <a href='github.com/BlueSandWeb'>Jonathan Bernal</a>
             </li>
             <li>
-              <img
-                src="https://avatars1.githubusercontent.com/u/17155841?s=400&v=4"
-                alt="Sammy Lee"
-              />
-              <a href="github.com/Captmoonshot">Sammy Lee</a>
+              <img src='https://avatars1.githubusercontent.com/u/17155841?s=400&v=4' alt='Sammy Lee' />
+              <a href='github.com/Captmoonshot'>Sammy Lee</a>
             </li>
             <li>
-              <img
-                src="https://avatars2.githubusercontent.com/u/13279523?s=460&v=4"
-                alt="Xander Jake de los Santos"
-              />
-              <a href="github.com/xanderjakeq">Xander Jake de los Santos</a>
+              <img src='https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt='Xander Jake de los Santos' />
+              <a href='github.com/xanderjakeq'>Xander Jake de los Santos</a>
             </li>
           </ul>
         </div>
       </Team>
       <Footer>
-        <div id="legal-stuff">
-          <h3>Legal Stuff</h3>
-          <Link to="/termsofservice">Terms of Service</Link>
-          <Link to="/privacypolicy">Privacy Policy</Link>
+        <div id='legal-stuff'>
+          <h2>Legal Stuff</h2>
+          <div>
+            <Link className="aTag" to='/termsofservice'>Terms of Service</Link>
+            <Link className="aTag" to='/privacypolicy'>Privacy Policy</Link>
+          </div>
         </div>
-        <div>
+        <div className='patreonBtn'>
           <PatreonButton />
         </div>
       </Footer>
     </LandingPageContainer>
-  );
-};
+  )
+}
 
 export default LandingPage;
 
 const LandingPageContainer = styled.div`
-  color: ivory;
-  margin-top: -40px;
-  * {
-    margin: 0;
-  }
-  #grid {
-    margin: 20px 0 50px;
-    .feature-details,
-    feature-img {
-      overflow: hidden;
-    }
-  }
+	a{
+		text-decoration: none !important
+	}
+	color: ivory;
+	margin-top: -40px;
+	*{
+		margin: 0;
+	}
+
+	#grid{
+		margin: 20px 0 50px;
+		.feature-details, feature-img{
+			overflow: hidden;
+		}
+	}
+	
+	.feature-img{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		height: auto;
+		overflow: hidden;
+		position: relative;
+		
+	}
+	.feature-img img{
+		width: 100%;
+	}
+
+	.feature-details{
+		font-size: 1.5em;
+		padding: 0 50px;
+		text-align: left;
 
   .feature-img {
     display: flex;
@@ -277,12 +277,31 @@ const Team = styled.div`
       color: #007da6;
       cursor: pointer;
     }
-  }
-  @media (max-width: 830px) {
-    ul {
-      align-items: center;
-      justify-content: space-evenly;
-      width: 450px;
+
+    li{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+        margin: 15px 0;
+        width: 33.333%;
+        text-align: left;
+		align-self: flex-start;
+	}
+
+	img{
+		width: 100px;
+		height: auto;
+		border-radius: 100%;
+	}
+
+    a{
+        text-align: center;
+        color: inherit;
+        text-decoration: underline;
+        :hover{
+            color: #007DA6;
+            cursor: pointer;
+        }
     }
     li {
       align-self: unset;
@@ -310,16 +329,36 @@ const Footer = styled.footer`
   align-items: center;
   #legal-stuff {
     display: flex;
-    flex-direction: column;
-    a {
-      text-decoration: none;
-      text-align: center;
-      color: inherit;
-      text-decoration: underline;
-      margin: 5px 0;
-      :hover {
-        cursor: pointer;
-      }
+    justify-content: space-evenly;
+	align-items: center;
+	@media (max-width: 500px) {
+		display : block;
+		text-align: center;	
+	}
+
+    #legal-stuff{
+        display: flex;
+		flex-direction: column;
+		@media (max-width: 500px) {
+			margin: 20px 0;	
+		}
+		   
+		.aTag{ 
+			padding-right: 30px; 
+			text-align: center;
+			color: inherit;
+			margin: 5px 0;
+			@media (max-width: 500px) {
+				margin :0;
+				padding-right: 5px;
+			}
+			:hover{
+				:hover{
+					color: #007DA6;
+					cursor: pointer;
+			}
+		}
+
     }
   }
 `;
