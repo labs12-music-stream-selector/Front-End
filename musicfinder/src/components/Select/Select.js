@@ -23,6 +23,7 @@ const MoodSelect = styled.select`
 	background-color: #009FB7;
 	border: none;
 	color: #EFF1F3;
+	display: none;
 	font-weight: bold;
 	option {
 		background-color: #007DA6;
