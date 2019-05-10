@@ -8,11 +8,11 @@ import Patreon from '../Patreon/Patreon.js'
 
 
 import { Route, Link } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import styled from 'styled-components';
 import axios from 'axios';
 
-export default class Navigation extends Component {
+class Navigation extends Component {
   constructor() {
     super();
     this.state = {
@@ -44,24 +44,14 @@ export default class Navigation extends Component {
       this.props.history.push("/");
     }
   }
-  showMenu = (event) => {
-    event.preventDefault();
-    this.setState({ showMenu: true }, () => {
-      document.addEventListener('click', this.closeMenu);
-    });
-  }
 
-  closeMenu = (event) => {
-    this.setState({ showMenu: false }, () => {
-      document.removeEventListener('click', this.closeMenu);
-    });
-  }
   render() {
     return (
       <Router>
         <NavDiv className="">
           <nav className="navBar" >
             <Link className="dropbtn" to='/home'>Home</Link>
+            <h2>Moody Beats</h2>
             <div className="dropdown">
 
               <button className="dropbtn">{this.state.name || 'Menu'}</button>
@@ -70,7 +60,6 @@ export default class Navigation extends Component {
                 <Link to="./donation"> Support Us </Link>
                 <Button className="signoutBtn" onClick={this.signMeOut}> Sign Out </Button>
               </div>
-
             </div>
           </nav>
           <Route path="/player" component={YoutubePlayer} />
@@ -85,23 +74,28 @@ export default class Navigation extends Component {
   }
 }
 
+export default withRouter(Navigation);
+
 const NavDiv = styled.div`
   .navBar{
     top:0;
     position: fixed;
     display: flex;
-
-    flex-wrap: warp;
-    background: #3232;
-    width: 100%;
-    justify-content: space-between;
-
-    flex-wrap: wrap;
     flex-direction: row;
+    flex-wrap: warp;
+
+    width: 100%;
+    justify-content : space-between;
+    align-items: center;
+
     background : #272727;
     width : 100%;
-    justify-content : space-between;
     box-shadow: 0px 2px 2px black;
+
+    h2 {
+      color: white;
+      margin: 0px;
+    }
 
     .dropbtn {
       text-decoration: none;
@@ -150,7 +144,7 @@ const NavDiv = styled.div`
 
 
     .dropbtn:hover {
-      background-color: #f1f2;
+      background-color: #007DA6;
     }
   }
   .dropdown-content .signoutBtn{
@@ -158,13 +152,12 @@ const NavDiv = styled.div`
     height: 25px;
   }`
 
-const Button= styled.div`
-  background: #f1f2;
-  border-radius: 5px;
-  margin: 10px;
-  height: 30px;
+const Button = styled.div`
+  padding: 12px 16px;
   border: none;
+  padding: 12px 16px;
+  text-align: center;
+  color: #EFF1F3;
   :hover{
-    background: purple;
-    color: white;
+    background-color: #009FB7;
   }`
