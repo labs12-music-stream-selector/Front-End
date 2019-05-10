@@ -13,12 +13,13 @@ export default class OAuthGoogle extends Component {
   signup = (res, type) => {
     let postData;
     if (type === "google" && res.w3.U3) {
+      console.log(res);
       postData = {
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
         provider_id: res.El,
-        token: res.Zi.id_token,
+        token: res.Zi.access_token,
         provider_pic: res.w3.Paa
       };
     }
