@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <RouterDiv className="App">
-        <GetUserPlaylists />
+        {/* <GetUserPlaylists /> */}
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/home" component={Navigation} />
         <Route path="/termsofservice" component={TermsOfService} />
