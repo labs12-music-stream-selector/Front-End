@@ -7,6 +7,8 @@ import SearchBar from "../SearchBar/SearchBar.js";
 import Select from "../Select/Select.js";
 import Track from "../Track/Track.js";
 import InfiniteScroll from "react-infinite-scroller";
+import { withRouter } from "react-router-dom";
+
 
 // import PostPlaylist from "../YoutubePlaylist/PostPlaylist.js";
 
@@ -154,7 +156,7 @@ const Browser = props => {
   }
 };
 
-export default Browser;
+export default withRouter(Browser);
 
 const BrowserContainer = styled.div`
   display: flex;
