@@ -41,22 +41,22 @@ export default class GetUserPlaylists extends Component {
       .catch(err => console.log(err));
   };
 
-  updateSigninStatus = isSignedIn => {
-    if (isSignedIn) {
-      isAuthorized = true;
-      this.sendAuthorizedApiRequest();
-    } else {
-      isAuthorized = false;
-    }
-  };
+  // updateSigninStatus = isSignedIn => {
+  //   if (isSignedIn) {
+  //     isAuthorized = true;
+  //     this.sendAuthorizedApiRequest();
+  //   } else {
+  //     isAuthorized = false;
+  //   }
+  // };
 
-  sendAuthorizedApiRequest() {
-    if (isAuthorized) {
-      this.request();
-    } else {
-      //GoogleAuth.signIn();
-    }
-  }
+  // sendAuthorizedApiRequest() {
+  //   if (isAuthorized) {
+  //     this.request();
+  //   } else {
+  //     //GoogleAuth.signIn();
+  //   }
+  // }
 
   request = () => {
     window.gapi.client
@@ -65,7 +65,8 @@ export default class GetUserPlaylists extends Component {
         method: "GET",
         params: {
           part: "contentDetails, id, snippet, status",
-          mine: true
+          mine: true,
+          maxResults: 25
         }
       })
       .execute(res => {
