@@ -1,18 +1,19 @@
 import React, { Component } from "react";
-import { GoogleAuth, isAuthorized, currentApiRequest } from "./global.js";
+import { isAuthorized, currentApiRequest } from "./global.js";
 
 export default class GetUserPlaylists extends Component {
   componentDidMount() {
-    this.loadClient();
+    let GoogleAuth;
+    this.loadClient(GoogleAuth);
   }
 
-  loadClient = () => {
+  loadClient = GoogleAuth => {
     window.gapi.load("client:auth2", () => {
-      this.initClient();
+      this.initClient(GoogleAuth);
     });
   };
 
-  initClient = () => {
+  initClient = GoogleAuth => {
     window.gapi.client
       .init({
         apiKey: "AIzaSyAH1-rFnzv6nhFdVyw7SwTlSvuOi-ZpxYQ",
@@ -25,6 +26,7 @@ export default class GetUserPlaylists extends Component {
       })
       .then(() => {
         GoogleAuth = window.gapi.auth2.getAuthInstance();
+        console.log(window.gapi.auth2.getAuthInstance());
         console.log(GoogleAuth);
 
         GoogleAuth.signIn().then(
@@ -52,7 +54,7 @@ export default class GetUserPlaylists extends Component {
     if (isAuthorized) {
       this.request();
     } else {
-      GoogleAuth.signIn();
+      //GoogleAuth.signIn();
     }
   }
 
