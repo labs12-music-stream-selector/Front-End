@@ -104,11 +104,13 @@ const LandingPage = (props) => {
 			</Team>
             <Footer>
                 <div id = 'legal-stuff'>
-                    <h3>Legal Stuff</h3>
-                    <Link to = '/termsofservice'>Terms of Service</Link>
-                    <Link to = '/privacypolicy'>Privacy Policy</Link>
+                    <h2>Legal Stuff</h2>
+					<div>
+                    <Link className= "aTag" to = '/termsofservice'>Terms of Service</Link>
+                    <Link className= "aTag" to = '/privacypolicy'>Privacy Policy</Link>
+					</div>
                 </div>
-                <div>
+                <div className= 'patreonBtn'>
 					<PatreonButton/>
                 </div>
             </Footer>
@@ -119,6 +121,9 @@ const LandingPage = (props) => {
 export default LandingPage;
 
 const LandingPageContainer = styled.div`
+	a{
+		text-decoration: none !important
+	}
 	color: ivory;
 	margin-top: -40px;
 	*{
@@ -246,7 +251,6 @@ const Team = styled.div`
 	}
 
     a{
-        text-decoration: none;
         text-align: center;
         color: inherit;
         text-decoration: underline;
@@ -287,19 +291,32 @@ const Footer = styled.footer`
 
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+	align-items: center;
+	@media (max-width: 500px) {
+		display : block;
+		text-align: center;	
+	}
 
     #legal-stuff{
         display: flex;
 		flex-direction: column;
-		a{
-			text-decoration: none;
+		@media (max-width: 500px) {
+			margin: 20px 0;	
+		}
+		   
+		.aTag{ 
+			padding-right: 30px; 
 			text-align: center;
 			color: inherit;
-			text-decoration: underline;
 			margin: 5px 0;
+			@media (max-width: 500px) {
+				margin :0;
+				padding-right: 5px;
+			}
 			:hover{
-				cursor: pointer;
+				:hover{
+					color: #007DA6;
+					cursor: pointer;
 			}
 		}
 
