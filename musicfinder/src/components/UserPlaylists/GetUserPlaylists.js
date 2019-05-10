@@ -23,11 +23,21 @@ export default class GetUserPlaylists extends Component {
           "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
         ]
       })
-      .then(GoogleAuth => {
-        GoogleAuth = window.gapi.auth2.getAuthInstance();
-
-        GoogleAuth.isSignedIn.listen(this.updateSigninStatus);
-      });
+      .then(() => {
+        GoogleAuth = window.gapi.auth2
+          .init()
+          .getAuthInstance()
+          .signIn()
+          .then(
+            res => {
+              console.log(res);
+            },
+            err => {
+              console.log(err);
+            }
+          );
+      })
+      .catch(err => console.log(err));
   };
 
   updateSigninStatus = isSignedIn => {
