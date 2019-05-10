@@ -37,6 +37,7 @@ export default class GetUserPlaylists extends Component {
 
         GoogleAuth.signIn().then(
           res => {
+            console.log(GoogleAuth);
             this.request();
           },
           err => {
@@ -78,7 +79,6 @@ export default class GetUserPlaylists extends Component {
       .execute(res => {
         const { items } = res;
         this.setState({ userPlaylists: items });
-        console.log(GoogleAuth);
         console.log(items);
         console.log(res);
         console.log(this.state);
