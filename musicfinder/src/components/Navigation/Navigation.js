@@ -53,10 +53,6 @@ class Navigation extends Component {
             <Link className="dropbtn" to='/home'>Home</Link>
             <h2>Moody Beats</h2>
             <div className="dropdown">
-<<<<<<< HEAD
-
-=======
->>>>>>> f54c523ddde29372dd835648381e3bd5f41cb4c9
               <button className="dropbtn">{this.state.name || 'Menu'}</button>
               <div className="dropdown-content">
                 <Link to='/user'> Update Profile </Link>

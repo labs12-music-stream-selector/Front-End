@@ -46,7 +46,7 @@ const LandingPage = (props) => {
                     <div className = 'feature-details'>
 						<h2>Create Playlists</h2>
 						<p>
-                            Group your favorite songs together. 
+                            Group your favorite songs together.
 						</p>
 					</div>
 					<div className = 'feature-img'>
