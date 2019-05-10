@@ -8,11 +8,11 @@ import Patreon from '../Patreon/Patreon.js'
 
 
 import { Route, Link } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import styled from 'styled-components';
 import axios from 'axios';
 
-export default class Navigation extends Component {
+class Navigation extends Component {
   constructor() {
     super();
     this.state = {
@@ -62,6 +62,7 @@ export default class Navigation extends Component {
         <NavDiv className="">
           <nav className="navBar" >
             <Link className="dropbtn" to='/home'>Home</Link>
+            <h2>Moody Beats</h2>
             <div className="dropdown">
 
               <button className="dropbtn">{this.state.name || 'Menu'}</button>
@@ -85,23 +86,28 @@ export default class Navigation extends Component {
   }
 }
 
+export default withRouter(Navigation);
+
 const NavDiv = styled.div`
   .navBar{
     top:0;
     position: fixed;
     display: flex;
-
-    flex-wrap: warp;
-    background: #3232;
-    width: 100%;
-    justify-content: space-between;
-
-    flex-wrap: wrap;
     flex-direction: row;
+    flex-wrap: warp;
+
+    width: 100%;
+    justify-content : space-between;
+    align-items: center;
+
     background : #272727;
     width : 100%;
-    justify-content : space-between;
     box-shadow: 0px 2px 2px black;
+
+    h2 {
+      color: white;
+      margin: 0px;
+    }
 
     .dropbtn {
       text-decoration: none;
