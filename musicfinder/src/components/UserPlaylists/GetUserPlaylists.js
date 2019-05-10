@@ -24,17 +24,16 @@ export default class GetUserPlaylists extends Component {
         ]
       })
       .then(() => {
-        GoogleAuth = window.gapi.auth2
-          .getAuthInstance()
-          .signIn()
-          .then(
-            res => {
-              console.log(res);
-            },
-            err => {
-              console.log(err);
-            }
-          );
+        GoogleAuth = window.gapi.auth2.getAuthInstance();
+
+        GoogleAuth.signIn().then(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log(err);
+          }
+        );
       })
       .catch(err => console.log(err));
   };
