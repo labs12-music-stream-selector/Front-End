@@ -12,7 +12,7 @@ export default class GetUserPlaylists extends Component {
     });
   };
 
-  initClient = GoogleAuth => {
+  initClient = () => {
     window.gapi.client
       .init({
         apiKey: "AIzaSyAH1-rFnzv6nhFdVyw7SwTlSvuOi-ZpxYQ",
@@ -23,7 +23,7 @@ export default class GetUserPlaylists extends Component {
           "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
         ]
       })
-      .then(() => {
+      .then(GoogleAuth => {
         GoogleAuth = window.gapi.auth2.getAuthInstance();
 
         GoogleAuth.isSignedIn.listen(this.updateSigninStatus);
