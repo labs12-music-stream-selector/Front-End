@@ -20,6 +20,7 @@ const Browser = props => {
   const [relatedTracks, updateRelatedTracks] = useState([]);
   const [tracksByMood, updateTracksByMood] = useState([]);
   const [hasMore, updateHasMore] = useState(true);
+  const [searching, updateSearching] = useState(false);
 
   useEffect(() => {
     // TODO: replace with correct url to get initial tracks
@@ -129,7 +130,12 @@ const Browser = props => {
   }
 
   async function searchTrack(searchTerm) {
-    // the fuzzy search goes here
+	// the fuzzy search goes here
+	if(searchTerm.length === 0){
+		updateSearching(false);
+	}else{
+		updateSearching(true);
+	}
     let options = {
       keys: ["artist", "mood", "track_title", "url"]
     };
@@ -141,12 +147,17 @@ const Browser = props => {
   function loadNext(page) {
     //console.log(page, tracks)
     // if (offset < tracks.length - 6) {
-    if (page * 6 < tracksData.length - 6) {
-      // updateOffset(offset + 6);
-      updateTracks(tracksData.slice(0, page * 6));
-    } else if (tracks.length > 0 && hasMore) {
-      updateHasMore(false);
-    }
+	if(searching){
+		return
+	} else {
+		if (page * 6 < tracksData.length - 6) {
+		// updateOffset(offset + 6);
+		updateTracks(tracksData.slice(0, page * 6));
+		} else if (tracks.length > 0 && hasMore) {
+		updateHasMore(false);
+		}
+	}
+    
   }
 
   function loadPrev() {
