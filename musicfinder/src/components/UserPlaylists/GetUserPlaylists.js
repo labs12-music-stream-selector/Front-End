@@ -3,7 +3,7 @@ import PlaylistSelect from "./PlaylistSelect.js";
 
 export default class GetUserPlaylists extends Component {
   state = {
-    userPlaylists: []
+    userPlaylists: [{}]
   };
 
   componentDidMount() {
