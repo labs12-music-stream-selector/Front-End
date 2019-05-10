@@ -11,6 +11,10 @@ export default class GetUserPlaylists extends Component {
     this.loadClient(GoogleAuth);
   }
 
+  componentDidUpdate() {
+    console.log(this.state);
+  }
+
   loadClient = GoogleAuth => {
     window.gapi.load("client:auth2", () => {
       this.initClient(GoogleAuth);
@@ -75,7 +79,7 @@ export default class GetUserPlaylists extends Component {
       })
       .execute(res => {
         console.log(res);
-        console.log(this.state.userPlaylists);
+        console.log(this.state);
       });
   };
 
