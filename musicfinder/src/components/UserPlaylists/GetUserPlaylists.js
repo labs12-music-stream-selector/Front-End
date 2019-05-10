@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { isAuthorized, currentApiRequest } from "./global.js";
+import PlaylistSelect from "./PlaylistSelect.js";
 
 export default class GetUserPlaylists extends Component {
+  state = {
+    userPlaylists: []
+  };
+
   componentDidMount() {
     let GoogleAuth;
     this.loadClient(GoogleAuth);
@@ -30,7 +34,7 @@ export default class GetUserPlaylists extends Component {
 
         GoogleAuth.signIn().then(
           res => {
-            console.log(res);
+            this.setState({ userPlaylists: res.items });
             this.request();
           },
           err => {
@@ -71,6 +75,7 @@ export default class GetUserPlaylists extends Component {
       })
       .execute(res => {
         console.log(res);
+        console.log(this.state.userPlaylists);
       });
   };
 
