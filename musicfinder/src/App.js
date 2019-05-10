@@ -7,11 +7,13 @@ import LandingPage from "./components/LandingPage/LandingPage.js";
 import Navigation from "./components/Navigation/Navigation.js";
 import TermsOfService from "./components/TermsOfService/TermsOfService.js";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.js";
+import GetUserPlaylists from "./components/UserPlaylists/GetUserPlaylists.js";
 
 function App() {
   return (
     <Router>
       <RouterDiv className="App">
+        <GetUserPlaylists />
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/home" component={Navigation} />
         <Route path="/termsofservice" component={TermsOfService} />
