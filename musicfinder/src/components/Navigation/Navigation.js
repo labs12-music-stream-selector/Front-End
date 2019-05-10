@@ -160,14 +160,3 @@ const Button = styled.div`
   :hover{
     background-color: #009FB7;
   }`
-
-
-
-// const Button = styled.div`
-//   width: 100%;
-//   padding 12px 16px;
-//   border: none;
-//   color: #EFF1F3;
-//   :hover{
-//     background-color: #009FB7;
-//   }`
