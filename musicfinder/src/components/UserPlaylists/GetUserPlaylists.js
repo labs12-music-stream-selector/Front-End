@@ -74,24 +74,6 @@ export default class GetUserPlaylists extends Component {
       });
   };
 
-  getPlaylists = () => {
-    window.gapi.client.youtube.playlists
-      .list({
-        part: "snippet,contentDetails",
-        maxResults: 25,
-        mine: true
-      })
-      .then(
-        function(response) {
-          // Handle the results here (response.result has the parsed body).
-          console.log("Response", response.result);
-        },
-        function(err) {
-          console.error("Execute error", err);
-        }
-      );
-  };
-
   render() {
     return <div />;
   }
