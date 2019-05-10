@@ -1,80 +1,65 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Grid, Cell } from "styled-css-grid";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { Grid, Cell } from 'styled-css-grid';
 
-import Login from "../LoginForm/OAuthGoogle.js";
-import PatreonButton from "../Patreon/PatreonButton.js";
+import Login from '../LoginForm/OAuthGoogle.js'
+import PatreonButton from '../Patreon/PatreonButton.js';
 
-import records from "../../imgs/recordCollection.jpg";
-import painting from "../../imgs/painting.jpg";
-import playlist from "../../imgs/playlist.jpg";
+import records from '../../imgs/recordCollection.jpg';
+import painting from '../../imgs/painting.jpg';
+import playlist from '../../imgs/playlist.jpg';
 
-const LandingPage = props => {
+const LandingPage = (props) => {
   return (
     <LandingPageContainer>
       <Header>
-        <div id="text-container">
+        <div id='text-container'>
           <h1>MoodiBeats</h1>
           <h2>Find copyright free music by mood.</h2>
         </div>
-        <Login
-          style={{
-            position: "absolute",
-            top: "5px",
-            right: "5px"
-          }}
-        />
+        <Login style={{
+          position: 'absolute',
+          top: '5px',
+          right: '5px'
+        }} />
       </Header>
 
-      <Grid
-        areas={["feature-1 img-1", "img-2 feature-2", "feature-3 img-3"]}
+      <Grid areas={[
+        'feature-1 img-1',
+        'img-2 feature-2',
+        'feature-3 img-3',
+      ]}
         columns={"1fr 1fr"}
         rows={"minmax(45px,auto) minmax(45px,auto) minmax(45px,auto)"}
-        gap="0"
-        id="grid"
-      >
-        <Cell
-          height={1}
-          center
-          middle
-          area="feature-1"
-          className="feature-details"
-        >
+        gap='0'
+        id='grid'>
+        <Cell height={1} center middle area='feature-1' className='feature-details'>
           <h2>Browse Free Curated Songs</h2>
           <p>
-            Over 60 curated songs guaranteed free to use on your stream or
-            videos.
-          </p>
+            over 60 curated songs guaranteed free to use on your stream or videos.
+					</p>
         </Cell>
-        <Cell height={1} center middle area="img-1" className="feature-img">
-          <img src={records} alt="records" />
+        <Cell height={1} center middle area='img-1' className='feature-img'>
+          <img src={records} alt='records' />
         </Cell>
-        <Cell height={1} center middle area="img-2" className="feature-img">
-          <img src={painting} alt="Painting" />
+        <Cell height={1} center middle area='img-2' className='feature-img'>
+          <img src={painting} alt='Painting' />
         </Cell>
-        <Cell
-          height={1}
-          center
-          middle
-          area="feature-2"
-          className="feature-details"
-        >
-          <h2>Search Songs by Mood</h2>
-          <p>Choose just the right music for the theme of your content.</p>
+        <Cell height={1} center middle area='feature-2' className='feature-details'>
+          <h2>Search songs by mood</h2>
+          <p>
+            Choose just the right music for the theme of your content.
+					</p>
         </Cell>
-        <Cell
-          height={1}
-          center
-          middle
-          area="feature-3"
-          className="feature-details"
-        >
+        <Cell height={1} center middle area='feature-3' className='feature-details'>
           <h2>Create Playlists</h2>
-          <p>Group Your Favorite Songs Together.</p>
+          <p>
+            Group your favorite songs together.
+					</p>
         </Cell>
-        <Cell height={1} center middle area="img-3" className="feature-img">
-          <img src={playlist} alt="playlist" />
+        <Cell height={1} center middle area='img-3' className='feature-img'>
+          <img src={playlist} alt='playlist' />
         </Cell>
       </Grid>
 
@@ -119,246 +104,178 @@ const LandingPage = props => {
       </Team>
       <Footer>
         <div id='legal-stuff'>
-          <h2>Legal Stuff</h2>
-          <div>
-            <Link className="aTag" to='/termsofservice'>Terms of Service</Link>
-            <Link className="aTag" to='/privacypolicy'>Privacy Policy</Link>
-          </div>
+          <h3>Legal Stuff</h3>
+          <Link to='/termsofservice'>Terms of Service</Link>
+          <Link to='/privacypolicy'>Privacy Policy</Link>
         </div>
-        <div className='patreonBtn'>
+        <div>
           <PatreonButton />
         </div>
       </Footer>
     </LandingPageContainer>
   )
 }
-
 export default LandingPage;
 
 const LandingPageContainer = styled.div`
-	a{
-		text-decoration: none !important
-	}
 	color: ivory;
 	margin-top: -40px;
 	*{
 		margin: 0;
-	}
-
-	#grid{
+  }
+  	#grid{
 		margin: 20px 0 50px;
 		.feature-details, feature-img{
 			overflow: hidden;
 		}
-	}
-	
+  }
+  	
 	.feature-img{
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
-		height: auto;
-		overflow: hidden;
-		position: relative;
-		
-	}
-	.feature-img img{
-		width: 100%;
-	}
-
-	.feature-details{
-		font-size: 1.5em;
-		padding: 0 50px;
-		text-align: left;
-
-  .feature-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: auto;
     overflow: hidden;
     position: relative;
+	}
+	.feature-img img{
+    		width: 100%;
   }
-  .feature-img img {
-    width: 100%;
-  }
-  .feature-details {
-    font-size: 1.5em;
-    padding: 0 50px;
+  .feature-details{
+		font-size: 1.5em;
+		padding: 0 50px;
     text-align: left;
-    h2 {
-      margin-bottom: 10px;
-    }
-  }
+    		h2{
+			margin-bottom: 10px;
+		}
+	}
 
-  @media (max-width: 750px) {
-    #grid {
-      margin: 0;
-      grid-template-areas:
-        "feature-1"
-        "img-1"
-        "feature-2"
-        "img-2"
-        "feature-3"
-        "img-3";
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      .feature-details {
-        height: 500px;
-        max-height: 500px;
-        img {
-        }
-      }
-    }
-  }
+	@media(max-width: 750px) {
+		#grid{
+			margin: 0;
+			grid-template-areas:
+				"feature-1"
+				"img-1"
+				"feature-2"
+				"img-2"
+				"feature-3"
+				"img-3";
+			grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+			.feature-details{
+				height: 500px;
+				max-height: 500px;
+				img{
+				}
+			}
+		}
+	}
 `;
-
 const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-image: url("https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  padding: 10px 10px 0;
-  #text-container {
-    text-shadow: 0px 0px 16px rgba(0, 0, 0, 0.71);
-    margin: 10px 0;
-    h1 {
-      text-align: center;
-    }
-  }
-  @media (max-width: 500px) {
-    flex-direction: column;
-  }
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-image: url('https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80');
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+	padding: 10px 10px 0;
+	#text-container{
+		text-shadow: 0px 0px 16px rgba(0,0,0,0.71);
+		margin: 10px 0;
+		h1{
+			text-align:center;
+		}
+	}
+	@media (max-width: 500px) {
+		flex-direction: column;
+	}
 `;
 
 const Team = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 10px;
-  min-height: 300px;
-  font-size: 1.5em;
-  h2 {
-    text-align: center;
-  }
-  ul {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: 5px auto;
-    padding: 0;
-    width: fit-content;
-    max-width: 846px;
-  }
-  li {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 15px 0;
-    width: 33.333%;
-    text-align: left;
-    align-self: flex-start;
-  }
-  img {
-    width: 100px;
-    height: auto;
-    border-radius: 100%;
-  }
-  a {
-    text-decoration: none;
-    text-align: center;
-    color: inherit;
-    text-decoration: underline;
-    :hover {
-      color: #007da6;
-      cursor: pointer;
+    justify-content: center;
+    margin-top: 10px;
+    min-height: 300px;
+	font-size: 1.5em;
+	h2{
+		text-align: center;
+	}
+    ul{
+        display: flex;
+        justify-content: start;
+        flex-wrap: wrap;
+        list-style: none;
+        margin: 5px auto;
+        padding: 0;
+        width: fit-content;
     }
-
     li{
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-        margin: 15px 0;
+    align-items: center;
+            margin: 15px 0;
         width: 33.333%;
         text-align: left;
-		align-self: flex-start;
+        		align-self: flex-start;
 	}
-
 	img{
 		width: 100px;
 		height: auto;
 		border-radius: 100%;
 	}
-
     a{
+        text-decoration: none;
         text-align: center;
-        color: inherit;
+                color: inherit;
         text-decoration: underline;
         :hover{
             color: #007DA6;
             cursor: pointer;
         }
     }
-    li {
-      align-self: unset;
-      width: 190px;
-    }
-  }
-  @media (max-width: 500px) {
-    font-size: 1.2em;
-    ul {
-      width: 300px;
-    }
-    li {
-      width: 126px;
-      img {
-        margin-bottom: 10px;
-      }
-    }
-  }
+    @media (max-width: 830px) {
+        ul{
+            align-items: center;
+            justify-content: space-evenly;
+            width: 450px;
+        }
+        li{
+            align-self: unset;
+            			width: 190px;
+        }
+	}
+    @media (max-width: 500px) {
+              font-size: 1.2em;
+	    ul{
+            width: 300px;
+        }
+        li{
+          			width: 126px;
+			img{
+				margin-bottom: 10px;
+			}
+        }
+	}
 `;
-
 const Footer = styled.footer`
-  height: 150px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  #legal-stuff {
+    height: 150px;
     display: flex;
     justify-content: space-evenly;
-	align-items: center;
-	@media (max-width: 500px) {
-		display : block;
-		text-align: center;	
-	}
-
+    align-items: center;
     #legal-stuff{
         display: flex;
 		flex-direction: column;
-		@media (max-width: 500px) {
-			margin: 20px 0;	
-		}
-		   
-		.aTag{ 
-			padding-right: 30px; 
+		a{
+			text-decoration: none;
 			text-align: center;
 			color: inherit;
+			text-decoration: underline;
 			margin: 5px 0;
-			@media (max-width: 500px) {
-				margin :0;
-				padding-right: 5px;
-			}
 			:hover{
-				:hover{
-					color: #007DA6;
-					cursor: pointer;
+				cursor: pointer;
 			}
 		}
-
     }
-  }
-`;
+    `; 
