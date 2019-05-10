@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { GoogleAuth, isAuthorized, currentApiRequest } from "./global.js";
 
 export default class GetUserPlaylists extends Component {
   componentDidMount() {
@@ -22,10 +23,29 @@ export default class GetUserPlaylists extends Component {
           "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
         ]
       })
-      .then(res => {
-        console.log(window.gapi.client);
+      .then(() => {
+        GoogleAuth = window.gapi.auth2.getAuthInstance();
+
+        GoogleAuth.isSignedIn.listen(this.updateSigninStatus);
       });
   };
+
+  updateSigninStatus = isSignedIn => {
+    if (isSignedIn) {
+      isAuthorized = true;
+      this.sendAuthorizedApiRequest();
+    } else {
+      isAuthorized = false;
+    }
+  };
+
+  sendAuthorizedApiRequest() {
+    if (isAuthorized) {
+      this.request();
+    } else {
+      GoogleAuth.signIn();
+    }
+  }
 
   request = () => {
     window.gapi.client
