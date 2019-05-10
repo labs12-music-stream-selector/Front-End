@@ -44,18 +44,7 @@ export default class Navigation extends Component {
       this.props.history.push("/");
     }
   }
-  showMenu = (event) => {
-    event.preventDefault();
-    this.setState({ showMenu: true }, () => {
-      document.addEventListener('click', this.closeMenu);
-    });
-  }
 
-  closeMenu = (event) => {
-    this.setState({ showMenu: false }, () => {
-      document.removeEventListener('click', this.closeMenu);
-    });
-  }
   render() {
     return (
       <Router>
@@ -63,21 +52,12 @@ export default class Navigation extends Component {
           <nav className="navBar" >
             <Link className="dropbtn" to='/home'>Home</Link>
             <div className="dropdown">
-
-                <button className="dropbtn">{this.state.name}</button>
-                <div className="dropdown-content">
-                  <Link to = '/user'> Update Profile </Link>
-                  <Link to="./donation"> Support Us </Link>
-                  <Button  className ="signoutBtn" onClick= {this.signMeOut}> Sign Out </Button>
-                </div>
-
               <button className="dropbtn">{this.state.name || 'Menu'}</button>
               <div className="dropdown-content">
                 <Link to='/user'> Update Profile </Link>
                 <Link to="./donation"> Support Us </Link>
                 <Button className="signoutBtn" onClick={this.signMeOut}> Sign Out </Button>
               </div>
-
             </div>
           </nav>
           <Route path="/player" component={YoutubePlayer} />
@@ -157,7 +137,7 @@ const NavDiv = styled.div`
 
 
     .dropbtn:hover {
-      background-color: #f1f2;
+      background-color: #007DA6;;
     }
   }
   .dropdown-content .signoutBtn{
@@ -171,9 +151,11 @@ const Button= styled.div`
   margin: 10px;
   height: 30px;
   border: none;
+  padding: 12px 16px;
+  text-align: center;
+  color: #EFF1F3;
   :hover{
-    background: purple;
-    color: white;
+    background-color: #009FB7;
   }`
 
 
