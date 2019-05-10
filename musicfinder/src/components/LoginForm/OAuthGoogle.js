@@ -13,12 +13,13 @@ export default class OAuthGoogle extends Component {
   signup = (res, type) => {
     let postData;
     if (type === "google" && res.w3.U3) {
+      console.log(res);
       postData = {
         name: res.w3.ig,
         provider: type,
         email: res.w3.U3,
         provider_id: res.El,
-        token: res.Zi.id_token,
+        token: res.Zi.access_token,
         provider_pic: res.w3.Paa
       };
     }
@@ -43,14 +44,19 @@ export default class OAuthGoogle extends Component {
     const responseGoogle = response => {
       this.signup(response, "google");
     };
+    // Md's Client ID from Google
+    // "557783495237-jqq3d269c5ee4uvbg0bv74rs1sb91g90.apps.googleusercontent.com"
+    const CLIENTID_MD =
+      "557783495237-jqq3d269c5ee4uvbg0bv74rs1sb91g90.apps.googleusercontent.com";
+
+    // Logan's Client ID from Google
+    // "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com"
+    const CLIENTID_LOGAN =
+      "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
     return (
       <div>
         <GoogleLogin
-          clientId="557783495237-jqq3d269c5ee4uvbg0bv74rs1sb91g90.apps.googleusercontent.com"
-          // discoverDocs={[
-          //   "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
-          // ]}
-          // scope="https://www.googleapis.com/auth/youtube.force-ssl"
+          clientId={CLIENTID_LOGAN}
           buttonText="Login with Google"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}

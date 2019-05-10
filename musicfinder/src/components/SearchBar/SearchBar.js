@@ -30,32 +30,29 @@ const SearchBar = (props) => {
 export default SearchBar;
 
 const SearchForm = styled.form`
-	position: fixed;
-	height: 20px;
-	top: 13px;
-	left: 10%;
-	display: flex;
-	width: 500px;
-	align-items: stretch;
-	input{
-		background-color: rgba(255,255,255,0.02);
-		color: #EFF1F3;
-		border: none;
-		border-bottom: 1px solid rgba(255,255,255,0.1);
-		text-align: center;
-		width: 70%;
-		height: 20px;
-		margin-top: -4px;
-		margin-right: 20px;
-		font-size: 12px;
-		@media(max-width: 479px){
-			margin-right: 2px;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    left: 0;
+    right: 0;
+    background-color: #009FB7;
+    padding: 20px 10px;
+    box-shadow: inset 0px 2px 2px black;
+		input{
+			background-color: #009FB7;
+			border: none;
+			text-align:center;
+			color: #272727;
+	    font-weight: bold;
+	    font-size: 2rem;
+		::placeholder {
+			color: #272727;
 		}
 	}
-	@media(max-width: 479px){
-		width: 200px;
-		left : 20%;
-	}
+	// @media(max-width: 479px){
+	// 	width: 200px;
+	// 	left : 20%;
+	// }
 `;
 
 // Referenced: https://dev.to/gabe_ragland/debouncing-with-react-hooks-jci
