@@ -46,7 +46,7 @@ const LandingPage = (props) => {
                     <div className = 'feature-details'>
 						<h2>Create Playlists</h2>
 						<p>
-                            Group your favorite songs together. Dunno lol
+                            Group your favorite songs together. 
 						</p>
 					</div>
 					<div className = 'feature-img'>
@@ -280,7 +280,7 @@ const Footer = styled.footer`
     #legal-stuff{
       display: flex;
 			flex-direction: column;
-			
+
 		a{
 			text-decoration: none;
 			text-align: center;
