@@ -3,7 +3,7 @@ import GoogleLogin from "react-google-login";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
-import GetUserPlaylists from "../UserPlaylists/GetUserPlaylists.js";
+import NewAuth from "../UserPlaylists/NewAuth.js";
 
 export default class OAuthGoogle extends Component {
   constructor(props) {
@@ -67,7 +67,7 @@ export default class OAuthGoogle extends Component {
           />
         );
       } else {
-        return <GetUserPlaylists responseGoogle={responseGoogle} />;
+        return <NewAuth responseGoogle={responseGoogle} />;
       }
     }
     return <div>{keyChanger()}</div>;

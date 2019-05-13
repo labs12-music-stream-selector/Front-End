@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GoogleButton from "../../imgs/googleButtons/smallGoogleButtons/btn_google_signin_light_normal_web.png";
 
-export default class GetUserPlaylists extends Component {
+export default class NewAuth extends Component {
   state = {
     userPlaylists: [],
     GoogleAuth: {}
