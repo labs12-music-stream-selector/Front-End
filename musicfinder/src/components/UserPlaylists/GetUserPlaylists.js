@@ -17,9 +17,7 @@ export default class GetUserPlaylists extends Component {
   }
 
   loadClient = () => {
-    window.gapi.load("client:auth2", () => {
-      this.initClient();
-    });
+    window.gapi.load("client:auth2", () => {});
   };
 
   // This initializes permissions and libraries we need
