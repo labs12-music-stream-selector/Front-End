@@ -6,6 +6,8 @@ import Browser from '../Browser/Browser.js';
 import User from '../user/User.js'
 import Patreon from '../Patreon/Patreon.js'
 
+import moodi from '../../imgs/logoWord.svg';
+
 
 import { Route, Link } from "react-router-dom";
 import { BrowserRouter as Router, withRouter } from "react-router-dom";
@@ -51,7 +53,7 @@ class Navigation extends Component {
         <NavDiv className="">
           <nav className="navBar" >
             <Link className="dropbtn" to='/home'>Home</Link>
-            <h2>Moody Beats</h2>
+            <img src = {moodi} alt = 'logo'/>
             <div className="dropdown">
               <button className="dropbtn">{this.state.name || 'Menu'}</button>
               <div className="dropdown-content">
@@ -91,9 +93,8 @@ const NavDiv = styled.div`
     width : 100%;
     box-shadow: 0px 2px 2px black;
 
-    h2 {
-      color: white;
-      margin: 0px;
+    img{
+      width: 105px;
     }
 
     .dropbtn {
