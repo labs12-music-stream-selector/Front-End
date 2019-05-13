@@ -1,27 +1,29 @@
 import React, { Component } from "react";
-import PlaylistSelect from "./PlaylistSelect.js";
+import GoogleButton from "../../imgs/googleButtons/smallGoogleButtons/btn_google_signin_light_normal_web.png";
 
 export default class GetUserPlaylists extends Component {
   state = {
-    userPlaylists: []
+    userPlaylists: [],
+    GoogleAuth: {}
   };
 
   componentDidMount() {
-    let GoogleAuth;
-    this.loadClient(GoogleAuth);
+    this.loadClient();
   }
 
   componentDidUpdate() {
     console.log(this.state);
+    this.signIn();
   }
 
-  loadClient = GoogleAuth => {
-    window.gapi.load("client:auth2", () => {
-      this.initClient(GoogleAuth);
-    });
+  loadClient = () => {
+    window.gapi.load("client:auth2", () => {});
   };
 
-  initClient = GoogleAuth => {
+  // This initializes permissions and libraries we need
+  // to load a user in. This also initializes the libraries we can use
+  // to interact with a user's Youtube Channel.
+  initClient = () => {
     window.gapi.client
       .init({
         apiKey: "AIzaSyAH1-rFnzv6nhFdVyw7SwTlSvuOi-ZpxYQ",
@@ -33,40 +35,38 @@ export default class GetUserPlaylists extends Component {
         ]
       })
       .then(() => {
-        GoogleAuth = window.gapi.auth2.getAuthInstance();
-
-        GoogleAuth.signIn().then(
-          res => {
-            console.log(window.gapi.auth2.getAuthInstance());
-            console.log(res);
-            this.request();
-          },
-          err => {
-            console.log(err);
-          }
-        );
+        console.log(".gapi.client.init.then running");
+        this.setState({
+          GoogleAuth: window.gapi.auth2.getAuthInstance()
+        });
+        // GoogleAuth = window.gapi.auth2.getAuthInstance();
       })
       .catch(err => console.log(err));
+    console.log();
   };
 
-  // updateSigninStatus = isSignedIn => {
-  //   if (isSignedIn) {
-  //     isAuthorized = true;
-  //     this.sendAuthorizedApiRequest();
-  //   } else {
-  //     isAuthorized = false;
-  //   }
-  // };
-
-  // sendAuthorizedApiRequest() {
-  //   if (isAuthorized) {
-  //     this.request();
-  //   } else {
-  //     //GoogleAuth.signIn();
-  //   }
-  // }
+  signIn = () => {
+    // After initialization succeeds, then we ask the user for permission.
+    // On permission success, the library sends the access token
+    // so that we can get a user's playlists.
+    this.state.GoogleAuth.signIn()
+      .then(
+        res => {
+          console.log(window.gapi.auth2.getAuthInstance());
+          console.log(res);
+          this.props.responseGoogle(res);
+        },
+        err => {
+          console.log(err);
+        }
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   request = () => {
+    console.log("request() running");
     window.gapi.client
       .request({
         path: "/youtube/v3/playlists",
@@ -87,6 +87,16 @@ export default class GetUserPlaylists extends Component {
   };
 
   render() {
-    return <div />;
+    return (
+      <div>
+        <button>
+          <img
+            src={GoogleButton}
+            alt="Google Sign in"
+            onClick={this.initClient}
+          />
+        </button>
+      </div>
+    );
   }
 }
