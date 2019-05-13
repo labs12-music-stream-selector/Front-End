@@ -3,6 +3,8 @@ import GoogleLogin from "react-google-login";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
+import GetUserPlaylists from "../UserPlaylists/GetUserPlaylists.js";
+
 export default class OAuthGoogle extends Component {
   constructor(props) {
     super(props);
@@ -61,6 +63,7 @@ export default class OAuthGoogle extends Component {
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
         />
+        <GetUserPlaylists />
       </div>
     );
   }

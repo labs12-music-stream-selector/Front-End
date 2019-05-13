@@ -1,15 +1,9 @@
 import React, { Component } from "react";
-import PlaylistSelect from "./PlaylistSelect.js";
 
 export default class GetUserPlaylists extends Component {
   state = {
     userPlaylists: []
   };
-
-  componentDidMount() {
-    let GoogleAuth;
-    this.loadClient(GoogleAuth);
-  }
 
   componentDidUpdate() {
     console.log(this.state);
@@ -93,6 +87,16 @@ export default class GetUserPlaylists extends Component {
   };
 
   render() {
-    return <div />;
+    let GoogleAuth;
+    return (
+      <div>
+        <input
+          type="image"
+          src="../../../googleButtons/googleButtons/btn_google_signin_light_normal_web@2x.png"
+          alt="Google Sign in Button"
+          onClick={this.loadClient(GoogleAuth)}
+        />
+      </div>
+    );
   }
 }
