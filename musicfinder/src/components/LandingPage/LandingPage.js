@@ -80,7 +80,7 @@ const LandingPage = (props) => {
               <a href='github.com/lilvina'>Davina Taylor</a>
             </li>
             <li>
-              <img src='https://avatars2.githubusercontent.com/u/13279523?s=460&v=4' alt='John Humphreys' />
+              <img src='https://avatars0.githubusercontent.com/u/6886907?s=400&v=4' alt='John Humphreys' />
               <a href='github.com/johnpharmd'>John Humphreys</a>
             </li>
             <li>
@@ -129,7 +129,7 @@ const LandingPageContainer = styled.div`
 			overflow: hidden;
 		}
   }
-  	
+
 	.feature-img{
 		display: flex;
 		justify-content: center;
@@ -278,4 +278,4 @@ const Footer = styled.footer`
 			}
 		}
     }
-    `; 
+    `;
