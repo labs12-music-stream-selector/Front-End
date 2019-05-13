@@ -21,6 +21,9 @@ export default class GetUserPlaylists extends Component {
     });
   };
 
+  // This initializes permissions and libraries we need
+  // to load a user in. This also initializes the libraries we can use
+  // to interact with a user's Youtube Channel.
   initClient = GoogleAuth => {
     window.gapi.client
       .init({
@@ -35,6 +38,9 @@ export default class GetUserPlaylists extends Component {
       .then(() => {
         GoogleAuth = window.gapi.auth2.getAuthInstance();
 
+        // After initialization succeeds, then we ask the user for permission.
+        // On permission success, the library sends the access token
+        // so that we can get a user's playlists.
         GoogleAuth.signIn().then(
           res => {
             console.log(window.gapi.auth2.getAuthInstance());
