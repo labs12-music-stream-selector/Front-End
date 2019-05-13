@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import GoogleButton from "../../imgs/googleButtons/smallGoogleButtons/btn_google_signin_light_normal_web.png";
 
 export default class GetUserPlaylists extends Component {
   state = {
@@ -92,7 +93,7 @@ export default class GetUserPlaylists extends Component {
       <div>
         <input
           type="image"
-          src="../../../googleButtons/googleButtons/btn_google_signin_light_normal_web@2x.png"
+          src={GoogleButton}
           alt="Google Sign in Button"
           onClick={this.loadClient(GoogleAuth)}
         />
