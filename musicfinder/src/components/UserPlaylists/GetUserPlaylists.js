@@ -13,6 +13,7 @@ export default class GetUserPlaylists extends Component {
 
   componentDidUpdate() {
     console.log(this.state);
+    this.signIn();
   }
 
   loadClient = () => {
@@ -91,7 +92,11 @@ export default class GetUserPlaylists extends Component {
     return (
       <div>
         <button>
-          <img src={GoogleButton} alt="Google Sign in" onClick={this.signIn} />
+          <img
+            src={GoogleButton}
+            alt="Google Sign in"
+            onClick={this.initClient}
+          />
         </button>
       </div>
     );

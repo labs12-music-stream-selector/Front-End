@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import GoogleLogin from "react-google-login";
+import GoogleLogin from "react-google-login";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
@@ -55,17 +55,22 @@ export default class OAuthGoogle extends Component {
     // "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com"
     const CLIENTID_LOGAN =
       "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
-    return (
-      <div>
-        <GetUserPlaylists responseGoogle={responseGoogle} />
-        {/* <GoogleLogin
-          clientId={CLIENTID_MD}
-          buttonText="Login with Google"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-        /> */}
-      </div>
-    );
+
+    function keyChanger() {
+      if (process.env.NODE_ENV) {
+        return (
+          <GoogleLogin
+            clientId={CLIENTID_MD}
+            buttonText="Login with Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+          />
+        );
+      } else {
+        return <GetUserPlaylists responseGoogle={responseGoogle} />;
+      }
+    }
+    return <div>{keyChanger()}</div>;
   }
 }
 
