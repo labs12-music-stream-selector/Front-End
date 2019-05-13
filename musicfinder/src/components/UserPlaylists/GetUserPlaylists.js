@@ -50,16 +50,20 @@ export default class GetUserPlaylists extends Component {
     // After initialization succeeds, then we ask the user for permission.
     // On permission success, the library sends the access token
     // so that we can get a user's playlists.
-    this.state.GoogleAuth.signIn().then(
-      res => {
-        console.log(window.gapi.auth2.getAuthInstance());
-        console.log(res);
-        this.request();
-      },
-      err => {
+    this.state.GoogleAuth.signIn()
+      .then(
+        res => {
+          console.log(window.gapi.auth2.getAuthInstance());
+          console.log(res);
+          this.props.responseGoogle(res);
+        },
+        err => {
+          console.log(err);
+        }
+      )
+      .catch(err => {
         console.log(err);
-      }
-    );
+      });
   };
 
   request = () => {
