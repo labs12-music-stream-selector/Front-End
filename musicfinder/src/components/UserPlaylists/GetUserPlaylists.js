@@ -11,7 +11,9 @@ export default class GetUserPlaylists extends Component {
   }
 
   loadClient = GoogleAuth => {
+    console.log("button Clicked - loadClient() running");
     window.gapi.load("client:auth2", () => {
+      console.log("gapi.load running");
       this.initClient(GoogleAuth);
     });
   };
@@ -20,6 +22,7 @@ export default class GetUserPlaylists extends Component {
   // to load a user in. This also initializes the libraries we can use
   // to interact with a user's Youtube Channel.
   initClient = GoogleAuth => {
+    console.log("initClient() running");
     window.gapi.client
       .init({
         apiKey: "AIzaSyAH1-rFnzv6nhFdVyw7SwTlSvuOi-ZpxYQ",
@@ -31,6 +34,7 @@ export default class GetUserPlaylists extends Component {
         ]
       })
       .then(() => {
+        console.log(".gapi.client.init.then running");
         GoogleAuth = window.gapi.auth2.getAuthInstance();
 
         // After initialization succeeds, then we ask the user for permission.
@@ -68,6 +72,7 @@ export default class GetUserPlaylists extends Component {
   // }
 
   request = () => {
+    console.log("request() running");
     window.gapi.client
       .request({
         path: "/youtube/v3/playlists",
@@ -91,12 +96,13 @@ export default class GetUserPlaylists extends Component {
     let GoogleAuth;
     return (
       <div>
-        <input
-          type="image"
-          src={GoogleButton}
-          alt="Google Sign in Button"
-          onClick={this.loadClient(GoogleAuth)}
-        />
+        <button>
+          <img
+            src={GoogleButton}
+            alt="Google Sign in"
+            onClick={() => this.loadClient(GoogleAuth)}
+          />
+        </button>
       </div>
     );
   }
