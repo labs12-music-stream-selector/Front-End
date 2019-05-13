@@ -57,13 +57,13 @@ export default class OAuthGoogle extends Component {
       "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
     return (
       <div>
+        <GetUserPlaylists />
         <GoogleLogin
           clientId={CLIENTID_MD}
           buttonText="Login with Google"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
         />
-        <GetUserPlaylists />
       </div>
     );
   }
