@@ -9,12 +9,14 @@ import PatreonButton from '../Patreon/PatreonButton.js';
 import records from '../../imgs/recordCollection.jpg';
 import painting from '../../imgs/painting.jpg';
 import playlist from '../../imgs/playlist.jpg';
+import moodi from '../../imgs/logoWord.svg';
 
 const LandingPage = (props) => {
   return (
     <LandingPageContainer>
       <Header>
         <div id='text-container'>
+          <img src = {moodi} alt = 'logo'/>
           <h1>MoodiBeats</h1>
           <h2>Find copyright free music by mood.</h2>
         </div>
@@ -181,11 +183,18 @@ const Header = styled.div`
 	height: 100vh;
 	padding: 10px 10px 0;
 	#text-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 		text-shadow: 0px 0px 16px rgba(0,0,0,0.71);
 		margin: 10px 0;
 		h1{
 			text-align:center;
-		}
+    }
+    img{
+      width: 40%;
+      max-width: 200px;
+    }
 	}
 	@media (max-width: 500px) {
 		flex-direction: column;
