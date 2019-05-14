@@ -7,8 +7,12 @@ import SearchBar from "../SearchBar/SearchBar.js";
 import Select from "../Select/Select.js";
 import Track from "../Track/Track.js";
 import InfiniteScroll from "react-infinite-scroller";
+<<<<<<< HEAD
 import { withRouter } from "react-router-dom";
 import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
+=======
+import { withRouter} from "react-router-dom";
+>>>>>>> 4b18c128ad0b85159e175a562f08b06c96bf6661
 
 // import PostPlaylist from "../YoutubePlaylist/PostPlaylist.js";
 
@@ -23,9 +27,10 @@ const Browser = props => {
   const [searching, updateSearching] = useState(false);
 
   useEffect(() => {
-    // TODO: replace with correct url to get initial tracks
+    if (!sessionStorage.getItem('token')) {
+      return props.history.push('/');   
+    }
     const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
-    // const url = `http://localhost:5000/api/song-list`;															//TODO: remove this and uncomment above line before PR
     getTracks(url);
   }, []);
 
@@ -36,19 +41,15 @@ const Browser = props => {
         selectComp={props => (
           <Select
             getTracks={getTracksByMood}
-            options={[
-              "sad",
-              "happy",
-              "confident-sassy",
-              "angry",
-              "in-love",
-              "peaceful"
-            ]}
+            options={["sad", "happy", "confident-sassy","angry","in-love", "peaceful" ]}
           />
         )}
       />
+<<<<<<< HEAD
       {/* <PostPlaylist /> */}
       <YoutubePlayer />
+=======
+>>>>>>> 4b18c128ad0b85159e175a562f08b06c96bf6661
       <InfiniteScroll
         pageStart={0}
         loadMore={loadNext}
@@ -92,7 +93,6 @@ const Browser = props => {
   );
 
   async function getTracks(url) {
-    // console.log(localStorage.getItem('token'))
     const res = await axios.get(url, {
       headers: { Authorization: localStorage.getItem("token") }
     });
@@ -131,6 +131,7 @@ const Browser = props => {
   }
 
   async function searchTrack(searchTerm) {
+<<<<<<< HEAD
     // the fuzzy search goes here
 
     console.log(searchTerm.length)
@@ -160,6 +161,33 @@ const Browser = props => {
       }
     }
 
+=======
+	// the fuzzy search goes here
+
+	if(searchTerm.length === 0) {
+		updateSearching(false);
+	} else {
+		updateSearching(true);
+	}
+	let options = {
+	keys: ["artist", "mood", "track_title", "url"]
+	};
+	let fuse = new Fuse(tracksData, options);
+	updateTracks(fuse.search(searchTerm));
+	updateOffset(0); // TODO: Double Check this worked!!!!!
+  }
+
+  function loadNext(page) {
+	if(!searching){
+		if (page * 6 < tracksData.length - 6) {
+		// updateOffset(offset + 6);
+			updateTracks(tracksData.slice(0, page * 6));
+		} else if (tracks.length > 0 && hasMore) {
+			updateHasMore(false);
+		}
+	}
+    
+>>>>>>> 4b18c128ad0b85159e175a562f08b06c96bf6661
   }
 
   function loadPrev() {
