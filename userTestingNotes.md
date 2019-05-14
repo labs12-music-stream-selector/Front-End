@@ -46,7 +46,7 @@
         -   Can't find download button
         -   used a dummy google acc
         
-    Tester 2 (real streamer y4nn4art on twitch)
+    Tester 2 (real streamer y4nn4rt on twitch)
         -   Could just use youtube for music
         -   Doesn't care if he gets muted
         -   Hesitant on allowing permissions (delete videos and comments)
