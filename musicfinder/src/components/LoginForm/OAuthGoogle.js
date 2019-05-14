@@ -34,13 +34,13 @@ export default class OAuthGoogle extends Component {
           "id",
           result.data.id
         );
-        // this.setState({ redirect: true });
+        this.setState({ redirect: true });
       });
     } else {
     }
   };
   render() {
-    if (this.state.redirect /*|| sessionStorage.getItem("token")*/) {
+    if (this.state.redirect || sessionStorage.getItem("token")) {
       return <Redirect to={"/home"} />;
     }
     const responseGoogle = response => {
