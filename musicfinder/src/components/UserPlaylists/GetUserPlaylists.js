@@ -21,6 +21,6 @@ export default class GetUserPlaylists extends Component {
   };
 
   render() {
-    return <div />;
+    return <div>{this.request()}</div>;
   }
 }
