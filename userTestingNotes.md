@@ -30,7 +30,7 @@
     Would love to get feedback from a real streamer :)"
 
     Note:
-    A good streamers to ask are those who:
+    Good streamers to ask are those who:
     [ ] play music on stream
     [ ] has one or more past broadcasts that are muted
     [ ] less than 3 viewers
