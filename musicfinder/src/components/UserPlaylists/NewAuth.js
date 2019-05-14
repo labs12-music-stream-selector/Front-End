@@ -3,7 +3,6 @@ import GoogleButton from "../../imgs/googleButtons/smallGoogleButtons/btn_google
 
 export default class NewAuth extends Component {
   state = {
-    userPlaylists: [],
     GoogleAuth: {}
   };
 
@@ -65,26 +64,26 @@ export default class NewAuth extends Component {
       });
   };
 
-  request = () => {
-    console.log("request() running");
-    window.gapi.client
-      .request({
-        path: "/youtube/v3/playlists",
-        method: "GET",
-        params: {
-          part: "contentDetails, id, snippet, status",
-          mine: true,
-          maxResults: 25
-        }
-      })
-      .execute(res => {
-        const { items } = res;
-        this.setState({ userPlaylists: items });
-        console.log(items);
-        console.log(res);
-        console.log(this.state);
-      });
-  };
+  // request = () => {
+  //   console.log("request() running");
+  //   window.gapi.client
+  //     .request({
+  //       path: "/youtube/v3/playlists",
+  //       method: "GET",
+  //       params: {
+  //         part: "contentDetails, id, snippet, status",
+  //         mine: true,
+  //         maxResults: 25
+  //       }
+  //     })
+  //     .execute(res => {
+  //       const { items } = res;
+  //       this.setState({ userPlaylists: items });
+  //       console.log(items);
+  //       console.log(res);
+  //       console.log(this.state);
+  //     });
+  // };
 
   render() {
     return (

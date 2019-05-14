@@ -34,13 +34,13 @@ export default class OAuthGoogle extends Component {
           "id",
           result.data.id
         );
-        this.setState({ redirect: true });
+        // this.setState({ redirect: true });
       });
     } else {
     }
   };
   render() {
-    if (this.state.redirect || sessionStorage.getItem("token")) {
+    if (this.state.redirect /*|| sessionStorage.getItem("token")*/) {
       return <Redirect to={"/home"} />;
     }
     const responseGoogle = response => {
@@ -53,8 +53,8 @@ export default class OAuthGoogle extends Component {
 
     // Logan's Client ID from Google
     // "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com"
-    const CLIENTID_LOGAN =
-      "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
+    // const CLIENTID_LOGAN =
+    //   "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
 
     function keyChanger() {
       if (process.env.NODE_ENV === "development") {
