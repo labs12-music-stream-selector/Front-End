@@ -84,6 +84,7 @@ const NavDiv = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: warp;
+    z-index: 100;
 
     width: 100%;
     justify-content : space-between;
