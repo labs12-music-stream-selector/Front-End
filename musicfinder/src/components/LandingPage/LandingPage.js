@@ -277,6 +277,9 @@ const Footer = styled.footer`
     #legal-stuff{
         display: flex;
 		flex-direction: column;
+    h3{
+      text-align: center;
+    }
 		a{
 			text-align: center;
 			color: inherit;
