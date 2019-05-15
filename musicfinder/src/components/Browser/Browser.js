@@ -8,8 +8,7 @@ import Select from "../Select/Select.js";
 import Track from "../Track/Track.js";
 import InfiniteScroll from "react-infinite-scroller";
 import { withRouter } from "react-router-dom";
-
-import GetUserPlaylists from "../UserPlaylists/GetUserPlaylists.js";
+import YoutubePlayer from "../YoutubePlayer/YoutubePlayer.js";
 
 // import PostPlaylist from "../YoutubePlaylist/PostPlaylist.js";
 
@@ -24,9 +23,10 @@ const Browser = props => {
   const [searching, updateSearching] = useState(false);
 
   useEffect(() => {
-    // TODO: replace with correct url to get initial tracks
+    if (!sessionStorage.getItem("token")) {
+      return props.history.push("/");
+    }
     const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
-    // const url = `http://localhost:5000/api/song-list`;															//TODO: remove this and uncomment above line before PR
     getTracks(url);
   }, []);
 
@@ -49,7 +49,7 @@ const Browser = props => {
         )}
       />
       {/* <PostPlaylist /> */}
-      {/* <GetUserPlaylists /> */}
+      <YoutubePlayer />
       <InfiniteScroll
         pageStart={0}
         loadMore={loadNext}
@@ -93,7 +93,6 @@ const Browser = props => {
   );
 
   async function getTracks(url) {
-    // console.log(localStorage.getItem('token'))
     const res = await axios.get(url, {
       headers: { Authorization: localStorage.getItem("token") }
     });
@@ -134,7 +133,6 @@ const Browser = props => {
   async function searchTrack(searchTerm) {
     // the fuzzy search goes here
 
-    console.log(searchTerm.length);
     if (searchTerm.length === 0) {
       updateSearching(false);
     } else {
@@ -149,9 +147,6 @@ const Browser = props => {
   }
 
   function loadNext(page) {
-    //console.log(page, tracks)
-    // if (offset < tracks.length - 6) {
-
     if (!searching) {
       if (page * 6 < tracksData.length - 6) {
         // updateOffset(offset + 6);
@@ -177,7 +172,7 @@ const BrowserContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
 `;
 
 const Container = styled.div`
