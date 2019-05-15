@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import GoogleButton from "../../imgs/googleButtons/smallGoogleButtons/btn_google_signin_light_normal_web.png";
+import LoadGapi from "./LoadGapi.js";
 
 export default class NewAuth extends Component {
   state = {
     GoogleAuth: {}
   };
 
-  componentDidMount() {
-    this.loadClient();
-  }
+  componentDidMount() {}
 
   componentDidUpdate() {
     console.log(this.state);
@@ -16,7 +14,9 @@ export default class NewAuth extends Component {
   }
 
   loadClient = () => {
-    window.gapi.load("client:auth2", () => {});
+    window.gapi.load("client:auth2", () => {
+      this.initClient();
+    });
   };
 
   // This initializes permissions and libraries we need
@@ -64,37 +64,10 @@ export default class NewAuth extends Component {
       });
   };
 
-  // request = () => {
-  //   console.log("request() running");
-  //   window.gapi.client
-  //     .request({
-  //       path: "/youtube/v3/playlists",
-  //       method: "GET",
-  //       params: {
-  //         part: "contentDetails, id, snippet, status",
-  //         mine: true,
-  //         maxResults: 25
-  //       }
-  //     })
-  //     .execute(res => {
-  //       const { items } = res;
-  //       this.setState({ userPlaylists: items });
-  //       console.log(items);
-  //       console.log(res);
-  //       console.log(this.state);
-  //     });
-  // };
-
   render() {
     return (
       <div>
-        <button>
-          <img
-            src={GoogleButton}
-            alt="Google Sign in"
-            onClick={this.initClient}
-          />
-        </button>
+        <LoadGapi loadClient={() => this.loadClient()} />
       </div>
     );
   }
