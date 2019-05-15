@@ -46,6 +46,7 @@ const Browser = props => {
         pageStart={0}
         loadMore={loadNext}
         hasMore={hasMore}
+        initialLoad={false}
         loader={
           <div className="loader" key={0}>
             Loading ...
@@ -96,7 +97,7 @@ const Browser = props => {
     });
 
     updateTracksData(data);
-    updateTracks(data.slice(0, 12));
+    updateTracks(data.slice(0, 6));
   }
 
   async function getRelatedTracks(id) {
