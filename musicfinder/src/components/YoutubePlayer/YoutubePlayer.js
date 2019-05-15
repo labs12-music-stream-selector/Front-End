@@ -19,7 +19,7 @@ const YoutubePlayer = (props) => {
       <div className="player-wrapper">
         <iframe
           id="player"
-          src={`https://www.youtube.com/embed/${urlConstructor(props.url, props.playlist)}?enablejsapi=1`}
+          src={`https://www.youtube.com/embed/${urlConstructor(props.url, props.playlist)}?enablejsapi=1${props.autoPlay}`}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
         </iframe>
       </div>
