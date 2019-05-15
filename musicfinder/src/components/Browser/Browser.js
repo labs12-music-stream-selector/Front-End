@@ -10,8 +10,6 @@ import InfiniteScroll from "react-infinite-scroller";
 import { withRouter } from "react-router-dom";
 import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
 
-// import PostPlaylist from "../YoutubePlaylist/PostPlaylist.js";
-
 const Browser = props => {
   const [tracks, updateTracks] = useState([]);
   const [tracksData, updateTracksData] = useState([]);
@@ -21,6 +19,8 @@ const Browser = props => {
   const [tracksByMood, updateTracksByMood] = useState([]);
   const [hasMore, updateHasMore] = useState(true);
   const [searching, updateSearching] = useState(false);
+  const [currentVideo, updateCurrentVideo] = useState('MkNeIUgNPQ8');
+  const [autoPlay, updateAutoPlay] = useState('');
 
   useEffect(() => {
     if (!sessionStorage.getItem('token')) {
@@ -41,8 +41,7 @@ const Browser = props => {
           />
         )}
       />
-      {/* <PostPlaylist /> */}
-      <YoutubePlayer />
+      <YoutubePlayer url={currentVideo} autoPlay={autoPlay} />
       <InfiniteScroll
         pageStart={0}
         loadMore={loadNext}
@@ -62,6 +61,8 @@ const Browser = props => {
                 index={index}
                 key={index}
                 getRelated={getRelatedTracks}
+                updateCurrentVideo={updateCurrentVideo}
+                updateAutoPlay={updateAutoPlay}
               />
             );
           })}
@@ -93,8 +94,9 @@ const Browser = props => {
       song.url = song.url.substring(song.url.indexOf("=") + 1);
       return song;
     });
-    updateTracks(data.slice(0, 12));
+
     updateTracksData(data);
+    updateTracks(data.slice(0, 12));
   }
 
   async function getRelatedTracks(id) {
@@ -140,6 +142,8 @@ const Browser = props => {
   }
 
   function loadNext(page) {
+    // TODO: make this better
+    console.log("page:", page, "tracks: ", tracks)
     if (!searching) {
       if (page * 6 < tracksData.length - 6) {
         // updateOffset(offset + 6);
