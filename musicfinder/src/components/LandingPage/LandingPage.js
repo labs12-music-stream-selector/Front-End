@@ -182,6 +182,7 @@ const Header = styled.div`
 	background-position: center;
 	height: 100vh;
 	padding: 10px 10px 0;
+  margin-bottom: -20px;
 	#text-container{
     display: flex;
     flex-direction: column;
@@ -238,7 +239,7 @@ const Team = styled.div`
         text-decoration: none;
         text-align: center;
                 color: inherit;
-        text-decoration: underline;
+        text-decoration: none;
         :hover{
             color: #007DA6;
             cursor: pointer;
@@ -277,10 +278,9 @@ const Footer = styled.footer`
         display: flex;
 		flex-direction: column;
 		a{
-			text-decoration: none;
 			text-align: center;
 			color: inherit;
-			text-decoration: underline;
+			text-decoration: none;
 			margin: 5px 0;
 			:hover{
 				cursor: pointer;

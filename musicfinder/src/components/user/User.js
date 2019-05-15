@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { withRouter } from "react-router-dom";
 
-
 class User extends React.Component {
     constructor(props) {
         super(props);
@@ -43,6 +42,7 @@ class User extends React.Component {
                     this.setState({ name: res.data.name, email: res.data.email })
                     alert("Your Update Submitted Successfully");
                     this.props.history.push('/home');
+                    window.location.reload(true);
                 })
         } catch (err) {
             console.log(err);
@@ -60,6 +60,7 @@ class User extends React.Component {
                     sessionStorage.clear()
                     alert("Your Account deleted Successfully")
                     this.props.history.push('/');
+                    window.location.reload(true);
                 })
         } catch (err) {
             console.log(err);
