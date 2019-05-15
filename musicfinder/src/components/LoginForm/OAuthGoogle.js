@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
-
+import {BrowserRouter as Router, withRouter } from "react-router-dom";
 import GetUserPlaylists from "../UserPlaylists/GetUserPlaylists.js";
 
-export default class OAuthGoogle extends Component {
+class OAuthGoogle extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,21 +27,14 @@ export default class OAuthGoogle extends Component {
     if (postData) {
       // console.log(postData);
       PostData(postData).then(result => {
-        sessionStorage.setItem(
-          "token",
-          result.data.token,
-          "id",
-          result.data.id
-        );
+        sessionStorage.setItem("token",result.data.token, "id",result.data.id);
         this.setState({ redirect: true });
+        this.props.history.push('/home');
       });
     } else {
     }
   };
   render() {
-    if (this.state.redirect || sessionStorage.getItem("token")) {
-      return <Redirect to={"/home"} />;
-    }
     const responseGoogle = response => {
       this.signup(response, "google");
     };
@@ -70,14 +62,15 @@ export default class OAuthGoogle extends Component {
         return <GetUserPlaylists responseGoogle={responseGoogle} />;
       }
     }
-    return <div>{keyChanger()}</div>;
+    return (
+        <Router>{keyChanger()}</Router>
+    );
   }
 }
+export default withRouter(OAuthGoogle);
 
 export function PostData(userData) {
-  const url =
-    // 'localhost:5000/api/register/oauth';
-    "https://fantabulous-music-finder.herokuapp.com/api/register/oauth";
+  const url = "https://fantabulous-music-finder.herokuapp.com/api/register/oauth";
   return new Promise((resolve, reject) => {
     try {
       axios
@@ -87,15 +80,13 @@ export function PostData(userData) {
           token: userData.token
         })
         .then(res => {
-          console.log("res");
           resolve(res);
           localStorage.setItem("token", res.data.token);
-          localStorage.setItem("id", res.data.id);
+          localStorage.setItem("id", res.data.id);          
         })
         .catch(error => {
           reject(error);
         });
-      // alert("successfully logged in");
     } catch (err) {
       console.log({ Mesage: { err } });
     }
