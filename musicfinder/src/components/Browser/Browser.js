@@ -28,7 +28,7 @@ const Browser = props => {
       return props.history.push('/');
     }
     const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
-    // getTracks(url);
+    getTracks(url);
   }, []);
 
   return (
