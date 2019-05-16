@@ -71,8 +71,8 @@ class User extends React.Component {
         return (
             <Wrapper>
                 <UserBar>
-                    <h2>Name : {this.state.name}</h2>
-                    <h3> Email : {this.state.email} </h3>
+                    <h3>Name : {this.state.name}</h3>
+                    <h4> Email : {this.state.email} </h4>
                     <form>
                         <input
                             className='input'
@@ -108,6 +108,7 @@ const Wrapper = styled.div`
     height: 100%;
 `
 const UserBar = styled.div`
+    box-shadow: 0px 4px 4px #007DA6;
     text-align : center;
     width: 400px;
     margin : 0 auto;
@@ -117,7 +118,7 @@ const UserBar = styled.div`
     @media(max-width: 479px){
         width : 300px;
     }
-    h2, h3{  
+    h2, h3, h4{  
         color: white;
         @media(max-width: 479px){
             font-size: 14px;
