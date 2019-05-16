@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 
 import UserPlaylists from '../UserPlaylists/GetUserPlaylists.js';
@@ -15,7 +16,7 @@ const Playlists = (props) => {
       {playlists.map((playlist) => {
         return(
           <div onClick={() => { props.updateCurrentPlaylist(playlist.name)}}>
-          <h3>{playlist.name}</h3>
+            <h3>{playlist.name}</h3>
           </div>
         )
       })}
