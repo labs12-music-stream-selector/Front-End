@@ -8,7 +8,8 @@ import Select from "../Select/Select.js";
 import Track from "../Track/Track.js";
 import InfiniteScroll from "react-infinite-scroller";
 import { withRouter } from "react-router-dom";
-import YoutubePlayer from "../YoutubePlayer/YoutubePlayer.js";
+import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
+import DisplayPlaylist from '../DisplayPlaylist/DisplayPlaylist.js';
 
 const Browser = props => {
   const [tracks, updateTracks] = useState([]);
@@ -30,6 +31,9 @@ const Browser = props => {
     getTracks(url);
   }, []);
 
+  useEffect(() => {
+    getRelatedTracks(currentVideo.id);
+  },[currentVideo])
   return (
     <BrowserContainer id="browser-container">
       <SearchBar
@@ -48,11 +52,19 @@ const Browser = props => {
           />
         )}
       />
-      <YoutubePlayer url={currentVideo} autoPlay={autoPlay} />
+      <CurrentTrackContainer>
+        <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
+        <DisplayPlaylist
+          allTracks={tracksData}
+          updateCurrentVideo={updateCurrentVideo}
+          updateAutoPlay={updateAutoPlay}
+        />
+      </CurrentTrackContainer>
       <InfiniteScroll
         pageStart={0}
         loadMore={loadNext}
         hasMore={hasMore}
+        initialLoad={false}
         loader={
           <div className="loader" key={0}>
             Loading ...
@@ -67,28 +79,12 @@ const Browser = props => {
                 track={track}
                 index={index}
                 key={index}
-                getRelated={getRelatedTracks}
                 updateCurrentVideo={updateCurrentVideo}
                 updateAutoPlay={updateAutoPlay}
               />
             );
           })}
         </Container>
-        <div>
-          <h3>related</h3>
-          <ul>
-            {relatedTracks.map(track => {
-              return <li>{track}</li>;
-            })}
-          </ul>
-
-          <h3>other Tracks by mood</h3>
-          <ul>
-            {tracksByMood.map(track => {
-              return <li>{track.title}</li>;
-            })}
-          </ul>
-        </div>
       </InfiniteScroll>
     </BrowserContainer>
   );
@@ -103,7 +99,7 @@ const Browser = props => {
     });
 
     updateTracksData(data);
-    updateTracks(data.slice(0, 12));
+    updateTracks(data.slice(0, 6));
   }
 
   async function getRelatedTracks(id) {
@@ -123,7 +119,7 @@ const Browser = props => {
         });
       }
     });
-    return relatedTracks;
+    updateRelatedTracks(relatedTracks)
   }
 
   async function getTracksByMood(mood) {
@@ -177,6 +173,7 @@ const BrowserContainer = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 100%;
+  padding-top: 10px;
 `;
 
 const Container = styled.div`
@@ -184,4 +181,15 @@ const Container = styled.div`
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin: 60px auto;
+`;
+
+const CurrentTrackContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  height: 500px;
+
+  @media(max-width: 700px){
+    flex-direction: column;
+    height: unset;
+  }
 `;

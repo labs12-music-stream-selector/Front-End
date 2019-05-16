@@ -1,34 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import axios from 'axios';
 
-import YouTubePlayer from '../YoutubePlayer/YoutubePlayer.js';
-
+/**
+ *  can accept a inPlaylist prop to along with allTracks prop to modify behavior
+ */
 const Track = (props) => {
 
-	const [related, setRelated] = useState([]);
 	const [thumbnailURL, setThumbnailURL] = useState('');
 
 	useEffect(() => {
-		setThumbnailURL(getSnippet(props.track.url));
+		getSnippet(props.track.url);
 	}, [])
 
 	return (
-		<TrackContainer onClick={() => { props.updateCurrentVideo(props.track.url); props.updateAutoPlay('&autoplay=1') }}>
+		<TrackContainer inPlaylist={props.inPlaylist} onClick={() => { props.updateCurrentVideo(props.track); props.updateAutoPlay('&autoplay=1') }}>
 			<Thumbnail key={props.track.url + props.index} src={thumbnailURL} />
-			<h3>{props.track.track_title}</h3>
+			<h3>{
+				props.inPlaylist && props.allTracks.length > 0? 
+				props.allTracks.filter(track => {
+					return track.url === props.track.url
+				})[0].track_title
+				:
+				 props.track.track_title}</h3>
+			{props.inPlaylist? null : <p>Mood: {props.track.mood}</p>}
 		</TrackContainer>
 	)
 	function getSnippet(id) {
-		// axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${process.env.REACT_APP_YTKey}`)
-		// 	.then(res => {
-		// 		console.log("Then is running")
-		// 		console.log(res.data);
-		// 		setThumbnailURL(res.data.items[0].snippet);
-		// 		return `${res.data.items[0].snippet}`;
-		// 	}).catch(err => { console.log("error: ", err) })
-		console.log('getSnippet running');
-		return 'http://i3.ytimg.com/vi/MkNeIUgNPQ8/maxresdefault.jpg';
+		axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${process.env.REACT_APP_YTKey}`)
+			.then(res => {
+				setThumbnailURL(res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url);
+			}).catch(err => { console.log("error: ", err) })
 	}
 }
 
@@ -39,6 +41,9 @@ const Thumbnail = styled.img`
 	width: 300px;
 	// background-color: red;
 	border-radius: 5px 5px 0px 0px;
+	${props => props.inPlaylist && css`
+		width: 100%;		
+	`}
 `;
 
 const TrackContainer = styled.div`
@@ -48,30 +53,23 @@ const TrackContainer = styled.div`
 	padding: 0px 0px 10px 0px;
 	margin: 20px;
 	box-shadow: 0px 2px 4px black;
+	position: relative;
+	${props => props.inPlaylist && css`
+		margin: 10px 5px;
+	`}
 	:hover {
 		cursor: pointer;
 	}
 	h3 {
 		color: #efefef;
 		margin: 10px;
+		padding-bottom: 20px;
 	}
+	p {
+		position: absolute;
+		bottom: 10px;
+		color: #efefefef;
+		margin: 0px 10px;
+	}
+ 
 	`;
-
-const Ul = styled.ul`
-	list-style: none;
-	text-align: left;
-	margin-bottom: 60px;
-	@media (max-width: 500px) {
-		padding-inline-start: 0px;
-		text-align: center;
-	}
-	li a{
-		text-decoration: none;
-		font-weight: bold;
-		line-height: 1.25;
-		color: #EFF1F3;
-		:hover{
-			color: #009FB7;
-		}
-	}
-`;
