@@ -2,31 +2,33 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
+/**
+ *  can accept a inPlaylist prop to along with allTracks prop to modify behavior
+ */
 const Track = (props) => {
 
 	const [thumbnailURL, setThumbnailURL] = useState('');
 
 	useEffect(() => {
-		setThumbnailURL(getSnippet(props.track.url));
+		getSnippet(props.track.url);
 	}, [])
 
 	return (
 		<TrackContainer onClick={() => { props.updateCurrentVideo(props.track); props.updateAutoPlay('&autoplay=1') }}>
 			<Thumbnail key={props.track.url + props.index} src={thumbnailURL} />
-			<h3>{props.track.track_title}</h3>
-			<p>Mood: {props.track.mood}</p>
+			<h3>{props.inPlaylist ? 
+				props.allTracks.filter(track => {
+					return track.url === props.track.url
+				})[0].track_title
+				: props.track.track_title}</h3>
+			{props.inPlaylist? null : <p>Mood: {props.track.mood}</p>}
 		</TrackContainer>
 	)
 	function getSnippet(id) {
-		// axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${process.env.REACT_APP_YTKey}`)
-		// 	.then(res => {
-		// 		console.log("Then is running")
-		// 		console.log(res.data);
-		// 		setThumbnailURL(res.data.items[0].snippet);
-		// 		return `${res.data.items[0].snippet}`;
-		// 	}).catch(err => { console.log("error: ", err) })
-		console.log('getSnippet running');
-		return 'http://i3.ytimg.com/vi/MkNeIUgNPQ8/maxresdefault.jpg';
+		axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${process.env.REACT_APP_YTKey}`)
+			.then(res => {
+				setThumbnailURL(res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url);
+			}).catch(err => { console.log("error: ", err) })
 	}
 }
 
