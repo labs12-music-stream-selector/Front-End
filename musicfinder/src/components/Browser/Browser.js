@@ -46,9 +46,6 @@ const Browser = props => {
         )}
       />
       <CurrentTrackContainer>
-        <RelatedTracks 
-          tracks={relatedTracks}
-          updateCurrentVideo = {updateCurrentVideo}/>
         <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
       </CurrentTrackContainer>
       <InfiniteScroll
@@ -76,14 +73,6 @@ const Browser = props => {
             );
           })}
         </Container>
-        <div>
-          <h3>other Tracks by mood</h3>
-          <ul>
-            {tracksByMood.map(track => {
-              return <li>{track.title}</li>;
-            })}
-          </ul>
-        </div>
       </InfiniteScroll>
     </BrowserContainer>
   );
