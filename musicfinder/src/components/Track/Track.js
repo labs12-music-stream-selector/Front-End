@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import axios from 'axios';
 
 /**
@@ -14,13 +14,15 @@ const Track = (props) => {
 	}, [])
 
 	return (
-		<TrackContainer onClick={() => { props.updateCurrentVideo(props.track); props.updateAutoPlay('&autoplay=1') }}>
+		<TrackContainer inPlaylist={props.inPlaylist} onClick={() => { props.updateCurrentVideo(props.track); props.updateAutoPlay('&autoplay=1') }}>
 			<Thumbnail key={props.track.url + props.index} src={thumbnailURL} />
-			<h3>{props.inPlaylist ? 
+			<h3>{
+				props.inPlaylist && props.allTracks.length > 0? 
 				props.allTracks.filter(track => {
 					return track.url === props.track.url
 				})[0].track_title
-				: props.track.track_title}</h3>
+				:
+				 props.track.track_title}</h3>
 			{props.inPlaylist? null : <p>Mood: {props.track.mood}</p>}
 		</TrackContainer>
 	)
@@ -39,6 +41,9 @@ const Thumbnail = styled.img`
 	width: 300px;
 	// background-color: red;
 	border-radius: 5px 5px 0px 0px;
+	${props => props.inPlaylist && css`
+		width: 100%;		
+	`}
 `;
 
 const TrackContainer = styled.div`
@@ -49,6 +54,9 @@ const TrackContainer = styled.div`
 	margin: 20px;
 	box-shadow: 0px 2px 4px black;
 	position: relative;
+	${props => props.inPlaylist && css`
+		margin: 10px 5px;
+	`}
 	:hover {
 		cursor: pointer;
 	}
@@ -63,4 +71,5 @@ const TrackContainer = styled.div`
 		color: #efefefef;
 		margin: 0px 10px;
 	}
+ 
 	`;
