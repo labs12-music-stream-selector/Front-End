@@ -92,19 +92,15 @@ const NavDiv = styled.div`
     flex-direction: row;
     flex-wrap: warp;
     z-index: 100;
-
     width: 100%;
     justify-content: space-between;
     align-items: center;
-
     background: #272727;
     width: 100%;
     box-shadow: 0px 2px 2px black;
-
     img {
       width: 105px;
     }
-
     .dropbtn {
       text-align: center;
       text-decoration: none;
@@ -120,12 +116,10 @@ const NavDiv = styled.div`
         font-size: 12px;
       }
     }
-
     .dropdown {
       position: relative;
       display: inline-block;
     }
-
     .dropdown-content {
       text-align: center;
       display: none;
@@ -136,22 +130,18 @@ const NavDiv = styled.div`
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1;
     }
-
     .dropdown-content a {
       color: #eff1f3;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
     }
-
     .dropdown-content a:hover {
       background-color: #009fb7;
     }
-
     .dropdown:hover .dropdown-content {
       display: block;
     }
-
     .dropbtn:hover {
       background-color: #007da6;
     }
