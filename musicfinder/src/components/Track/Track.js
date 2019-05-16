@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-import YouTubePlayer from '../YoutubePlayer/YoutubePlayer.js';
-
 const Track = (props) => {
 
-	const [related, setRelated] = useState([]);
 	const [thumbnailURL, setThumbnailURL] = useState('');
 
 	useEffect(() => {
@@ -14,9 +11,10 @@ const Track = (props) => {
 	}, [])
 
 	return (
-		<TrackContainer onClick={() => { props.updateCurrentVideo(props.track.url); props.updateAutoPlay('&autoplay=1') }}>
+		<TrackContainer onClick={() => { props.updateCurrentVideo(props.track); props.updateAutoPlay('&autoplay=1') }}>
 			<Thumbnail key={props.track.url + props.index} src={thumbnailURL} />
 			<h3>{props.track.track_title}</h3>
+			<p>Mood: {props.track.mood}</p>
 		</TrackContainer>
 	)
 	function getSnippet(id) {
@@ -48,30 +46,19 @@ const TrackContainer = styled.div`
 	padding: 0px 0px 10px 0px;
 	margin: 20px;
 	box-shadow: 0px 2px 4px black;
+	position: relative;
 	:hover {
 		cursor: pointer;
 	}
 	h3 {
 		color: #efefef;
 		margin: 10px;
+		padding-bottom: 20px;
+	}
+	p {
+		position: absolute;
+		bottom: 10px;
+		color: #efefefef;
+		margin: 0px 10px;
 	}
 	`;
-
-const Ul = styled.ul`
-	list-style: none;
-	text-align: left;
-	margin-bottom: 60px;
-	@media (max-width: 500px) {
-		padding-inline-start: 0px;
-		text-align: center;
-	}
-	li a{
-		text-decoration: none;
-		font-weight: bold;
-		line-height: 1.25;
-		color: #EFF1F3;
-		:hover{
-			color: #009FB7;
-		}
-	}
-`;
