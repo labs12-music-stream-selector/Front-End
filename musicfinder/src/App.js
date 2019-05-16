@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
 /// All imported components
 import LandingPage from "./components/LandingPage/LandingPage.js";
 import TermsOfService from "./components/TermsOfService/TermsOfService.js";
@@ -15,13 +14,6 @@ import Patreon from "./components/Patreon/Patreon.js";
 import moodi from "./imgs/logoWord.svg";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      name: "",
-      token: ""
-    };
-  }
   signMeOut = () => {
     if (sessionStorage.getItem("token")) {
       sessionStorage.removeItem("token");
@@ -30,6 +22,16 @@ class App extends Component {
       alert("You successfully Signed Out");
       this.props.history.push("/");
       window.location.reload(true);
+    } else {
+      alert("Please Log in First");
+    }
+  };
+  takeMetoUpdate = () => {
+    if (sessionStorage.getItem("token")) {
+      this.props.history.push("/user");
+      window.location.reload(true);
+    } else {
+      alert("Please Log in First");
     }
   };
   render() {
@@ -48,7 +50,10 @@ class App extends Component {
                   <Link to="/donation"> Support Us </Link>
                   <Link to="/privacypolicy"> Privacy Policy </Link>
                   <Link to="/termsofservice"> Term & Services </Link>
-                  <Link to="/user"> Update Profile </Link>
+                  <Button className="update" onClick={this.takeMetoUpdate}>
+                    {" "}
+                    Update Profile{" "}
+                  </Button>
                   <Button className="signoutBtn" onClick={this.signMeOut}>
                     {" "}
                     Sign Out{" "}
@@ -155,14 +160,16 @@ const NavDiv = styled.div`
     border-radius: 5px;
     height: 25px;
   }
+  .update {
+    padding: 12px 16px;
+  }
   .signoutBtn {
     border: 1px solid #009fb7;
+    padding: 12px 16px;
   }
 `;
 const Button = styled.div`
-  padding: 12px 16px;
   border: none;
-  padding: 12px 16px;
   text-align: center;
   color: #eff1f3;
   :hover {

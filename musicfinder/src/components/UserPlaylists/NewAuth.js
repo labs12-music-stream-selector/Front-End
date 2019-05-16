@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import LoadGapi from "./LoadGapi.js";
+import GoogleButton from "../../imgs/googleButtons/smallGoogleButtons/btn_google_signin_light_normal_web.png";
+import basket from "";
 
 export default class NewAuth extends Component {
   state = {
     GoogleAuth: {}
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    if (
+      basket.require({ url: "https://apis.google.com/js/api.js", key: "gapi" })
+    ) {
+      this.loadClient();
+    }
+  }
 
   componentDidUpdate() {
     console.log(this.state);
@@ -67,7 +75,13 @@ export default class NewAuth extends Component {
   render() {
     return (
       <div>
-        <LoadGapi loadClient={() => this.loadClient()} />
+        <button>
+          <img
+            src={GoogleButton}
+            alt="Google Sign in"
+            onClick={this.loadClient}
+          />
+        </button>
       </div>
     );
   }
