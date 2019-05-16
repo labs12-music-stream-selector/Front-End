@@ -48,11 +48,16 @@ class OAuthGoogle extends Component {
     const CLIENTID_LOGAN =
       "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
 
+    // Jon's Client ID from Google
+    const CLIENTID_JON = process.env.REACT_APP_CLIENT_KEY;
+    console.log("clientID: ",CLIENTID_JON);
+
     function keyChanger() {
       if (process.env.NODE_ENV === "development") {
         return (
           <GoogleLogin
-            clientId={CLIENTID_MD}
+            // clientId={CLIENTID_MD}
+            clientId='609694193472-8raeak24684f9qq5jr8qthaerev50jht.apps.googleusercontent.com'
             buttonText="Login with Google"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
