@@ -9,7 +9,7 @@ import Track from "../Track/Track.js";
 import InfiniteScroll from "react-infinite-scroller";
 import { withRouter } from "react-router-dom";
 import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
-import RelatedTracks from '../RelatedTracks/RelatedTracks.js';
+import DisplayPlaylist from '../DisplayPlaylist/DisplayPlaylist.js';
 
 const Browser = props => {
   const [tracks, updateTracks] = useState([]);
@@ -47,6 +47,11 @@ const Browser = props => {
       />
       <CurrentTrackContainer>
         <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
+        <DisplayPlaylist
+          allTracks={tracksData}
+          updateCurrentVideo={updateCurrentVideo}
+          updateAutoPlay={updateAutoPlay}
+        />
       </CurrentTrackContainer>
       <InfiniteScroll
         pageStart={0}
@@ -162,6 +167,7 @@ const BrowserContainer = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 100%;
+  padding-top: 10px;
 `;
 
 const Container = styled.div`
@@ -175,4 +181,9 @@ const CurrentTrackContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   height: 500px;
+
+  @media(max-width: 700px){
+    flex-direction: column;
+    height: unset;
+  }
 `;
