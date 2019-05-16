@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import LoadGapi from "./LoadGapi.js";
+// import LoadGapi from "./LoadGapi.js";
 import GoogleButton from "../../imgs/googleButtons/smallGoogleButtons/btn_google_signin_light_normal_web.png";
-import basket from "";
 
 export default class NewAuth extends Component {
   state = {

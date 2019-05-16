@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
-import NewAuth from "../UserPlaylists/NewAuth.js";
+// import NewAuth from "../UserPlaylists/NewAuth.js";
 import { BrowserRouter as Router, withRouter } from "react-router-dom";
 
 class OAuthGoogle extends Component {
@@ -53,21 +53,32 @@ class OAuthGoogle extends Component {
     // const CLIENTID_LOGAN =
     //   "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
 
-    function keyChanger() {
-      if (process.env.NODE_ENV === "") {
-        return (
+    // function keyChanger() {
+    //   if (process.env.NODE_ENV === "") {
+    //     return (
+    //       <GoogleLogin
+    //         clientId={CLIENTID_MD}
+    //         buttonText="Login with Google"
+    //         onSuccess={responseGoogle}
+    //         onFailure={responseGoogle}
+    //       />
+    //     );
+    //   } else {
+    //     return <NewAuth responseGoogle={responseGoogle} />;
+    //   }
+    // }
+    return (
+      <Router>
+        {
           <GoogleLogin
             clientId={CLIENTID_MD}
             buttonText="Login with Google"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
           />
-        );
-      } else {
-        return <NewAuth responseGoogle={responseGoogle} />;
-      }
-    }
-    return <Router>{keyChanger()}</Router>;
+        }
+      </Router>
+    );
   }
 }
 export default withRouter(OAuthGoogle);
