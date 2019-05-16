@@ -9,6 +9,7 @@ import Track from "../Track/Track.js";
 import InfiniteScroll from "react-infinite-scroller";
 import { withRouter } from "react-router-dom";
 import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
+import RelatedTracks from '../RelatedTracks/RelatedTracks.js';
 
 const Browser = props => {
   const [tracks, updateTracks] = useState([]);
@@ -30,6 +31,9 @@ const Browser = props => {
     getTracks(url);
   }, []);
 
+  useEffect(() => {
+    getRelatedTracks(currentVideo.id);
+  },[currentVideo])
   return (
     <BrowserContainer id="browser-container">
       <SearchBar
@@ -41,7 +45,12 @@ const Browser = props => {
           />
         )}
       />
-      <YoutubePlayer url={currentVideo} autoPlay={autoPlay} />
+      <CurrentTrackContainer>
+        <RelatedTracks 
+          tracks={relatedTracks}
+          updateCurrentVideo = {updateCurrentVideo}/>
+        <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
+      </CurrentTrackContainer>
       <InfiniteScroll
         pageStart={0}
         loadMore={loadNext}
@@ -61,7 +70,6 @@ const Browser = props => {
                 track={track}
                 index={index}
                 key={index}
-                getRelated={getRelatedTracks}
                 updateCurrentVideo={updateCurrentVideo}
                 updateAutoPlay={updateAutoPlay}
               />
@@ -69,13 +77,6 @@ const Browser = props => {
           })}
         </Container>
         <div>
-          <h3>related</h3>
-          <ul>
-            {relatedTracks.map(track => {
-              return <li>{track}</li>;
-            })}
-          </ul>
-
           <h3>other Tracks by mood</h3>
           <ul>
             {tracksByMood.map(track => {
@@ -117,7 +118,7 @@ const Browser = props => {
         });
       }
     });
-    return relatedTracks;
+    updateRelatedTracks(relatedTracks)
   }
 
   async function getTracksByMood(mood) {
@@ -179,4 +180,10 @@ const Container = styled.div`
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin: 60px auto;
+`;
+
+const CurrentTrackContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  height: 500px;
 `;
