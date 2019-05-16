@@ -24,8 +24,8 @@ const Browser = props => {
   const [autoPlay, updateAutoPlay] = useState('');
 
   useEffect(() => {
-    if (!sessionStorage.getItem('token')) {
-      return props.history.push('/');
+    if (!sessionStorage.getItem("token")) {
+      return props.history.push("/");
     }
     const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
     getTracks(url);
@@ -41,7 +41,14 @@ const Browser = props => {
         selectComp={props => (
           <Select
             getTracks={getTracksByMood}
-            options={["sad", "happy", "confident-sassy", "angry", "in-love", "peaceful"]}
+            options={[
+              "sad",
+              "happy",
+              "confident-sassy",
+              "angry",
+              "in-love",
+              "peaceful"
+            ]}
           />
         )}
       />
@@ -148,7 +155,6 @@ const Browser = props => {
         updateHasMore(false);
       }
     }
-
   }
 
   function loadPrev() {
