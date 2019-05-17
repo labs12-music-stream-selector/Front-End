@@ -81,6 +81,7 @@ const Browser = props => {
           tracksData={[...tracksData]}
           updateTracks={updateTracks}
           updateAllTracksByMood={updateAllTracksByMood}
+          updateSearching={updateSearching}
         />
       </PlayerMenu>
       {/* <Playlists /> */}
@@ -98,16 +99,20 @@ const Browser = props => {
       >
         <Container>
           {tracks.map((track, index) => {
-            return (
-              <Track
-                track={track}
-                index={index}
-                key={index}
-                updateCurrentVideo={updateCurrentVideo}
-                updateAutoPlay={updateAutoPlay}
-                customAxios={cookieMonster}
-              />
-            );
+            // if(index > 10) {              // TODO remove for production app
+            //   return;
+            // } else {
+              return (
+                <Track
+                  track={track}
+                  index={index}
+                  key={index}
+                  updateCurrentVideo={updateCurrentVideo}
+                  updateAutoPlay={updateAutoPlay}
+                  customAxios={cookieMonster}
+                />
+              );
+            // }
           })}
         </Container>
       </InfiniteScroll>
