@@ -7,13 +7,13 @@ import Track from '../Track/Track.js';
 const DisplayPlaylist = (props) => {
 
   const [tracks, setTracks] = useState([{
-    url: '-QQUaWtMW3w'
+    video_id: '-QQUaWtMW3w'
   },
   {
-    url: 'n9kBbDQr5kM'
+    video_id: 'n9kBbDQr5kM'
   },
   {
-    url: 'MghsT0OpDUM'
+    video_id: 'MghsT0OpDUM'
   }
   ]);
 
@@ -29,7 +29,7 @@ const DisplayPlaylist = (props) => {
       <ul>
         {tracks.map(track => {
           return (
-            <li key={track.url}>
+            <li key={track.video_id}>
               <Track
                 inPlaylist
                 track={track}
