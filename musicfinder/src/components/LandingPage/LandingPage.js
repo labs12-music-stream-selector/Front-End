@@ -16,7 +16,7 @@ const LandingPage = (props) => {
     <LandingPageContainer>
       <Header>
         <div id='text-container'>
-          <img src={moodi} alt='logo' />
+          <img src = {moodi} alt = 'logo'/>
           <h1>MoodiBeats</h1>
           <h2>Find copyright free music by mood.</h2>
         </div>
@@ -70,6 +70,10 @@ const LandingPage = (props) => {
           <h2>Team</h2>
           <ul>
             <li>
+              <img src='https://avatars0.githubusercontent.com/u/13532991?s=400&v=4' alt='Kevin Brack' />
+              <a href='github.com/KevinBrack'>Kevin Brack</a>
+            </li>
+            <li>
               <img src='https://avatars2.githubusercontent.com/u/46465575?s=400&v=4' alt='Logan Hufstetler' />
               <a href='github.com/BlissCatalyst'>Logan Hufstetler</a>
             </li>
@@ -101,13 +105,14 @@ const LandingPage = (props) => {
         </div>
       </Team>
       <Footer>
-
-
-        <Link to='/termsofservice'>Terms of Service</Link>
-        <Link to='/privacypolicy'>Privacy Policy</Link>
-
-        <PatreonButton />
-
+        <div id='legal-stuff'>
+          <h3>Legal Stuff</h3>
+          <Link to='/termsofservice'>Terms of Service</Link>
+          <Link to='/privacypolicy'>Privacy Policy</Link>
+        </div>
+        <div>
+          <PatreonButton />
+        </div>
       </Footer>
     </LandingPageContainer>
   )
@@ -121,7 +126,7 @@ const LandingPageContainer = styled.div`
 		margin: 0;
   }
   	#grid{
-		margin: 20px 0 0px;
+		margin: 20px 0 50px;
 		.feature-details, feature-img{
 			overflow: hidden;
 		}
@@ -201,11 +206,8 @@ const Team = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 0px;
-    padding-top: 60px;
+    margin-top: 10px;
     min-height: 300px;
-    background-color: ivory;
-    color: #232323;
 	font-size: 1.5em;
 	h2{
 		text-align: center;
@@ -272,19 +274,20 @@ const Footer = styled.footer`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    @media (max-width: 600px) {
-      flex-direction: column;
-      padding-top: 20px;
-      padding-bottom: 20px;
+    #legal-stuff{
+        display: flex;
+		flex-direction: column;
+    h3{
+      text-align: center;
     }
 		a{
 			text-align: center;
 			color: inherit;
-      text-decoration: none;
-      color: ivory;
+			text-decoration: none;
 			margin: 5px 0;
 			:hover{
 				cursor: pointer;
 			}
+		}
     }
     `;
