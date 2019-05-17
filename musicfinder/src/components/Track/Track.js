@@ -10,7 +10,7 @@ const Track = (props) => {
 	const [thumbnailURL, setThumbnailURL] = useState('');
 
 	useEffect(() => {
-		if(props.track.video_id){
+		if (props.track.video_id) {
 			// getSnippet(props.track.video_id);				//TODO Uncomment this before Submitting PR
 		}
 	}, [])
@@ -35,7 +35,7 @@ const Track = (props) => {
 	}
 	function returnSearchResult() {
 		const title = props.allTracks.filter(track => {
-			return track.video_id === props.track.url
+			return track.video_id === props.track.video_id
 		})
 		if (title.length > 0) {
 			// getSnippet(title[0].video_id);                         //TODO Uncomment this before Submitting PR
