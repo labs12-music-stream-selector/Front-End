@@ -38,8 +38,9 @@ const SelectMoodDropdown = (props) => {
   function changeMood(mood) {
     if (mood === 'all') {
       props.updateAllTracksByMood(props.tracksData);
-      props.updateTracks(props.tracksData);
+      props.updateTracks(props.tracksData.slice(0,12));
       updateDisplayedMood('all');
+      props.updateSearching(false)
     } else {
       let options = {
         keys: ["moods"],
@@ -48,6 +49,7 @@ const SelectMoodDropdown = (props) => {
       let fuse = new Fuse(props.tracksData, options);
       const results = fuse.search(mood);
       updateDisplayedMood(mood);
+      props.updateSearching(true);
       props.updateAllTracksByMood(results);
       props.updateTracks(results);
       // props.updateTracks(results.slice(0, 6));
