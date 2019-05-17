@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import axios from 'axios';
 
 /**
@@ -10,27 +10,37 @@ const Track = (props) => {
 	const [thumbnailURL, setThumbnailURL] = useState('');
 
 	useEffect(() => {
-		getSnippet(props.track.video_id);
+		if (props.track.video_id) {
+			getSnippet(props.track.video_id);				//TODO Uncomment this before Submitting PR
+		}
 	}, [])
 
 	return (
 		<TrackContainer inPlaylist={props.inPlaylist} onClick={() => { props.updateCurrentVideo(props.track); props.updateAutoPlay('&autoplay=1') }}>
 			<Thumbnail key={props.track.url + props.index} src={thumbnailURL} />
 			<h3>{
-				props.inPlaylist && props.allTracks.length > 0? 
-				props.allTracks.filter(track => {
-					return track.video_id === props.track.url
-				}) 
-				:
-				 props.track.track_title}</h3>
-			{props.inPlaylist? null : <p>Mood: {props.track.moods}</p>}
+				props.inPlaylist && props.allTracks.length > 0 ?
+					returnSearchResult()
+					:
+					props.track.video_title}</h3>
+			{props.inPlaylist ? null : <p>Mood: {props.track.moods}</p>}
 		</TrackContainer>
 	)
 	function getSnippet(id) {
 		axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${process.env.REACT_APP_YTKey}`)
 			.then(res => {
+				console.log("getSnippet running")
 				setThumbnailURL(res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url);
 			}).catch(err => { console.log("error: ", err) })
+	}
+	function returnSearchResult() {
+		const title = props.allTracks.filter(track => {
+			return track.video_id === props.track.video_id
+		})
+		if (title.length > 0) {
+			getSnippet(title[0].video_id);                         //TODO Uncomment this before Submitting PR
+			return title[0].video_title;
+		}
 	}
 }
 
