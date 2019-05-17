@@ -10,7 +10,7 @@ const Track = props => {
 
   useEffect(() => {
     if (props.track.video_id) {
-        //getSnippet(props.track.video_id); //TODO Uncomment this before Submitting PR
+        getSnippet(props.track.video_id); //TODO Uncomment this before Submitting PR
     }
   }, []);
 
