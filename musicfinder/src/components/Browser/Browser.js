@@ -33,6 +33,8 @@ const Browser = props => {
   //update current playlist to change the content in DisplayPlaylist component
   const [currentPlaylist, updateCurrentPlaylist] = useState(null);
 
+  const [trackThumbnailURLs, updateTrackThumbnailURLs] = useState({});
+
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
       return props.history.push("/");
@@ -110,6 +112,8 @@ const Browser = props => {
                   updateCurrentVideo={updateCurrentVideo}
                   updateAutoPlay={updateAutoPlay}
                   customAxios={cookieMonster}
+                  trackThumbnailURLs={trackThumbnailURLs}
+                  updateTrackThumbnailURLs={updateTrackThumbnailURLs}
                 />
               );
             // }
