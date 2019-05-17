@@ -12,7 +12,7 @@ const Track = props => {
 
   useEffect(() => {
     if (props.track.video_id) {
-      //getSnippet(props.track.video_id); //TODO Uncomment this before Submitting PR
+      getSnippet(props.track.video_id); //TODO Uncomment this before Submitting PR
     }
   }, []);
 
@@ -31,6 +31,9 @@ const Track = props => {
             : props.track.video_title}
         </h3>
         {props.inPlaylist ? null : <p>Mood: {props.track.moods}</p>}
+        {props.inPlaylist ? (
+          <button onClick={() => deleteTrack(props.track.id)}>delete</button>
+        ) : null}
       </div>
       <MoodSuggestForm trackProps={props} />
     </TrackContainer>
@@ -43,7 +46,7 @@ const Track = props => {
         }`
       )
       .then(res => {
-        console.log("getSnippet running");
+        console.log("getSnippet running", res.data);
         setThumbnailURL(
           res.data.items[0].snippet.thumbnails[
             Object.keys(res.data.items[0].snippet.thumbnails)[2]
@@ -59,9 +62,18 @@ const Track = props => {
       return track.video_id === props.track.video_id;
     });
     if (title.length > 0) {
-      //getSnippet(title[0].video_id); //TODO Uncomment this before Submitting PR
+      getSnippet(title[0].video_id); //TODO Uncomment this before Submitting PR
       return title[0].video_title;
     }
+  }
+
+  function deleteTrack(playlistId, video_id) {
+    axios
+      .delete("url")
+      .then(res => {
+        console.log("successfully deleted");
+      })
+      .catch(err => console.log(err));
   }
 };
 

@@ -28,8 +28,10 @@ const Browser = props => {
   const [tracksByMood, updateTracksByMood] = useState([]);
   const [hasMore, updateHasMore] = useState(true);
   const [searching, updateSearching] = useState(false);
-  const [currentVideo, updateCurrentVideo] = useState("MkNeIUgNPQ8");
-  const [autoPlay, updateAutoPlay] = useState("");
+  const [currentVideo, updateCurrentVideo] = useState('MkNeIUgNPQ8');
+  const [autoPlay, updateAutoPlay] = useState('');
+  //update current playlist to change the content in DisplayPlaylist component
+  const [currentPlaylist, updateCurrentPlaylist] = useState(null);
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -41,8 +43,9 @@ const Browser = props => {
   }, []);
 
   useEffect(() => {
-    getRelatedTracks(currentVideo.id);
-  }, [currentVideo]);
+    // getRelatedTracks(currentVideo.id);
+  },[currentVideo])
+
   return (
     <BrowserContainer id="browser-container">
       {cookieMonster()}
@@ -64,11 +67,15 @@ const Browser = props => {
       />
       <CurrentTrackContainer>
         <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
-        <DisplayPlaylist
-          allTracks={tracksData}
-          updateCurrentVideo={updateCurrentVideo}
-          updateAutoPlay={updateAutoPlay}
-        />
+        {currentPlaylist &&
+            <DisplayPlaylist
+              playlistId={currentPlaylist}
+              currentTrack={currentVideo}
+              allTracks={tracksData}
+              updateCurrentVideo={updateCurrentVideo}
+              updateAutoPlay={updateAutoPlay}
+            />
+        }
       </CurrentTrackContainer>
       <PlayerMenu>
         <SelectMoodDropdown
@@ -227,15 +234,47 @@ const CurrentTrackContainer = styled.div`
   height: 500px;
   @media (max-width: 700px) {
     flex-direction: column;
-    height: unset;
+    height: 65vw;
+  }
+`;
+const SelectMoodDropdownStyle = styled.div`
+  background-color: tomato;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+`;
+
+const SelectMoodListLabel = styled.div`
+  box-sizing: border-box;
+  display: block;
+  background-color: #009fb7;
+  padding: 5px;
+  width: 100%;
+  color: white;
+`;
+
+const SelectMoodList = styled.div`
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  ${props => {
+    if (props.showList) {
+      return `display: none;`;
+    }
+  }
   }
 `;
 
 const PlayerMenu = styled.div`
-  z-index: 200;
   display: flex;
   flex-direction: row;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
+  width: 100%;
+  list-style: none;
+  padding: 5px ;
 `;
