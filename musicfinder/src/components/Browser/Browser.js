@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Fuse from "fuse.js";
 import styled from "styled-components";
+import Cookies from "js-cookie";
 
 import SearchBar from "../SearchBar/SearchBar.js";
 import Select from "../Select/Select.js";
@@ -19,8 +20,8 @@ const Browser = props => {
   const [tracksByMood, updateTracksByMood] = useState([]);
   const [hasMore, updateHasMore] = useState(true);
   const [searching, updateSearching] = useState(false);
-  const [currentVideo, updateCurrentVideo] = useState('MkNeIUgNPQ8');
-  const [autoPlay, updateAutoPlay] = useState('');
+  const [currentVideo, updateCurrentVideo] = useState("MkNeIUgNPQ8");
+  const [autoPlay, updateAutoPlay] = useState("");
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -70,6 +71,7 @@ const Browser = props => {
                 getRelated={getRelatedTracks}
                 updateCurrentVideo={updateCurrentVideo}
                 updateAutoPlay={updateAutoPlay}
+                customAxios={cookieMonster}
               />
             );
           })}
@@ -150,7 +152,7 @@ const Browser = props => {
 
   function loadNext(page) {
     // TODO: make this better
-    console.log("page:", page, "tracks: ", tracks)
+    console.log("page:", page, "tracks: ", tracks);
     if (!searching) {
       if (page * 6 < tracksData.length - 6) {
         // updateOffset(offset + 6);
@@ -165,6 +167,30 @@ const Browser = props => {
     if (offset > 5) {
       updateOffset(offset - 6);
     }
+  }
+
+  // Get CSRF token from django cookie
+  function cookieMonster() {
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+    let customAxios = axios.create({
+      headers: {
+        "X-CSRFToken":
+          "ICbMi48R3vY05o1jfqzrL65Yk8YeY5ozF4waZIm58t1Iif4nxpFllhX9YxCZaVtz"
+      }
+    });
+
+    // axios
+    //   .get("https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/")
+    //   .then(res => {
+    //     console.log(res);
+    //     console.log(Cookies.get("csrftoken"));
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    return customAxios;
   }
 };
 

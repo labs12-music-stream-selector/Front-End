@@ -1,9 +1,10 @@
 import React from "react";
+import Cookies from "js-cookie";
 
-let CSRF_TOKEN = getCookie("csrftoken");
+let csrftoken = Cookies.get("csrftoken");
 
 const CsrfToken = () => {
-  return <input type="hidden" name="csrfmiddlewaretoken" value={CSRF_TOKEN} />;
+  return <input type="hidden" name="csrfmiddlewaretoken" value={csrftoken} />;
 };
 
 export default CsrfToken;

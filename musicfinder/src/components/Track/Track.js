@@ -24,7 +24,11 @@ const Track = props => {
         <Thumbnail key={props.track.url + props.index} src={thumbnailURL} />
         <h3>{props.track.track_title}</h3>
       </div>
-      <MoodSuggestForm />
+      {/* <MoodSuggestForm
+        video_id={props.track.url}
+        video_title={props.track.track_title}
+        customAxios={props.customAxios}
+      /> */}
     </TrackContainer>
   );
   function getSnippet(id) {

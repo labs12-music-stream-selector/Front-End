@@ -8,6 +8,12 @@ export default class MoodSuggestForm extends Component {
     suggestedMood: ""
   };
 
+  componentDidMount() {
+    // axios.defaults.xsrfCookieName = "csrftoken";
+    // axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    // console.log(axios);
+  }
+
   changeHandler = e => {
     this.setState({ suggestedMood: e.target.value });
   };
@@ -19,16 +25,18 @@ export default class MoodSuggestForm extends Component {
       video_title: this.props.video_title,
       correct_moods: this.state.suggestedMood
     };
+    // console.log({ ...newMood });
     axios
       .post(
         "https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/",
-        ...newMood
+        { ...newMood },
+        this.props.customAxios()
       )
       .then(res => {
-        console.log(res);
+        // console.log(res);
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
     this.setState({ suggestedMood: "" });
   };
@@ -42,37 +50,37 @@ export default class MoodSuggestForm extends Component {
             type="button"
             onClick={this.changeHandler}
             value="Happy"
-            name="HAPPY"
+            name="Happy"
           />
           <input
             type="button"
             onClick={this.changeHandler}
             value="Sad"
-            name="SAD"
+            name="Sad"
           />
           <input
             type="button"
             onClick={this.changeHandler}
             value="Angry"
-            name="ANGRY"
+            name="Angry"
           />
           <input
             type="button"
             onClick={this.changeHandler}
             value="Chill"
-            name="CHILL"
+            name="Chill"
           />
           <input
             type="button"
             onClick={this.changeHandler}
             value="In-Love"
-            name="IN-LOVE"
+            name="In-Love"
           />
           <input
             type="button"
             onClick={this.changeHandler}
             value="Confident/Sassy"
-            name="CONFIDENT/SASSY"
+            name="Confident/Sassy"
           />
           <button>Submit</button>
         </form>
