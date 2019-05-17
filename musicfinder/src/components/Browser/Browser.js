@@ -48,7 +48,6 @@ const Browser = props => {
 
   return (
     <BrowserContainer id="browser-container">
-
       <SearchBar
         searchTrack={searchTrack}
         selectComp={props => (
@@ -247,7 +246,6 @@ const PlayerMenu = styled.div`
   background-color: rgba(0,0,0,0);
   box-sizing: border-box;
   width: 100%;
-  background-color: green;
   list-style: none;
   padding: 5px ;
 `;
