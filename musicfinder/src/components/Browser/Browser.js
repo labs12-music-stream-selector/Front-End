@@ -269,7 +269,11 @@ const SelectMoodList = styled.div`
 `;
 
 const PlayerMenu = styled.div`
+<<<<<<< HEAD
   z-index: 90;
+=======
+  z-index: 200;
+>>>>>>> 854ae755eb1f51bdb8c08983aa4b2ed329954d65
   display: flex;
   flex-direction: row;
   padding: 20px;
