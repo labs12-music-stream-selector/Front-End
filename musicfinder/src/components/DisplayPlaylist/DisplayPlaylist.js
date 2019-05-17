@@ -18,7 +18,7 @@ const DisplayPlaylist = (props) => {
   ]);
 
   useEffect(() => {
-     axios.get(`http://localhost:5000/api/user/playlists/${props.playlistId}/song`).then(res => {
+     axios.get(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${props.playlistId}/song`).then(res => {
        setTracks(res.data)
      }).catch(err => console.log(err))
   }, [])
@@ -46,7 +46,7 @@ const DisplayPlaylist = (props) => {
   )
 
     function addCurrentTrack(playlistId, song_id){
-        axios.post(`http://localhost:5000/api/user/playlists/${playlistId}/song`,{song_id}).then(res => {
+        axios.post(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song`,{song_id}).then(res => {
             console.log('added successfully')
         }).catch(err => console.log(err))
     }

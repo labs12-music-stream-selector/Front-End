@@ -1,18 +1,18 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Fuse from "fuse.js";
 import styled from "styled-components";
-import Playlists from '../Playlists/Playlists.js';
+import Cookies from "js-cookie";
+import Playlists from "../Playlists/Playlists.js";
 
 import SearchBar from "../SearchBar/SearchBar.js";
 import Select from "../Select/Select.js";
 import Track from "../Track/Track.js";
 import InfiniteScroll from "react-infinite-scroller";
 import { withRouter } from "react-router-dom";
-import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
-import DisplayPlaylist from '../DisplayPlaylist/DisplayPlaylist.js';
-import SelectMoodDropdown from '../SelectMoodDropdown/SelectMoodDropdown.js';
+import YoutubePlayer from "../YoutubePlayer/YoutubePlayer.js";
+import DisplayPlaylist from "../DisplayPlaylist/DisplayPlaylist.js";
+import SelectMoodDropdown from "../SelectMoodDropdown/SelectMoodDropdown.js";
 
 const Browser = props => {
   // All data for tracks
@@ -77,7 +77,11 @@ const Browser = props => {
         }
       </CurrentTrackContainer>
       <PlayerMenu>
-        <SelectMoodDropdown tracksData={[...tracksData]} updateTracks={updateTracks} updateAllTracksByMood={updateAllTracksByMood} />
+        <SelectMoodDropdown
+          tracksData={[...tracksData]}
+          updateTracks={updateTracks}
+          updateAllTracksByMood={updateAllTracksByMood}
+        />
       </PlayerMenu>
       {/* <Playlists /> */}
       <InfiniteScroll
@@ -101,6 +105,7 @@ const Browser = props => {
                 key={index}
                 updateCurrentVideo={updateCurrentVideo}
                 updateAutoPlay={updateAutoPlay}
+                customAxios={cookieMonster}
               />
             );
           })}
@@ -135,7 +140,7 @@ const Browser = props => {
         });
       }
     });
-    updateRelatedTracks(relatedTracks)
+    updateRelatedTracks(relatedTracks);
   }
 
   async function getTracksByMood(mood) {
@@ -178,6 +183,30 @@ const Browser = props => {
       updateOffset(offset - 6);
     }
   }
+
+  // Get CSRF token from django cookie
+  function cookieMonster() {
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+    let customAxios = axios.create({
+      headers: {
+        "X-CSRFToken":
+          "ICbMi48R3vY05o1jfqzrL65Yk8YeY5ozF4waZIm58t1Iif4nxpFllhX9YxCZaVtz"
+      }
+    });
+
+    // axios
+    //   .get("https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/")
+    //   .then(res => {
+    //     console.log(res);
+    //     console.log(Cookies.get("csrftoken"));
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    return customAxios;
+  }
 };
 
 export default withRouter(Browser);
@@ -203,7 +232,7 @@ const CurrentTrackContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   height: 500px;
-  @media(max-width: 700px){
+  @media (max-width: 700px) {
     flex-direction: column;
     height: unset;
   }
@@ -240,12 +269,16 @@ const SelectMoodList = styled.div`
 `;
 
 const PlayerMenu = styled.div`
+  z-index: 200;
   display: flex;
   flex-direction: row;
   padding: 20px;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
+<<<<<<< HEAD
   width: 100%;
   list-style: none;
   padding: 5px ;
+=======
+>>>>>>> 00cb82d37f860edf2226b58b9b9c761bb31cdd0f
 `;
