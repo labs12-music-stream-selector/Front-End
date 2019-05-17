@@ -204,6 +204,7 @@ const CurrentTrackContainer = styled.div`
 `;
 
 const PlayerMenu = styled.div`
+  z-index: 200;
   display: flex;
   flex-direction: row;
   padding: 20px;
