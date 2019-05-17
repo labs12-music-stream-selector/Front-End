@@ -7,13 +7,13 @@ import Track from '../Track/Track.js';
 const DisplayPlaylist = (props) => {
   
   const [tracks, setTracks] = useState([{
-    url: 'Vrd8uDWRmx0'
+    video_id: 'Vrd8uDWRmx0'
   },
   {
-    url: 'Vrd8uDWRmx0'
+    video_id: 'Vrd8uDWRmx0'
   },
   {
-    url: 'Vrd8uDWRmx0'
+    video_id: 'Vrd8uDWRmx0'
   }
   ]);
 

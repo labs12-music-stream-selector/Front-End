@@ -10,7 +10,7 @@ const Track = (props) => {
 	const [thumbnailURL, setThumbnailURL] = useState('');
 
 	useEffect(() => {
-		getSnippet(props.track.url);
+		getSnippet(props.track.video_id);
 	}, [])
 
 	return (
@@ -19,11 +19,11 @@ const Track = (props) => {
 			<h3>{
 				props.inPlaylist && props.allTracks.length > 0? 
 				props.allTracks.filter(track => {
-					return track.url === props.track.url
-				})[0].track_title
+					return track.video_id === props.track.url
+				}) 
 				:
 				 props.track.track_title}</h3>
-			{props.inPlaylist? null : <p>Mood: {props.track.mood}</p>}
+			{props.inPlaylist? null : <p>Mood: {props.track.moods}</p>}
 		</TrackContainer>
 	)
 	function getSnippet(id) {

@@ -42,7 +42,7 @@ const Browser = props => {
   }, []);
 
   useEffect(() => {
-    getRelatedTracks(currentVideo.id);
+    // getRelatedTracks(currentVideo.id);
   },[currentVideo])
   return (
     <BrowserContainer id="browser-container">
@@ -71,7 +71,7 @@ const Browser = props => {
           updateAutoPlay={updateAutoPlay}
         />
       </CurrentTrackContainer>
-      <YoutubePlayer url={currentVideo} autoPlay={autoPlay} />
+      {/* <YoutubePlayer url={currentVideo} autoPlay={autoPlay} /> */}
       <div style={{ margin: "0 auto" }}>
         <SelectMoodDropdown>
           <SelectMoodListLabel onClick={toggleList} htmlFor="">Select a song mood!</SelectMoodListLabel>
