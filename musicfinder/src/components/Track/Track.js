@@ -14,9 +14,9 @@ const Track = (props) => {
 	}, [])
 
 	return (
-		<TrackContainer onClick={() => { props.updateCurrentVideo(props.track.url); props.updateAutoPlay('&autoplay=1') }}>
-			<Thumbnail key={props.track.url + props.index} src={thumbnailURL} />
-			<h3>{props.track.track_title}</h3>
+		<TrackContainer onClick={() => { props.updateCurrentVideo(props.track.video_id); props.updateAutoPlay('&autoplay=1') }}>
+			<Thumbnail key={props.track.video_id + props.index} src={thumbnailURL} />
+			<h3>{props.track.video_title}</h3>
 		</TrackContainer>
 	)
 	function getSnippet(id) {
