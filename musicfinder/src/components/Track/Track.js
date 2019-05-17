@@ -24,8 +24,10 @@ const Track = (props) => {
 					:
 					props.track.video_title}</h3>
 			{props.inPlaylist ? null : <p>Mood: {props.track.moods}</p>}
+            {props.inPlaylist ? <button onClick={() => deleteTrack(props.track.id)}>delete</button>: null}
 		</TrackContainer>
 	)
+
 	function getSnippet(id) {
 		axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${process.env.REACT_APP_YTKey}`)
 			.then(res => {
@@ -33,6 +35,7 @@ const Track = (props) => {
 				setThumbnailURL(res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url);
 			}).catch(err => { console.log("error: ", err) })
 	}
+
 	function returnSearchResult() {
 		const title = props.allTracks.filter(track => {
 			return track.video_id === props.track.video_id
@@ -42,6 +45,11 @@ const Track = (props) => {
 			return title[0].video_title;
 		}
 	}
+
+    function deleteTrack(id){
+        //do something to delete a song
+    }
+
 }
 
 

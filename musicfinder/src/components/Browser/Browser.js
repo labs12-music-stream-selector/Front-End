@@ -30,6 +30,8 @@ const Browser = props => {
   const [searching, updateSearching] = useState(false);
   const [currentVideo, updateCurrentVideo] = useState('MkNeIUgNPQ8');
   const [autoPlay, updateAutoPlay] = useState('');
+  //update current playlist to change the content in DisplayPlaylist component
+  const [currentPlaylist, updateCurrentPlaylist] = useState(null);
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -65,11 +67,15 @@ const Browser = props => {
       />
       <CurrentTrackContainer>
         <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
-        <DisplayPlaylist
-          allTracks={tracksData}
-          updateCurrentVideo={updateCurrentVideo}
-          updateAutoPlay={updateAutoPlay}
-        />
+        {currentPlaylist &&
+            <DisplayPlaylist
+              playlistId={currentPlaylist}
+              currentTrack={currentVideo}
+              allTracks={tracksData}
+              updateCurrentVideo={updateCurrentVideo}
+              updateAutoPlay={updateAutoPlay}
+            />
+        }
       </CurrentTrackContainer>
       <PlayerMenu>
         <SelectMoodDropdown tracksData={[...tracksData]} updateTracks={updateTracks} updateAllTracksByMood={updateAllTracksByMood} />

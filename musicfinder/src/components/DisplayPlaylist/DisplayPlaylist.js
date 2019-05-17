@@ -18,14 +18,15 @@ const DisplayPlaylist = (props) => {
   ]);
 
   useEffect(() => {
-    // axios.get('url here').then(res => {
-    //   setTracks(res.data)
-    // }).catch(err => console.log(err))
+     axios.get(`http://localhost:5000/api/user/playlists/${props.playlistId}/song`).then(res => {
+       setTracks(res.data)
+     }).catch(err => console.log(err))
   }, [])
 
   return (
     <DisplayPlaylistContainer>
       <h2>Playlist</h2>
+      <button onClick={()=>{addCurrentTrack(props.playlistId, props.currentTrack.video_id)}}>add currentTrack</button>
       <ul>
         {tracks.map(track => {
           return (
@@ -43,6 +44,12 @@ const DisplayPlaylist = (props) => {
       </ul>
     </DisplayPlaylistContainer>
   )
+
+    function addCurrentTrack(playlistId, song_id){
+        axios.post(`http://localhost:5000/api/user/playlists/${playlistId}/song`,{song_id}).then(res => {
+            console.log('added successfully')
+        }).catch(err => console.log(err))
+    }
 }
 
 export default DisplayPlaylist;
