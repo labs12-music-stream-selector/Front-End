@@ -20,23 +20,23 @@ export default class MoodSuggestForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.props);
     const newMood = {
-      video_id: this.props.video_id,
-      video_title: this.props.video_title,
+      video_id: this.props.trackProps.track.video_id,
+      video_title: this.props.trackProps.track.video_title,
       correct_moods: this.state.suggestedMood
     };
-    // console.log({ ...newMood });
+    console.log({ ...newMood });
     axios
       .post(
         "https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/",
-        { ...newMood },
-        this.props.customAxios()
+        { ...newMood }
       )
       .then(res => {
-        // console.log(res);
+        console.log(res);
       })
       .catch(err => {
-        // console.log(err);
+        console.log(err);
       });
     this.setState({ suggestedMood: "" });
   };
@@ -49,37 +49,37 @@ export default class MoodSuggestForm extends Component {
           <input
             type="button"
             onClick={this.changeHandler}
-            value="Happy"
+            value="HAPPY"
             name="Happy"
           />
           <input
             type="button"
             onClick={this.changeHandler}
-            value="Sad"
+            value="SAD"
             name="Sad"
           />
           <input
             type="button"
             onClick={this.changeHandler}
-            value="Angry"
+            value="ANGRY"
             name="Angry"
           />
           <input
             type="button"
             onClick={this.changeHandler}
-            value="Chill"
+            value="CHILL"
             name="Chill"
           />
           <input
             type="button"
             onClick={this.changeHandler}
-            value="In-Love"
+            value="IN-LOVE"
             name="In-Love"
           />
           <input
             type="button"
             onClick={this.changeHandler}
-            value="Confident/Sassy"
+            value="CONFIDENT/SASSY"
             name="Confident/Sassy"
           />
           <button>Submit</button>

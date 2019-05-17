@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import axios from "axios";
 
+import MoodSuggestForm from "../MoodSuggestForm/MoodSuggestForm.js";
+
 /**
  *  can accept a inPlaylist prop to along with allTracks prop to modify behavior
  */
@@ -10,7 +12,7 @@ const Track = props => {
 
   useEffect(() => {
     if (props.track.video_id) {
-      getSnippet(props.track.video_id); //TODO Uncomment this before Submitting PR
+      //getSnippet(props.track.video_id); //TODO Uncomment this before Submitting PR
     }
   }, []);
 
@@ -30,11 +32,7 @@ const Track = props => {
         </h3>
         {props.inPlaylist ? null : <p>Mood: {props.track.moods}</p>}
       </div>
-      {/* <MoodSuggestForm
-          video_id={props.track.url}
-          video_title={props.track.track_title}
-          customAxios={props.customAxios}
-        /> */}
+      <MoodSuggestForm trackProps={props} />
     </TrackContainer>
   );
   function getSnippet(id) {
@@ -61,7 +59,7 @@ const Track = props => {
       return track.video_id === props.track.video_id;
     });
     if (title.length > 0) {
-      getSnippet(title[0].video_id); //TODO Uncomment this before Submitting PR
+      //getSnippet(title[0].video_id); //TODO Uncomment this before Submitting PR
       return title[0].video_title;
     }
   }
