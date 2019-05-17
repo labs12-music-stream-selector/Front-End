@@ -44,7 +44,7 @@ const Browser = props => {
 
   useEffect(() => {
     // getRelatedTracks(currentVideo.id);
-  },[currentVideo])
+  }, [currentVideo])
 
   return (
     <BrowserContainer id="browser-container">
@@ -67,13 +67,13 @@ const Browser = props => {
       <CurrentTrackContainer>
         <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
         {currentPlaylist &&
-            <DisplayPlaylist
-              playlistId={currentPlaylist}
-              currentTrack={currentVideo}
-              allTracks={tracksData}
-              updateCurrentVideo={updateCurrentVideo}
-              updateAutoPlay={updateAutoPlay}
-            />
+          <DisplayPlaylist
+            playlistId={currentPlaylist}
+            currentTrack={currentVideo}
+            allTracks={tracksData}
+            updateCurrentVideo={updateCurrentVideo}
+            updateAutoPlay={updateAutoPlay}
+          />
         }
       </CurrentTrackContainer>
       <PlayerMenu>
@@ -269,11 +269,7 @@ const SelectMoodList = styled.div`
 `;
 
 const PlayerMenu = styled.div`
-<<<<<<< HEAD
   z-index: 90;
-=======
-  z-index: 200;
->>>>>>> 854ae755eb1f51bdb8c08983aa4b2ed329954d65
   display: flex;
   flex-direction: row;
   padding: 20px;
