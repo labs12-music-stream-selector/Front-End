@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Fuse from "fuse.js";
 import styled from "styled-components";
+import Playlists from '../Playlists/Playlists.js';
 
 import SearchBar from "../SearchBar/SearchBar.js";
 import Select from "../Select/Select.js";
@@ -45,6 +46,7 @@ const Browser = props => {
   },[currentVideo])
   return (
     <BrowserContainer id="browser-container">
+    <Playlists/>
       <SearchBar
         searchTrack={searchTrack}
         selectComp={props => (
