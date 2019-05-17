@@ -234,7 +234,7 @@ const CurrentTrackContainer = styled.div`
   height: 500px;
   @media (max-width: 700px) {
     flex-direction: column;
-    height: unset;
+    height: 65vw;
   }
 `;
 const SelectMoodDropdownStyle = styled.div`
@@ -275,10 +275,7 @@ const PlayerMenu = styled.div`
   padding: 20px;
   background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
-<<<<<<< HEAD
   width: 100%;
   list-style: none;
   padding: 5px ;
-=======
->>>>>>> 00cb82d37f860edf2226b58b9b9c761bb31cdd0f
 `;
