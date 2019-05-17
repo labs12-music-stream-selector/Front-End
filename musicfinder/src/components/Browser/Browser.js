@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Fuse from "fuse.js";
@@ -11,10 +12,16 @@ import InfiniteScroll from "react-infinite-scroller";
 import { withRouter } from "react-router-dom";
 import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
 import DisplayPlaylist from '../DisplayPlaylist/DisplayPlaylist.js';
+import SelectMoodDropdown from '../SelectMoodDropdown/SelectMoodDropdown.js';
 
 const Browser = props => {
-  const [tracks, updateTracks] = useState([]);
+  // All data for tracks
   const [tracksData, updateTracksData] = useState([]);
+  // all tracks data after mood filter
+  const [allTracksByMood, updateAllTracksByMood] = useState([]);
+  // All tracks data to be displayed
+  const [tracks, updateTracks] = useState([]);
+
   const [offset, updateOffset] = useState(0);
   const [offsetMax, updateOffsetMax] = useState(6);
   const [relatedTracks, updateRelatedTracks] = useState([]);
@@ -28,16 +35,17 @@ const Browser = props => {
     if (!sessionStorage.getItem("token")) {
       return props.history.push("/");
     }
-    const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
+    // const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
+    const url = `https://moodibeats-recommender.herokuapp.com/api/new-videos/`;
     getTracks(url);
   }, []);
 
   useEffect(() => {
     getRelatedTracks(currentVideo.id);
-  },[currentVideo])
+  }, [currentVideo])
   return (
     <BrowserContainer id="browser-container">
-    <Playlists/>
+
       <SearchBar
         searchTrack={searchTrack}
         selectComp={props => (
@@ -62,6 +70,10 @@ const Browser = props => {
           updateAutoPlay={updateAutoPlay}
         />
       </CurrentTrackContainer>
+      <PlayerMenu>
+        <SelectMoodDropdown tracksData={[...tracksData]} updateTracks={updateTracks} updateAllTracksByMood={updateAllTracksByMood} />
+      </PlayerMenu>
+      {/* <Playlists /> */}
       <InfiniteScroll
         pageStart={0}
         loadMore={loadNext}
@@ -95,11 +107,7 @@ const Browser = props => {
     const res = await axios.get(url, {
       headers: { Authorization: localStorage.getItem("token") }
     });
-    const data = res.data.map(song => {
-      song.url = song.url.substring(song.url.indexOf("=") + 1);
-      return song;
-    });
-
+    const data = res.data;
     updateTracksData(data);
     updateTracks(data.slice(0, 6));
   }
@@ -139,16 +147,16 @@ const Browser = props => {
       updateSearching(true);
     }
     let options = {
-      keys: ["artist", "mood", "track_title", "url"]
+      keys: ["moods", "video_title", "video_id"]
     };
-    let fuse = new Fuse(tracksData, options);
+    let fuse = new Fuse(allTracksByMood, options);
     updateTracks(fuse.search(searchTerm));
+    console.log(fuse.search(searchTerm));
     updateOffset(0); // TODO: Double Check this worked!!!!!
   }
 
   function loadNext(page) {
     // TODO: make this better
-    console.log("page:", page, "tracks: ", tracks)
     if (!searching) {
       if (page * 6 < tracksData.length - 6) {
         // updateOffset(offset + 6);
@@ -189,9 +197,16 @@ const CurrentTrackContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   height: 500px;
-
   @media(max-width: 700px){
     flex-direction: column;
     height: unset;
   }
+`;
+
+const PlayerMenu = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  background-color: rgba(0,0,0,0);
+  box-sizing: border-box;
 `;
