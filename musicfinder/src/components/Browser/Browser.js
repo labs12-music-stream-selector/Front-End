@@ -1,18 +1,18 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Fuse from "fuse.js";
 import styled from "styled-components";
-import Playlists from '../Playlists/Playlists.js';
+import Cookies from "js-cookie";
+import Playlists from "../Playlists/Playlists.js";
 
 import SearchBar from "../SearchBar/SearchBar.js";
 import Select from "../Select/Select.js";
 import Track from "../Track/Track.js";
 import InfiniteScroll from "react-infinite-scroller";
 import { withRouter } from "react-router-dom";
-import YoutubePlayer from '../YoutubePlayer/YoutubePlayer.js';
-import DisplayPlaylist from '../DisplayPlaylist/DisplayPlaylist.js';
-import SelectMoodDropdown from '../SelectMoodDropdown/SelectMoodDropdown.js';
+import YoutubePlayer from "../YoutubePlayer/YoutubePlayer.js";
+import DisplayPlaylist from "../DisplayPlaylist/DisplayPlaylist.js";
+import SelectMoodDropdown from "../SelectMoodDropdown/SelectMoodDropdown.js";
 
 const Browser = props => {
   // All data for tracks
@@ -30,6 +30,8 @@ const Browser = props => {
   const [searching, updateSearching] = useState(false);
   const [currentVideo, updateCurrentVideo] = useState('MkNeIUgNPQ8');
   const [autoPlay, updateAutoPlay] = useState('');
+  //update current playlist to change the content in DisplayPlaylist component
+  const [currentPlaylist, updateCurrentPlaylist] = useState(null);
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -41,11 +43,11 @@ const Browser = props => {
   }, []);
 
   useEffect(() => {
-    getRelatedTracks(currentVideo.id);
-  }, [currentVideo])
+    // getRelatedTracks(currentVideo.id);
+  },[currentVideo])
+
   return (
     <BrowserContainer id="browser-container">
-
       <SearchBar
         searchTrack={searchTrack}
         selectComp={props => (
@@ -64,14 +66,22 @@ const Browser = props => {
       />
       <CurrentTrackContainer>
         <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
-        <DisplayPlaylist
-          allTracks={tracksData}
-          updateCurrentVideo={updateCurrentVideo}
-          updateAutoPlay={updateAutoPlay}
-        />
+        {currentPlaylist &&
+            <DisplayPlaylist
+              playlistId={currentPlaylist}
+              currentTrack={currentVideo}
+              allTracks={tracksData}
+              updateCurrentVideo={updateCurrentVideo}
+              updateAutoPlay={updateAutoPlay}
+            />
+        }
       </CurrentTrackContainer>
       <PlayerMenu>
-        <SelectMoodDropdown tracksData={[...tracksData]} updateTracks={updateTracks} updateAllTracksByMood={updateAllTracksByMood} />
+        <SelectMoodDropdown
+          tracksData={[...tracksData]}
+          updateTracks={updateTracks}
+          updateAllTracksByMood={updateAllTracksByMood}
+        />
       </PlayerMenu>
       {/* <Playlists /> */}
       <InfiniteScroll
@@ -95,6 +105,7 @@ const Browser = props => {
                 key={index}
                 updateCurrentVideo={updateCurrentVideo}
                 updateAutoPlay={updateAutoPlay}
+                customAxios={cookieMonster}
               />
             );
           })}
@@ -129,7 +140,7 @@ const Browser = props => {
         });
       }
     });
-    updateRelatedTracks(relatedTracks)
+    updateRelatedTracks(relatedTracks);
   }
 
   async function getTracksByMood(mood) {
@@ -172,6 +183,30 @@ const Browser = props => {
       updateOffset(offset - 6);
     }
   }
+
+  // Get CSRF token from django cookie
+  function cookieMonster() {
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+    let customAxios = axios.create({
+      headers: {
+        "X-CSRFToken":
+          "ICbMi48R3vY05o1jfqzrL65Yk8YeY5ozF4waZIm58t1Iif4nxpFllhX9YxCZaVtz"
+      }
+    });
+
+    // axios
+    //   .get("https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/")
+    //   .then(res => {
+    //     console.log(res);
+    //     console.log(Cookies.get("csrftoken"));
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    return customAxios;
+  }
 };
 
 export default withRouter(Browser);
@@ -197,9 +232,39 @@ const CurrentTrackContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   height: 500px;
-  @media(max-width: 700px){
+  @media (max-width: 700px) {
     flex-direction: column;
-    height: unset;
+    height: 65vw;
+  }
+`;
+const SelectMoodDropdownStyle = styled.div`
+  background-color: tomato;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+`;
+
+const SelectMoodListLabel = styled.div`
+  box-sizing: border-box;
+  display: block;
+  background-color: #009fb7;
+  padding: 5px;
+  width: 100%;
+  color: white;
+`;
+
+const SelectMoodList = styled.div`
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  ${props => {
+    if (props.showList) {
+      return `display: none;`;
+    }
+  }
   }
 `;
 
@@ -207,6 +272,9 @@ const PlayerMenu = styled.div`
   display: flex;
   flex-direction: row;
   padding: 20px;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
+  width: 100%;
+  list-style: none;
+  padding: 5px ;
 `;
