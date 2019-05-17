@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import axios from 'axios';
 
 /**
@@ -10,27 +10,38 @@ const Track = (props) => {
 	const [thumbnailURL, setThumbnailURL] = useState('');
 
 	useEffect(() => {
-		getSnippet(props.track.url);
+		getSnippet(props.track.video_id);
 	}, [])
 
 	return (
 		<TrackContainer inPlaylist={props.inPlaylist} onClick={() => { props.updateCurrentVideo(props.track); props.updateAutoPlay('&autoplay=1') }}>
 			<Thumbnail key={props.track.url + props.index} src={thumbnailURL} />
 			<h3>{
-				props.inPlaylist && props.allTracks.length > 0? 
-				props.allTracks.filter(track => {
-					return track.url === props.track.url
-				})[0].track_title
-				:
-				 props.track.track_title}</h3>
-			{props.inPlaylist? null : <p>Mood: {props.track.mood}</p>}
+				props.inPlaylist && props.allTracks.length > 0 ?
+					returnSearchResult()
+					:
+					props.track.video_title}</h3>
+			{props.inPlaylist ? null : <p>Mood: {props.track.mood}</p>}
 		</TrackContainer>
 	)
 	function getSnippet(id) {
-		axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${process.env.REACT_APP_YTKey}`)
+		axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${props.track.url}&key=${process.env.REACT_APP_YTKey}`)
 			.then(res => {
+				console.log("thumbnail url: ", res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url)
 				setThumbnailURL(res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url);
 			}).catch(err => { console.log("error: ", err) })
+	}
+	function returnSearchResult() {
+		const title = props.allTracks.filter(track => {
+			console.log(track.video_id);
+			console.log(props.track.url);
+			console.log(track.video_id === props.track.url)
+			return track.video_id === props.track.url
+		})
+		console.log(title);
+		if (title.length > 0) {
+			return title[0].video_title;
+		}
 	}
 }
 
