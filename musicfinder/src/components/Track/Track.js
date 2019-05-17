@@ -10,7 +10,11 @@ const Track = (props) => {
 	const [thumbnailURL, setThumbnailURL] = useState('');
 
 	useEffect(() => {
-		getSnippet(props.track.video_id);
+		if(props.track.video_id){
+			getSnippet(props.track.video_id);
+		} else {
+			getSnippet()
+		}
 	}, [])
 
 	return (
@@ -25,21 +29,20 @@ const Track = (props) => {
 		</TrackContainer>
 	)
 	function getSnippet(id) {
-		axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${props.track.url}&key=${process.env.REACT_APP_YTKey}`)
+		axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${process.env.REACT_APP_YTKey}`)
 			.then(res => {
+				console.log("getSnippet running")
 				console.log("thumbnail url: ", res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url)
 				setThumbnailURL(res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url);
 			}).catch(err => { console.log("error: ", err) })
 	}
 	function returnSearchResult() {
 		const title = props.allTracks.filter(track => {
-			console.log(track.video_id);
-			console.log(props.track.url);
-			console.log(track.video_id === props.track.url)
 			return track.video_id === props.track.url
 		})
 		console.log(title);
 		if (title.length > 0) {
+			getSnippet(title[0].video_id);
 			return title[0].video_title;
 		}
 	}
