@@ -36,9 +36,11 @@ const PlayerContainer = styled.div`
   @media (max-width: 800px){
     margin-left: 0;
     margin-right: 0;
+    .player-wrapper{
+    }
   }
   .player-wrapper {
-    padding-bottom: 56.25%; /* 16:9 */
+    padding-bottom: 56.25%;
     padding-top: 25px;
     height: 0;
     #player {
