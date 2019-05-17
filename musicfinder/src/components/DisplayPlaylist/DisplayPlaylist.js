@@ -1,19 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
 import Track from '../Track/Track.js';
 
 const DisplayPlaylist = (props) => {
-  
+
   const [tracks, setTracks] = useState([{
-    url: 'Vrd8uDWRmx0'
+    url: '-QQUaWtMW3w'
   },
   {
-    url: 'Vrd8uDWRmx0'
+    url: 'n9kBbDQr5kM'
   },
   {
-    url: 'Vrd8uDWRmx0'
+    url: 'MghsT0OpDUM'
   }
   ]);
 
@@ -21,7 +21,7 @@ const DisplayPlaylist = (props) => {
     // axios.get('url here').then(res => {
     //   setTracks(res.data)
     // }).catch(err => console.log(err))
-  },[])
+  }, [])
 
   return (
     <DisplayPlaylistContainer>
@@ -30,7 +30,7 @@ const DisplayPlaylist = (props) => {
         {tracks.map(track => {
           return (
             <li key={track.url}>
-              <Track 
+              <Track
                 inPlaylist
                 track={track}
                 allTracks={props.allTracks}
