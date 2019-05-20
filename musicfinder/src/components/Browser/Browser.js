@@ -31,7 +31,7 @@ const Browser = props => {
   const [currentVideo, updateCurrentVideo] = useState('MkNeIUgNPQ8');
   const [autoPlay, updateAutoPlay] = useState('');
   //update current playlist to change the content in DisplayPlaylist component
-  const [currentPlaylist, updateCurrentPlaylist] = useState(null);
+  const [currentPlaylist, updateCurrentPlaylist] = useState(1);
 
   const [trackThumbnailURLs, updateTrackThumbnailURLs] = useState({});
 
@@ -73,6 +73,7 @@ const Browser = props => {
             playlistId={currentPlaylist}
             currentTrack={currentVideo}
             allTracks={tracksData}
+            trackThumbnailURLs={trackThumbnailURLs}
             updateCurrentVideo={updateCurrentVideo}
             updateAutoPlay={updateAutoPlay}
           />

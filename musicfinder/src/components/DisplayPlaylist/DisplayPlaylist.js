@@ -35,6 +35,7 @@ const DisplayPlaylist = (props) => {
                 inPlaylist
                 track={track}
                 allTracks={props.allTracks}
+                trackThumbnailURLs={props.trackThumbnailURLs}
                 updateCurrentVideo={props.updateCurrentVideo}
                 updateAutoPlay={props.updateAutoPlay}
               />
