@@ -33,6 +33,8 @@ const Browser = props => {
   //update current playlist to change the content in DisplayPlaylist component
   const [currentPlaylist, updateCurrentPlaylist] = useState(null);
 
+  const [trackThumbnailURLs, updateTrackThumbnailURLs] = useState({});
+
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
       return props.history.push("/");
@@ -44,7 +46,7 @@ const Browser = props => {
 
   useEffect(() => {
     // getRelatedTracks(currentVideo.id);
-  },[currentVideo])
+  }, [currentVideo])
 
   return (
     <BrowserContainer id="browser-container">
@@ -68,13 +70,13 @@ const Browser = props => {
       <CurrentTrackContainer>
         <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
         {currentPlaylist &&
-            <DisplayPlaylist
-              playlistId={currentPlaylist}
-              currentTrack={currentVideo}
-              allTracks={tracksData}
-              updateCurrentVideo={updateCurrentVideo}
-              updateAutoPlay={updateAutoPlay}
-            />
+          <DisplayPlaylist
+            playlistId={currentPlaylist}
+            currentTrack={currentVideo}
+            allTracks={tracksData}
+            updateCurrentVideo={updateCurrentVideo}
+            updateAutoPlay={updateAutoPlay}
+          />
         }
       </CurrentTrackContainer>
       <PlayerMenu>
@@ -82,6 +84,7 @@ const Browser = props => {
           tracksData={[...tracksData]}
           updateTracks={updateTracks}
           updateAllTracksByMood={updateAllTracksByMood}
+          updateSearching={updateSearching}
         />
       </PlayerMenu>
       {/* <Playlists /> */}
@@ -99,16 +102,22 @@ const Browser = props => {
       >
         <Container>
           {tracks.map((track, index) => {
-            return (
-              <Track
-                track={track}
-                index={index}
-                key={index}
-                updateCurrentVideo={updateCurrentVideo}
-                updateAutoPlay={updateAutoPlay}
-                customAxios={cookieMonster}
-              />
-            );
+            // if(index > 10) {              // TODO remove for production app
+            //   return;
+            // } else {
+              return (
+                <Track
+                  track={track}
+                  index={index}
+                  key={index}
+                  updateCurrentVideo={updateCurrentVideo}
+                  updateAutoPlay={updateAutoPlay}
+                  customAxios={cookieMonster}
+                  trackThumbnailURLs={trackThumbnailURLs}
+                  updateTrackThumbnailURLs={updateTrackThumbnailURLs}
+                />
+              );
+            // }
           })}
         </Container>
       </InfiniteScroll>
@@ -269,6 +278,7 @@ const SelectMoodList = styled.div`
 `;
 
 const PlayerMenu = styled.div`
+  z-index: 90;
   display: flex;
   flex-direction: row;
   padding: 20px;
