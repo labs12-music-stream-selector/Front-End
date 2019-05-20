@@ -33,31 +33,31 @@ class App extends Component {
     } else {
       alert("Please Log in First");
     }
-  };
+}
+  takeMetoHome= () => {
+    if(sessionStorage.getItem('token')) {
+      this.props.history.push("/home");
+    } else{
+      alert("Please Log in First");
+    }
+
+  }
   render() {
     return (
       <Router>
         <RouterDiv className="App">
-          <NavDiv className="this.state.token`">
-            <nav className="navBar">
-              <Link className="dropbtn" to="/home">
-                Home
-              </Link>
-              <img src={moodi} alt="logo" />
+          <NavDiv className='this.state.token`'>
+            <nav className="navBar" >
+              <Link onClick={this.takeMetoHome} className="dropbtn" to='/home'>Home</Link>
+              <Link className="moodibtn" to='/'><img src = {moodi} alt = 'logo'/> </Link>
               <div className="dropdown">
                 <button className="dropbtn"> Menu</button>
                 <div className="dropdown-content">
                   <Link to="/donation"> Support Us </Link>
-                  <Link to="/privacypolicy"> Privacy Policy </Link>
-                  <Link to="/termsofservice"> Term & Services </Link>
-                  <Button className="update" onClick={this.takeMetoUpdate}>
-                    {" "}
-                    Update Profile{" "}
-                  </Button>
-                  <Button className="signoutBtn" onClick={this.signMeOut}>
-                    {" "}
-                    Sign Out{" "}
-                  </Button>
+                  <Link to='/privacypolicy'> Privacy Policy </Link>
+                  <Link to='/termsofservice'> Term & Services </Link>
+                  <Link className="update" onClick={this.takeMetoUpdate}> Update Profile </Link>
+                  <Button className="signoutBtn" onClick={this.signMeOut}> Sign Out </Button>
                 </div>
               </div>
             </nav>
