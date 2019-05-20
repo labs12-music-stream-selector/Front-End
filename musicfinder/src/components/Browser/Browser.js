@@ -96,8 +96,10 @@ const Browser = props => {
         }
         threshold={150}
       >
+              {console.log('-----------------------------------')}
         <Container>
           {tracks.map((track, index) => {
+              console.log(track.video_id)
             return (
               <Track
                 track={track}
