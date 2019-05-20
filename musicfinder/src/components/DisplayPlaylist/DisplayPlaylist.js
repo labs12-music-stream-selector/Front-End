@@ -56,7 +56,10 @@ const DisplayPlaylist = (props) => {
           return newTrack
         })
         setTracks(newTracksArray)
-      }).catch(err => console.log(err))
+      }).catch(err => {
+        console.log(err)
+        setTracks([])
+      })
     }
 }
 
