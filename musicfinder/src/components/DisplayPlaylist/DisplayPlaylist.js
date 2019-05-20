@@ -6,21 +6,10 @@ import Track from '../Track/Track.js';
 
 const DisplayPlaylist = (props) => {
 
-  const [tracks, setTracks] = useState([{
-    video_id: '-QQUaWtMW3w'
-  },
-  {
-    video_id: 'n9kBbDQr5kM'
-  },
-  {
-    video_id: 'MghsT0OpDUM'
-  }
-  ]);
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
-     axios.get(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${props.playlistId}/song`).then(res => {
-       setTracks(res.data)
-     }).catch(err => console.log(err))
+    fetchTracks();
   }, [])
 
   return (
@@ -32,12 +21,13 @@ const DisplayPlaylist = (props) => {
           return (
             <li key={track.video_id}>
               <Track
-                inPlaylist
+                inPlaylist={props.playlistId}
                 track={track}
                 allTracks={props.allTracks}
                 trackThumbnailURLs={props.trackThumbnailURLs}
                 updateCurrentVideo={props.updateCurrentVideo}
                 updateAutoPlay={props.updateAutoPlay}
+                fetchTracks={fetchTracks}
               />
             </li>
           )
@@ -49,7 +39,18 @@ const DisplayPlaylist = (props) => {
     function addCurrentTrack(playlistId, song_id){
         axios.post(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song`,{song_id}).then(res => {
             console.log('added successfully')
+            fetchTracks();
         }).catch(err => console.log(err))
+    }
+
+    function fetchTracks(){
+      axios.get(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${props.playlistId}/songs`).then(res => {
+        const newTracksArray = res.data.map(track => {
+          let newTrack = {...track, video_id: track.song_id};
+          return newTrack
+        })
+        setTracks(newTracksArray)
+      }).catch(err => console.log(err))
     }
 }
 

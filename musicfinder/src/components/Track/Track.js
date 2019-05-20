@@ -37,7 +37,7 @@ const Track = props => {
             : props.track.video_title}
         </h3>
         {props.inPlaylist ? null : <p>Mood: {props.track.moods}</p>}
-        {props.inPlaylist ? <button onClick = {() => deleteTrack(props.track.id)}>delete</button>: null}
+        {props.inPlaylist ? <button onClick = {() => deleteTrack(props.inPlaylist, props.track.id)}>delete</button>: null}
       </div>
       {/* <MoodSuggestForm
           video_id={props.track.url}
@@ -75,10 +75,11 @@ const Track = props => {
     }
   }
 
-  function deleteTrack(playlistId, video_id){
-      axios.delete('url').then(res => {
-         console.log('successfully deleted')
-      }).catch(err => console.log(err))
+  function deleteTrack(playlistId, id){
+    axios.delete(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song/${id}`).then(res => {
+      console.log('successfully deleted');
+      props.fetchTracks();
+    }).catch(err => console.log(err))
   }
 };
 
