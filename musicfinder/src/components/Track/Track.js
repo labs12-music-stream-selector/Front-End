@@ -9,11 +9,16 @@ const Track = props => {
   const [thumbnailURL, setThumbnailURL] = useState("");
 
   useEffect(() => {
-    if (props.track.video_id) {
-        console.log(props.track.video_id)
-        //getSnippet(props.track.video_id); //TODO Uncomment this before Submitting PR
+
+    // if (props.track.video_id) {
+    //     getSnippet(props.track.video_id); //TODO Uncomment this before Submitting PR
+    // }
+    if (props.trackThumbnailURLs[props.track.video_id]) {
+      setThumbnailURL(props.trackThumbnailURLs[props.track.video_id]);
+    } else {
+      getSnippet(props.track.video_id);
     }
-  }, []);
+  }, [props.track]);
 
   return (
     <TrackContainer inPlaylist={props.inPlaylist}>
@@ -48,11 +53,11 @@ const Track = props => {
       )
       .then(res => {
         console.log("getSnippet running", res.data);
-        setThumbnailURL(
-          res.data.items[0].snippet.thumbnails[
-            Object.keys(res.data.items[0].snippet.thumbnails)[2]
-          ].url
-        );
+        const newThumbnail = res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url
+        setThumbnailURL(newThumbnail);
+        const newTrackThumbnailURLs = props.trackThumbnailURLs;
+        newTrackThumbnailURLs[props.track.video_id] = newThumbnail; 
+        props.updateTrackThumbnailURLs(newTrackThumbnailURLs);
       })
       .catch(err => {
         console.log("error: ", err);
@@ -63,7 +68,7 @@ const Track = props => {
       return track.video_id === props.track.video_id;
     });
     if (title.length > 0) {
-      getSnippet(title[0].video_id); //TODO Uncomment this before Submitting PR
+      // getSnippet(title[0].video_id); //TODO Uncomment this before Submitting PR
       return title[0].video_title;
     }
   }
