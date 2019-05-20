@@ -280,7 +280,7 @@ const SelectMoodList = styled.div`
 `;
 
 const PlayerMenu = styled.div`
-  z-index: 90;
+  z-index: 100;
   display: flex;
   flex-direction: row;
   padding: 20px;
