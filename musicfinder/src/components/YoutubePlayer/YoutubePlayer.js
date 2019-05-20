@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -19,7 +20,7 @@ const YoutubePlayer = (props) => {
       <div className="player-wrapper">
         <iframe
           id="player"
-          src={`https://www.youtube.com/embed/${urlConstructor(props.url, props.playlist)}?enablejsapi=1${props.autoPlay}`}
+          src={`https://www.youtube.com/embed/${urlConstructor(props.track.video_id, props.playlist)}?enablejsapi=1${props.autoPlay}`}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
         </iframe>
       </div>
@@ -27,19 +28,19 @@ const YoutubePlayer = (props) => {
   )
 }
 const PlayerContainer = styled.div`
-  max-width: 800px;
   width: 100%;
   margin-top: 11px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 5px;
   z-index: 0;
+  position: relative;
   @media (max-width: 800px){
     margin-left: 0;
     margin-right: 0;
+    .player-wrapper{
+    }
   }
   .player-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
+    padding-bottom: 56.25%;
     padding-top: 25px;
     height: 0;
     #player {

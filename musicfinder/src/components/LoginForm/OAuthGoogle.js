@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
-import {BrowserRouter as Router, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import GetUserPlaylists from "../UserPlaylists/GetUserPlaylists.js";
 
 class OAuthGoogle extends Component {
@@ -27,9 +27,14 @@ class OAuthGoogle extends Component {
     if (postData) {
       // console.log(postData);
       PostData(postData).then(result => {
-        sessionStorage.setItem("token",result.data.token, "id",result.data.id);
+        sessionStorage.setItem(
+          "token",
+          result.data.token,
+          "id",
+          result.data.id
+        );
         this.setState({ redirect: true });
-        this.props.history.push('/home');
+        this.props.history.push("/home");
       });
     } else {
     }
@@ -47,12 +52,14 @@ class OAuthGoogle extends Component {
     // "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com"
     const CLIENTID_LOGAN =
       "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
+      
+    const CLIENTID_JON = "609694193472-8raeak24684f9qq5jr8qthaerev50jht.apps.googleusercontent.com";
 
     function keyChanger() {
-      if (process.env.NODE_ENV === "development") {
+      if (process.env.NODE_ENV !== "") {
         return (
           <GoogleLogin
-            clientId={CLIENTID_MD}
+            clientId={CLIENTID_JON}
             buttonText="Login with Google"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
@@ -62,15 +69,14 @@ class OAuthGoogle extends Component {
         return <GetUserPlaylists responseGoogle={responseGoogle} />;
       }
     }
-    return (
-        <Router>{keyChanger()}</Router>
-    );
+    return <Router>{keyChanger()}</Router>;
   }
 }
 export default withRouter(OAuthGoogle);
 
 export function PostData(userData) {
-  const url = "https://fantabulous-music-finder.herokuapp.com/api/register/oauth";
+  const url =
+    "https://fantabulous-music-finder.herokuapp.com/api/register/oauth";
   return new Promise((resolve, reject) => {
     try {
       axios
@@ -82,7 +88,7 @@ export function PostData(userData) {
         .then(res => {
           resolve(res);
           localStorage.setItem("token", res.data.token);
-          localStorage.setItem("id", res.data.id);          
+          localStorage.setItem("id", res.data.id);
         })
         .catch(error => {
           reject(error);
