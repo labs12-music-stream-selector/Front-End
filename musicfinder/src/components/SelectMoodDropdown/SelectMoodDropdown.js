@@ -79,6 +79,7 @@ export default SelectMoodDropdown;
 
 const SelectMoodDropdownDiv = styled.div`
   background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
   display: inline-block;
   box-sizing: border-box;
   position: relative;
@@ -114,6 +115,7 @@ const SelectMoodListItem = styled.div`
   z-index: 95;
   box-sizing: border-box;
   width: 100%;
+  cursor: pointer;
   background-color: #272727;
   color: ivory;
   list-style: none;
