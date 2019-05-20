@@ -22,13 +22,15 @@ const Track = props => {
 
   return (
     <TrackContainer inPlaylist={props.inPlaylist}>
-      <div
-        onClick={() => {
-          props.updateCurrentVideo(props.track);
-          props.updateAutoPlay("&autoplay=1");
-        }}
-      >
-        <Thumbnail key={props.track.url + props.index} src={thumbnailURL} />
+      <div>
+        <Thumbnail 
+          onClick={() => {
+            props.updateCurrentVideo(props.track);
+            props.updateAutoPlay("&autoplay=1");
+          }} 
+          key={props.track.url + props.index} 
+          src={thumbnailURL} 
+        />
         <h3>
           {props.inPlaylist && props.allTracks.length > 0
             ? returnSearchResult()
@@ -91,6 +93,9 @@ const Thumbnail = styled.img`
     css`
       width: 100%;
     `}
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const TrackContainer = styled.div`
@@ -106,9 +111,6 @@ const TrackContainer = styled.div`
     css`
       margin: 10px 5px;
     `}
-  :hover {
-    cursor: pointer;
-  }
   h3 {
     color: #efefef;
     margin: 10px;
