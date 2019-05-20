@@ -15,7 +15,7 @@ const SelectMoodDropdown = props => {
   return (
     <SelectMoodDropdownDiv>
       <SelectMoodListLabel onClick={toggleList} htmlFor="">
-        Select a song mood!
+        Current Song Mood: {displayedMood}
       </SelectMoodListLabel>
       <SelectMoodList showList={showList}>
         <SelectMoodListItem onClick={() => changeMood("all")} className="">
@@ -71,6 +71,7 @@ const SelectMoodDropdown = props => {
       props.updateTracks(results);
       // props.updateTracks(results.slice(0, 6));
     }
+    toggleList();
   }
 };
 
