@@ -9,10 +9,6 @@ const Track = props => {
   const [thumbnailURL, setThumbnailURL] = useState("");
 
   useEffect(() => {
-
-    // if (props.track.video_id) {
-    //     getSnippet(props.track.video_id); //TODO Uncomment this before Submitting PR
-    // }
     if (props.trackThumbnailURLs[props.track.video_id]) {
       setThumbnailURL(props.trackThumbnailURLs[props.track.video_id]);
     } else {
@@ -23,19 +19,28 @@ const Track = props => {
   return (
     <TrackContainer inPlaylist={props.inPlaylist}>
       <div>
-        <Thumbnail 
-          onClick={() => {
-            props.updateCurrentVideo(props.track);
-            props.updateAutoPlay("&autoplay=1");
-          }} 
-          key={props.track.url + props.index} 
-          src={thumbnailURL} 
-        />
-        <h3>
-          {props.inPlaylist && props.allTracks.length > 0
-            ? returnSearchResult()
-            : props.track.video_title}
-        </h3>
+        {props.inPlaylist ?
+          <Thumbnail 
+            inPlaylist
+            onClick={() => {
+              props.updateCurrentVideo(props.track);
+              props.updateAutoPlay("&autoplay=1");
+            }} 
+            key={props.track.url + props.index} 
+            src={thumbnailURL} 
+          />
+          :
+          <Thumbnail 
+            onClick={() => {
+              props.updateCurrentVideo(props.track);
+              props.updateAutoPlay("&autoplay=1");
+            }} 
+            key={props.track.url + props.index} 
+            src={thumbnailURL} 
+          />
+        }
+          {props.inPlaylist ? null
+            : <h3>{props.track.video_title}</h3>}
         {props.inPlaylist ? null : <p>Mood: {props.track.moods}</p>}
         {props.inPlaylist ? <DeleteBtn title='remove from playlist' onClick = {() => deleteTrack(props.inPlaylist, props.track.id)}>
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +103,7 @@ const Thumbnail = styled.img`
   ${props =>
     props.inPlaylist &&
     css`
-      width: 100%;
+      width: 85%;
     `}
   :hover {
     cursor: pointer;
@@ -110,10 +115,14 @@ const DeleteBtn = styled.button`
   border: none;
   svg{
     path{
-      stroke: red;
+      stroke: white;
     }
     :hover{
       cursor: pointer;
+      fill: white;
+      path{
+        stroke: red;
+      }
     }
   }
   outline: none;
@@ -127,11 +136,6 @@ const TrackContainer = styled.div`
   margin: 20px;
   box-shadow: 0px 2px 4px black;
   position: relative;
-  ${props =>
-    props.inPlaylist &&
-    css`
-      margin: 10px 5px;
-    `}
   h3 {
     color: #efefef;
     margin: 10px;
@@ -143,4 +147,19 @@ const TrackContainer = styled.div`
     color: #efefefef;
     margin: 0px 10px;
   }
+  ${props =>
+    props.inPlaylist &&
+    css`
+      div{
+        display: flex;
+        align-items: center;
+      }
+      margin: 10px 5px;
+      max-width: max-content;
+      padding: 0;
+      h3{
+        font-size: 15px;
+      }
+    `}
+  
 `;
