@@ -9,6 +9,7 @@ const Track = props => {
   const [thumbnailURL, setThumbnailURL] = useState("");
 
   useEffect(() => {
+
     // if (props.track.video_id) {
     //     getSnippet(props.track.video_id); //TODO Uncomment this before Submitting PR
     // }
@@ -21,20 +22,28 @@ const Track = props => {
 
   return (
     <TrackContainer inPlaylist={props.inPlaylist}>
-      <div
-        onClick={() => {
-          props.updateCurrentVideo(props.track);
-          props.updateAutoPlay("&autoplay=1");
-        }}
-      >
-        <Thumbnail key={props.track.url + props.index} src={thumbnailURL} />
+      <div>
+        <Thumbnail 
+          onClick={() => {
+            props.updateCurrentVideo(props.track);
+            props.updateAutoPlay("&autoplay=1");
+          }} 
+          key={props.track.url + props.index} 
+          src={thumbnailURL} 
+        />
         <h3>
           {props.inPlaylist && props.allTracks.length > 0
             ? returnSearchResult()
             : props.track.video_title}
         </h3>
         {props.inPlaylist ? null : <p>Mood: {props.track.moods}</p>}
-        {props.inPlaylist ? <button onClick = {() => deleteTrack(props.track.id)}>delete</button>: null}
+        {props.inPlaylist ? <DeleteBtn title='remove from playlist' onClick = {() => deleteTrack(props.inPlaylist, props.track.id)}>
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 9L15 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15 9L9 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </DeleteBtn>: null}
       </div>
       {/* <MoodSuggestForm
           video_id={props.track.url}
@@ -72,10 +81,11 @@ const Track = props => {
     }
   }
 
-  function deleteTrack(playlistId, video_id){
-      axios.delete('url').then(res => {
-         console.log('successfully deleted')
-      }).catch(err => console.log(err))
+  function deleteTrack(playlistId, id){
+    axios.delete(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song/${id}`).then(res => {
+      console.log('successfully deleted');
+      props.fetchTracks();
+    }).catch(err => console.log(err))
   }
 };
 
@@ -90,6 +100,23 @@ const Thumbnail = styled.img`
     css`
       width: 100%;
     `}
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const DeleteBtn = styled.button`
+  background: none;
+  border: none;
+  svg{
+    path{
+      stroke: red;
+    }
+    :hover{
+      cursor: pointer;
+    }
+  }
+  outline: none;
 `;
 
 const TrackContainer = styled.div`
@@ -105,9 +132,6 @@ const TrackContainer = styled.div`
     css`
       margin: 10px 5px;
     `}
-  :hover {
-    cursor: pointer;
-  }
   h3 {
     color: #efefef;
     margin: 10px;
