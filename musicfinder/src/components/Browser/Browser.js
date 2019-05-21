@@ -293,7 +293,7 @@ const PlayerMenu = styled.div`
   padding: 20px;
   background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
-  width: 100%;
+  width: 100px;
   list-style: none;
   padding: 5px ;
 `;
