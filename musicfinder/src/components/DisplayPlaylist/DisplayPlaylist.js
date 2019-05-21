@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import Track from "../Track/Track.js";
 
@@ -50,23 +51,46 @@ const DisplayPlaylist = props => {
           />
         </svg>
       </AddBtn>
-      <ul>
-        {tracks.map(track => {
-          return (
-            <li key={track.video_id}>
-              <Track
-                inPlaylist={props.playlistId}
-                track={track}
-                allTracks={props.allTracks}
-                trackThumbnailURLs={props.trackThumbnailURLs}
-                updateCurrentVideo={props.updateCurrentVideo}
-                updateAutoPlay={props.updateAutoPlay}
-                fetchTracks={fetchTracks}
-              />
-            </li>
-          );
-        })}
-      </ul>
+      <DragDropContext onDragEnd={handleOrderChange}>
+        <ul>
+          <Droppable droppableId="draggable">
+            {(provided, snapshot) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {tracks.map((track, index) => (
+                  <Draggable
+                    key={track.video_id}
+                    draggableId={track.video_id || "adfsad"}
+                    index={index}
+                  >
+                    {(provided, snapshot) => (
+                      <li
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getItemStyle(
+                          snapshot.isDragging,
+                          provided.draggableProps.style
+                        )}
+                      >
+                        <Track
+                          inPlaylist={props.playlistId}
+                          track={track}
+                          allTracks={props.allTracks}
+                          trackThumbnailURLs={props.trackThumbnailURLs}
+                          updateCurrentVideo={props.updateCurrentVideo}
+                          updateAutoPlay={props.updateAutoPlay}
+                          fetchTracks={fetchTracks}
+                        />
+                      </li>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </ul>
+      </DragDropContext>
     </DisplayPlaylistContainer>
   );
 
@@ -95,12 +119,78 @@ const DisplayPlaylist = props => {
           let newTrack = { ...track, video_id: track.song_id };
           return newTrack;
         });
-        setTracks(newTracksArray);
+        const orderedTracks = order(newTracksArray);
+        setTracks(orderedTracks);
       })
       .catch(err => {
         console.log(err);
         setTracks([]);
       });
+  }
+
+  /**
+   * used to order the tracks based on playlist_index onMount
+   */
+  function order(arr) {
+    let newArr = [];
+    for (let i = 1; i <= arr.length; i++) {
+      newArr.push(
+        arr.filter(
+          track => track.playlist_index === i || track.playlist_index === null
+        )[0]
+      );
+    }
+    return newArr;
+  }
+
+  function handleOrderChange(result) {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = reorder(
+      tracks,
+      result.source.index,
+      result.destination.index
+    );
+    items.map((track, idx) => {
+      const index = idx + 1;
+      track.playlist_index = index;
+      axios
+        .put(
+          `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
+            props.playlistId
+          }/song/${track.id}`,
+          { playlist_index: index }
+        )
+        .then(res => {
+          console.log("successful");
+        })
+        .catch(err => console.log(err));
+      return track;
+    });
+
+    setTracks(items);
+  }
+
+  function reorder(list, startIndex, endIndex) {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  }
+
+  function getItemStyle(isDragging, draggableStyle) {
+    const grid = 8;
+    return {
+      // some basic styles to make the items look a bit nicer
+      userSelect: "none",
+      margin: `0 0 ${grid}px 0`,
+
+      // styles we need to apply on draggables
+      ...draggableStyle
+    };
   }
 };
 
