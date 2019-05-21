@@ -40,7 +40,7 @@ const PlayerContainer = styled.div`
     }
   }
   .player-wrapper {
-    padding-bottom: 56.25%;
+    // padding-bottom: 56.25%;
     padding-top: 25px;
     height: 0;
     #player {
