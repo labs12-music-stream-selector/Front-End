@@ -89,21 +89,21 @@ const LandingPage = props => {
                 src="https://avatars2.githubusercontent.com/u/46465575?s=400&v=4"
                 alt="Logan Hufstetler"
               />
-              <a href="github.com/BlissCatalyst">Logan Hufstetler</a>
+              <a href="https://github.com/BlissCatalyst">Logan Hufstetler</a>
             </li>
             <li>
               <img
                 src="https://avatars0.githubusercontent.com/u/10713358?s=400&u=f3dd10a2ecfa7efa5b993fc63fd905cf14311fd3&v=4"
                 alt="Davina Taylor"
               />
-              <a href="github.com/lilvina">Davina Taylor</a>
+              <a href="https://github.com/lilvina">Davina Taylor</a>
             </li>
             <li>
               <img
                 src="https://avatars0.githubusercontent.com/u/6886907?s=400&v=4"
                 alt="John Humphreys"
               />
-              <a href="github.com/johnpharmd">John Humphreys</a>
+              <a href="https://github.com/johnpharmd">John Humphreys</a>
             </li>
             <li>
               <img
@@ -117,21 +117,21 @@ const LandingPage = props => {
                 src="https://avatars3.githubusercontent.com/u/42630698?s=400&v=4"
                 alt="Jonathan Bernal"
               />
-              <a href="github.com/BlueSandWeb">Jonathan Bernal</a>
+              <a href="https://github.com/BlueSandWeb">Jonathan Bernal</a>
             </li>
             <li>
               <img
                 src="https://avatars1.githubusercontent.com/u/17155841?s=400&v=4"
                 alt="Sammy Lee"
               />
-              <a href="github.com/Captmoonshot">Sammy Lee</a>
+              <a href="https://github.com/Captmoonshot">Sammy Lee</a>
             </li>
             <li>
               <img
                 src="https://avatars2.githubusercontent.com/u/13279523?s=460&v=4"
                 alt="Xander Jake de los Santos"
               />
-              <a href="github.com/xanderjakeq">Xander Jake de los Santos</a>
+              <a href="https://github.com/xanderjakeq">Xander Jake de los Santos</a>
             </li>
           </ul>
         </div>
