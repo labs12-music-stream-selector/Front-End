@@ -13,6 +13,7 @@ import { withRouter } from "react-router-dom";
 import YoutubePlayer from "../YoutubePlayer/YoutubePlayer.js";
 import DisplayPlaylist from "../DisplayPlaylist/DisplayPlaylist.js";
 import SelectMoodDropdown from "../SelectMoodDropdown/SelectMoodDropdown.js";
+import ToggleButton from "../ToggleButton/ToggleButton.js";
 
 const Browser = props => {
   // All data for tracks
@@ -31,9 +32,11 @@ const Browser = props => {
   const [currentVideo, updateCurrentVideo] = useState('MkNeIUgNPQ8');
   const [autoPlay, updateAutoPlay] = useState('');
   //update current playlist to change the content in DisplayPlaylist component
-  const [currentPlaylist, updateCurrentPlaylist] = useState(1);
+  const [currentPlaylist, updateCurrentPlaylist] = useState();
 
   const [trackThumbnailURLs, updateTrackThumbnailURLs] = useState({});
+  //  toggle songs/playlists view
+  const [showPlaylists, updateShowPlaylists] = useState(false);
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -80,6 +83,7 @@ const Browser = props => {
         }
       </CurrentTrackContainer>
       <PlayerMenu>
+
         <SelectMoodDropdown
           tracksData={[...tracksData]}
           updateTracks={updateTracks}
@@ -87,7 +91,8 @@ const Browser = props => {
           updateSearching={updateSearching}
         />
       </PlayerMenu>
-      {/* <Playlists /> */}
+      <ToggleButton showPlaylists={showPlaylists} updateShowPlaylists={updateShowPlaylists} />
+      {showPlaylists ? <Playlists showPlaylists={showPlaylists}/> : 
       <InfiniteScroll
         pageStart={0}
         loadMore={loadNext}
@@ -122,6 +127,7 @@ const Browser = props => {
           })}
         </Container>
       </InfiniteScroll>
+      }
     </BrowserContainer>
   );
 

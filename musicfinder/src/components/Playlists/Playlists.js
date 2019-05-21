@@ -4,14 +4,19 @@ import axios from "axios";
 
 import UserPlaylists from "../UserPlaylists/GetUserPlaylists.js";
 
+
 const Playlists = props => {
+  
   const [playlists, updatePlaylists] = useState([]);
   const [thumbnailURL, updateThumbnailURL] = useState("");
 
   useEffect(() => {
+    
     getPlaylists();
+
   }, []);
 
+  console.log('top OF RENDER', playlists)
   if (playlists.length > 0) {
     return (
       <PlaylistsContainer>
@@ -30,12 +35,13 @@ const Playlists = props => {
   }
 
   async function getPlaylists() {
+    
     try {
-      const vidList = [];
+      let vidList = [];
       const songsThumbnails = await axios.get(
         "https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/"
       );
-      // console.log("songsThumbnails: ", songsThumbnails);
+      
       const playlists = await axios.get(
         // `http://localhost:5000/api/user/playlists/${localStorage.getItem(
         //   "id"
@@ -44,29 +50,35 @@ const Playlists = props => {
           "id"
         )}/playlists`
       );
-      // console.log("playlists: ", playlists);
+     
 
       const playlistsSongs = playlists.data.map(async playlist => {
-        // console.log("Playlist id: ", playlist.id);
+        
         const songList = await axios.get(
           // `http://localhost:5000/api/user/playlists/${playlist.id}/songs` // TODO replace this with production url
           `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
             playlist.id
           }/songs`
         );
-        // console.log("songList: ", songList.data);
+        
         playlist.video_ids = songList.data;
         // console.log("playlist: ", playlist.video_ids[0].song_id);
         const songThumbnail = songsThumbnails.data.find(song => {
           // console.log("song.video_id", song.video_id);
           return song.video_id === playlist.video_ids[0].song_id;
         });
-        // console.log(songThumbnail);
+        
         playlist.thumbnail = songThumbnail.video_thumbnail;
-        vidList.push(playlist);
+        // vidList.push(playlist);
+        return playlist;
       });
 
-      updatePlaylists(vidList);
+      Promise.all(playlistsSongs).then(data => {
+        console.log('FROM PROMISE.ALL', data)
+        updatePlaylists(data)
+      })
+      
+      // updatePlaylists(vidList);
       return vidList;
     } catch (error) {
       console.error(error);
