@@ -41,7 +41,7 @@ const Playlists = props => {
         //   "id"
         // )}/playlists` // TODO replace this with production url
         `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${localStorage.getItem(
-          id
+          "id"
         )}/playlists`
       );
       // console.log("playlists: ", playlists);
