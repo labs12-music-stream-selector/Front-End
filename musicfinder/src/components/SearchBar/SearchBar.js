@@ -26,28 +26,29 @@ export default SearchBar;
 
 const SearchForm = styled.form`
   position: fixed;
-  z-index: 90;
+  z-index: 100;
   left: 0;
   right: 0;
+  left: 0;
   text-align: center;
   position: fixed;
   bottom: 0;
-  width: 100vw;
-  left: 0;
-  right: 0;
-  padding: 20px 10px;
+  width: 40%;
+  margin: auto;
+  padding: 0;
   @media (max-width: 479px) {
     padding: 0;
     width: 100%;
   }
   input {
     color: black;
-    padding: 5px;
-    background-color: #696773;
+    padding: 0px;
+    background-color: #009fb7;
     border: none;
     text-align: center;
     font-weight: bold;
     font-size: 2rem;
+    border-radius: 5px;
     @media (max-width: 479px) {
       width: 100%;
     }

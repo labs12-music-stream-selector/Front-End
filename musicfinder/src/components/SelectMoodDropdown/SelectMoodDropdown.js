@@ -118,6 +118,7 @@ const SelectMoodListItem = styled.div`
   cursor: pointer;
   background-color: #272727;
   color: ivory;
+  justify-content: center;
   list-style: none;
   padding: 10px;
   :hover {

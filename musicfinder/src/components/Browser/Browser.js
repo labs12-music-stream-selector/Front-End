@@ -280,8 +280,9 @@ const SelectMoodList = styled.div`
 `;
 
 const PlayerMenu = styled.div`
-  z-index: 90;
+  z-index: 100;
   display: flex;
+  justify-content: center;
   flex-direction: row;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0);
