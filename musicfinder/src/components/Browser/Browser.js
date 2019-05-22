@@ -268,7 +268,10 @@ const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 60px auto;
+  box-shadow: 0px -2px 2px black;
+  z-index: 5;
+  margin: 0px auto;
+  padding: 60px;
 `;
 
 const CurrentTrackContainer = styled.div`
