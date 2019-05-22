@@ -33,6 +33,7 @@ const Browser = props => {
   const [autoPlay, updateAutoPlay] = useState("");
   //update current playlist to change the content in DisplayPlaylist component
   const [currentPlaylist, updateCurrentPlaylist] = useState();
+  const [tracksCurrentPlaylist, updateTracksCurrentPlaylist] = useState([]);
 
   const [trackThumbnailURLs, updateTrackThumbnailURLs] = useState({});
   //  toggle songs/playlists view
@@ -70,11 +71,19 @@ const Browser = props => {
         )}
       />
       <CurrentTrackContainer>
-        <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
+        <YoutubePlayer 
+          track={currentVideo} 
+          autoPlay={autoPlay} 
+          isPlaylistSelected={currentPlaylist}
+          tracksList={tracksCurrentPlaylist}
+          updateCurrentVideo={updateCurrentVideo}
+          playNext={playNext}
+          />
         {currentPlaylist && (
           <DisplayPlaylist
             playlistId={currentPlaylist}
             currentTrack={currentVideo}
+            updateTracksCurrentPlaylist={updateTracksCurrentPlaylist}
             allTracks={tracksData}
             trackThumbnailURLs={trackThumbnailURLs}
             updateCurrentVideo={updateCurrentVideo}
@@ -205,6 +214,16 @@ const Browser = props => {
   function loadPrev() {
     if (offset > 5) {
       updateOffset(offset - 6);
+    }
+  }
+
+  function playNext() {
+    if(currentPlaylist){
+      const current = tracksCurrentPlaylist.filter(track => track.video_id === currentVideo.video_id)[0];
+      const trackOnQueue= tracksCurrentPlaylist.filter(track => track.playlist_index === current.playlist_index + 1)[0];
+      if(trackOnQueue){
+        updateCurrentVideo(trackOnQueue)
+      }
     }
   }
 
