@@ -50,11 +50,22 @@ const ShowPlaylistsButton = styled.button`
 
 const AddPlaylistContainer = styled.div`
   display: flex;
+  background-color: rgba(0, 0, 0, 0);
   flex-direction: column;
 `;
 
 const AddPlaylistButton = styled.button`
   display: flex;
+  margin-top: -44px;
+  padding-bottom: 2px;
+  font-size: unset;
+  border: none;
+  background: none;
+  background-color: #009fb7;
+  color: white;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
 `;
 
 export default ToggleButton;
