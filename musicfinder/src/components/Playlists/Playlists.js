@@ -4,26 +4,26 @@ import axios from "axios";
 
 import UserPlaylists from "../UserPlaylists/GetUserPlaylists.js";
 
-
 const Playlists = props => {
-  
   const [playlists, updatePlaylists] = useState([]);
   const [thumbnailURL, updateThumbnailURL] = useState("");
 
   useEffect(() => {
-    
     getPlaylists();
-
   }, []);
 
-  console.log('top OF RENDER', playlists)
   if (playlists.length > 0) {
     return (
       <PlaylistsContainer>
         {playlists.map(playlist => {
           return (
             <PlaylistCard key={`${playlist.name}`}>
-              <PlaylistImg src={playlist.thumbnail} />
+              <PlaylistImg
+                src={playlist.thumbnail}
+                onClick={() => {
+                  props.updateCurrentPlaylist(playlist.id);
+                }}
+              />
               <PlaylistTitle>{playlist.name}</PlaylistTitle>
             </PlaylistCard>
           );
@@ -35,13 +35,12 @@ const Playlists = props => {
   }
 
   async function getPlaylists() {
-    
     try {
       let vidList = [];
       const songsThumbnails = await axios.get(
         "https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/"
       );
-      
+
       const playlists = await axios.get(
         // `http://localhost:5000/api/user/playlists/${localStorage.getItem(
         //   "id"
@@ -50,34 +49,32 @@ const Playlists = props => {
           "id"
         )}/playlists`
       );
-     
 
       const playlistsSongs = playlists.data.map(async playlist => {
-        
         const songList = await axios.get(
           // `http://localhost:5000/api/user/playlists/${playlist.id}/songs` // TODO replace this with production url
           `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
             playlist.id
           }/songs`
         );
-        
+
         playlist.video_ids = songList.data;
         // console.log("playlist: ", playlist.video_ids[0].song_id);
         const songThumbnail = songsThumbnails.data.find(song => {
           // console.log("song.video_id", song.video_id);
           return song.video_id === playlist.video_ids[0].song_id;
         });
-        
+
         playlist.thumbnail = songThumbnail.video_thumbnail;
         // vidList.push(playlist);
         return playlist;
       });
 
       Promise.all(playlistsSongs).then(data => {
-        console.log('FROM PROMISE.ALL', data)
-        updatePlaylists(data)
-      })
-      
+        console.log("FROM PROMISE.ALL", data);
+        updatePlaylists(data);
+      });
+
       // updatePlaylists(vidList);
       return vidList;
     } catch (error) {
