@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const ToggleButton = props => {
-  console.log(props);
   return (
     <ToggleContainer>
       <ShowSongsButton
