@@ -3,35 +3,44 @@ import styled from "styled-components";
 import axios from "axios";
 
 import UserPlaylists from "../UserPlaylists/GetUserPlaylists.js";
+import defaultImg from "../../imgs/default-song-img.jpg";
 
 const Playlists = props => {
-  const [playlists, updatePlaylists] = useState([]);
   const [thumbnailURL, updateThumbnailURL] = useState("");
 
   useEffect(() => {
     getPlaylists();
-  }, []);
+  }, [props.playlists]);
 
-  if (playlists.length > 0) {
+  if (props.playlists.length > 0) {
     return (
       <PlaylistsContainer>
-        {playlists.map(playlist => {
-          return (
-            <PlaylistCard key={`${playlist.name}`}>
-              <PlaylistImg
-                src={playlist.thumbnail}
-                onClick={() => {
-                  props.updateCurrentPlaylist(playlist.id);
-                }}
-              />
-              <PlaylistTitle>{playlist.name}</PlaylistTitle>
-            </PlaylistCard>
-          );
+        {props.playlists.map((playlist, index) => {
+          if (playlist.video_ids.length > 0) {
+            return (
+              <PlaylistCard key={`${playlist.name}`}>
+                <PlaylistImg
+                  src={playlist.thumbnail}
+                  onClick={() => {
+                    props.updateCurrentPlaylist(playlist.id);
+                  }}
+                />
+                <PlaylistTitle>{playlist.name}</PlaylistTitle>
+              </PlaylistCard>
+            );
+          } else {
+            return (
+              <PlaylistCard key={`${index}`}>
+                <PlaylistImg src={defaultImg} />
+                <PlaylistTitle>{playlist.name}</PlaylistTitle>
+              </PlaylistCard>
+            );
+          }
         })}
       </PlaylistsContainer>
     );
   } else {
-    return <p>...loading</p>;
+    return <Loading>...loading</Loading>;
   }
 
   async function getPlaylists() {
@@ -58,22 +67,26 @@ const Playlists = props => {
           }/songs`
         );
 
-        playlist.video_ids = songList.data;
-        // console.log("playlist: ", playlist.video_ids[0].song_id);
-        const songThumbnail = songsThumbnails.data.find(song => {
-          // console.log("song.video_id", song.video_id);
-          return song.video_id === playlist.video_ids[0].song_id;
-        });
+        if (songList.data.length > 0) {
+          playlist.video_ids = songList.data;
+          const songThumbnail = songsThumbnails.data.find(song => {
+            return song.video_id === playlist.video_ids[0].song_id;
+          });
 
-        playlist.thumbnail = songThumbnail.video_thumbnail;
-        // vidList.push(playlist);
+          playlist.thumbnail = songThumbnail.video_thumbnail;
+        } else {
+          playlist.video_ids = [];
+        }
         return playlist;
       });
 
-      Promise.all(playlistsSongs).then(data => {
-        console.log("FROM PROMISE.ALL", data);
-        updatePlaylists(data);
-      });
+      Promise.all(playlistsSongs)
+        .then(data => {
+          props.updatePlaylists(data);
+        })
+        .catch(data => {
+          console.log("Data: ", data);
+        });
 
       // updatePlaylists(vidList);
       return vidList;
@@ -88,6 +101,7 @@ export default Playlists;
 const PlaylistsContainer = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   box-shadow: 0px -2px 2px black;
   z-index: 5;
@@ -118,4 +132,11 @@ const PlaylistTitle = styled.h3`
   padding-bottom: 20px;
   text-align: center;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+`;
+
+const Loading = styled.h3`
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  text-shadow: 1px 1px 1px (0, 0, 0, 1);
 `;

@@ -14,6 +14,7 @@ import YoutubePlayer from "../YoutubePlayer/YoutubePlayer.js";
 import DisplayPlaylist from "../DisplayPlaylist/DisplayPlaylist.js";
 import SelectMoodDropdown from "../SelectMoodDropdown/SelectMoodDropdown.js";
 import ToggleButton from "../ToggleButton/ToggleButton.js";
+import AddPlaylist from "../Playlists/AddPlaylist.js";
 
 const Browser = props => {
   // All data for tracks
@@ -38,6 +39,7 @@ const Browser = props => {
   const [trackThumbnailURLs, updateTrackThumbnailURLs] = useState({});
   //  toggle songs/playlists view
   const [showPlaylists, updateShowPlaylists] = useState(false);
+  const [playlists, updatePlaylists] = useState([]);
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -71,14 +73,14 @@ const Browser = props => {
         )}
       />
       <CurrentTrackContainer>
-        <YoutubePlayer 
-          track={currentVideo} 
-          autoPlay={autoPlay} 
+        <YoutubePlayer
+          track={currentVideo}
+          autoPlay={autoPlay}
           isPlaylistSelected={currentPlaylist}
           tracksList={tracksCurrentPlaylist}
           updateCurrentVideo={updateCurrentVideo}
           playNext={playNext}
-          />
+        />
         {currentPlaylist && (
           <DisplayPlaylist
             playlistId={currentPlaylist}
@@ -98,6 +100,7 @@ const Browser = props => {
           updateAllTracksByMood={updateAllTracksByMood}
           updateSearching={updateSearching}
         />
+        <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} />
       </PlayerMenu>
       <ToggleButton
         showPlaylists={showPlaylists}
@@ -106,6 +109,8 @@ const Browser = props => {
       {showPlaylists ? (
         <Playlists
           showPlaylists={showPlaylists}
+          playlists={playlists}
+          updatePlaylists={updatePlaylists}
           updateCurrentPlaylist={updateCurrentPlaylist}
         />
       ) : (
@@ -218,11 +223,15 @@ const Browser = props => {
   }
 
   function playNext() {
-    if(currentPlaylist){
-      const current = tracksCurrentPlaylist.filter(track => track.video_id === currentVideo.video_id)[0];
-      const trackOnQueue= tracksCurrentPlaylist.filter(track => track.playlist_index === current.playlist_index + 1)[0];
-      if(trackOnQueue){
-        updateCurrentVideo(trackOnQueue)
+    if (currentPlaylist) {
+      const current = tracksCurrentPlaylist.filter(
+        track => track.video_id === currentVideo.video_id
+      )[0];
+      const trackOnQueue = tracksCurrentPlaylist.filter(
+        track => track.playlist_index === current.playlist_index + 1
+      )[0];
+      if (trackOnQueue) {
+        updateCurrentVideo(trackOnQueue);
       }
     }
   }
@@ -283,45 +292,17 @@ const CurrentTrackContainer = styled.div`
     height: 65vw;
   }
 `;
-const SelectMoodDropdownStyle = styled.div`
-  background-color: tomato;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-`;
-
-const SelectMoodListLabel = styled.div`
-  box-sizing: border-box;
-  display: block;
-  background-color: #009fb7;
-  padding: 5px;
-  width: 100%;
-  color: white;
-`;
-
-const SelectMoodList = styled.div`
-  box-sizing: border-box;
-  padding: 0px;
-  margin: 0px;
-  width: 100%;
-  ${props => {
-    if (props.showList) {
-      return `display: none;`;
-    }
-  }}
-`;
 
 const PlayerMenu = styled.div`
   z-index: 100;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: stretch;
   flex-direction: row;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
-  width: 100px;
+  width: 100%;
   list-style: none;
   padding: 5px;
 `;
