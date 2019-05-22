@@ -89,7 +89,7 @@ const LandingPage = props => {
                 src="https://avatars2.githubusercontent.com/u/46465575?s=400&v=4"
                 alt="Logan Hufstetler"
               />
-              <a href="github.com/BlissCatalyst">Logan Hufstetler</a>
+              <h4>Logan Hufstetler</h4>
                   <div>
                     <a href="https://github.com/BlissCatalyst">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/logan-hufstetler-145611a2/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -100,7 +100,7 @@ const LandingPage = props => {
                 src="https://avatars0.githubusercontent.com/u/10713358?s=400&u=f3dd10a2ecfa7efa5b993fc63fd905cf14311fd3&v=4"
                 alt="Davina Taylor"
               />
-              <a href="github.com/lilvina">Davina Taylor</a>
+              <h4>Davina Taylor</h4>
                   <div>
                     <a href="https://github.com/lilvina">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/davinataylor123/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -111,7 +111,7 @@ const LandingPage = props => {
                 src="https://avatars0.githubusercontent.com/u/6886907?s=400&v=4"
                 alt="John Humphreys"
               />
-              <a href="github.com/johnpharmd">John Humphreys</a>
+              <h4>John Humphreys</h4>
                   <div>
                     <a href="https://github.com/johnpharmd">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/johnhumphreys/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -122,7 +122,7 @@ const LandingPage = props => {
                 src="https://avatars0.githubusercontent.com/u/46500263?s=400&v=4"
                 alt="Md Kawsar Hussen"
               />
-              <a href="github.com/kkingbd">Md Kawsar Hussen</a>
+              <h4>Md Kawsar Hussen</h4>
                   <div>
                     <a href="https://github.com/kkingbd ">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/kkingbd/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -133,7 +133,7 @@ const LandingPage = props => {
                 src="https://avatars3.githubusercontent.com/u/42630698?s=400&v=4"
                 alt="Jonathan Bernal"
               />
-              <a href="github.com/BlueSandWeb">Jonathan Bernal</a>
+              <h4>Jonathan Bernal</h4>
                   <div>
                     <a href="https://github.com/BlueSandsWeb ">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/jon-bernal/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -144,7 +144,7 @@ const LandingPage = props => {
                 src="https://avatars1.githubusercontent.com/u/17155841?s=400&v=4"
                 alt="Sammy Lee"
               />
-              <a href="github.com/Captmoonshot">Sammy Lee</a>
+              <h4>Sammy Lee</h4>
                   <div>
                     <a href="github.com/Captmoonshot">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/sammy-lee-89944282/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -155,13 +155,13 @@ const LandingPage = props => {
                 src="https://avatars2.githubusercontent.com/u/13279523?s=460&v=4"
                 alt="Xander Jake de los Santos"
               />
-              <a href="github.com/xanderjakeq">Xander Jake de los Santos</a>
-        
+              <h4>Xander Jake de los Santos</h4>
+
                   <div>
                     <a href="https://github.com/xanderjakeq">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/xanderjakeq/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
                   </div>
-              
+
             </li>
           </ul>
         </div>
