@@ -29,8 +29,8 @@ const Browser = props => {
   const [tracksByMood, updateTracksByMood] = useState([]);
   const [hasMore, updateHasMore] = useState(true);
   const [searching, updateSearching] = useState(false);
-  const [currentVideo, updateCurrentVideo] = useState('MkNeIUgNPQ8');
-  const [autoPlay, updateAutoPlay] = useState('');
+  const [currentVideo, updateCurrentVideo] = useState("MkNeIUgNPQ8");
+  const [autoPlay, updateAutoPlay] = useState("");
   //update current playlist to change the content in DisplayPlaylist component
   const [currentPlaylist, updateCurrentPlaylist] = useState();
 
@@ -49,7 +49,7 @@ const Browser = props => {
 
   useEffect(() => {
     // getRelatedTracks(currentVideo.id);
-  }, [currentVideo])
+  }, [currentVideo]);
 
   return (
     <BrowserContainer id="browser-container">
@@ -71,7 +71,7 @@ const Browser = props => {
       />
       <CurrentTrackContainer>
         <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
-        {currentPlaylist &&
+        {currentPlaylist && (
           <DisplayPlaylist
             playlistId={currentPlaylist}
             currentTrack={currentVideo}
@@ -80,10 +80,9 @@ const Browser = props => {
             updateCurrentVideo={updateCurrentVideo}
             updateAutoPlay={updateAutoPlay}
           />
-        }
+        )}
       </CurrentTrackContainer>
       <PlayerMenu>
-
         <SelectMoodDropdown
           tracksData={[...tracksData]}
           updateTracks={updateTracks}
@@ -91,26 +90,34 @@ const Browser = props => {
           updateSearching={updateSearching}
         />
       </PlayerMenu>
-      <ToggleButton showPlaylists={showPlaylists} updateShowPlaylists={updateShowPlaylists} />
-      {showPlaylists ? <Playlists showPlaylists={showPlaylists}/> : 
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={loadNext}
-        hasMore={hasMore}
-        initialLoad={false}
-        loader={
-          <div className="loader" key={0}>
-            Loading ...
-          </div>
-        }
-        threshold={150}
-      >
-              {console.log('-----------------------------------')}
-        <Container>
-          {tracks.map((track, index) => {
-            // if(index > 10) {              // TODO remove for production app
-            //   return;
-            // } else {
+      <ToggleButton
+        showPlaylists={showPlaylists}
+        updateShowPlaylists={updateShowPlaylists}
+      />
+      {showPlaylists ? (
+        <Playlists
+          showPlaylists={showPlaylists}
+          updateCurrentPlaylist={updateCurrentPlaylist}
+        />
+      ) : (
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={loadNext}
+          hasMore={hasMore}
+          initialLoad={false}
+          loader={
+            <div className="loader" key={0}>
+              Loading ...
+            </div>
+          }
+          threshold={150}
+        >
+          {console.log("-----------------------------------")}
+          <Container>
+            {tracks.map((track, index) => {
+              // if(index > 10) {              // TODO remove for production app
+              //   return;
+              // } else {
               return (
                 <Track
                   track={track}
@@ -123,11 +130,11 @@ const Browser = props => {
                   updateTrackThumbnailURLs={updateTrackThumbnailURLs}
                 />
               );
-            // }
-          })}
-        </Container>
-      </InfiniteScroll>
-      }
+              // }
+            })}
+          </Container>
+        </InfiniteScroll>
+      )}
     </BrowserContainer>
   );
 
@@ -242,7 +249,10 @@ const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 60px auto;
+  box-shadow: 0px -2px 2px black;
+  z-index: 5;
+  margin: 0px auto;
+  padding: 60px;
 `;
 
 const CurrentTrackContainer = styled.div`
@@ -281,8 +291,7 @@ const SelectMoodList = styled.div`
     if (props.showList) {
       return `display: none;`;
     }
-  }
-  }
+  }}
 `;
 
 const PlayerMenu = styled.div`
@@ -295,5 +304,5 @@ const PlayerMenu = styled.div`
   box-sizing: border-box;
   width: 100px;
   list-style: none;
-  padding: 5px ;
+  padding: 5px;
 `;

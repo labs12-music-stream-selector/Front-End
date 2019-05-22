@@ -1,39 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-import Track from '../Track/Track.js';
+import Track from "../Track/Track.js";
 
-const DisplayPlaylist = (props) => {
-
+const DisplayPlaylist = props => {
   const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     fetchTracks();
-  }, [])
+  }, [props.playlistId]);
 
   return (
     <DisplayPlaylistContainer>
       <h2>Playlist</h2>
-      <AddBtn title='add current track to playlist' onClick={()=>{addCurrentTrack(props.playlistId, props.currentTrack.video_id)}}>
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M12 8V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M8 12H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <AddBtn
+        title="add current track to playlist"
+        onClick={() => {
+          addCurrentTrack(props.playlistId, props.currentTrack.video_id);
+        }}
+      >
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M12 8V16"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M8 12H16"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </AddBtn>
       <DragDropContext onDragEnd={handleOrderChange}>
         <ul>
-        <Droppable droppableId='draggable'>
-          {(provided, snapshot) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {tracks.map((track, index) => 
-                (
-                  <Draggable key={track.video_id} draggableId={track.video_id || 'adfsad'} index={index}>
+          <Droppable droppableId="draggable">
+            {(provided, snapshot) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {tracks.map((track, index) => (
+                  <Draggable
+                    key={track.video_id}
+                    draggableId={track.video_id || "adfsad"}
+                    index={index}
+                  >
                     {(provided, snapshot) => (
                       <li
                         ref={provided.innerRef}
@@ -56,125 +84,145 @@ const DisplayPlaylist = (props) => {
                       </li>
                     )}
                   </Draggable>
-                )
-              )}
-              {provided.placeholder}
-            </div>
-          )
-          }
-          
-        </Droppable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </ul>
       </DragDropContext>
-
     </DisplayPlaylistContainer>
-  )
+  );
 
-    function addCurrentTrack(playlistId, song_id){
-        axios.post(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song`,{song_id}).then(res => {
-            console.log('added successfully')
-            fetchTracks();
-        }).catch(err => console.log(err));
-    }
-
-    function fetchTracks(){
-      axios.get(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${props.playlistId}/songs`).then(res => {
-        const newTracksArray = res.data.map(track => {
-          let newTrack = {...track, video_id: track.song_id};
-          return newTrack
-        })
-        const orderedTracks = order(newTracksArray);
-        setTracks(orderedTracks)
-      }).catch(err => {
-        console.log(err)
-        setTracks([])
-      });
-    }
-
-    /**
-     * used to order the tracks based on playlist_index onMount
-     */
-    function order(arr){
-      let newArr = [];
-      for(let i = 1; i <= arr.length; i++){
-        newArr.push(arr.filter(track => track.playlist_index === i || track.playlist_index === null)[0]);
-      }
-      return newArr;
-    }
-
-    function handleOrderChange(result){
-      if(!result.destination){
-        return;
-      }
-
-      const items = reorder(
-        tracks,
-        result.source.index,
-        result.destination.index
+  function addCurrentTrack(playlistId, song_id) {
+    axios
+      .post(
+        `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song`,
+        { song_id }
       )
-      items.map((track, idx) => {
-        const index = idx + 1;
-        track.playlist_index = index
-        axios.put(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${props.playlistId}/song/${track.id}`, {playlist_index: index}).then(res => {
-          console.log('successful')
-        }).catch(err => console.log(err))
-        return track
+      .then(res => {
+        console.log("added successfully");
+        fetchTracks();
       })
+      .catch(err => console.log(err));
+  }
 
-      setTracks(items)
+  function fetchTracks() {
+    axios
+      .get(
+        `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
+          props.playlistId
+        }/songs`
+      )
+      .then(res => {
+        const newTracksArray = res.data.map(track => {
+          let newTrack = { ...track, video_id: track.song_id };
+          return newTrack;
+        });
+        const orderedTracks = order(newTracksArray);
+        setTracks(orderedTracks);
+      })
+      .catch(err => {
+        console.log(err);
+        setTracks([]);
+      });
+  }
+
+  /**
+   * used to order the tracks based on playlist_index onMount
+   */
+  function order(arr) {
+    let newArr = [];
+    for (let i = 1; i <= arr.length; i++) {
+      newArr.push(
+        arr.filter(
+          track => track.playlist_index === i || track.playlist_index === null
+        )[0]
+      );
+    }
+    return newArr;
+  }
+
+  function handleOrderChange(result) {
+    if (!result.destination) {
+      return;
     }
 
-    function reorder(list, startIndex, endIndex){
-      const result = Array.from(list);
-      const [removed] = result.splice(startIndex, 1);
-      result.splice(endIndex, 0, removed);
+    const items = reorder(
+      tracks,
+      result.source.index,
+      result.destination.index
+    );
+    items.map((track, idx) => {
+      const index = idx + 1;
+      track.playlist_index = index;
+      axios
+        .put(
+          `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
+            props.playlistId
+          }/song/${track.id}`,
+          { playlist_index: index }
+        )
+        .then(res => {
+          console.log("successful");
+        })
+        .catch(err => console.log(err));
+      return track;
+    });
 
-      return result;
-    }
+    setTracks(items);
+  }
 
+  function reorder(list, startIndex, endIndex) {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
 
-    function getItemStyle(isDragging, draggableStyle){
-      const grid = 8;
-      return {
-        // some basic styles to make the items look a bit nicer
-        userSelect: "none",
-        margin: `0 0 ${grid}px 0`,
+    return result;
+  }
 
-        // styles we need to apply on draggables
-        ...draggableStyle
-      }
+  function getItemStyle(isDragging, draggableStyle) {
+    const grid = 8;
+    return {
+      // some basic styles to make the items look a bit nicer
+      userSelect: "none",
+      margin: `0 0 ${grid}px 0`,
+
+      // styles we need to apply on draggables
+      ...draggableStyle
     };
-}
+  }
+};
 
 export default DisplayPlaylist;
 
 const Thumbnail = styled.img`
-	width: 100px;
+  width: 100px;
 `;
 
 const AddBtn = styled.button`
   background: none;
   border: none;
-  svg{
-    path{
+  svg {
+    path {
       stroke: white;
     }
-    :hover{
+    :hover {
       cursor: pointer;
     }
   }
-  outline: none;  
+  outline: none;
 `;
 
 const DisplayPlaylistContainer = styled.div`
   margin-left: 5px;
   max-width: 95vw;
   margin: 0 auto;
-  h2{
+  h2 {
     margin: 0;
     color: #eff1f3;
   }
-  ul{
+  ul {
     width: min-content;
     min-width: 310px;
     list-style: none;
@@ -182,7 +230,7 @@ const DisplayPlaylistContainer = styled.div`
     margin: 0;
     height: 86%;
     overflow-y: scroll;
-    @media(max-width: 700px){
+    @media (max-width: 700px) {
       height: 300px;
       display: flex;
       overflow-x: scroll;

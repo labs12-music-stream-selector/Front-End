@@ -4,6 +4,7 @@ import styled from "styled-components";
 const ToggleButton = props => {
   console.log(props);
   return (
+
       <ToggleContainer>
         <ShowSongsButton onClick={() => {props.updateShowPlaylists(false)}}>Show Songs</ShowSongsButton>
         <ShowPlaylistsButton onClick={() => {props.updateShowPlaylists(true)}}>Show Playlists</ShowPlaylistsButton>
@@ -11,6 +12,7 @@ const ToggleButton = props => {
           <AddPlaylistButton>Add Playlist</AddPlaylistButton>
         </AddPlaylistContainer>
       </ToggleContainer>
+
 
   );
 };
@@ -25,7 +27,7 @@ const ToggleContainer = styled.div`
 const ShowSongsButton = styled.button`
   padding: 20px;
   border-radius: 40px 40px 0px 0px;
-  width:49%;
+  width: 50%;
   border: none;
   // change with function
   background-color: #272727;
@@ -33,7 +35,9 @@ const ShowSongsButton = styled.button`
   color: ivory;
   `;
 
-  const ShowPlaylistsButton = styled.button`
+
+const ShowPlaylistsButton = styled.button`
+
   padding: 20px;
   border-radius: 40px 40px 0px 0px;
   border: none;
