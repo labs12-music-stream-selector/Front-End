@@ -89,6 +89,8 @@ const PlaylistsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  box-shadow: 0px -2px 2px black;
+  z-index: 5;
 `;
 
 const PlaylistCard = styled.div`
