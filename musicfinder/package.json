@@ -47,5 +47,5 @@
   "devDependencies": {
     "jest-dom": "^3.2.0"
   },
-  "proxy": "https://moodybeats.netlify.com/home/"
+  "proxy": "https://moodibeats.com/home/" 
 }
