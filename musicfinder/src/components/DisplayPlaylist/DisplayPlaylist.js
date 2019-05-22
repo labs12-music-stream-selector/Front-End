@@ -12,6 +12,10 @@ const DisplayPlaylist = props => {
     fetchTracks();
   }, [props.playlistId]);
 
+  useEffect(() => {
+    props.updateTracksCurrentPlaylist(tracks);
+  }, [tracks]);
+
   return (
     <DisplayPlaylistContainer>
       <h2>Playlist</h2>
