@@ -31,7 +31,12 @@ const Playlists = props => {
           } else {
             return (
               <PlaylistCard key={`${index}`}>
-                <PlaylistImg src={defaultImg} />
+                <PlaylistImg
+                  src={defaultImg}
+                  onClick={() => {
+                    props.updateCurrentPlaylist(playlist.id);
+                  }}
+                />
                 <PlaylistTitle>{playlist.name}</PlaylistTitle>
               </PlaylistCard>
             );
