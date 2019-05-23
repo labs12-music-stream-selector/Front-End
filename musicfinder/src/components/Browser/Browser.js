@@ -94,39 +94,48 @@ const Browser = props => {
         )}
       </CurrentTrackContainer>
       <PlayerMenu>
-        <SelectMoodDropdown
+        {/* <SelectMoodDropdown
           tracksData={[...tracksData]}
           updateTracks={updateTracks}
           updateAllTracksByMood={updateAllTracksByMood}
           updateSearching={updateSearching}
-        />
-        <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} />
+        /> */}
+        {/* <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} /> */}
       </PlayerMenu>
       <ToggleButton
         showPlaylists={showPlaylists}
         updateShowPlaylists={updateShowPlaylists}
       />
       {showPlaylists ? (
+        <div className='generalContainer'>
+        <AddPlaylist playlists={props.playlists} updatePlaylists={props.updatePlaylists} />
         <Playlists
           showPlaylists={showPlaylists}
           playlists={playlists}
           updatePlaylists={updatePlaylists}
           updateCurrentPlaylist={updateCurrentPlaylist}
         />
+        </div>
       ) : (
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={loadNext}
-            hasMore={hasMore}
-            initialLoad={false}
-            loader={
-              <Loading className="loader" key={0}>
-                Loading ...
+        <InfiniteScroll
+          className='generalContainer'
+          pageStart={0}
+          loadMore={loadNext}
+          hasMore={hasMore}
+          initialLoad={false}
+          loader={
+            <Loading className="loader" key={0}>
+              Loading ...
             </Loading>
           }
           threshold={150}
         >
-          {/* {console.log("-----------------------------------")} */}
+          <SelectMoodDropdown
+            tracksData={[...tracksData]}
+            updateTracks={updateTracks}
+            updateAllTracksByMood={updateAllTracksByMood}
+            updateSearching={updateSearching}
+          />
           <Container>
             {tracks.map((track, index) => {
               // if(index > 10) {              // TODO remove for production app
@@ -290,13 +299,15 @@ const BrowserContainer = styled.div`
   width: 100%;
   min-height: 100%;
   padding-top: 10px;
+  .generalContainer{
+    padding: 5px;
+  }
 `;
 
 const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  box-shadow: 0px -2px 2px black;
   z-index: 5;
   margin: 0px auto;
   padding: 60px;

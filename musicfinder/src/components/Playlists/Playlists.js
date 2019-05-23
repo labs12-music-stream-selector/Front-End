@@ -101,7 +101,7 @@ const PlaylistsContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  box-shadow: 0px -2px 2px black;
+  // box-shadow: 0px -2px 2px black;
   z-index: 5;
 `;
 
