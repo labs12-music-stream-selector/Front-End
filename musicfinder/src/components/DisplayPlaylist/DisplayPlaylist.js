@@ -84,9 +84,11 @@ const DisplayPlaylist = props => {
   function addCurrentTrack(playlistId, song_id) {
     axios
       .post(
-        // `http://localhost:5000/api/user/playlists/${playlistId}/song`,
         `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song`,
-        { song_id }, {headers: {Authorization: `${localStorage.getItem("token")}`}}
+        { 
+          song_id,
+          playlist_index: tracks.length+1
+        }
       )
       .then(res => {
         console.log("added successfully");
@@ -98,10 +100,9 @@ const DisplayPlaylist = props => {
   function fetchTracks() {
     axios
       .get(
-        // `http://localhost:5000/api/user/playlists/${
-         `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
+        `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
           props.playlistId
-        }/songs`, {headers: {Authorization: `${localStorage.getItem("token")}`}}
+        }/songs`
       )
       .then(res => {
         if(res.data.length === 0){
@@ -125,12 +126,10 @@ const DisplayPlaylist = props => {
    */
   function order(arr) {
     let newArr = [];
-    for (let i = 1; i <= arr.length; i++) {
-      newArr.push(
-        arr.filter(track => track.playlist_index === i || track.playlist_index === null)[0]
-      );
-      arr.splice(0, 1)
-    }
+    // get all playlist indexes and sort them
+    const sortedIndexes = arr.map(track => track.playlist_index).sort((a,b) => a-b);
+    // go through the sorted indexes and push the track that have the index and push it to newArr in the sorted order
+    sortedIndexes.forEach(index => newArr.push(arr.filter(track => track.playlist_index === index)[0]));
     return newArr;
   }
 
@@ -149,13 +148,10 @@ const DisplayPlaylist = props => {
       track.playlist_index = index;
       axios
         .put(
-          // `http://localhost:5000/api/user/playlists/${
-          //   props.playlistId
-          // }/song/${track.id}`,
           `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
             props.playlistId
           }/song/${track.id}`,
-          { playlist_index: index }, {headers: {Authorization: `${localStorage.getItem("token")}`}}
+          { playlist_index: index }
         )
         .then(res => {
           console.log("successful");
