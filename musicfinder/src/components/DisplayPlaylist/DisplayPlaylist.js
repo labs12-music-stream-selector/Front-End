@@ -246,8 +246,6 @@ const DisplayPlaylistContainer = styled.div`
     color: #eff1f3;
   }
   ul{
-    width: min-content;
-    min-width: 310px;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -255,6 +253,7 @@ const DisplayPlaylistContainer = styled.div`
     overflow-y: scroll;
     @media (max-width: 700px) {
       height: 300px;
+      min-width: 310px;
       display: flex;
       overflow-y: unset;
       height: max-content;
