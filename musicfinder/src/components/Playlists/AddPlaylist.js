@@ -55,7 +55,7 @@ const CreatePlaylistForm = styled.form`
 const CreatePlaylistInput = styled.input`
   border: none;
   padding: 10px;
-  border-radius: 5px 0 0 5px;
+  // border-radius: 5px 0 0 5px;
 `;
 
 const CreatePlaylistBtn = styled.button`
@@ -64,6 +64,9 @@ const CreatePlaylistBtn = styled.button`
   color: ivory;
   font-size: 16px;
   border: none;
-  border-radius: 0 5px 5px 0;
+  // border-radius: 0 5px 5px 0;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+  :hover{
+    cursor: pointer;
+  }
 `;
