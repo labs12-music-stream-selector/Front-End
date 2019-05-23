@@ -46,10 +46,6 @@ const Browser = props => {
     }
     // const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
     const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
-    async function delaying(){
-      await getTracks(url);
-    }
-    delaying();
     getThumbnails();
   }, []);
 
@@ -168,6 +164,8 @@ const Browser = props => {
     const res = await axios.get(url, {
       headers: { Authorization: localStorage.getItem("token") }
     });
+
+    console.log('Get tracks')
     const data = res.data;
     updateTracksData(data);
     updateTracks(data.slice(0, 6));
@@ -211,6 +209,7 @@ const Browser = props => {
     let options = {
       keys: ["moods", "video_title", "video_id"]
     };
+    console.log(allTracksByMood)
     let fuse = new Fuse(allTracksByMood, options);
     updateTracks(fuse.search(searchTerm));
     console.log(fuse.search(searchTerm));
@@ -274,6 +273,7 @@ const Browser = props => {
         `https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/`
       )
       .then(res => {
+        console.log('Get thumbnails')
         console.log(res);
         const data = res.data;
         console.log(data);
@@ -286,7 +286,8 @@ const Browser = props => {
         })
         console.log(variable);
         updateTrackThumbnailURLs(variable);
-        console.log("GET THUMBNAILS FINISHED");
+        const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
+        getTracks(url);
       })
       .catch(err => {
         console.log("error: ", err);
@@ -303,7 +304,7 @@ const BrowserContainer = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 100%;
-  padding-top: 10px;
+  padding-top: 50px;
   .generalContainer{
     padding: 5px;
   }
