@@ -39,7 +39,6 @@ const YoutubePlayer = (props) => {
 }
 const PlayerContainer = styled.div`
   width: 100%;
-  margin-top: 11px;
   margin-left: 5px;
   z-index: 0;
   position: relative;
