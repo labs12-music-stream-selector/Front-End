@@ -45,7 +45,7 @@ const Browser = props => {
       return props.history.push("/");
     }
     // const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
-    const url = `https://moodibeats-recommender.herokuapp.com/api/new-videos/`;
+    const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
     getTracks(url);
     getThumbnails();
   }, []);
@@ -123,32 +123,32 @@ const Browser = props => {
               <Loading className="loader" key={0}>
                 Loading ...
             </Loading>
-            }
-            threshold={150}
-          >
-            {console.log("-----------------------------------")}
-            <Container>
-              {tracks.map((track, index) => {
-                // if(index > 10) {              // TODO remove for production app
-                //   return;
-                // } else {
-                return (
-                  <Track
-                    track={track}
-                    index={index}
-                    key={index}
-                    updateCurrentVideo={updateCurrentVideo}
-                    updateAutoPlay={updateAutoPlay}
-                    customAxios={cookieMonster}
-                    trackThumbnailURLs={trackThumbnailURLs}
-                    updateTrackThumbnailURLs={updateTrackThumbnailURLs}
-                  />
-                );
-                // }
-              })}
-            </Container>
-          </InfiniteScroll>
-        )}
+          }
+          threshold={150}
+        >
+          {/* {console.log("-----------------------------------")} */}
+          <Container>
+            {tracks.map((track, index) => {
+              // if(index > 10) {              // TODO remove for production app
+              //   return;
+              // } else {
+              return (
+                <Track
+                  track={track}
+                  index={index}
+                  key={index}
+                  updateCurrentVideo={updateCurrentVideo}
+                  updateAutoPlay={updateAutoPlay}
+                  customAxios={cookieMonster}
+                  trackThumbnailURLs={trackThumbnailURLs}
+                  updateTrackThumbnailURLs={updateTrackThumbnailURLs}
+                />
+              );
+              // }
+            })}
+          </Container>
+        </InfiniteScroll>
+      )}
     </BrowserContainer>
   );
 

@@ -22,7 +22,7 @@ const YoutubePlayer = (props) => {
                 console.log('ended')
                 props.playNext()
               }}
-              onError={e => console.log('onError', e)}
+              // onError={e => console.log('onError', e)}
             />
       </div>
     </PlayerContainer>
