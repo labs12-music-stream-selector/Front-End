@@ -158,10 +158,9 @@ const DisplayPlaylist = props => {
     let newArr = [];
     for (let i = 1; i <= arr.length; i++) {
       newArr.push(
-        arr.filter(
-          track => track.playlist_index === i || track.playlist_index === null
-        )[0]
+        arr.filter(track => track.playlist_index === i || track.playlist_index === null)[0]
       );
+      arr.splice(0, 1)
     }
     return newArr;
   }
@@ -250,6 +249,7 @@ const DisplayPlaylistContainer = styled.div`
     padding: 0;
     margin: 0;
     height: 86%;
+    min-width: 260px;
     overflow-y: scroll;
     @media (max-width: 700px) {
       height: 300px;
