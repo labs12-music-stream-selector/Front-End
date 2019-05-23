@@ -107,56 +107,56 @@ const Browser = props => {
       />
       {showPlaylists ? (
         <div className='generalContainer'>
-        <AddPlaylist playlists={props.playlists} updatePlaylists={props.updatePlaylists} />
-        <Playlists
-          showPlaylists={showPlaylists}
-          playlists={playlists}
-          updatePlaylists={updatePlaylists}
-          updateCurrentPlaylist={updateCurrentPlaylist}
-        />
+          <AddPlaylist playlists={props.playlists} updatePlaylists={props.updatePlaylists} />
+          <Playlists
+            showPlaylists={showPlaylists}
+            playlists={playlists}
+            updatePlaylists={updatePlaylists}
+            updateCurrentPlaylist={updateCurrentPlaylist}
+          />
         </div>
       ) : (
-        <InfiniteScroll
-          className='generalContainer'
-          pageStart={0}
-          loadMore={loadNext}
-          hasMore={hasMore}
-          initialLoad={false}
-          loader={
-            <Loading className="loader" key={0}>
-              Loading ...
+          <InfiniteScroll
+            className='generalContainer'
+            pageStart={0}
+            loadMore={loadNext}
+            hasMore={hasMore}
+            initialLoad={false}
+            loader={
+              <Loading className="loader" key={0}>
+                Loading ...
             </Loading>
-          }
-          threshold={150}
-        >
-          <SelectMoodDropdown
-            tracksData={[...tracksData]}
-            updateTracks={updateTracks}
-            updateAllTracksByMood={updateAllTracksByMood}
-            updateSearching={updateSearching}
-          />
-          <Container>
-            {tracks.map((track, index) => {
-              // if(index > 10) {              // TODO remove for production app
-              //   return;
-              // } else {
-              return (
-                <Track
-                  track={track}
-                  index={index}
-                  key={index}
-                  updateCurrentVideo={updateCurrentVideo}
-                  updateAutoPlay={updateAutoPlay}
-                  customAxios={cookieMonster}
-                  trackThumbnailURLs={trackThumbnailURLs}
-                  updateTrackThumbnailURLs={updateTrackThumbnailURLs}
-                />
-              );
-              // }
-            })}
-          </Container>
-        </InfiniteScroll>
-      )}
+            }
+            threshold={150}
+          >
+            <SelectMoodDropdown
+              tracksData={[...tracksData]}
+              updateTracks={updateTracks}
+              updateAllTracksByMood={updateAllTracksByMood}
+              updateSearching={updateSearching}
+            />
+            <Container>
+              {tracks.map((track, index) => {
+                // if(index > 10) {              // TODO remove for production app
+                //   return;
+                // } else {
+                return (
+                  <Track
+                    track={track}
+                    index={index}
+                    key={index}
+                    updateCurrentVideo={updateCurrentVideo}
+                    updateAutoPlay={updateAutoPlay}
+                    customAxios={cookieMonster}
+                    trackThumbnailURLs={trackThumbnailURLs}
+                    updateTrackThumbnailURLs={updateTrackThumbnailURLs}
+                  />
+                );
+                // }
+              })}
+            </Container>
+          </InfiniteScroll>
+        )}
     </BrowserContainer>
   );
 
@@ -169,6 +169,7 @@ const Browser = props => {
     const data = res.data;
     updateTracksData(data);
     updateTracks(data.slice(0, 6));
+    console.log("GET TRACKS FINISHED")
   }
 
   // async function getRelatedTracks(id) {
