@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Fuse from "fuse.js";
 import styled from "styled-components";
-import Cookies from "js-cookie";
 import Playlists from "../Playlists/Playlists.js";
 
 import SearchBar from "../SearchBar/SearchBar.js";
@@ -13,6 +12,8 @@ import { withRouter } from "react-router-dom";
 import YoutubePlayer from "../YoutubePlayer/YoutubePlayer.js";
 import DisplayPlaylist from "../DisplayPlaylist/DisplayPlaylist.js";
 import SelectMoodDropdown from "../SelectMoodDropdown/SelectMoodDropdown.js";
+import ToggleButton from "../ToggleButton/ToggleButton.js";
+import AddPlaylist from "../Playlists/AddPlaylist.js";
 
 const Browser = props => {
   // All data for tracks
@@ -23,17 +24,21 @@ const Browser = props => {
   const [tracks, updateTracks] = useState([]);
 
   const [offset, updateOffset] = useState(0);
-  const [offsetMax, updateOffsetMax] = useState(6);
-  const [relatedTracks, updateRelatedTracks] = useState([]);
+  // const [offsetMax, updateOffsetMax] = useState(6);
+  // const [relatedTracks, updateRelatedTracks] = useState([]);
   const [tracksByMood, updateTracksByMood] = useState([]);
   const [hasMore, updateHasMore] = useState(true);
   const [searching, updateSearching] = useState(false);
-  const [currentVideo, updateCurrentVideo] = useState('MkNeIUgNPQ8');
-  const [autoPlay, updateAutoPlay] = useState('');
+  const [currentVideo, updateCurrentVideo] = useState("MkNeIUgNPQ8");
+  const [autoPlay, updateAutoPlay] = useState("");
   //update current playlist to change the content in DisplayPlaylist component
-  const [currentPlaylist, updateCurrentPlaylist] = useState(null);
+  const [currentPlaylist, updateCurrentPlaylist] = useState();
+  const [tracksCurrentPlaylist, updateTracksCurrentPlaylist] = useState([]);
 
   const [trackThumbnailURLs, updateTrackThumbnailURLs] = useState({});
+  //  toggle songs/playlists view
+  const [showPlaylists, updateShowPlaylists] = useState(false);
+  const [playlists, updatePlaylists] = useState([]);
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -46,7 +51,7 @@ const Browser = props => {
 
   useEffect(() => {
     // getRelatedTracks(currentVideo.id);
-  }, [currentVideo])
+  }, [currentVideo]);
 
   return (
     <BrowserContainer id="browser-container">
@@ -68,16 +73,25 @@ const Browser = props => {
         )}
       />
       <CurrentTrackContainer>
-        <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
-        {currentPlaylist &&
+        <YoutubePlayer
+          track={currentVideo}
+          autoPlay={autoPlay}
+          isPlaylistSelected={currentPlaylist}
+          tracksList={tracksCurrentPlaylist}
+          updateCurrentVideo={updateCurrentVideo}
+          playNext={playNext}
+        />
+        {currentPlaylist && (
           <DisplayPlaylist
             playlistId={currentPlaylist}
             currentTrack={currentVideo}
+            updateTracksCurrentPlaylist={updateTracksCurrentPlaylist}
             allTracks={tracksData}
+            trackThumbnailURLs={trackThumbnailURLs}
             updateCurrentVideo={updateCurrentVideo}
             updateAutoPlay={updateAutoPlay}
           />
-        }
+        )}
       </CurrentTrackContainer>
       <PlayerMenu>
         <SelectMoodDropdown
@@ -86,25 +100,38 @@ const Browser = props => {
           updateAllTracksByMood={updateAllTracksByMood}
           updateSearching={updateSearching}
         />
+        <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} />
       </PlayerMenu>
-      {/* <Playlists /> */}
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={loadNext}
-        hasMore={hasMore}
-        initialLoad={false}
-        loader={
-          <div className="loader" key={0}>
-            Loading ...
-          </div>
-        }
-        threshold={150}
-      >
-        <Container>
-          {tracks.map((track, index) => {
-            // if(index > 10) {              // TODO remove for production app
-            //   return;
-            // } else {
+      <ToggleButton
+        showPlaylists={showPlaylists}
+        updateShowPlaylists={updateShowPlaylists}
+      />
+      {showPlaylists ? (
+        <Playlists
+          showPlaylists={showPlaylists}
+          playlists={playlists}
+          updatePlaylists={updatePlaylists}
+          updateCurrentPlaylist={updateCurrentPlaylist}
+        />
+      ) : (
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={loadNext}
+          hasMore={hasMore}
+          initialLoad={false}
+          loader={
+            <Loading className="loader" key={0}>
+              Loading ...
+            </Loading>
+          }
+          threshold={150}
+        >
+          {console.log("-----------------------------------")}
+          <Container>
+            {tracks.map((track, index) => {
+              // if(index > 10) {              // TODO remove for production app
+              //   return;
+              // } else {
               return (
                 <Track
                   track={track}
@@ -117,10 +144,11 @@ const Browser = props => {
                   updateTrackThumbnailURLs={updateTrackThumbnailURLs}
                 />
               );
-            // }
-          })}
-        </Container>
-      </InfiniteScroll>
+              // }
+            })}
+          </Container>
+        </InfiniteScroll>
+      )}
     </BrowserContainer>
   );
 
@@ -133,25 +161,25 @@ const Browser = props => {
     updateTracks(data.slice(0, 6));
   }
 
-  async function getRelatedTracks(id) {
-    const url = `https://moody-beats-recommender-api.herokuapp.com/api/${id}/`;
-    const res = await axios.get(url);
-    const relatedTracks = [];
+  // async function getRelatedTracks(id) {
+  //   const url = `https://moody-beats-recommender-api.herokuapp.com/api/${id}/`;
+  //   const res = await axios.get(url);
+  //   const relatedTracks = [];
 
-    Object.keys(res.data).forEach(key => {
-      if (
-        !["id", "songs", "mood", "video_id"].includes(key) &&
-        res.data[key] !== null &&
-        !key.includes("_link")
-      ) {
-        relatedTracks.push({
-          name: res.data[key],
-          url: res.data[`${key}_link`]
-        });
-      }
-    });
-    updateRelatedTracks(relatedTracks);
-  }
+  //   Object.keys(res.data).forEach(key => {
+  //     if (
+  //       !["id", "songs", "mood", "video_id"].includes(key) &&
+  //       res.data[key] !== null &&
+  //       !key.includes("_link")
+  //     ) {
+  //       relatedTracks.push({
+  //         name: res.data[key],
+  //         url: res.data[`${key}_link`]
+  //       });
+  //     }
+  //   });
+  //   updateRelatedTracks(relatedTracks);
+  // }
 
   async function getTracksByMood(mood) {
     const url = `https://john-moody-beats-recommender.herokuapp.com/api/${mood}`;
@@ -188,9 +216,23 @@ const Browser = props => {
     }
   }
 
-  function loadPrev() {
-    if (offset > 5) {
-      updateOffset(offset - 6);
+  // function loadPrev() {
+  //   if (offset > 5) {
+  //     updateOffset(offset - 6);
+  //   }
+  // }
+
+  function playNext() {
+    if (currentPlaylist) {
+      const current = tracksCurrentPlaylist.filter(
+        track => track.video_id === currentVideo.video_id
+      )[0];
+      const trackOnQueue = tracksCurrentPlaylist.filter(
+        track => track.playlist_index === current.playlist_index + 1
+      )[0];
+      if (trackOnQueue) {
+        updateCurrentVideo(trackOnQueue);
+      }
     }
   }
 
@@ -234,7 +276,13 @@ const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 60px auto;
+  box-shadow: 0px -2px 2px black;
+  z-index: 5;
+  margin: 0px auto;
+  padding: 60px;
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `;
 
 const CurrentTrackContainer = styled.div`
@@ -243,48 +291,26 @@ const CurrentTrackContainer = styled.div`
   height: 500px;
   @media (max-width: 700px) {
     flex-direction: column;
-    height: 65vw;
-  }
-`;
-const SelectMoodDropdownStyle = styled.div`
-  background-color: tomato;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-`;
-
-const SelectMoodListLabel = styled.div`
-  box-sizing: border-box;
-  display: block;
-  background-color: #009fb7;
-  padding: 5px;
-  width: 100%;
-  color: white;
-`;
-
-const SelectMoodList = styled.div`
-  box-sizing: border-box;
-  padding: 0px;
-  margin: 0px;
-  width: 100%;
-  ${props => {
-    if (props.showList) {
-      return `display: none;`;
-    }
-  }
+    height: unset;
   }
 `;
 
 const PlayerMenu = styled.div`
-  z-index: 90;
+  z-index: 100;
   display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
   flex-direction: row;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
   width: 100%;
   list-style: none;
-  padding: 5px ;
+  padding: 5px;
+`;
+
+const Loading = styled.h3`
+  font-size: 2rem;
+  color: #efefef;
+  text-align: center;
 `;

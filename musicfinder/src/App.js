@@ -33,26 +33,35 @@ class App extends Component {
       alert("Please Log in First");
     }
   };
+  takeMetoHome = () => {
+    if (sessionStorage.getItem("token")) {
+      this.props.history.push("/home");
+    } else {
+      alert("Please Log in First");
+    }
+  };
   render() {
     return (
       <Router>
         <RouterDiv className="App">
           <NavDiv className="this.state.token`">
             <nav className="navBar">
-              <Link className="dropbtn" to="/home">
+              <Link onClick={this.takeMetoHome} className="dropbtn" to="/home">
                 Home
               </Link>
-              <img src={moodi} alt="logo" />
+              <Link className="moodibtn" to="/">
+                <img src={moodi} alt="logo" />{" "}
+              </Link>
               <div className="dropdown">
                 <button className="dropbtn"> Menu</button>
                 <div className="dropdown-content">
                   <Link to="/donation"> Support Us </Link>
                   <Link to="/privacypolicy"> Privacy Policy </Link>
                   <Link to="/termsofservice"> Term & Services </Link>
-                  <Button className="update" onClick={this.takeMetoUpdate}>
+                  <Link className="update" onClick={this.takeMetoUpdate}>
                     {" "}
                     Update Profile{" "}
-                  </Button>
+                  </Link>
                   <Button className="signoutBtn" onClick={this.signMeOut}>
                     {" "}
                     Sign Out{" "}
@@ -79,7 +88,6 @@ const RouterDiv = styled.div`
   width: 100%;
   min-height: 100vh;
   background: #272727;
-  padding-top: 40px;
 `;
 
 const NavDiv = styled.div`
@@ -123,7 +131,7 @@ const NavDiv = styled.div`
       display: none;
       position: absolute;
       right: 0;
-      background-color: #007da6;
+      background-color: #272727;
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1;
@@ -140,20 +148,21 @@ const NavDiv = styled.div`
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    .dropbtn:hover {
-      background-color: #007da6;
-    }
   }
   .dropdown-content .signoutBtn {
-    border-radius: 5px;
     height: 25px;
   }
   .update {
     padding: 12px 16px;
   }
   .signoutBtn {
-    border: 1px solid #009fb7;
+    border-top: 2px solid #696773;
     padding: 12px 16px;
+    cursor: pointer;
+    background-color: tomato;
+    :hover {
+      background-color: tomato;
+    }
   }
 `;
 const Button = styled.div`
