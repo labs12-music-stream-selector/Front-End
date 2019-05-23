@@ -156,6 +156,7 @@ const TrackContainer = styled.div`
       }
       margin: 10px 5px;
       max-width: max-content;
+      width: 250px;
       padding: 0;
       h3{
         font-size: 15px;

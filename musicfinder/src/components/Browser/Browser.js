@@ -281,6 +281,9 @@ const Container = styled.div`
   z-index: 5;
   margin: 0px auto;
   padding: 60px;
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `;
 
 const CurrentTrackContainer = styled.div`
@@ -289,7 +292,7 @@ const CurrentTrackContainer = styled.div`
   height: 500px;
   @media (max-width: 700px) {
     flex-direction: column;
-    height: 65vw;
+    height: unset;
   }
 `;
 
