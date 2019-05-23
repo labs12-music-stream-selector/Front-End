@@ -212,6 +212,7 @@ const DisplayPlaylistContainer = styled.div`
   margin: 0 auto;
   h2 {
     margin: 0;
+    text-align: center;
     color: #eff1f3;
   }
   ul{
