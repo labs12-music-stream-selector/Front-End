@@ -18,21 +18,12 @@ const AddPlaylist = props => {
 
   function createPlaylistHandler(e) {
     e.preventDefault();
-    const config = {
-      body: {
-        name: `${inputData}`,
-        user_id: `${localStorage.getItem("id")}`
-      },
-      headers: {
-        Authorization: `${localStorage.getItem("token")}`
-      }
-    };
-
     axios
       .post(
-        "https://fantabulous-music-finder.herokuapp.com/api/user/playlists"
+        "https://fantabulous-music-finder.herokuapp.com/api/user/playlists",
         // "http://localhost:5000/api/user/playlists",
-        // config
+        {name: `${inputData}`,user_id: localStorage.getItem("id"),
+        }, {headers: {Authorization: `${localStorage.getItem("token")}`}}
       )
       .then(res => {
         console.log(res.data);
@@ -55,7 +46,7 @@ const CreatePlaylistForm = styled.form`
 const CreatePlaylistInput = styled.input`
   border: none;
   padding: 10px;
-  border-radius: 5px 0 0 5px;
+  // border-radius: 5px 0 0 5px;
 `;
 
 const CreatePlaylistBtn = styled.button`
@@ -64,6 +55,9 @@ const CreatePlaylistBtn = styled.button`
   color: ivory;
   font-size: 16px;
   border: none;
-  border-radius: 0 5px 5px 0;
+  // border-radius: 0 5px 5px 0;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+  :hover{
+    cursor: pointer;
+  }
 `;

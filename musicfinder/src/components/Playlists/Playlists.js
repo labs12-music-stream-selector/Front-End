@@ -52,12 +52,7 @@ const Playlists = props => {
       );
 
       const playlists = await axios.get(
-        // `http://localhost:5000/api/user/playlists/${localStorage.getItem(
-        //   "id"
-        // )}/playlists`, config // TODO replace this with production url
-        `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${localStorage.getItem(
-          "id"
-        )}/playlists`,
+        `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${localStorage.getItem("id")}/playlists`,
         config
       );
 
@@ -106,7 +101,7 @@ const PlaylistsContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  box-shadow: 0px -2px 2px black;
+  // box-shadow: 0px -2px 2px black;
   z-index: 5;
 `;
 

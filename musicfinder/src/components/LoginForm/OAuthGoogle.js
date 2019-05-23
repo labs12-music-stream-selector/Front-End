@@ -75,8 +75,9 @@ class OAuthGoogle extends Component {
 export default withRouter(OAuthGoogle);
 
 export function PostData(userData) {
-  const url =
-    "https://fantabulous-music-finder.herokuapp.com/api/register/oauth";
+  // const url = "http://localhost:5000/api/register/oauth"
+    
+  const url = "https://fantabulous-music-finder.herokuapp.com/api/register/oauth";
   return new Promise((resolve, reject) => {
     try {
       axios

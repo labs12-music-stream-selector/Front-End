@@ -7,12 +7,13 @@ import axios from "axios";
  */
 const Track = props => {
   const [thumbnailURL, setThumbnailURL] = useState("");
+  const [thumbnailList, updateThumbnailList] = useState([]);
 
   useEffect(() => {
     if (props.trackThumbnailURLs[props.track.video_id]) {
       setThumbnailURL(props.trackThumbnailURLs[props.track.video_id]);
     } else {
-      getSnippet(props.track.video_id);
+      // getSnippet(props.track.video_id);
     }
   }, [props.track]);
 
@@ -40,7 +41,7 @@ const Track = props => {
           />
         )}
         {props.inPlaylist ? null : <h3>{props.track.video_title}</h3>}
-        {props.inPlaylist ? null : <p>Mood: {props.track.moods}</p>}
+        {props.inPlaylist ? null : <p>Mood: {props.track.predicted_moods}</p>}
         {props.inPlaylist ? (
           <DeleteBtn
             title="remove from playlist"
@@ -80,28 +81,6 @@ const Track = props => {
       </div>
     </TrackContainer>
   );
-  function getSnippet(id) {
-    axios
-      .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${
-          process.env.REACT_APP_YTKey
-        }`
-      )
-      .then(res => {
-        // console.log("getSnippet running", res.data);
-        const newThumbnail =
-          res.data.items[0].snippet.thumbnails[
-            Object.keys(res.data.items[0].snippet.thumbnails)[2]
-          ].url;
-        setThumbnailURL(newThumbnail);
-        const newTrackThumbnailURLs = props.trackThumbnailURLs;
-        newTrackThumbnailURLs[props.track.video_id] = newThumbnail;
-        props.updateTrackThumbnailURLs(newTrackThumbnailURLs);
-      })
-      .catch(err => {
-        console.log("error: ", err);
-      });
-  }
   function returnSearchResult() {
     const title = props.allTracks.filter(track => {
       return track.video_id === props.track.video_id;
@@ -115,9 +94,12 @@ const Track = props => {
   function deleteTrack(playlistId, id) {
     axios
       .delete(
-        `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song/${id}`
+        `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song/${id}`,
+        // axios.delete(`http://localhost:5000/api/user/playlists/${playlistId}/song/${id}`,
+        { headers: { Authorization: `${localStorage.getItem("token")}` } }
       )
       .then(res => {
+        console.log("successfully deleted");
         props.fetchTracks();
       })
       .catch(err => console.log(err));

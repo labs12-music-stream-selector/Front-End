@@ -45,8 +45,8 @@ const Browser = props => {
       return props.history.push("/");
     }
     // const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
-    const url = `https://moodibeats-recommender.herokuapp.com/api/new-videos/`;
-    getTracks(url);
+    const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
+    getThumbnails();
   }, []);
 
   useEffect(() => {
@@ -93,27 +93,34 @@ const Browser = props => {
         )}
       </CurrentTrackContainer>
       <PlayerMenu>
-        <SelectMoodDropdown
+        {/* <SelectMoodDropdown
           tracksData={[...tracksData]}
           updateTracks={updateTracks}
           updateAllTracksByMood={updateAllTracksByMood}
           updateSearching={updateSearching}
-        />
-        <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} />
+        /> */}
+        {/* <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} /> */}
       </PlayerMenu>
       <ToggleButton
         showPlaylists={showPlaylists}
         updateShowPlaylists={updateShowPlaylists}
       />
       {showPlaylists ? (
-        <Playlists
-          showPlaylists={showPlaylists}
-          playlists={playlists}
-          updatePlaylists={updatePlaylists}
-          updateCurrentPlaylist={updateCurrentPlaylist}
-        />
+        <div className="generalContainer">
+          <AddPlaylist
+            playlists={props.playlists}
+            updatePlaylists={props.updatePlaylists}
+          />
+          <Playlists
+            showPlaylists={showPlaylists}
+            playlists={playlists}
+            updatePlaylists={updatePlaylists}
+            updateCurrentPlaylist={updateCurrentPlaylist}
+          />
+        </div>
       ) : (
         <InfiniteScroll
+          className="generalContainer"
           pageStart={0}
           loadMore={loadNext}
           hasMore={hasMore}
@@ -125,6 +132,12 @@ const Browser = props => {
           }
           threshold={150}
         >
+          <SelectMoodDropdown
+            tracksData={[...tracksData]}
+            updateTracks={updateTracks}
+            updateAllTracksByMood={updateAllTracksByMood}
+            updateSearching={updateSearching}
+          />
           <Container>
             {tracks.map((track, index) => {
               // if(index > 10) {              // TODO remove for production app
@@ -137,6 +150,7 @@ const Browser = props => {
                   key={index}
                   updateCurrentVideo={updateCurrentVideo}
                   updateAutoPlay={updateAutoPlay}
+                  customAxios={cookieMonster}
                   trackThumbnailURLs={trackThumbnailURLs}
                   updateTrackThumbnailURLs={updateTrackThumbnailURLs}
                 />
@@ -153,9 +167,12 @@ const Browser = props => {
     const res = await axios.get(url, {
       headers: { Authorization: localStorage.getItem("token") }
     });
+
+    console.log("Get tracks");
     const data = res.data;
     updateTracksData(data);
     updateTracks(data.slice(0, 6));
+    console.log("GET TRACKS FINISHED");
   }
 
   // async function getRelatedTracks(id) {
@@ -195,6 +212,7 @@ const Browser = props => {
     let options = {
       keys: ["moods", "video_title", "video_id"]
     };
+    console.log(allTracksByMood);
     let fuse = new Fuse(allTracksByMood, options);
     updateTracks(fuse.search(searchTerm));
     updateOffset(0); // TODO: Double Check this worked!!!!!
@@ -211,12 +229,6 @@ const Browser = props => {
       }
     }
   }
-
-  // function loadPrev() {
-  //   if (offset > 5) {
-  //     updateOffset(offset - 6);
-  //   }
-  // }
 
   function playNext() {
     if (currentPlaylist) {
@@ -241,19 +253,50 @@ const Browser = props => {
   //   //   }
   //   // });
 
-  //   axios
-  //     .get("https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/")
-  //     .then(res => {
-  //       axios.defaults.xsrfCookieName = "csrftoken";
-  //       axios.defaults.xsrfHeaderName = "X-CSRFToken";
-  //       console.log(res);
-  //       console.log(Cookies.get("csrftoken"));
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  //   // return customAxios;
-  // }
+  // let customAxios = axios.create({
+  //   headers: {
+  //     "X-CSRFToken":
+  //       "ICbMi48R3vY05o1jfqzrL65Yk8YeY5ozF4waZIm58t1Iif4nxpFllhX9YxCZaVtz"
+  //   }
+  // });
+
+  // axios
+  //   .get("https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/")
+  //   .then(res => {
+  //     console.log(res);
+  //     console.log(Cookies.get("csrftoken"));
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
+  // return customAxios;
+
+  function getThumbnails() {
+    axios
+      .get(
+        `https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/`
+      )
+      .then(res => {
+        console.log("Get thumbnails");
+        console.log(res);
+        const data = res.data;
+        console.log(data);
+        let newThumbnail = "";
+
+        let variable = {};
+
+        res.data.forEach(track => {
+          variable[track.video_id] = track.video_thumbnail;
+        });
+        console.log(variable);
+        updateTrackThumbnailURLs(variable);
+        const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
+        getTracks(url);
+      })
+      .catch(err => {
+        console.log("error: ", err);
+      });
+  }
 };
 
 export default withRouter(Browser);
@@ -265,14 +308,16 @@ const BrowserContainer = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 100%;
-  padding-top: 10px;
+  padding-top: 50px;
+  .generalContainer {
+    padding: 5px;
+  }
 `;
 
 const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  box-shadow: 0px -2px 2px black;
   z-index: 5;
   margin: 0px auto;
   padding: 60px;

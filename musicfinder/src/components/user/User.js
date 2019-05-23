@@ -15,9 +15,14 @@ class User extends React.Component {
   componentDidMount() {
     let id = localStorage.getItem(`id`);
     const url = `https://fantabulous-music-finder.herokuapp.com/api/users/${id}`;
+    // const url = `http://localhost:5000/api/users/${id}`;
     this.setState({ id: id });
     try {
-      axios.get(url).then(res => {
+      console.log("User Info Res");
+      axios.get(url, { headers: {
+        Authorization: `${localStorage.getItem("token")}`
+      }}).then(res => {
+        console.log("User Info Res", res);
         this.setState({ name: res.data.name, email: res.data.email });
       });
     } catch (err) {
@@ -33,12 +38,14 @@ class User extends React.Component {
     data = { name: this.state.name, email: this.state.email };
     id = localStorage.getItem(`id`);
     const url = `https://fantabulous-music-finder.herokuapp.com/api/users/${id}`;
+    // const url = `http://localhost:5000/api/users/${id}`;
     try {
-      axios.put(url, data).then(res => {
+      axios.put(url, data, {headers: {Authorization: `${localStorage.getItem("token")}`}})
+      .then(res => {
         this.setState({ name: res.data.name, email: res.data.email });
         alert("Your Update Submitted Successfully");
         this.props.history.push("/home");
-        window.location.reload(true);
+        // window.location.reload(true);
       });
     } catch (err) {
       console.log(err);
@@ -46,30 +53,35 @@ class User extends React.Component {
   };
   deleteMyAccount = id => {
     id = localStorage.getItem(`id`);
+    // const url = `http://localhost:5000/api/users/${id}`;
     const url = `https://fantabulous-music-finder.herokuapp.com/api/users/${id}`;
-    alert("Your Account Will be deleted permanantly");
-    try {
-      axios.delete(url).then(res => {
-        localStorage.clear();
-        sessionStorage.clear();
-        alert("Your Account deleted Successfully");
-        this.props.history.push("/");
-        window.location.reload(true);
-      });
-    } catch (err) {
-      console.log(err);
+    let answer = window.confirm("Your Account Will be deleted permanantly");
+    if(answer ){
+    
+        try {
+          axios.delete(url, {headers: {Authorization: `${localStorage.getItem("token")}`}}).then(res => {
+            localStorage.clear();
+            sessionStorage.clear();
+            alert("Your Account deleted Successfully");
+            this.props.history.push("/");
+            window.location.reload(true);
+          });
+        } catch (err) {
+          console.log(err);
+        }
     }
   };
-
   render() {
     return (
       <Wrapper>
         <UserBar>
-          <h3>Name : {this.state.name}</h3>
-          <h4> Email : {this.state.email} </h4>
+          <div className= "userInfoBar">
+              <h3>{this.state.name}</h3>
+              <h4>{this.state.email} </h4>
+          </div>
           <form>
             <div className="input-row">
-              <label for="name">Update Name:</label>
+              <h5 for="name">Update Name:</h5>
               <input
                 className="input"
                 onChange={this.handleInput}
@@ -79,7 +91,7 @@ class User extends React.Component {
               />
             </div>
             <div className="input-row">
-              <label for="email">Update Email:</label>
+              <h5 for="email">Update Email:</h5>
               <input
                 className="input"
                 onChange={this.handleInput}
@@ -90,10 +102,10 @@ class User extends React.Component {
             </div>
           </form>
 
-          <div className="btn">
-            <button onClick={this.deleteMyAccount}>
+          <div className="btn ">
+            <button className="deleteBtn " onClick={this.deleteMyAccount}>
               {" "}
-              Delete My Account permanantly
+              Delete My Account
             </button>
             <button className="updateBtn" onClick={this.updateInfo}>
               Update
@@ -117,14 +129,17 @@ const Wrapper = styled.div`
   color: #272727;
 `;
 const UserBar = styled.div`
+  
   box-shadow: 0px 4px 4px black;
   text-align: center;
   width: 400px;
   border-radius: 5px;
   background-color: white;
-
   @media (max-width: 479px) {
     width: 300px;
+  }
+  h5{
+    margin:0; padding:0;
   }
   h2,
   h3,
@@ -150,7 +165,7 @@ const UserBar = styled.div`
     }
   }
   button {
-    background-color: #009fb7;
+    background-color: green;
     border-radius: 5px;
     color: white;
     margin: 10px;
@@ -163,6 +178,9 @@ const UserBar = styled.div`
     transform: translateY(-1px);
     cursor: pointer;
     transition: all 0.1s;
+  }
+  .deleteBtn{
+    background: tomato;
   }
   .btn {
     @media (max-width: 479px) {
