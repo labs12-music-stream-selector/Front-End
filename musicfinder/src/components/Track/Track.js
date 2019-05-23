@@ -7,12 +7,13 @@ import axios from "axios";
  */
 const Track = props => {
   const [thumbnailURL, setThumbnailURL] = useState("");
+  const [thumbnailList, updateThumbnailList] = useState([]);
 
   useEffect(() => {
     if (props.trackThumbnailURLs[props.track.video_id]) {
       setThumbnailURL(props.trackThumbnailURLs[props.track.video_id]);
     } else {
-      getSnippet(props.track.video_id);
+      // getSnippet(props.track.video_id);
     }
   }, [props.track]);
 
@@ -57,34 +58,7 @@ const Track = props => {
         /> */}
     </TrackContainer>
   );
-  function getSnippet(id) {
-    axios
-      .get(
-        // `https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${
-        //   process.env.REACT_APP_YTKey
-        // }`
-        `https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/`
-      )
-      .then(res => {
-        // console.log(id);
-        // console.log(res.data);
-        const data = res.data;
-        let newThumbnail = '';
-        res.data.forEach(track => {
-          if (track.video_id === id) {
-            newThumbnail = track.video_thumbnail;
-            console.log(newThumbnail);
-          }
-        })
-        setThumbnailURL(newThumbnail);
-        const newTrackThumbnailURLs = props.trackThumbnailURLs;
-        newTrackThumbnailURLs[props.track.video_id] = newThumbnail;
-        props.updateTrackThumbnailURLs(newTrackThumbnailURLs);
-      })
-      .catch(err => {
-        console.log("error: ", err);
-      });
-  }
+
   function returnSearchResult() {
     const title = props.allTracks.filter(track => {
       return track.video_id === props.track.video_id;
