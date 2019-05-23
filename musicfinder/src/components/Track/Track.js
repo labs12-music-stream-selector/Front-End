@@ -7,12 +7,13 @@ import axios from "axios";
  */
 const Track = props => {
   const [thumbnailURL, setThumbnailURL] = useState("");
+  const [thumbnailList, updateThumbnailList] = useState([]);
 
   useEffect(() => {
     if (props.trackThumbnailURLs[props.track.video_id]) {
       setThumbnailURL(props.trackThumbnailURLs[props.track.video_id]);
     } else {
-      getSnippet(props.track.video_id);
+      // getSnippet(props.track.video_id);
     }
   }, [props.track]);
 
@@ -20,23 +21,23 @@ const Track = props => {
     <TrackContainer inPlaylist={props.inPlaylist}>
       <div>
         {props.inPlaylist ?
-          <Thumbnail 
+          <Thumbnail
             inPlaylist
             onClick={() => {
               props.updateCurrentVideo(props.track);
               props.updateAutoPlay("&autoplay=1");
-            }} 
-            key={props.track.url + props.index} 
-            src={thumbnailURL} 
+            }}
+            key={props.track.url + props.index}
+            src={thumbnailURL}
           />
           :
-          <Thumbnail 
+          <Thumbnail
             onClick={() => {
               props.updateCurrentVideo(props.track);
               props.updateAutoPlay("&autoplay=1");
-            }} 
-            key={props.track.url + props.index} 
-            src={thumbnailURL} 
+            }}
+            key={props.track.url + props.index}
+            src={thumbnailURL}
           />
         }
           {props.inPlaylist ? null
@@ -44,11 +45,11 @@ const Track = props => {
         {props.inPlaylist ? null : <p>Mood: {props.track.predicted_moods}</p>}
         {props.inPlaylist ? <DeleteBtn title='remove from playlist' onClick = {() => deleteTrack(props.inPlaylist, props.track.id)}>
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M9 9L15 15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M15 9L9 15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M9 9L15 15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M15 9L9 15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </DeleteBtn>: null}
+        </DeleteBtn> : null}
       </div>
       {/* <MoodSuggestForm
           video_id={props.track.url}
@@ -57,25 +58,6 @@ const Track = props => {
         /> */}
     </TrackContainer>
   );
-  function getSnippet(id) {
-    axios
-      .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${
-          process.env.REACT_APP_YTKey
-        }`
-      )
-      .then(res => {
-        // console.log("getSnippet running", res.data);
-        const newThumbnail = res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url
-        setThumbnailURL(newThumbnail);
-        const newTrackThumbnailURLs = props.trackThumbnailURLs;
-        newTrackThumbnailURLs[props.track.video_id] = newThumbnail; 
-        props.updateTrackThumbnailURLs(newTrackThumbnailURLs);
-      })
-      .catch(err => {
-        console.log("error: ", err);
-      });
-  }
   function returnSearchResult() {
     const title = props.allTracks.filter(track => {
       return track.video_id === props.track.video_id;

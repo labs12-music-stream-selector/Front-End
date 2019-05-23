@@ -47,6 +47,7 @@ const Browser = props => {
     // const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
     const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
     getTracks(url);
+    getThumbnails();
   }, []);
 
   useEffect(() => {
@@ -224,11 +225,6 @@ const Browser = props => {
     }
   }
 
-  // function loadPrev() {
-  //   if (offset > 5) {
-  //     updateOffset(offset - 6);
-  //   }
-  // }
 
   function playNext() {
     if (currentPlaylist) {
@@ -266,6 +262,30 @@ const Browser = props => {
     //     console.log(err);
     //   });
     return customAxios;
+  }
+
+  function getThumbnails() {
+    axios
+      .get(
+        `https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/`
+      )
+      .then(res => {
+        console.log(res);
+        const data = res.data;
+        console.log(data);
+        let newThumbnail = '';
+
+        let variable = {};
+
+        res.data.forEach(track => {
+          variable[track.video_id] = track.video_thumbnail;
+        })
+        console.log(variable);
+        updateTrackThumbnailURLs(variable);
+      })
+      .catch(err => {
+        console.log("error: ", err);
+      });
   }
 };
 
