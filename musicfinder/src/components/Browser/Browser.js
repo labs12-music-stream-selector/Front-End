@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Fuse from "fuse.js";
 import styled from "styled-components";
-import Cookies from "js-cookie";
 import Playlists from "../Playlists/Playlists.js";
 
 import SearchBar from "../SearchBar/SearchBar.js";
@@ -25,8 +24,8 @@ const Browser = props => {
   const [tracks, updateTracks] = useState([]);
 
   const [offset, updateOffset] = useState(0);
-  const [offsetMax, updateOffsetMax] = useState(6);
-  const [relatedTracks, updateRelatedTracks] = useState([]);
+  // const [offsetMax, updateOffsetMax] = useState(6);
+  // const [relatedTracks, updateRelatedTracks] = useState([]);
   const [tracksByMood, updateTracksByMood] = useState([]);
   const [hasMore, updateHasMore] = useState(true);
   const [searching, updateSearching] = useState(false);
@@ -120,9 +119,9 @@ const Browser = props => {
           hasMore={hasMore}
           initialLoad={false}
           loader={
-            <div className="loader" key={0}>
+            <Loading className="loader" key={0}>
               Loading ...
-            </div>
+            </Loading>
           }
           threshold={150}
         >
@@ -161,25 +160,25 @@ const Browser = props => {
     updateTracks(data.slice(0, 6));
   }
 
-  async function getRelatedTracks(id) {
-    const url = `https://moody-beats-recommender-api.herokuapp.com/api/${id}/`;
-    const res = await axios.get(url);
-    const relatedTracks = [];
+  // async function getRelatedTracks(id) {
+  //   const url = `https://moody-beats-recommender-api.herokuapp.com/api/${id}/`;
+  //   const res = await axios.get(url);
+  //   const relatedTracks = [];
 
-    Object.keys(res.data).forEach(key => {
-      if (
-        !["id", "songs", "mood", "video_id"].includes(key) &&
-        res.data[key] !== null &&
-        !key.includes("_link")
-      ) {
-        relatedTracks.push({
-          name: res.data[key],
-          url: res.data[`${key}_link`]
-        });
-      }
-    });
-    updateRelatedTracks(relatedTracks);
-  }
+  //   Object.keys(res.data).forEach(key => {
+  //     if (
+  //       !["id", "songs", "mood", "video_id"].includes(key) &&
+  //       res.data[key] !== null &&
+  //       !key.includes("_link")
+  //     ) {
+  //       relatedTracks.push({
+  //         name: res.data[key],
+  //         url: res.data[`${key}_link`]
+  //       });
+  //     }
+  //   });
+  //   updateRelatedTracks(relatedTracks);
+  // }
 
   async function getTracksByMood(mood) {
     const url = `https://john-moody-beats-recommender.herokuapp.com/api/${mood}`;
@@ -216,11 +215,11 @@ const Browser = props => {
     }
   }
 
-  function loadPrev() {
-    if (offset > 5) {
-      updateOffset(offset - 6);
-    }
-  }
+  // function loadPrev() {
+  //   if (offset > 5) {
+  //     updateOffset(offset - 6);
+  //   }
+  // }
 
   function playNext() {
     if (currentPlaylist) {
@@ -281,6 +280,9 @@ const Container = styled.div`
   z-index: 5;
   margin: 0px auto;
   padding: 60px;
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `;
 
 const CurrentTrackContainer = styled.div`
@@ -289,7 +291,7 @@ const CurrentTrackContainer = styled.div`
   height: 500px;
   @media (max-width: 700px) {
     flex-direction: column;
-    height: 65vw;
+    height: unset;
   }
 `;
 
@@ -305,4 +307,10 @@ const PlayerMenu = styled.div`
   width: 100%;
   list-style: none;
   padding: 5px;
+`;
+
+const Loading = styled.h3`
+  font-size: 2rem;
+  color: #efefef;
+  text-align: center;
 `;

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const Playlists = props => {
+const AddPlaylist = props => {
   const [inputData, updateInputData] = useState("");
   return (
     <CreatePlaylistForm onSubmit={createPlaylistHandler}>
@@ -18,16 +18,21 @@ const Playlists = props => {
 
   function createPlaylistHandler(e) {
     e.preventDefault();
-    const body = {
-      name: `${inputData}`,
-      user_id: `${localStorage.getItem("id")}`
+    const config = {
+      body: {
+        name: `${inputData}`,
+        user_id: `${localStorage.getItem("id")}`
+      },
+      headers: {
+        Authorization: `${localStorage.getItem("token")}`
+      }
     };
 
     axios
       .post(
-        "https://fantabulous-music-finder.herokuapp.com/api/user/playlists",
+        "https://fantabulous-music-finder.herokuapp.com/api/user/playlists"
         // "http://localhost:5000/api/user/playlists",
-        body
+        // config
       )
       .then(res => {
         console.log(res.data);
@@ -39,7 +44,7 @@ const Playlists = props => {
   }
 };
 
-export default Playlists;
+export default AddPlaylist;
 
 const CreatePlaylistForm = styled.form`
   display: flex;

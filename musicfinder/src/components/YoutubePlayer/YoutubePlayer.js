@@ -43,17 +43,10 @@ const PlayerContainer = styled.div`
   margin-left: 5px;
   z-index: 0;
   position: relative;
-  @media (max-width: 800px){
-    margin-left: 0;
-    margin-right: 0;
-    .player-wrapper{
-    }
-  }
+  
   .player-wrapper {
-    // padding-bottom: 56.25%;
-    padding-top: 25px;
-    height: 300px;
-    width: 500px;
+    height: 100%;
+    width: 100%;
     #player {
       position: absolute;
       top: 0;
@@ -61,6 +54,14 @@ const PlayerContainer = styled.div`
       width: 100%;
       height: 100%;
       border: 0px;
+    }
+  }
+
+  @media (max-width: 800px){
+    margin-left: 0;
+    margin-right: 0;
+    .player-wrapper{
+      height: 50vw;
     }
   }
     

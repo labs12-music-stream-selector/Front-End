@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-import UserPlaylists from "../UserPlaylists/GetUserPlaylists.js";
 import defaultImg from "../../imgs/default-song-img.jpg";
 
 const Playlists = props => {
-  const [thumbnailURL, updateThumbnailURL] = useState("");
 
   useEffect(() => {
     getPlaylists();
@@ -16,26 +14,21 @@ const Playlists = props => {
     return (
       <PlaylistsContainer>
         {props.playlists.map((playlist, index) => {
-          if (playlist.video_ids.length > 0) {
-            return (
-              <PlaylistCard key={`${playlist.name}`}>
-                <PlaylistImg
-                  src={playlist.thumbnail}
-                  onClick={() => {
-                    props.updateCurrentPlaylist(playlist.id);
-                  }}
-                />
-                <PlaylistTitle>{playlist.name}</PlaylistTitle>
-              </PlaylistCard>
-            );
-          } else {
-            return (
-              <PlaylistCard key={`${index}`}>
-                <PlaylistImg src={defaultImg} />
-                <PlaylistTitle>{playlist.name}</PlaylistTitle>
-              </PlaylistCard>
-            );
-          }
+          return (
+            <PlaylistCard key={`${playlist.name}`}>
+              <PlaylistImg
+                src={
+                  playlist.video_ids.length > 0
+                    ? playlist.thumbnail
+                    : defaultImg
+                }
+                onClick={() => {
+                  props.updateCurrentPlaylist(playlist.id);
+                }}
+              />
+              <PlaylistTitle>{playlist.name}</PlaylistTitle>
+            </PlaylistCard>
+          );
         })}
       </PlaylistsContainer>
     );
@@ -46,6 +39,14 @@ const Playlists = props => {
   async function getPlaylists() {
     try {
       let vidList = [];
+      const config = {
+        body: {
+          user_id: `${localStorage.getItem("id")}`
+        },
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`
+        }
+      };
       const songsThumbnails = await axios.get(
         "https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/"
       );
@@ -53,10 +54,11 @@ const Playlists = props => {
       const playlists = await axios.get(
         // `http://localhost:5000/api/user/playlists/${localStorage.getItem(
         //   "id"
-        // )}/playlists` // TODO replace this with production url
+        // )}/playlists`, config // TODO replace this with production url
         `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${localStorage.getItem(
           "id"
-        )}/playlists`
+        )}/playlists`,
+        config
       );
 
       const playlistsSongs = playlists.data.map(async playlist => {
@@ -64,7 +66,8 @@ const Playlists = props => {
           // `http://localhost:5000/api/user/playlists/${playlist.id}/songs` // TODO replace this with production url
           `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
             playlist.id
-          }/songs`
+          }/songs`,
+          config
         );
 
         if (songList.data.length > 0) {
