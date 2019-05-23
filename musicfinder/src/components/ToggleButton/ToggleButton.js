@@ -60,7 +60,7 @@ const ShowPlaylistsButton = styled.button`
   color: ${props => (props.showPlaylists ? "ivory" : "#dcdcdc")};
   box-shadow: ${props =>
     props.showPlaylists
-      ? "0px -4px 2px black, 2px -2px 2px black"
+      ? "0px -4px 2px black, -2px -2px 2px black"
       : "0px -2px 2px black, inset 0px -2px 2px black;"};
   ${props => (props.showPlaylists ? "z-index: 10" : null)};
   outline: none;
