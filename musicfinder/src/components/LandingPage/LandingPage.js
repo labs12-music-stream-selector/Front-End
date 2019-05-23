@@ -90,6 +90,7 @@ const LandingPage = props => {
                 alt="Logan Hufstetler"
               />
               <h4>Logan Hufstetler</h4>
+              <p>Software Engineer</p>
                   <div>
                     <a href="https://github.com/BlissCatalyst">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/logan-hufstetler-145611a2/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -101,6 +102,7 @@ const LandingPage = props => {
                 alt="Davina Taylor"
               />
               <h4>Davina Taylor</h4>
+              <p>Software Engineer</p>
                   <div>
                     <a href="https://github.com/lilvina">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/davinataylor123/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -112,6 +114,7 @@ const LandingPage = props => {
                 alt="John Humphreys"
               />
               <h4>John Humphreys</h4>
+              <p>Data Scientist</p>
                   <div>
                     <a href="https://github.com/johnpharmd">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/johnhumphreys/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -123,6 +126,7 @@ const LandingPage = props => {
                 alt="Md Kawsar Hussen"
               />
               <h4>Md Kawsar Hussen</h4>
+              <p>Software Engineer</p>
                   <div>
                     <a href="https://github.com/kkingbd ">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/kkingbd/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -134,6 +138,7 @@ const LandingPage = props => {
                 alt="Jonathan Bernal"
               />
               <h4>Jonathan Bernal</h4>
+              <p>Software Engineer</p>
                   <div>
                     <a href="https://github.com/BlueSandsWeb ">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/jon-bernal/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -145,6 +150,7 @@ const LandingPage = props => {
                 alt="Sammy Lee"
               />
               <h4>Sammy Lee</h4>
+              <p>Data Scientist</p>
                   <div>
                     <a href="github.com/Captmoonshot">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
                     <a href="https://www.linkedin.com/in/sammy-lee-89944282/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
@@ -156,6 +162,7 @@ const LandingPage = props => {
                 alt="Xander Jake de los Santos"
               />
               <h4>Xander Jake de los Santos</h4>
+              <p>Software Engineer</p>
 
                   <div>
                     <a href="https://github.com/xanderjakeq">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
@@ -282,26 +289,38 @@ const Team = styled.div`
   }
   ul {
     display: flex;
-    justify-content: start;
+    justify-content: space-evenly;
     flex-wrap: wrap;
+    flex-direction: row;
     list-style: none;
-    margin: 5px auto;
-    padding: 0;
-    width: fit-content;
+    margin: 5px;
+    padding: 2px 16px;
   }
   li {
     display: flex;
     flex-direction: column;
+    max-width: 275px;
     align-items: center;
-    margin: 15px 0;
-    width: 33.333%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 15px;
+    width: 100%;
     text-align: left;
     align-self: flex-start;
   }
   img {
-    width: 100px;
+    width: 100%;
+    border-radius: 6px 6px 0 0;
     height: auto;
-    // border-radius: 100%;
+  }
+  h4 {
+    font-size: 1.25rem;
+    padding-top: 10px;
+  }
+  p {
+    font-size: 0.9rem;
+    padding-bottom: 5px;
   }
   a {
     font-weight:bold;
@@ -319,23 +338,42 @@ const Team = styled.div`
     ul {
       align-items: center;
       justify-content: space-evenly;
-      width: 450px;
+      width: 90%;
+      margin: 0 auto;
     }
     li {
       align-self: unset;
-      width: 190px;
+
     }
   }
   @media (max-width: 500px) {
     font-size: 1.2em;
     ul {
-      width: 300px;
+      width: 80%;
+      margin: 0 auto;
     }
     li {
-      width: 126px;
+
       img {
         margin-bottom: 10px;
       }
+    }
+    h4 {
+      font-size: 1rem;
+      padding: 5px;
+      text-align: center;
+    }
+    p {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media(max-width: 300px) {
+    ul {
+      h4 {
+        font-size: 0.8rem;
+      }
+
     }
   }
 `;
