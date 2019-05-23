@@ -90,10 +90,22 @@ const LandingPage = props => {
                 alt="Logan Hufstetler"
               />
               <h4>Logan Hufstetler</h4>
-                  <div>
-                    <a href="https://github.com/BlissCatalyst">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
-                    <a href="https://www.linkedin.com/in/logan-hufstetler-145611a2/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
-                  </div>
+              <div>
+                <a href="https://github.com/BlissCatalyst">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://github.com/favicon.ico"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/logan-hufstetler-145611a2/">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                  />
+                </a>
+              </div>
             </li>
             <li>
               <img
@@ -101,10 +113,22 @@ const LandingPage = props => {
                 alt="Davina Taylor"
               />
               <h4>Davina Taylor</h4>
-                  <div>
-                    <a href="https://github.com/lilvina">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
-                    <a href="https://www.linkedin.com/in/davinataylor123/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
-                  </div>
+              <div>
+                <a href="https://github.com/lilvina">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://github.com/favicon.ico"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/davinataylor123/">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                  />
+                </a>
+              </div>
             </li>
             <li>
               <img
@@ -112,10 +136,22 @@ const LandingPage = props => {
                 alt="John Humphreys"
               />
               <h4>John Humphreys</h4>
-                  <div>
-                    <a href="https://github.com/johnpharmd">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
-                    <a href="https://www.linkedin.com/in/johnhumphreys/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
-                  </div>
+              <div>
+                <a href="https://github.com/johnpharmd">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://github.com/favicon.ico"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/johnhumphreys/">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                  />
+                </a>
+              </div>
             </li>
             <li>
               <img
@@ -123,10 +159,22 @@ const LandingPage = props => {
                 alt="Md Kawsar Hussen"
               />
               <h4>Md Kawsar Hussen</h4>
-                  <div>
-                    <a href="https://github.com/kkingbd ">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
-                    <a href="https://www.linkedin.com/in/kkingbd/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
-                  </div>
+              <div>
+                <a href="https://github.com/kkingbd ">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://github.com/favicon.ico"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/kkingbd/">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                  />
+                </a>
+              </div>
             </li>
             <li>
               <img
@@ -134,10 +182,22 @@ const LandingPage = props => {
                 alt="Jonathan Bernal"
               />
               <h4>Jonathan Bernal</h4>
-                  <div>
-                    <a href="https://github.com/BlueSandsWeb ">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
-                    <a href="https://www.linkedin.com/in/jon-bernal/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
-                  </div>
+              <div>
+                <a href="https://github.com/BlueSandsWeb ">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://github.com/favicon.ico"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/jon-bernal/">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                  />
+                </a>
+              </div>
             </li>
             <li>
               <img
@@ -145,10 +205,22 @@ const LandingPage = props => {
                 alt="Sammy Lee"
               />
               <h4>Sammy Lee</h4>
-                  <div>
-                    <a href="github.com/Captmoonshot">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
-                    <a href="https://www.linkedin.com/in/sammy-lee-89944282/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
-                  </div>
+              <div>
+                <a href="github.com/Captmoonshot">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://github.com/favicon.ico"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/sammy-lee-89944282/">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                  />
+                </a>
+              </div>
             </li>
             <li>
               <img
@@ -157,11 +229,22 @@ const LandingPage = props => {
               />
               <h4>Xander Jake de los Santos</h4>
 
-                  <div>
-                    <a href="https://github.com/xanderjakeq">  <img className="linkedImg" src="https://github.com/favicon.ico"></img></a>
-                    <a href="https://www.linkedin.com/in/xanderjakeq/">  <img className="linkedImg" src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"></img></a>
-                  </div>
-
+              <div>
+                <a href="https://github.com/xanderjakeq">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://github.com/favicon.ico"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/xanderjakeq/">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                  />
+                </a>
+              </div>
             </li>
           </ul>
         </div>
@@ -178,7 +261,7 @@ export default LandingPage;
 
 const LandingPageContainer = styled.div`
   color: ivory;
-  margin-top: -40px;
+  margin-top: 0px;
   * {
     margin: 0;
   }
@@ -189,7 +272,7 @@ const LandingPageContainer = styled.div`
       overflow: hidden;
     }
   }
-  .linkedImg{
+  .linkedImg {
     height: 30px;
     width: 30px;
     margin: 4px;
@@ -304,7 +387,7 @@ const Team = styled.div`
     // border-radius: 100%;
   }
   a {
-    font-weight:bold;
+    font-weight: bold;
     font-size: 15px;
     text-decoration: none;
     text-align: center;

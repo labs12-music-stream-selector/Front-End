@@ -42,7 +42,7 @@ const ShowSongsButton = styled.button`
   box-shadow: ${props =>
     !props.showPlaylists
       ? "0px -4px 2px black, 2px -2px 2px black"
-      : "0px -2px 2px black"};
+      : "0px -2px 2px black, inset 0px -2px 2px black;"};
   ${props => (!props.showPlaylists ? "z-index: 10" : null)};
 `;
 
@@ -57,7 +57,7 @@ const ShowPlaylistsButton = styled.button`
   box-shadow: ${props =>
     props.showPlaylists
       ? "0px -4px 2px black, 2px -2px 2px black"
-      : "0px -2px 2px black"};
+      : "0px -2px 2px black, inset 0px -2px 2px black;"};
   ${props => (props.showPlaylists ? "z-index: 10" : null)};
 `;
 

@@ -120,9 +120,9 @@ const Browser = props => {
           hasMore={hasMore}
           initialLoad={false}
           loader={
-            <div className="loader" key={0}>
+            <Loading className="loader" key={0}>
               Loading ...
-            </div>
+            </Loading>
           }
           threshold={150}
         >
@@ -308,4 +308,10 @@ const PlayerMenu = styled.div`
   width: 100%;
   list-style: none;
   padding: 5px;
+`;
+
+const Loading = styled.h3`
+  font-size: 2rem;
+  color: #efefef;
+  text-align: center;
 `;
