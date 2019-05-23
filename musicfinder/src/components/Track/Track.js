@@ -91,7 +91,7 @@ const Track = props => {
         }`
       )
       .then(res => {
-        console.log("getSnippet running", res.data);
+        // console.log("getSnippet running", res.data);
         const newThumbnail =
           res.data.items[0].snippet.thumbnails[
             Object.keys(res.data.items[0].snippet.thumbnails)[2]
@@ -121,7 +121,6 @@ const Track = props => {
         `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song/${id}`
       )
       .then(res => {
-        console.log("successfully deleted");
         props.fetchTracks();
       })
       .catch(err => console.log(err));

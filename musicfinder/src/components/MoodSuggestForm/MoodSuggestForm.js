@@ -20,21 +20,17 @@ export default class MoodSuggestForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.props);
     const newMood = {
       video_id: this.props.trackProps.track.video_id,
       video_title: this.props.trackProps.track.video_title,
       correct_moods: this.state.suggestedMood
     };
-    console.log({ ...newMood });
     axios
       .post(
         "https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/",
         { ...newMood }
       )
-      .then(res => {
-        console.log(res);
-      })
+      .then(res => {})
       .catch(err => {
         console.log(err);
       });

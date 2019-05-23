@@ -12,9 +12,7 @@ export default class GetUserPlaylists extends Component {
         mine: true,
         maxResults: 50
       })
-      .then(res => {
-        console.log(res);
-      })
+      .then(res => {})
       .catch(err => {
         console.log(err);
       });

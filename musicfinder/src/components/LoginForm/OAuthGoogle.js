@@ -14,7 +14,6 @@ class OAuthGoogle extends Component {
   signup = (res, type) => {
     let postData;
     if (type === "google" && res.w3.U3) {
-      console.log(res);
       postData = {
         name: res.w3.ig,
         provider: type,
@@ -52,8 +51,9 @@ class OAuthGoogle extends Component {
     // "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com"
     const CLIENTID_LOGAN =
       "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
-      
-    const CLIENTID_JON = "609694193472-8raeak24684f9qq5jr8qthaerev50jht.apps.googleusercontent.com";
+
+    const CLIENTID_JON =
+      "609694193472-8raeak24684f9qq5jr8qthaerev50jht.apps.googleusercontent.com";
 
     function keyChanger() {
       if (process.env.NODE_ENV !== "") {

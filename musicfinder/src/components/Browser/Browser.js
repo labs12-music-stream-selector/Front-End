@@ -126,7 +126,6 @@ const Browser = props => {
           }
           threshold={150}
         >
-          {console.log("-----------------------------------")}
           <Container>
             {tracks.map((track, index) => {
               // if(index > 10) {              // TODO remove for production app
@@ -200,7 +199,6 @@ const Browser = props => {
     };
     let fuse = new Fuse(allTracksByMood, options);
     updateTracks(fuse.search(searchTerm));
-    console.log(fuse.search(searchTerm));
     updateOffset(0); // TODO: Double Check this worked!!!!!
   }
 
@@ -237,27 +235,27 @@ const Browser = props => {
   }
 
   // Get CSRF token from django cookie
-  function cookieMonster() {
-    // let customAxios = axios.create({
-    //   headers: {
-    //     "X-CSRFToken":
-    //       "ICbMi48R3vY05o1jfqzrL65Yk8YeY5ozF4waZIm58t1Iif4nxpFllhX9YxCZaVtz"
-    //   }
-    // });
+  // function cookieMonster() {
+  //   // let customAxios = axios.create({
+  //   //   headers: {
+  //   //     "X-CSRFToken":
+  //   //       "ICbMi48R3vY05o1jfqzrL65Yk8YeY5ozF4waZIm58t1Iif4nxpFllhX9YxCZaVtz"
+  //   //   }
+  //   // });
 
-    axios
-      .get("https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/")
-      .then(res => {
-        axios.defaults.xsrfCookieName = "csrftoken";
-        axios.defaults.xsrfHeaderName = "X-CSRFToken";
-        console.log(res);
-        console.log(Cookies.get("csrftoken"));
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    // return customAxios;
-  }
+  //   axios
+  //     .get("https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/")
+  //     .then(res => {
+  //       axios.defaults.xsrfCookieName = "csrftoken";
+  //       axios.defaults.xsrfHeaderName = "X-CSRFToken";
+  //       console.log(res);
+  //       console.log(Cookies.get("csrftoken"));
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  //   // return customAxios;
+  // }
 };
 
 export default withRouter(Browser);

@@ -16,7 +16,6 @@ export default class NewAuth extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state);
     this.signIn();
   }
 
@@ -41,14 +40,12 @@ export default class NewAuth extends Component {
         ]
       })
       .then(() => {
-        console.log(".gapi.client.init.then running");
         this.setState({
           GoogleAuth: window.gapi.auth2.getAuthInstance()
         });
         // GoogleAuth = window.gapi.auth2.getAuthInstance();
       })
       .catch(err => console.log(err));
-    console.log();
   };
 
   signIn = () => {
@@ -58,8 +55,6 @@ export default class NewAuth extends Component {
     this.state.GoogleAuth.signIn()
       .then(
         res => {
-          console.log(window.gapi.auth2.getAuthInstance());
-          console.log(res);
           this.props.responseGoogle(res);
         },
         err => {
