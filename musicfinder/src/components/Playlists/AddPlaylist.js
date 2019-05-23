@@ -18,21 +18,12 @@ const AddPlaylist = props => {
 
   function createPlaylistHandler(e) {
     e.preventDefault();
-    const config = {
-      body: {
-        name: `${inputData}`,
-        user_id: `${localStorage.getItem("id")}`
-      },
-      headers: {
-        Authorization: `${localStorage.getItem("token")}`
-      }
-    };
-
     axios
       .post(
-        "https://fantabulous-music-finder.herokuapp.com/api/user/playlists"
+        "https://fantabulous-music-finder.herokuapp.com/api/user/playlists",
         // "http://localhost:5000/api/user/playlists",
-        // config
+        {name: `${inputData}`,user_id: localStorage.getItem("id"),
+        }, {headers: {Authorization: `${localStorage.getItem("token")}`}}
       )
       .then(res => {
         console.log(res.data);
