@@ -14,6 +14,7 @@ import YoutubePlayer from "../YoutubePlayer/YoutubePlayer.js";
 import DisplayPlaylist from "../DisplayPlaylist/DisplayPlaylist.js";
 import SelectMoodDropdown from "../SelectMoodDropdown/SelectMoodDropdown.js";
 import ToggleButton from "../ToggleButton/ToggleButton.js";
+import AddPlaylist from "../Playlists/AddPlaylist.js";
 
 const Browser = props => {
   // All data for tracks
@@ -33,17 +34,19 @@ const Browser = props => {
   const [autoPlay, updateAutoPlay] = useState("");
   //update current playlist to change the content in DisplayPlaylist component
   const [currentPlaylist, updateCurrentPlaylist] = useState();
+  const [tracksCurrentPlaylist, updateTracksCurrentPlaylist] = useState([]);
 
   const [trackThumbnailURLs, updateTrackThumbnailURLs] = useState({});
   //  toggle songs/playlists view
   const [showPlaylists, updateShowPlaylists] = useState(false);
+  const [playlists, updatePlaylists] = useState([]);
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
       return props.history.push("/");
     }
     // const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
-    const url = `https://moodibeats-recommender.herokuapp.com/api/new-videos/`;
+    const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
     getTracks(url);
   }, []);
 
@@ -70,11 +73,19 @@ const Browser = props => {
         )}
       />
       <CurrentTrackContainer>
-        <YoutubePlayer track={currentVideo} autoPlay={autoPlay} />
+        <YoutubePlayer
+          track={currentVideo}
+          autoPlay={autoPlay}
+          isPlaylistSelected={currentPlaylist}
+          tracksList={tracksCurrentPlaylist}
+          updateCurrentVideo={updateCurrentVideo}
+          playNext={playNext}
+        />
         {currentPlaylist && (
           <DisplayPlaylist
             playlistId={currentPlaylist}
             currentTrack={currentVideo}
+            updateTracksCurrentPlaylist={updateTracksCurrentPlaylist}
             allTracks={tracksData}
             trackThumbnailURLs={trackThumbnailURLs}
             updateCurrentVideo={updateCurrentVideo}
@@ -89,6 +100,7 @@ const Browser = props => {
           updateAllTracksByMood={updateAllTracksByMood}
           updateSearching={updateSearching}
         />
+        <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} />
       </PlayerMenu>
       <ToggleButton
         showPlaylists={showPlaylists}
@@ -97,6 +109,8 @@ const Browser = props => {
       {showPlaylists ? (
         <Playlists
           showPlaylists={showPlaylists}
+          playlists={playlists}
+          updatePlaylists={updatePlaylists}
           updateCurrentPlaylist={updateCurrentPlaylist}
         />
       ) : (
@@ -106,13 +120,13 @@ const Browser = props => {
           hasMore={hasMore}
           initialLoad={false}
           loader={
-            <div className="loader" key={0}>
+            <Loading className="loader" key={0}>
               Loading ...
-            </div>
+            </Loading>
           }
           threshold={150}
         >
-          {console.log("-----------------------------------")}
+          {/* {console.log("-----------------------------------")} */}
           <Container>
             {tracks.map((track, index) => {
               // if(index > 10) {              // TODO remove for production app
@@ -208,6 +222,20 @@ const Browser = props => {
     }
   }
 
+  function playNext() {
+    if (currentPlaylist) {
+      const current = tracksCurrentPlaylist.filter(
+        track => track.video_id === currentVideo.video_id
+      )[0];
+      const trackOnQueue = tracksCurrentPlaylist.filter(
+        track => track.playlist_index === current.playlist_index + 1
+      )[0];
+      if (trackOnQueue) {
+        updateCurrentVideo(trackOnQueue);
+      }
+    }
+  }
+
   // Get CSRF token from django cookie
   function cookieMonster() {
     axios.defaults.xsrfCookieName = "csrftoken";
@@ -249,7 +277,13 @@ const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 60px auto;
+  box-shadow: 0px -2px 2px black;
+  z-index: 5;
+  margin: 0px auto;
+  padding: 60px;
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `;
 
 const CurrentTrackContainer = styled.div`
@@ -258,48 +292,26 @@ const CurrentTrackContainer = styled.div`
   height: 500px;
   @media (max-width: 700px) {
     flex-direction: column;
-    height: 65vw;
+    height: unset;
   }
-`;
-const SelectMoodDropdownStyle = styled.div`
-  background-color: tomato;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-`;
-
-const SelectMoodListLabel = styled.div`
-  box-sizing: border-box;
-  display: block;
-  background-color: #009fb7;
-  padding: 5px;
-  width: 100%;
-  color: white;
-`;
-
-const SelectMoodList = styled.div`
-  box-sizing: border-box;
-  padding: 0px;
-  margin: 0px;
-  width: 100%;
-  ${props => {
-    if (props.showList) {
-      return `display: none;`;
-    }
-  }}
 `;
 
 const PlayerMenu = styled.div`
   z-index: 100;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: stretch;
   flex-direction: row;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
-  width: 100px;
+  width: 100%;
   list-style: none;
   padding: 5px;
+`;
+
+const Loading = styled.h3`
+  font-size: 2rem;
+  color: #efefef;
+  text-align: center;
 `;

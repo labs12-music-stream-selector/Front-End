@@ -90,7 +90,6 @@ const RouterDiv = styled.div`
   width: 100%;
   min-height: 100vh;
   background: #272727;
-  padding-top: 40px;
 `;
 
 const NavDiv = styled.div`

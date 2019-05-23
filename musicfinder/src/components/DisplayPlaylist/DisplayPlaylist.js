@@ -12,6 +12,10 @@ const DisplayPlaylist = props => {
     fetchTracks();
   }, [props.playlistId]);
 
+  useEffect(() => {
+    props.updateTracksCurrentPlaylist(tracks);
+  }, [tracks]);
+
   return (
     <DisplayPlaylistContainer>
       <h2>Playlist</h2>
@@ -21,45 +25,28 @@ const DisplayPlaylist = props => {
           addCurrentTrack(props.playlistId, props.currentTrack.video_id);
         }}
       >
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M12 8V16"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M8 12H16"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 8V16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M8 12H16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </AddBtn>
       <DragDropContext onDragEnd={handleOrderChange}>
         <ul>
-          <Droppable droppableId="draggable">
+          <Droppable 
+            droppableId="droppable" 
+            direction={window.innerWidth < 700? 'horizontal' : 'vertical'}
+            >
             {(provided, snapshot) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
+              <div 
+                id='listContainer'
+                {...provided.droppableProps} 
+                ref={provided.innerRef}
+                >
                 {tracks.map((track, index) => (
                   <Draggable
-                    key={track.video_id}
-                    draggableId={track.video_id || "adfsad"}
+                    key={`${track.video_id}${index}`}
+                    draggableId={`${track.video_id}${index}`}
                     index={index}
                   >
                     {(provided, snapshot) => (
@@ -115,6 +102,10 @@ const DisplayPlaylist = props => {
         }/songs`
       )
       .then(res => {
+        if(res.data.length === 0){
+          setTracks([]);
+          return
+        }
         const newTracksArray = res.data.map(track => {
           let newTrack = { ...track, video_id: track.song_id };
           return newTrack;
@@ -124,7 +115,6 @@ const DisplayPlaylist = props => {
       })
       .catch(err => {
         console.log(err);
-        setTracks([]);
       });
   }
 
@@ -135,10 +125,9 @@ const DisplayPlaylist = props => {
     let newArr = [];
     for (let i = 1; i <= arr.length; i++) {
       newArr.push(
-        arr.filter(
-          track => track.playlist_index === i || track.playlist_index === null
-        )[0]
+        arr.filter(track => track.playlist_index === i || track.playlist_index === null)[0]
       );
+      arr.splice(0, 1)
     }
     return newArr;
   }
@@ -196,10 +185,6 @@ const DisplayPlaylist = props => {
 
 export default DisplayPlaylist;
 
-const Thumbnail = styled.img`
-  width: 100px;
-`;
-
 const AddBtn = styled.button`
   background: none;
   border: none;
@@ -222,21 +207,26 @@ const DisplayPlaylistContainer = styled.div`
     margin: 0;
     color: #eff1f3;
   }
-  ul {
-    width: min-content;
-    min-width: 310px;
+  ul{
     list-style: none;
     padding: 0;
     margin: 0;
     height: 86%;
+    min-width: 260px;
     overflow-y: scroll;
     @media (max-width: 700px) {
       height: 300px;
+      min-width: 310px;
       display: flex;
-      overflow-x: scroll;
       overflow-y: unset;
       height: max-content;
-      width: calc(100% -5px);
+      width: 100%; 
+      overflow-y: unset;
+      #listContainer{
+        display: flex;
+        overflow-x: scroll;
+        width: 100%;
+      }
     }
   }
 `;
