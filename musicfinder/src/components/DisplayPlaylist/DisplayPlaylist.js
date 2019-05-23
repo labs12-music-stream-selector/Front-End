@@ -85,7 +85,10 @@ const DisplayPlaylist = props => {
     axios
       .post(
         `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song`,
-        { song_id }
+        { 
+          song_id,
+          playlist_index: tracks.length+1
+        }
       )
       .then(res => {
         console.log("added successfully");
@@ -125,9 +128,8 @@ const DisplayPlaylist = props => {
     let newArr = [];
     for (let i = 1; i <= arr.length; i++) {
       newArr.push(
-        arr.filter(track => track.playlist_index === i || track.playlist_index === null)[0]
+        arr.filter(track => track.playlist_index === i)[0]
       );
-      arr.splice(0, 1)
     }
     return newArr;
   }
