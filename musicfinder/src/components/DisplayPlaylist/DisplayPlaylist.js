@@ -67,13 +67,6 @@ const DisplayPlaylist = props => {
                 id='listContainer'
                 {...provided.droppableProps} 
                 ref={provided.innerRef}
-                // style={
-                //   {
-                //     display: 'flex',
-                //     overflowX: 'scroll',
-                //     width: '100%'
-                //   }
-                // }
                 >
                 {tracks.map((track, index) => (
                   <Draggable
@@ -217,10 +210,6 @@ const DisplayPlaylist = props => {
 };
 
 export default DisplayPlaylist;
-
-const Thumbnail = styled.img`
-  width: 100px;
-`;
 
 const AddBtn = styled.button`
   background: none;
