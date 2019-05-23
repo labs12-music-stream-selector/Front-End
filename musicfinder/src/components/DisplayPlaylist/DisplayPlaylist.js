@@ -126,11 +126,10 @@ const DisplayPlaylist = props => {
    */
   function order(arr) {
     let newArr = [];
-    for (let i = 1; i <= arr.length; i++) {
-      newArr.push(
-        arr.filter(track => track.playlist_index === i)[0]
-      );
-    }
+    // get all playlist indexes and sort them
+    const sortedIndexes = arr.map(track => track.playlist_index).sort((a,b) => a-b);
+    // go through the sorted indexes and push the track that have the index and push it to newArr in the sorted order
+    sortedIndexes.forEach(index => newArr.push(arr.filter(track => track.playlist_index === index)[0]));
     return newArr;
   }
 
