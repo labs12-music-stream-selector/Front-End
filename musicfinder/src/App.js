@@ -6,7 +6,6 @@ import styled from "styled-components";
 import LandingPage from "./components/LandingPage/LandingPage.js";
 import TermsOfService from "./components/TermsOfService/TermsOfService.js";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.js";
-import GetUserPlaylists from "./components/UserPlaylists/GetUserPlaylists.js";
 import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer.js";
 import Browser from "./components/Browser/Browser.js";
 import User from "./components/user/User.js";

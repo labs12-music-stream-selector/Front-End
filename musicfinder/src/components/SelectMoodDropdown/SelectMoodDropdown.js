@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import Fuse from "fuse.js";
-
-import Track from "../Track/Track.js";
 
 const SelectMoodDropdown = props => {
   // const [allTracksByMood, updateAllTracksByMood] = useState([]);
   const [showList, updateShowList] = useState(true);
   const [displayedMood, updateDisplayedMood] = useState("all");
-
-  // useEffect(() => {}, [])
 
   return (
     <SelectMoodDropdownDiv>

@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-import UserPlaylists from "../UserPlaylists/GetUserPlaylists.js";
 import defaultImg from "../../imgs/default-song-img.jpg";
 
 const Playlists = props => {
-  const [thumbnailURL, updateThumbnailURL] = useState("");
 
   useEffect(() => {
     getPlaylists();

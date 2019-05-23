@@ -8,7 +8,7 @@ import PatreonButton from "../Patreon/PatreonButton.js";
 
 import records from "../../imgs/recordCollection.jpg";
 import painting from "../../imgs/painting.jpg";
-import playlist from "../../imgs/playlist.jpg";
+import recordPlayer from "../../imgs/recordPlayer.jpg";
 import moodi from "../../imgs/logoWord.svg";
 
 const LandingPage = props => {
@@ -43,10 +43,10 @@ const LandingPage = props => {
           area="feature-1"
           className="feature-details"
         >
-          <h2>Browse Free Curated Songs</h2>
+          <h2>Creator Friendly</h2>
           <p>
-            over 60 curated songs guaranteed free to use on your stream or
-            videos.
+            MoodiBeats the app designed for content creators who want royalty free music that doesn't cost an arm and a leg.
+            Make playlists  based on the mood you are looking for where the music is always fresh.
           </p>
         </Cell>
         <Cell height={1} center middle area="img-1" className="feature-img">
@@ -62,8 +62,12 @@ const LandingPage = props => {
           area="feature-2"
           className="feature-details"
         >
-          <h2>Search songs by mood</h2>
-          <p>Choose just the right music for the theme of your content.</p>
+          <h2>Data Driven</h2>
+          <p>
+            MoodiBeats cares about how you feel.  That's why we engineered content-based filtering on text meta-data of over 1000
+            copyright free YouTube music videos.  We then trained a classification machine learning algorithm to generate predictions
+            of moods from that meta-data.
+          </p>
         </Cell>
         <Cell
           height={1}
@@ -72,11 +76,11 @@ const LandingPage = props => {
           area="feature-3"
           className="feature-details"
         >
-          <h2>Create Playlists</h2>
-          <p>Group your favorite songs together.</p>
+          <h2>Have Fun!</h2>
+          <p></p>
         </Cell>
         <Cell height={1} center middle area="img-3" className="feature-img">
-          <img src={playlist} alt="playlist" />
+          <img src={recordPlayer} alt="playlist" />
         </Cell>
       </Grid>
 
@@ -90,12 +94,14 @@ const LandingPage = props => {
                 alt="Logan Hufstetler"
               />
               <h4>Logan Hufstetler</h4>
+              <p>Software Engineer</p>
               <div>
                 <a href="https://github.com/BlissCatalyst">
                   {" "}
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/logan-hufstetler-145611a2/">
@@ -103,6 +109,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -113,12 +120,14 @@ const LandingPage = props => {
                 alt="Davina Taylor"
               />
               <h4>Davina Taylor</h4>
+              <p>Software Engineer</p>
               <div>
                 <a href="https://github.com/lilvina">
                   {" "}
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/davinataylor123/">
@@ -126,6 +135,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -136,12 +146,14 @@ const LandingPage = props => {
                 alt="John Humphreys"
               />
               <h4>John Humphreys</h4>
+              <p>Data Scientist</p>
               <div>
                 <a href="https://github.com/johnpharmd">
                   {" "}
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/johnhumphreys/">
@@ -149,6 +161,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -159,12 +172,14 @@ const LandingPage = props => {
                 alt="Md Kawsar Hussen"
               />
               <h4>Md Kawsar Hussen</h4>
+              <p>Software Engineer</p>
               <div>
                 <a href="https://github.com/kkingbd ">
                   {" "}
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/kkingbd/">
@@ -172,6 +187,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -182,12 +198,14 @@ const LandingPage = props => {
                 alt="Jonathan Bernal"
               />
               <h4>Jonathan Bernal</h4>
+              <p>Software Engineer</p>
               <div>
                 <a href="https://github.com/BlueSandsWeb ">
                   {" "}
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/jon-bernal/">
@@ -195,6 +213,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -205,12 +224,14 @@ const LandingPage = props => {
                 alt="Sammy Lee"
               />
               <h4>Sammy Lee</h4>
+              <p>Data Scientist</p>
               <div>
                 <a href="github.com/Captmoonshot">
                   {" "}
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/sammy-lee-89944282/">
@@ -218,6 +239,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -228,13 +250,14 @@ const LandingPage = props => {
                 alt="Xander Jake de los Santos"
               />
               <h4>Xander Jake de los Santos</h4>
-
+              <p>Software Engineer</p>
               <div>
                 <a href="https://github.com/xanderjakeq">
                   {" "}
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/xanderjakeq/">
@@ -242,6 +265,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -261,7 +285,7 @@ export default LandingPage;
 
 const LandingPageContainer = styled.div`
   color: ivory;
-  margin-top: 0px;
+  margin-top: -40px;
   * {
     margin: 0;
   }
@@ -272,7 +296,7 @@ const LandingPageContainer = styled.div`
       overflow: hidden;
     }
   }
-  .linkedImg {
+  .linkedImg{
     height: 30px;
     width: 30px;
     margin: 4px;
@@ -365,29 +389,41 @@ const Team = styled.div`
   }
   ul {
     display: flex;
-    justify-content: start;
+    justify-content: space-evenly;
     flex-wrap: wrap;
+    flex-direction: row;
     list-style: none;
-    margin: 5px auto;
-    padding: 0;
-    width: fit-content;
+    margin: 5px;
+    padding: 2px 16px;
   }
   li {
     display: flex;
     flex-direction: column;
+    max-width: 275px;
     align-items: center;
-    margin: 15px 0;
-    width: 33.333%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 15px;
+    width: 100%;
     text-align: left;
     align-self: flex-start;
   }
   img {
-    width: 100px;
+    width: 100%;
+    border-radius: 6px 6px 0 0;
     height: auto;
-    // border-radius: 100%;
+  }
+  h4 {
+    font-size: 1.25rem;
+    padding-top: 10px;
+  }
+  p {
+    font-size: 0.9rem;
+    padding-bottom: 5px;
   }
   a {
-    font-weight: bold;
+    font-weight:bold;
     font-size: 15px;
     text-decoration: none;
     text-align: center;
@@ -402,23 +438,42 @@ const Team = styled.div`
     ul {
       align-items: center;
       justify-content: space-evenly;
-      width: 450px;
+      width: 90%;
+      margin: 0 auto;
     }
     li {
       align-self: unset;
-      width: 190px;
+
     }
   }
   @media (max-width: 500px) {
     font-size: 1.2em;
     ul {
-      width: 300px;
+      width: 80%;
+      margin: 0 auto;
     }
     li {
-      width: 126px;
+
       img {
         margin-bottom: 10px;
       }
+    }
+    h4 {
+      font-size: 1rem;
+      padding: 5px;
+      text-align: center;
+    }
+    p {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media(max-width: 300px) {
+    ul {
+      h4 {
+        font-size: 0.8rem;
+      }
+
     }
   }
 `;
