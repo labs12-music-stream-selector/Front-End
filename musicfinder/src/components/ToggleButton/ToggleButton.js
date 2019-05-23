@@ -33,7 +33,7 @@ const ToggleContainer = styled.div`
 
 const ShowSongsButton = styled.button`
   padding: 20px;
-  border-radius: 40px 40px 0px 0px;
+  // border-radius: 40px 40px 0px 0px;
   width: 50%;
   border: none;
 
@@ -44,11 +44,15 @@ const ShowSongsButton = styled.button`
       ? "0px -4px 2px black, 2px -2px 2px black"
       : "0px -2px 2px black, inset 0px -2px 2px black;"};
   ${props => (!props.showPlaylists ? "z-index: 10" : null)};
+  outline: none;
+  :hover{
+    cursor: pointer;
+  }
 `;
 
 const ShowPlaylistsButton = styled.button`
   padding: 20px;
-  border-radius: 40px 40px 0px 0px;
+  // border-radius: 40px 40px 0px 0px;
   width: 50%;
   border: none;
 
@@ -56,9 +60,13 @@ const ShowPlaylistsButton = styled.button`
   color: ${props => (props.showPlaylists ? "ivory" : "#dcdcdc")};
   box-shadow: ${props =>
     props.showPlaylists
-      ? "0px -4px 2px black, 2px -2px 2px black"
+      ? "0px -4px 2px black, -2px -2px 2px black"
       : "0px -2px 2px black, inset 0px -2px 2px black;"};
   ${props => (props.showPlaylists ? "z-index: 10" : null)};
+  outline: none;
+  :hover{
+    cursor: pointer;
+  }
 `;
 
 export default ToggleButton;

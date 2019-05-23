@@ -46,7 +46,11 @@ const Browser = props => {
     }
     // const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
     const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
-    getTracks(url);
+    async function delaying(){
+      await getTracks(url);
+    }
+    delaying();
+    getThumbnails();
   }, []);
 
   useEffect(() => {
@@ -93,61 +97,70 @@ const Browser = props => {
         )}
       </CurrentTrackContainer>
       <PlayerMenu>
-        <SelectMoodDropdown
+        {/* <SelectMoodDropdown
           tracksData={[...tracksData]}
           updateTracks={updateTracks}
           updateAllTracksByMood={updateAllTracksByMood}
           updateSearching={updateSearching}
-        />
-        <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} />
+        /> */}
+        {/* <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} /> */}
       </PlayerMenu>
       <ToggleButton
         showPlaylists={showPlaylists}
         updateShowPlaylists={updateShowPlaylists}
       />
       {showPlaylists ? (
-        <Playlists
-          showPlaylists={showPlaylists}
-          playlists={playlists}
-          updatePlaylists={updatePlaylists}
-          updateCurrentPlaylist={updateCurrentPlaylist}
-        />
+        <div className='generalContainer'>
+          <AddPlaylist playlists={props.playlists} updatePlaylists={props.updatePlaylists} />
+          <Playlists
+            showPlaylists={showPlaylists}
+            playlists={playlists}
+            updatePlaylists={updatePlaylists}
+            updateCurrentPlaylist={updateCurrentPlaylist}
+          />
+        </div>
       ) : (
-        <InfiniteScroll
-          pageStart={0}
-          loadMore={loadNext}
-          hasMore={hasMore}
-          initialLoad={false}
-          loader={
-            <Loading className="loader" key={0}>
-              Loading ...
+          <InfiniteScroll
+            className='generalContainer'
+            pageStart={0}
+            loadMore={loadNext}
+            hasMore={hasMore}
+            initialLoad={false}
+            loader={
+              <Loading className="loader" key={0}>
+                Loading ...
             </Loading>
-          }
-          threshold={150}
-        >
-          {/* {console.log("-----------------------------------")} */}
-          <Container>
-            {tracks.map((track, index) => {
-              // if(index > 10) {              // TODO remove for production app
-              //   return;
-              // } else {
-              return (
-                <Track
-                  track={track}
-                  index={index}
-                  key={index}
-                  updateCurrentVideo={updateCurrentVideo}
-                  updateAutoPlay={updateAutoPlay}
-                  customAxios={cookieMonster}
-                  trackThumbnailURLs={trackThumbnailURLs}
-                  updateTrackThumbnailURLs={updateTrackThumbnailURLs}
-                />
-              );
-              // }
-            })}
-          </Container>
-        </InfiniteScroll>
-      )}
+            }
+            threshold={150}
+          >
+            <SelectMoodDropdown
+              tracksData={[...tracksData]}
+              updateTracks={updateTracks}
+              updateAllTracksByMood={updateAllTracksByMood}
+              updateSearching={updateSearching}
+            />
+            <Container>
+              {tracks.map((track, index) => {
+                // if(index > 10) {              // TODO remove for production app
+                //   return;
+                // } else {
+                return (
+                  <Track
+                    track={track}
+                    index={index}
+                    key={index}
+                    updateCurrentVideo={updateCurrentVideo}
+                    updateAutoPlay={updateAutoPlay}
+                    customAxios={cookieMonster}
+                    trackThumbnailURLs={trackThumbnailURLs}
+                    updateTrackThumbnailURLs={updateTrackThumbnailURLs}
+                  />
+                );
+                // }
+              })}
+            </Container>
+          </InfiniteScroll>
+        )}
     </BrowserContainer>
   );
 
@@ -158,6 +171,7 @@ const Browser = props => {
     const data = res.data;
     updateTracksData(data);
     updateTracks(data.slice(0, 6));
+    console.log("GET TRACKS FINISHED")
   }
 
   // async function getRelatedTracks(id) {
@@ -215,11 +229,6 @@ const Browser = props => {
     }
   }
 
-  // function loadPrev() {
-  //   if (offset > 5) {
-  //     updateOffset(offset - 6);
-  //   }
-  // }
 
   function playNext() {
     if (currentPlaylist) {
@@ -258,6 +267,31 @@ const Browser = props => {
     //   });
     return customAxios;
   }
+
+  function getThumbnails() {
+    axios
+      .get(
+        `https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/`
+      )
+      .then(res => {
+        console.log(res);
+        const data = res.data;
+        console.log(data);
+        let newThumbnail = '';
+
+        let variable = {};
+
+        res.data.forEach(track => {
+          variable[track.video_id] = track.video_thumbnail;
+        })
+        console.log(variable);
+        updateTrackThumbnailURLs(variable);
+        console.log("GET THUMBNAILS FINISHED");
+      })
+      .catch(err => {
+        console.log("error: ", err);
+      });
+  }
 };
 
 export default withRouter(Browser);
@@ -270,13 +304,15 @@ const BrowserContainer = styled.div`
   width: 100%;
   min-height: 100%;
   padding-top: 10px;
+  .generalContainer{
+    padding: 5px;
+  }
 `;
 
 const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  box-shadow: 0px -2px 2px black;
   z-index: 5;
   margin: 0px auto;
   padding: 60px;

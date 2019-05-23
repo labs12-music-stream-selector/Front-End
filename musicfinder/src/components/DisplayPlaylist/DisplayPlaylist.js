@@ -88,7 +88,10 @@ const DisplayPlaylist = props => {
         { 
           song_id,
           playlist_index: tracks.length+1
-        }, {headers: {Authorization: `${localStorage.getItem("token")}`}}
+        },
+        {
+          headers: {Authorization: `${localStorage.getItem("token")}`}
+        }
       )
       .then(res => {
         console.log("added successfully");
@@ -102,7 +105,10 @@ const DisplayPlaylist = props => {
       .get(
         `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
           props.playlistId
-        }/songs`, {headers: {Authorization: `${localStorage.getItem("token")}`}}
+        }/songs`,
+        {
+          headers: {Authorization: `${localStorage.getItem("token")}`}
+        }
       )
       .then(res => {
         if(res.data.length === 0){
