@@ -297,8 +297,8 @@ const LandingPageContainer = styled.div`
     }
   }
   .linkedImg{
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
     margin: 4px;
     padding: 4px;
   }
@@ -401,7 +401,7 @@ const Team = styled.div`
     flex-direction: column;
     max-width: 275px;
     align-items: center;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
     transition: 0.3s;
     border-radius: 5px;
     margin: 15px;
@@ -416,10 +416,12 @@ const Team = styled.div`
   }
   h4 {
     font-size: 1.25rem;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
     padding-top: 10px;
   }
   p {
     font-size: 0.9rem;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
     padding-bottom: 5px;
   }
   a {
