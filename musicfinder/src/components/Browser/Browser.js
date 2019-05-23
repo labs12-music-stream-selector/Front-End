@@ -304,7 +304,7 @@ const BrowserContainer = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 100%;
-  padding-top: 10px;
+  padding-top: 50px;
   .generalContainer{
     padding: 5px;
   }
