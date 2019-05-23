@@ -45,7 +45,7 @@ const Browser = props => {
       return props.history.push("/");
     }
     // const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
-    const url = `https://moodibeats-recommender.herokuapp.com/api/new-videos/`;
+    const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
     getTracks(url);
   }, []);
 
@@ -125,7 +125,7 @@ const Browser = props => {
           }
           threshold={150}
         >
-          {console.log("-----------------------------------")}
+          {/* {console.log("-----------------------------------")} */}
           <Container>
             {tracks.map((track, index) => {
               // if(index > 10) {              // TODO remove for production app

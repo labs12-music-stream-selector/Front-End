@@ -15,9 +15,14 @@ class User extends React.Component {
   componentDidMount() {
     let id = localStorage.getItem(`id`);
     const url = `https://fantabulous-music-finder.herokuapp.com/api/users/${id}`;
+    // const url = `http://localhost:5000/api/users/${id}`;
     this.setState({ id: id });
     try {
-      axios.get(url).then(res => {
+      console.log("User Info Res");
+      axios.get(url, { headers: {
+        Authorization: `${localStorage.getItem("token")}`
+      }}).then(res => {
+        console.log("User Info Res", res);
         this.setState({ name: res.data.name, email: res.data.email });
       });
     } catch (err) {
@@ -33,8 +38,10 @@ class User extends React.Component {
     data = { name: this.state.name, email: this.state.email };
     id = localStorage.getItem(`id`);
     const url = `https://fantabulous-music-finder.herokuapp.com/api/users/${id}`;
+    // const url = `http://localhost:5000/api/users/${id}`;
     try {
-      axios.put(url, data).then(res => {
+      axios.put(url, data, {headers: {Authorization: `${localStorage.getItem("token")}`}})
+      .then(res => {
         this.setState({ name: res.data.name, email: res.data.email });
         alert("Your Update Submitted Successfully");
         this.props.history.push("/home");
@@ -46,21 +53,24 @@ class User extends React.Component {
   };
   deleteMyAccount = id => {
     id = localStorage.getItem(`id`);
+    // const url = `http://localhost:5000/api/users/${id}`;
     const url = `https://fantabulous-music-finder.herokuapp.com/api/users/${id}`;
-    alert("Your Account Will be deleted permanantly");
-    try {
-      axios.delete(url).then(res => {
-        localStorage.clear();
-        sessionStorage.clear();
-        alert("Your Account deleted Successfully");
-        this.props.history.push("/");
-        window.location.reload(true);
-      });
-    } catch (err) {
-      console.log(err);
+    let answer = window.confirm("Your Account Will be deleted permanantly");
+    if(answer ){
+    
+        try {
+          axios.delete(url, {headers: {Authorization: `${localStorage.getItem("token")}`}}).then(res => {
+            localStorage.clear();
+            sessionStorage.clear();
+            alert("Your Account deleted Successfully");
+            this.props.history.push("/");
+            window.location.reload(true);
+          });
+        } catch (err) {
+          console.log(err);
+        }
     }
   };
-
   render() {
     return (
       <Wrapper>
