@@ -9,6 +9,7 @@ import PatreonButton from "../Patreon/PatreonButton.js";
 import records from "../../imgs/recordCollection.jpg";
 import painting from "../../imgs/painting.jpg";
 import playlist from "../../imgs/playlist.jpg";
+import recordPlayer from "../../imgs/recordPlayer.jpg";
 import moodi from "../../imgs/logoWord.svg";
 
 const LandingPage = props => {
@@ -43,10 +44,10 @@ const LandingPage = props => {
           area="feature-1"
           className="feature-details"
         >
-          <h2>Browse Free Curated Songs</h2>
+          <h2>Creator Friendly</h2>
           <p>
-            over 60 curated songs guaranteed free to use on your stream or
-            videos.
+            MoodiBeats the app designed for content creators who want royalty free music that doesn't cost an arm and a leg.
+            Make playlists  based on the mood you are looking for where the music is always fresh.
           </p>
         </Cell>
         <Cell height={1} center middle area="img-1" className="feature-img">
@@ -62,8 +63,12 @@ const LandingPage = props => {
           area="feature-2"
           className="feature-details"
         >
-          <h2>Search songs by mood</h2>
-          <p>Choose just the right music for the theme of your content.</p>
+          <h2>Data Driven</h2>
+          <p>
+            MoodiBeats cares about how you feel.  That's why we engineered content-based filtering on text meta-data of over 1000 
+            copyright free YouTube music videos.  We then trained a classification machine learning algorithm to generate predictions 
+            of moods from that meta-data.
+          </p>
         </Cell>
         <Cell
           height={1}
@@ -72,11 +77,11 @@ const LandingPage = props => {
           area="feature-3"
           className="feature-details"
         >
-          <h2>Create Playlists</h2>
-          <p>Group your favorite songs together.</p>
+          <h2>Have Fun!</h2>
+          <p></p>
         </Cell>
         <Cell height={1} center middle area="img-3" className="feature-img">
-          <img src={playlist} alt="playlist" />
+          <img src={recordPlayer} alt="playlist" />
         </Cell>
       </Grid>
 
