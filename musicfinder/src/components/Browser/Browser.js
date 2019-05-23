@@ -55,7 +55,6 @@ const Browser = props => {
 
   return (
     <BrowserContainer id="browser-container">
-      {cookieMonster()}
       <SearchBar
         searchTrack={searchTrack}
         selectComp={props => (
@@ -138,7 +137,6 @@ const Browser = props => {
                   key={index}
                   updateCurrentVideo={updateCurrentVideo}
                   updateAutoPlay={updateAutoPlay}
-                  customAxios={cookieMonster}
                   trackThumbnailURLs={trackThumbnailURLs}
                   updateTrackThumbnailURLs={updateTrackThumbnailURLs}
                 />

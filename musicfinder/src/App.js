@@ -58,10 +58,14 @@ class App extends Component {
                   <Link to="/donation"> Support Us </Link>
                   <Link to="/privacypolicy"> Privacy Policy </Link>
                   <Link to="/termsofservice"> Term & Services </Link>
-                  <Link className="update" onClick={this.takeMetoUpdate}>
+                  <Button
+                    to=""
+                    className="update"
+                    onClick={this.takeMetoUpdate}
+                  >
                     {" "}
                     Update Profile{" "}
-                  </Link>
+                  </Button>
                   <Button className="signoutBtn" onClick={this.signMeOut}>
                     {" "}
                     Sign Out{" "}

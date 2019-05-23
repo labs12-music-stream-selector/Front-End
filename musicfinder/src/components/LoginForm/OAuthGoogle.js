@@ -44,13 +44,13 @@ class OAuthGoogle extends Component {
     };
     // Md's Client ID from Google
     // "557783495237-jqq3d269c5ee4uvbg0bv74rs1sb91g90.apps.googleusercontent.com"
-    const CLIENTID_MD =
-      "557783495237-jqq3d269c5ee4uvbg0bv74rs1sb91g90.apps.googleusercontent.com";
+    // const CLIENTID_MD =
+    //   "557783495237-jqq3d269c5ee4uvbg0bv74rs1sb91g90.apps.googleusercontent.com";
 
     // Logan's Client ID from Google
     // "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com"
-    const CLIENTID_LOGAN =
-      "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
+    // const CLIENTID_LOGAN =
+    //   "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
 
     const CLIENTID_JON =
       "609694193472-8raeak24684f9qq5jr8qthaerev50jht.apps.googleusercontent.com";

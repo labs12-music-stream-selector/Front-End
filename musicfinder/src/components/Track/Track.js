@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import axios from "axios";
 
-import MoodSuggestForm from "../MoodSuggestForm/MoodSuggestForm.js";
-
 /**
  *  can accept a inPlaylist prop to along with allTracks prop to modify behavior
  */
@@ -80,7 +78,6 @@ const Track = props => {
           </DeleteBtn>
         ) : null}
       </div>
-      <MoodSuggestForm trackProps={props} />
     </TrackContainer>
   );
   function getSnippet(id) {
