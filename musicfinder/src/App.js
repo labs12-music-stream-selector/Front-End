@@ -158,12 +158,14 @@ const NavDiv = styled.div`
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1;
+      border-radius: 5px;
     }
     .dropdown-content a {
       color: #eff1f3;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
+      border-radius: 5px;
     }
     .dropdown-content a:hover {
       background-color: #009fb7;
@@ -172,19 +174,20 @@ const NavDiv = styled.div`
       display: block;
     }
   }
-  .dropdown-content .signoutBtn {
-    height: 25px;
-  }
   .update {
     padding: 12px 16px;
   }
   .signoutBtn {
-    border-top: 2px solid #696773;
-    padding: 12px 16px;
+    text-align: center;
+    height: 35px;
+    padding-top: 6px;
+    //border-top: 2px solid #696773;
+    border-radius: 5px;
     cursor: pointer;
+    width: auto;
     background-color: tomato;
     :hover {
-      background-color: tomato;
+      background-color: red;
     }
   }
 `;
