@@ -16,31 +16,21 @@ const Playlists = props => {
     return (
       <PlaylistsContainer>
         {props.playlists.map((playlist, index) => {
-          if (playlist.video_ids.length > 0) {
-            return (
-              <PlaylistCard key={`${playlist.name}`}>
-                <PlaylistImg
-                  src={playlist.thumbnail}
-                  onClick={() => {
-                    props.updateCurrentPlaylist(playlist.id);
-                  }}
-                />
-                <PlaylistTitle>{playlist.name}</PlaylistTitle>
-              </PlaylistCard>
-            );
-          } else {
-            return (
-              <PlaylistCard key={`${index}`}>
-                <PlaylistImg
-                  src={defaultImg}
-                  onClick={() => {
-                    props.updateCurrentPlaylist(playlist.id);
-                  }}
-                />
-                <PlaylistTitle>{playlist.name}</PlaylistTitle>
-              </PlaylistCard>
-            );
-          }
+          return (
+            <PlaylistCard key={`${playlist.name}`}>
+              <PlaylistImg
+                src={
+                  playlist.video_ids.length > 0
+                    ? playlist.thumbnail
+                    : defaultImg
+                }
+                onClick={() => {
+                  props.updateCurrentPlaylist(playlist.id);
+                }}
+              />
+              <PlaylistTitle>{playlist.name}</PlaylistTitle>
+            </PlaylistCard>
+          );
         })}
       </PlaylistsContainer>
     );
