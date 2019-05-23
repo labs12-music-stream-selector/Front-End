@@ -20,35 +20,35 @@ const Track = props => {
     <TrackContainer inPlaylist={props.inPlaylist}>
       <div>
         {props.inPlaylist ?
-          <Thumbnail 
+          <Thumbnail
             inPlaylist
             onClick={() => {
               props.updateCurrentVideo(props.track);
               props.updateAutoPlay("&autoplay=1");
-            }} 
-            key={props.track.url + props.index} 
-            src={thumbnailURL} 
+            }}
+            key={props.track.url + props.index}
+            src={thumbnailURL}
           />
           :
-          <Thumbnail 
+          <Thumbnail
             onClick={() => {
               props.updateCurrentVideo(props.track);
               props.updateAutoPlay("&autoplay=1");
-            }} 
-            key={props.track.url + props.index} 
-            src={thumbnailURL} 
+            }}
+            key={props.track.url + props.index}
+            src={thumbnailURL}
           />
         }
-          {props.inPlaylist ? null
-            : <h3>{props.track.video_title}</h3>}
+        {props.inPlaylist ? null
+          : <h3>{props.track.video_title}</h3>}
         {props.inPlaylist ? null : <p>Mood: {props.track.moods}</p>}
-        {props.inPlaylist ? <DeleteBtn title='remove from playlist' onClick = {() => deleteTrack(props.inPlaylist, props.track.id)}>
+        {props.inPlaylist ? <DeleteBtn title='remove from playlist' onClick={() => deleteTrack(props.inPlaylist, props.track.id)}>
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M9 9L15 15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M15 9L9 15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M9 9L15 15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M15 9L9 15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </DeleteBtn>: null}
+        </DeleteBtn> : null}
       </div>
       {/* <MoodSuggestForm
           video_id={props.track.url}
@@ -60,16 +60,25 @@ const Track = props => {
   function getSnippet(id) {
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${
-          process.env.REACT_APP_YTKey
-        }`
+        // `https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=${id}&key=${
+        //   process.env.REACT_APP_YTKey
+        // }`
+        `https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/`
       )
       .then(res => {
-        console.log("getSnippet running", res.data);
-        const newThumbnail = res.data.items[0].snippet.thumbnails[Object.keys(res.data.items[0].snippet.thumbnails)[2]].url
+        // console.log(id);
+        // console.log(res.data);
+        const data = res.data;
+        let newThumbnail = '';
+        res.data.forEach(track => {
+          if (track.video_id === id) {
+            newThumbnail = track.video_thumbnail;
+            console.log(newThumbnail);
+          }
+        })
         setThumbnailURL(newThumbnail);
         const newTrackThumbnailURLs = props.trackThumbnailURLs;
-        newTrackThumbnailURLs[props.track.video_id] = newThumbnail; 
+        newTrackThumbnailURLs[props.track.video_id] = newThumbnail;
         props.updateTrackThumbnailURLs(newTrackThumbnailURLs);
       })
       .catch(err => {
@@ -86,7 +95,7 @@ const Track = props => {
     }
   }
 
-  function deleteTrack(playlistId, id){
+  function deleteTrack(playlistId, id) {
     axios.delete(`https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song/${id}`).then(res => {
       console.log('successfully deleted');
       props.fetchTracks();
