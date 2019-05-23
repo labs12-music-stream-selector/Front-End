@@ -57,13 +57,29 @@ const DisplayPlaylist = props => {
       </AddBtn>
       <DragDropContext onDragEnd={handleOrderChange}>
         <ul>
-          <Droppable droppableId="draggable">
+          <Droppable 
+            droppableId="droppable" 
+            direction={window.innerWidth < 700? 'horizontal' : 'vertical'}
+            
+            >
             {(provided, snapshot) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
+              <div 
+                id='listContainer'
+                {...provided.droppableProps} 
+                ref={provided.innerRef}
+                // style={
+                //   {
+                //     display: 'flex',
+                //     overflowX: 'scroll',
+                //     width: '100%'
+                //   }
+                // }
+                >
                 {tracks.map((track, index) => (
                   <Draggable
                     key={track.video_id}
                     draggableId={track.video_id || "adfsad"}
+                    
                     index={index}
                   >
                     {(provided, snapshot) => (
@@ -119,6 +135,10 @@ const DisplayPlaylist = props => {
         }/songs`
       )
       .then(res => {
+        if(res.data.length === 0){
+          setTracks([]);
+          return
+        }
         const newTracksArray = res.data.map(track => {
           let newTrack = { ...track, video_id: track.song_id };
           return newTrack;
@@ -128,7 +148,6 @@ const DisplayPlaylist = props => {
       })
       .catch(err => {
         console.log(err);
-        setTracks([]);
       });
   }
 
@@ -226,7 +245,7 @@ const DisplayPlaylistContainer = styled.div`
     margin: 0;
     color: #eff1f3;
   }
-  ul {
+  ul{
     width: min-content;
     min-width: 310px;
     list-style: none;
@@ -237,10 +256,15 @@ const DisplayPlaylistContainer = styled.div`
     @media (max-width: 700px) {
       height: 300px;
       display: flex;
-      overflow-x: scroll;
       overflow-y: unset;
       height: max-content;
-      width: calc(100% -5px);
+      width: 100%; 
+      overflow-y: unset;
+      #listContainer{
+        display: flex;
+        overflow-x: scroll;
+        width: 100%;
+      }
     }
   }
 `;
