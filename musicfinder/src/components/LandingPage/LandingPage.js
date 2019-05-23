@@ -8,7 +8,6 @@ import PatreonButton from "../Patreon/PatreonButton.js";
 
 import records from "../../imgs/recordCollection.jpg";
 import painting from "../../imgs/painting.jpg";
-import playlist from "../../imgs/playlist.jpg";
 import recordPlayer from "../../imgs/recordPlayer.jpg";
 import moodi from "../../imgs/logoWord.svg";
 
@@ -101,6 +100,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/logan-hufstetler-145611a2/">
@@ -108,6 +108,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -124,6 +125,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/davinataylor123/">
@@ -131,6 +133,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -147,6 +150,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/johnhumphreys/">
@@ -154,6 +158,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -170,6 +175,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/kkingbd/">
@@ -177,6 +183,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -193,6 +200,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/jon-bernal/">
@@ -200,6 +208,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -216,6 +225,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/sammy-lee-89944282/">
@@ -223,6 +233,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
@@ -240,6 +251,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://github.com/favicon.ico"
+                    alt="github logo"
                   />
                 </a>
                 <a href="https://www.linkedin.com/in/xanderjakeq/">
@@ -247,6 +259,7 @@ const LandingPage = props => {
                   <img
                     className="linkedImg"
                     src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
                   />
                 </a>
               </div>
