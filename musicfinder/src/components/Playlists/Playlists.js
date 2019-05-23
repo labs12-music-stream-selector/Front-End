@@ -54,12 +54,7 @@ const Playlists = props => {
       );
 
       const playlists = await axios.get(
-        // `http://localhost:5000/api/user/playlists/${localStorage.getItem(
-        //   "id"
-        // )}/playlists`, config // TODO replace this with production url
-        `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${localStorage.getItem(
-          "id"
-        )}/playlists`,
+        `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${localStorage.getItem("id")}/playlists`,
         config
       );
 
