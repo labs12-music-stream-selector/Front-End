@@ -84,8 +84,9 @@ const DisplayPlaylist = props => {
   function addCurrentTrack(playlistId, song_id) {
     axios
       .post(
+        // `http://localhost:5000/api/user/playlists/${playlistId}/song`,
         `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song`,
-        { song_id }
+        { song_id }, {headers: {Authorization: `${localStorage.getItem("token")}`}}
       )
       .then(res => {
         console.log("added successfully");
@@ -97,9 +98,10 @@ const DisplayPlaylist = props => {
   function fetchTracks() {
     axios
       .get(
-        `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
+        // `http://localhost:5000/api/user/playlists/${
+         `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
           props.playlistId
-        }/songs`
+        }/songs`, {headers: {Authorization: `${localStorage.getItem("token")}`}}
       )
       .then(res => {
         if(res.data.length === 0){
@@ -147,10 +149,13 @@ const DisplayPlaylist = props => {
       track.playlist_index = index;
       axios
         .put(
+          // `http://localhost:5000/api/user/playlists/${
+          //   props.playlistId
+          // }/song/${track.id}`,
           `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${
             props.playlistId
           }/song/${track.id}`,
-          { playlist_index: index }
+          { playlist_index: index }, {headers: {Authorization: `${localStorage.getItem("token")}`}}
         )
         .then(res => {
           console.log("successful");
