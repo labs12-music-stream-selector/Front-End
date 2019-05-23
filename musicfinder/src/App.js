@@ -13,6 +13,26 @@ import Patreon from "./components/Patreon/Patreon.js";
 import moodi from "./imgs/logoWord.svg";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+        showMenu: false,
+    }
+  }
+  showMenu=(e)=>{
+      this.setState({showMenu :true}, ()=>{
+        document.addEventListener('click', this.closeMenu);
+        console.log("Hello")
+      })
+  }
+  closeMenu=(event)=>{
+    if (!this.dropdownMenu.contains(event.target)) { 
+      this.setState({ showMenu: false }, () => {
+        document.removeEventListener('click', this.closeMenu);
+      });  
+      
+    }
+  }
   signMeOut = () => {
     if (sessionStorage.getItem("token")) {
       sessionStorage.removeItem("token");
@@ -53,21 +73,23 @@ class App extends Component {
                 <img src={moodi} alt="logo" />{" "}
               </Link>
               <div className="dropdown">
-                <button className="dropbtn"> Menu</button>
-                <div className="dropdown-content">
-                  <Link to="/donation"> Support Us </Link>
-                  <Link to="/privacypolicy"> Privacy Policy </Link>
-                  <Link to="/termsofservice"> Term & Services </Link>
-                  <Link className="update" onClick={this.takeMetoUpdate}>
-                    {" "}
-                    Update Profile{" "}
-                  </Link>
-                  <Button className="signoutBtn" onClick={this.signMeOut}>
-                    {" "}
-                    Sign Out{" "}
-                  </Button>
-                </div>
-              </div>
+                <button onClick={this.showMenu} className="dropbtn"> Menu</button>
+                {this.state.showMenu ? (
+                    <div className="dropdown-content" ref={(element)=>{this.dropdownMenu = element;}}>
+                        <Link to="/donation"> Support Us </Link>
+                        <Link to="/privacypolicy"> Privacy Policy </Link>
+                        <Link to="/termsofservice"> Term & Services </Link>
+                        <Link className="update" onClick={this.takeMetoUpdate}>
+                          {" "}
+                          Update Profile{" "}
+                        </Link>
+                        <Button className="signoutBtn" onClick={this.signMeOut}>
+                          {" "}
+                          Sign Out{" "}
+                        </Button>
+                    </div>
+                ):(null)}
+              </div>      
             </nav>
           </NavDiv>
           {/* <GetUserPlaylists /> */}
@@ -98,7 +120,7 @@ const NavDiv = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: warp;
-    z-index: 100;
+    z-index: 101;
     width: 100%;
     justify-content: space-between;
     align-items: center;
