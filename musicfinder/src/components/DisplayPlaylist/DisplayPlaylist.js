@@ -45,9 +45,8 @@ const DisplayPlaylist = props => {
                 >
                 {tracks.map((track, index) => (
                   <Draggable
-                    key={track.video_id}
-                    draggableId={track.video_id || "adfsad"}
-                    
+                    key={`${track.video_id}${index}`}
+                    draggableId={`${track.video_id}${index}`}
                     index={index}
                   >
                     {(provided, snapshot) => (
