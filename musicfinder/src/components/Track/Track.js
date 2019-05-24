@@ -99,7 +99,6 @@ const Track = props => {
         { headers: { Authorization: `${localStorage.getItem("token")}` } }
       )
       .then(res => {
-        // console.log("successfully deleted");
         props.fetchTracks();
       })
       .catch(err => console.log(err));

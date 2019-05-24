@@ -26,7 +26,6 @@ const AddPlaylist = props => {
         { headers: { Authorization: `${localStorage.getItem("token")}` } }
       )
       .then(res => {
-        // console.log(res.data);
         props.updatePlaylists(res.data);
       })
       .catch(error => {
@@ -42,7 +41,7 @@ const CreatePlaylistForm = styled.form`
   flex-direction: row;
   border-radius: 5px;
   margin-top: 10px;
-  height : 40px;
+  height: 40px;
 `;
 
 const CreatePlaylistInput = styled.input`
@@ -51,15 +50,14 @@ const CreatePlaylistInput = styled.input`
   width: 20%;
   min-height: 20px;
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   border-radius: 5px 0 0 5px;
   justify-content: flex-end;
-  align-content:right;
+  align-content: right;
   margin-left: 60%;
   @media (max-width: 500px) {
     width: 60%;
     margin-left: 9%;
-    
   }
 `;
 
