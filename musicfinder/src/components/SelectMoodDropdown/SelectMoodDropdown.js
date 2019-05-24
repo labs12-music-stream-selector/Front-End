@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Fuse from "fuse.js";
+
 
 const SelectMoodDropdown = props => {
   // const [allTracksByMood, updateAllTracksByMood] = useState([]);
   const [showList, updateShowList] = useState(true);
   const [displayedMood, updateDisplayedMood] = useState("all");
+
+  // useEffect(() => {}, [])
 
   return (
     <SelectMoodDropdownDiv>
@@ -55,7 +58,7 @@ const SelectMoodDropdown = props => {
       props.updateSearching(false);
     } else {
       let options = {
-        keys: ["moods"],
+        keys: ["predicted_moods"],
         threshold: 0.0
       };
       let fuse = new Fuse(props.tracksData, options);
@@ -78,16 +81,29 @@ const SelectMoodDropdownDiv = styled.div`
   display: inline-block;
   box-sizing: border-box;
   position: relative;
+  min-width: max-content;
+  text-align: center;
+  height: 42px;
+  box-sizing: border-box;
+  @media (max-width: 500px) {
+    height: 40px;
+  }
 `;
 
 const SelectMoodListLabel = styled.div`
   box-sizing: border-box;
   display: block;
   background-color: #009fb7;
-  padding: 10px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  padding: 0px 15px;
   width: 100%;
   color: white;
+  font-size: 1.15rem
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 5px 0 0 5px;
 `;
 
 const SelectMoodList = styled.div`
@@ -116,6 +132,7 @@ const SelectMoodListItem = styled.div`
   justify-content: center;
   list-style: none;
   padding: 10px;
+  text-align: left;
   :hover {
     background-color: #009fb7;
     color: ivory;

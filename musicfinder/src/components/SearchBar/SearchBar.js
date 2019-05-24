@@ -12,7 +12,7 @@ const SearchBar = props => {
 
   return (
     <SearchForm onSubmit={e => e.preventDefault()}>
-      <input value={term} onChange={onChange} placeholder="search... 🔍" />
+      <input value={term} onChange={onChange} placeholder="Search..." />
       {props.selectComp()}
     </SearchForm>
   );
@@ -25,38 +25,29 @@ const SearchBar = props => {
 export default SearchBar;
 
 const SearchForm = styled.form`
-  position: fixed;
-  z-index: 100;
-  left: 0;
-  right: 0;
-  left: 0;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 40%;
-  margin: auto;
-  padding: 0;
-  @media (max-width: 479px) {
-    padding: 0;
-    width: 100%;
-  }
-  input {
-    color: black;
-    padding: 0px;
-    background-color: #009fb7;
-    border: none;
-    text-align: center;
-    font-weight: bold;
-    font-size: 2rem;
-    border-radius: 5px;
-    @media (max-width: 479px) {
+    box-sizing: border-box;
+      height: 40px;
+      // height: 100%;
       width: 100%;
-    }
+  input {
+      border-radius: 0 5px 5px 0;
+      box - sizing: border-box;
+      width: 100%;
+      height: 100%;
+      padding-left: 20px;
+      font-size: 1.25rem;
+      border: 0px;
+      color: #efefef;
+      background-color: #373737;
     ::placeholder {
-      color: #272727;
+      color: #cfcfcf;
     }
-  }
-`;
+    @media (max-width: 500px) {
+      padding: 0;
+      text-align:center;
+    }
+    }
+  `;
 
 // Referenced: https://dev.to/gabe_ragland/debouncing-with-react-hooks-jci
 function useDebounce(value, delay) {

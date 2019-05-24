@@ -55,22 +55,6 @@ const Browser = props => {
 
   return (
     <BrowserContainer id="browser-container">
-      <SearchBar
-        searchTrack={searchTrack}
-        selectComp={props => (
-          <Select
-            getTracks={getTracksByMood}
-            options={[
-              "sad",
-              "happy",
-              "confident-sassy",
-              "angry",
-              "in-love",
-              "peaceful"
-            ]}
-          />
-        )}
-      />
       <CurrentTrackContainer>
         <YoutubePlayer
           track={currentVideo}
@@ -92,15 +76,6 @@ const Browser = props => {
           />
         )}
       </CurrentTrackContainer>
-      <PlayerMenu>
-        {/* <SelectMoodDropdown
-          tracksData={[...tracksData]}
-          updateTracks={updateTracks}
-          updateAllTracksByMood={updateAllTracksByMood}
-          updateSearching={updateSearching}
-        /> */}
-        {/* <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} /> */}
-      </PlayerMenu>
       <ToggleButton
         showPlaylists={showPlaylists}
         updateShowPlaylists={updateShowPlaylists}
@@ -132,12 +107,31 @@ const Browser = props => {
           }
           threshold={150}
         >
-          <SelectMoodDropdown
-            tracksData={[...tracksData]}
-            updateTracks={updateTracks}
-            updateAllTracksByMood={updateAllTracksByMood}
-            updateSearching={updateSearching}
-          />
+          <SongsMenu>
+            <SelectMoodDropdown
+              tracksData={[...tracksData]}
+              // tracksData={tracksData}
+              updateTracks={updateTracks}
+              updateAllTracksByMood={updateAllTracksByMood}
+              updateSearching={updateSearching}
+            />
+            <SearchBar
+              searchTrack={searchTrack}
+              selectComp={props => (
+                <Select
+                  getTracks={getTracksByMood}
+                  options={[
+                    "sad",
+                    "happy",
+                    "confident-sassy",
+                    "angry",
+                    "in-love",
+                    "peaceful"
+                  ]}
+                />
+              )}
+            />
+          </SongsMenu>
           <Container>
             {tracks.map((track, index) => {
               // if(index > 10) {              // TODO remove for production app
@@ -168,11 +162,10 @@ const Browser = props => {
       headers: { Authorization: localStorage.getItem("token") }
     });
 
-    console.log("Get tracks");
     const data = res.data;
     updateTracksData(data);
+    updateAllTracksByMood(data);
     updateTracks(data.slice(0, 6));
-    console.log("GET TRACKS FINISHED");
   }
 
   // async function getRelatedTracks(id) {
@@ -210,9 +203,8 @@ const Browser = props => {
       updateSearching(true);
     }
     let options = {
-      keys: ["moods", "video_title", "video_id"]
+      keys: ["predicted_moods", "video_title", "video_id"]
     };
-    console.log(allTracksByMood);
     let fuse = new Fuse(allTracksByMood, options);
     updateTracks(fuse.search(searchTerm));
     updateOffset(0); // TODO: Double Check this worked!!!!!
@@ -277,10 +269,7 @@ const Browser = props => {
         `https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/`
       )
       .then(res => {
-        console.log("Get thumbnails");
-        console.log(res);
         const data = res.data;
-        console.log(data);
         let newThumbnail = "";
 
         let variable = {};
@@ -288,7 +277,6 @@ const Browser = props => {
         res.data.forEach(track => {
           variable[track.video_id] = track.video_thumbnail;
         });
-        console.log(variable);
         updateTrackThumbnailURLs(variable);
         const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
         getTracks(url);
@@ -309,9 +297,6 @@ const BrowserContainer = styled.div`
   width: 100%;
   min-height: 100%;
   padding-top: 50px;
-  .generalContainer {
-    padding: 5px;
-  }
 `;
 
 const Container = styled.div`
@@ -320,10 +305,7 @@ const Container = styled.div`
   flex-wrap: wrap;
   z-index: 5;
   margin: 0px auto;
-  padding: 60px;
-  @media (max-width: 700px) {
-    padding: 0;
-  }
+  padding: 0px;
 `;
 
 const CurrentTrackContainer = styled.div`
@@ -336,22 +318,22 @@ const CurrentTrackContainer = styled.div`
   }
 `;
 
-const PlayerMenu = styled.div`
-  z-index: 100;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: stretch;
-  flex-direction: row;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0);
-  box-sizing: border-box;
-  width: 100%;
-  list-style: none;
-  padding: 5px;
-`;
-
 const Loading = styled.h3`
   font-size: 2rem;
   color: #efefef;
   text-align: center;
+`;
+
+const SongsMenu = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  height: 50px;
+  box-sizing: border-box;
+  width: 66%;
+  margin-left: auto;
+  margin-right: auto;
+  @media (max-width: 500px) {
+    width: 85%;
+  }
 `;
