@@ -26,10 +26,12 @@ export default SearchBar;
 
 const SearchForm = styled.form`
     box-sizing: border-box;
-      height: 100%;
+      height: 40px;
+      // height: 100%;
       width: 100%;
   input {
-        box - sizing: border-box;
+      border-radius: 0 5px 5px 0;
+      box - sizing: border-box;
       width: 100%;
       height: 100%;
       padding-left: 20px;
@@ -39,6 +41,10 @@ const SearchForm = styled.form`
       background-color: #373737;
     ::placeholder {
       color: #cfcfcf;
+    }
+    @media (max-width: 500px) {
+      padding: 0;
+      text-align:center;
     }
     }
   `;
