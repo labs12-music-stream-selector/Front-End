@@ -83,8 +83,11 @@ const SelectMoodDropdownDiv = styled.div`
   position: relative;
   min-width: max-content;
   text-align: center;
-  height: 50px;
+  height: 42px;
   box-sizing: border-box;
+  @media (max-width: 500px) {
+    height: 40px;
+  }
 `;
 
 const SelectMoodListLabel = styled.div`
@@ -100,6 +103,7 @@ const SelectMoodListLabel = styled.div`
   color: white;
   font-size: 1.15rem
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 5px 0 0 5px;
 `;
 
 const SelectMoodList = styled.div`
