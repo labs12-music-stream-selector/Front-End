@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Fuse from "fuse.js";
+
 
 const SelectMoodDropdown = props => {
   // const [allTracksByMood, updateAllTracksByMood] = useState([]);
   const [showList, updateShowList] = useState(true);
   const [displayedMood, updateDisplayedMood] = useState("all");
+
+  // useEffect(() => {}, [])
 
   return (
     <SelectMoodDropdownDiv>
@@ -55,7 +58,7 @@ const SelectMoodDropdown = props => {
       props.updateSearching(false);
     } else {
       let options = {
-        keys: ["moods"],
+        keys: ["predicted_moods"],
         threshold: 0.0
       };
       let fuse = new Fuse(props.tracksData, options);
