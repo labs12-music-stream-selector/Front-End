@@ -55,22 +55,7 @@ const Browser = props => {
 
   return (
     <BrowserContainer id="browser-container">
-      <SearchBar
-        searchTrack={searchTrack}
-        selectComp={props => (
-          <Select
-            getTracks={getTracksByMood}
-            options={[
-              "sad",
-              "happy",
-              "confident-sassy",
-              "angry",
-              "in-love",
-              "peaceful"
-            ]}
-          />
-        )}
-      />
+
       <CurrentTrackContainer>
         <YoutubePlayer
           track={currentVideo}
@@ -92,15 +77,6 @@ const Browser = props => {
           />
         )}
       </CurrentTrackContainer>
-      <PlayerMenu>
-        {/* <SelectMoodDropdown
-          tracksData={[...tracksData]}
-          updateTracks={updateTracks}
-          updateAllTracksByMood={updateAllTracksByMood}
-          updateSearching={updateSearching}
-        /> */}
-        {/* <AddPlaylist playlists={playlists} updatePlaylists={updatePlaylists} /> */}
-      </PlayerMenu>
       <ToggleButton
         showPlaylists={showPlaylists}
         updateShowPlaylists={updateShowPlaylists}
@@ -129,13 +105,31 @@ const Browser = props => {
             }
             threshold={150}
           >
-            <SelectMoodDropdown
-              tracksData={[...tracksData]}
-              // tracksData={tracksData}
-              updateTracks={updateTracks}
-              updateAllTracksByMood={updateAllTracksByMood}
-              updateSearching={updateSearching}
-            />
+            <SongsMenu>
+              <SelectMoodDropdown
+                tracksData={[...tracksData]}
+                // tracksData={tracksData}
+                updateTracks={updateTracks}
+                updateAllTracksByMood={updateAllTracksByMood}
+                updateSearching={updateSearching}
+              />
+              <SearchBar
+                searchTrack={searchTrack}
+                selectComp={props => (
+                  <Select
+                    getTracks={getTracksByMood}
+                    options={[
+                      "sad",
+                      "happy",
+                      "confident-sassy",
+                      "angry",
+                      "in-love",
+                      "peaceful"
+                    ]}
+                  />
+                )}
+              />
+            </SongsMenu>
             <Container>
               {tracks.map((track, index) => {
                 // if(index > 10) {              // TODO remove for production app
@@ -299,9 +293,7 @@ const BrowserContainer = styled.div`
   width: 100%;
   min-height: 100%;
   padding-top: 50px;
-  .generalContainer{
-    padding: 5px;
-  }
+
 `;
 
 const Container = styled.div`
@@ -326,22 +318,20 @@ const CurrentTrackContainer = styled.div`
   }
 `;
 
-const PlayerMenu = styled.div`
-  z-index: 100;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: stretch;
-  flex-direction: row;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0);
-  box-sizing: border-box;
-  width: 100%;
-  list-style: none;
-  padding: 5px;
-`;
 
 const Loading = styled.h3`
   font-size: 2rem;
   color: #efefef;
   text-align: center;
+`;
+
+const SongsMenu = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 60px;
+  height: 50px;
+  box-sizing: border-box;
+  width: 66%;
+  margin-left: auto;
+  margin-right: auto;
 `;
