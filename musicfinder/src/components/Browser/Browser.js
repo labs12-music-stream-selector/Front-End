@@ -303,8 +303,8 @@ const Container = styled.div`
   z-index: 5;
   margin: 0px auto;
   padding: 60px;
-  @media (max-width: 700px) {
-    padding: 0;
+  @media (max-width: 500px) {
+    padding: 0px;
   }
 `;
 
@@ -334,4 +334,7 @@ const SongsMenu = styled.div`
   width: 66%;
   margin-left: auto;
   margin-right: auto;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;

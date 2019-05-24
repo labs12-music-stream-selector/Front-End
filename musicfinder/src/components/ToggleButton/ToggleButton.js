@@ -36,6 +36,10 @@ const ShowSongsButton = styled.button`
   // border-radius: 40px 40px 0px 0px;
   width: 50%;
   border: none;
+  font-size: 1.25rem;
+  @media (max-width: 800px) {
+    font-size: 1rem;
+  }
 
   background-color: ${props => (!props.showPlaylists ? "#272727" : "#373737")};
   color: ${props => (!props.showPlaylists ? "ivory" : "#dcdcdc")};
@@ -55,7 +59,10 @@ const ShowPlaylistsButton = styled.button`
   // border-radius: 40px 40px 0px 0px;
   width: 50%;
   border: none;
-
+  font-size: 1.25rem;
+  @media (max-width: 800px) {
+    font-size: 1rem;
+  }
   background-color: ${props => (props.showPlaylists ? "#272727" : "#373737")};
   color: ${props => (props.showPlaylists ? "ivory" : "#dcdcdc")};
   box-shadow: ${props =>
