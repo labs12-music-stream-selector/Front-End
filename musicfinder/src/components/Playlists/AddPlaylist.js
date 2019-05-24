@@ -41,12 +41,26 @@ const CreatePlaylistForm = styled.form`
   display: flex;
   flex-direction: row;
   border-radius: 5px;
+  margin-top: 10px;
+  height : 40px;
 `;
 
 const CreatePlaylistInput = styled.input`
   border: none;
   padding: 10px;
-  // border-radius: 5px 0 0 5px;
+  width: 20%;
+  min-height: 20px;
+  display: flex;
+  flex-wrap:wrap;
+  border-radius: 5px 0 0 5px;
+  justify-content: flex-end;
+  align-content:right;
+  margin-left: 60%;
+  @media (max-width: 500px) {
+    width: 60%;
+    margin-left: 9%;
+    
+  }
 `;
 
 const CreatePlaylistBtn = styled.button`
@@ -55,7 +69,7 @@ const CreatePlaylistBtn = styled.button`
   color: ivory;
   font-size: 16px;
   border: none;
-  // border-radius: 0 5px 5px 0;
+  border-radius: 0 5px 5px 0;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
   :hover{
     cursor: pointer;
