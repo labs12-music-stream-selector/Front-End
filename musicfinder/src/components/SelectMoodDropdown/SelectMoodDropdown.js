@@ -81,15 +81,24 @@ const SelectMoodDropdownDiv = styled.div`
   display: inline-block;
   box-sizing: border-box;
   position: relative;
+  min-width: max-content;
+  text-align: center;
+  height: 50px;
+  box-sizing: border-box;
 `;
 
 const SelectMoodListLabel = styled.div`
   box-sizing: border-box;
   display: block;
   background-color: #009fb7;
-  padding: 10px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  padding: 0px 15px;
   width: 100%;
   color: white;
+  font-size: 1.15rem
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
 `;
 
@@ -119,6 +128,7 @@ const SelectMoodListItem = styled.div`
   justify-content: center;
   list-style: none;
   padding: 10px;
+  text-align: left;
   :hover {
     background-color: #009fb7;
     color: ivory;
