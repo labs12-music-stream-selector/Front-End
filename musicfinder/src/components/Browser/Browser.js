@@ -302,10 +302,7 @@ const Container = styled.div`
   flex-wrap: wrap;
   z-index: 5;
   margin: 0px auto;
-  padding: 60px;
-  @media (max-width: 500px) {
-    padding: 0px;
-  }
+  padding: 0px ;
 `;
 
 const CurrentTrackContainer = styled.div`
