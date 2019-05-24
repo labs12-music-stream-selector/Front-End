@@ -47,7 +47,7 @@ const Browser = props => {
     // const url = `https://fantabulous-music-finder.herokuapp.com/api/song-list`;
     const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
     getThumbnails();
-  }, []);
+  }, [showPlaylists]);
 
   useEffect(() => {
     // getRelatedTracks(currentVideo.id);
