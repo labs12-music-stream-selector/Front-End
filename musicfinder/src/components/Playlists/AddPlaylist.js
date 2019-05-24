@@ -22,11 +22,11 @@ const AddPlaylist = props => {
       .post(
         "https://fantabulous-music-finder.herokuapp.com/api/user/playlists",
         // "http://localhost:5000/api/user/playlists",
-        {name: `${inputData}`,user_id: localStorage.getItem("id"),
-        }, {headers: {Authorization: `${localStorage.getItem("token")}`}}
+        { name: `${inputData}`, user_id: localStorage.getItem("id") },
+        { headers: { Authorization: `${localStorage.getItem("token")}` } }
       )
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         props.updatePlaylists(res.data);
       })
       .catch(error => {
@@ -57,7 +57,7 @@ const CreatePlaylistBtn = styled.button`
   border: none;
   // border-radius: 0 5px 5px 0;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-  :hover{
+  :hover {
     cursor: pointer;
   }
 `;

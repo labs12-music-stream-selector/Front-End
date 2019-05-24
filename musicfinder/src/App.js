@@ -22,7 +22,6 @@ class App extends Component {
   showMenu = e => {
     this.setState({ showMenu: true }, () => {
       document.addEventListener("click", this.closeMenu);
-      console.log("Hello");
     });
   };
   closeMenu = event => {
