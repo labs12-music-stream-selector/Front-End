@@ -131,6 +131,7 @@ const Browser = props => {
           >
             <SelectMoodDropdown
               tracksData={[...tracksData]}
+              // tracksData={tracksData}
               updateTracks={updateTracks}
               updateAllTracksByMood={updateAllTracksByMood}
               updateSearching={updateSearching}
@@ -165,11 +166,10 @@ const Browser = props => {
       headers: { Authorization: localStorage.getItem("token") }
     });
 
-    console.log('Get tracks')
     const data = res.data;
     updateTracksData(data);
+    updateAllTracksByMood(data);
     updateTracks(data.slice(0, 6));
-    console.log("GET TRACKS FINISHED")
   }
 
   // async function getRelatedTracks(id) {
@@ -207,12 +207,10 @@ const Browser = props => {
       updateSearching(true);
     }
     let options = {
-      keys: ["moods", "video_title", "video_id"]
+      keys: ["predicted_moods", "video_title", "video_id"]
     };
-    console.log(allTracksByMood)
     let fuse = new Fuse(allTracksByMood, options);
     updateTracks(fuse.search(searchTerm));
-    console.log(fuse.search(searchTerm));
     updateOffset(0); // TODO: Double Check this worked!!!!!
   }
 
@@ -273,10 +271,7 @@ const Browser = props => {
         `https://moodibeats-recommender.herokuapp.com/api/new-videos-thumbnails/`
       )
       .then(res => {
-        console.log('Get thumbnails')
-        console.log(res);
         const data = res.data;
-        console.log(data);
         let newThumbnail = '';
 
         let variable = {};
@@ -284,7 +279,6 @@ const Browser = props => {
         res.data.forEach(track => {
           variable[track.video_id] = track.video_thumbnail;
         })
-        console.log(variable);
         updateTrackThumbnailURLs(variable);
         const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
         getTracks(url);
