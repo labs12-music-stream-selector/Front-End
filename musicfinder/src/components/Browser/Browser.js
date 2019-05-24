@@ -328,13 +328,13 @@ const Loading = styled.h3`
 const SongsMenu = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 60px;
+  margin-top: 10px;
   height: 50px;
   box-sizing: border-box;
   width: 66%;
   margin-left: auto;
   margin-right: auto;
   @media (max-width: 500px) {
-    width: 100%;
+    width: 85%;
   }
 `;
