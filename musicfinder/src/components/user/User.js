@@ -19,12 +19,16 @@ class User extends React.Component {
     this.setState({ id: id });
     try {
       console.log("User Info Res");
-      axios.get(url, { headers: {
-        Authorization: `${localStorage.getItem("token")}`
-      }}).then(res => {
-        console.log("User Info Res", res);
-        this.setState({ name: res.data.name, email: res.data.email });
-      });
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `${localStorage.getItem("token")}`
+          }
+        })
+        .then(res => {
+          console.log("User Info Res", res);
+          this.setState({ name: res.data.name, email: res.data.email });
+        });
     } catch (err) {
       console.log(err);
     }
@@ -40,13 +44,16 @@ class User extends React.Component {
     const url = `https://fantabulous-music-finder.herokuapp.com/api/users/${id}`;
     // const url = `http://localhost:5000/api/users/${id}`;
     try {
-      axios.put(url, data, {headers: {Authorization: `${localStorage.getItem("token")}`}})
-      .then(res => {
-        this.setState({ name: res.data.name, email: res.data.email });
-        alert("Your Update Submitted Successfully");
-        this.props.history.push("/home");
-        // window.location.reload(true);
-      });
+      axios
+        .put(url, data, {
+          headers: { Authorization: `${localStorage.getItem("token")}` }
+        })
+        .then(res => {
+          this.setState({ name: res.data.name, email: res.data.email });
+          alert("Your Update Submitted Successfully");
+          this.props.history.push("/home");
+          // window.location.reload(true);
+        });
     } catch (err) {
       console.log(err);
     }
@@ -56,28 +63,31 @@ class User extends React.Component {
     // const url = `http://localhost:5000/api/users/${id}`;
     const url = `https://fantabulous-music-finder.herokuapp.com/api/users/${id}`;
     let answer = window.confirm("Your Account Will be deleted permanantly");
-    if(answer ){
-    
-        try {
-          axios.delete(url, {headers: {Authorization: `${localStorage.getItem("token")}`}}).then(res => {
+    if (answer) {
+      try {
+        axios
+          .delete(url, {
+            headers: { Authorization: `${localStorage.getItem("token")}` }
+          })
+          .then(res => {
             localStorage.clear();
             sessionStorage.clear();
             alert("Your Account deleted Successfully");
             this.props.history.push("/");
             window.location.reload(true);
           });
-        } catch (err) {
-          console.log(err);
-        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   render() {
     return (
       <Wrapper>
         <UserBar>
-          <div className= "userInfoBar">
-              <h3>{this.state.name}</h3>
-              <h4>{this.state.email} </h4>
+          <div className="userInfoBar">
+            <h3>{this.state.name}</h3>
+            <h4>{this.state.email} </h4>
           </div>
           <form>
             <div className="input-row">
@@ -129,7 +139,6 @@ const Wrapper = styled.div`
   color: #272727;
 `;
 const UserBar = styled.div`
-  
   box-shadow: 0px 4px 4px black;
   text-align: center;
   width: 400px;
@@ -138,8 +147,9 @@ const UserBar = styled.div`
   @media (max-width: 479px) {
     width: 300px;
   }
-  h5{
-    margin:0; padding:0;
+  h5 {
+    margin: 0;
+    padding: 0;
   }
   h2,
   h3,
@@ -179,7 +189,7 @@ const UserBar = styled.div`
     cursor: pointer;
     transition: all 0.1s;
   }
-  .deleteBtn{
+  .deleteBtn {
     background: tomato;
   }
   .btn {

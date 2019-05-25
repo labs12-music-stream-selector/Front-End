@@ -55,7 +55,6 @@ const Browser = props => {
 
   return (
     <BrowserContainer id="browser-container">
-
       <CurrentTrackContainer>
         <YoutubePlayer
           track={currentVideo}
@@ -82,8 +81,11 @@ const Browser = props => {
         updateShowPlaylists={updateShowPlaylists}
       />
       {showPlaylists ? (
-        <div className='generalContainer'>
-          <AddPlaylist playlists={props.playlists} updatePlaylists={props.updatePlaylists} />
+        <div className="generalContainer">
+          <AddPlaylist
+            playlists={props.playlists}
+            updatePlaylists={props.updatePlaylists}
+          />
           <Playlists
             showPlaylists={showPlaylists}
             playlists={playlists}
@@ -92,66 +94,66 @@ const Browser = props => {
           />
         </div>
       ) : (
-          <InfiniteScroll
-            className='generalContainer'
-            pageStart={0}
-            loadMore={loadNext}
-            hasMore={hasMore}
-            initialLoad={false}
-            loader={
-              <Loading className="loader" key={0}>
-                Loading ...
+        <InfiniteScroll
+          className="generalContainer"
+          pageStart={0}
+          loadMore={loadNext}
+          hasMore={hasMore}
+          initialLoad={false}
+          loader={
+            <Loading className="loader" key={0}>
+              Loading ...
             </Loading>
-            }
-            threshold={150}
-          >
-            <SongsMenu>
-              <SelectMoodDropdown
-                tracksData={[...tracksData]}
-                // tracksData={tracksData}
-                updateTracks={updateTracks}
-                updateAllTracksByMood={updateAllTracksByMood}
-                updateSearching={updateSearching}
-              />
-              <SearchBar
-                searchTrack={searchTrack}
-                selectComp={props => (
-                  <Select
-                    getTracks={getTracksByMood}
-                    options={[
-                      "sad",
-                      "happy",
-                      "confident-sassy",
-                      "angry",
-                      "in-love",
-                      "peaceful"
-                    ]}
-                  />
-                )}
-              />
-            </SongsMenu>
-            <Container>
-              {tracks.map((track, index) => {
-                // if(index > 10) {              // TODO remove for production app
-                //   return;
-                // } else {
-                return (
-                  <Track
-                    track={track}
-                    index={index}
-                    key={index}
-                    updateCurrentVideo={updateCurrentVideo}
-                    updateAutoPlay={updateAutoPlay}
-                    customAxios={cookieMonster}
-                    trackThumbnailURLs={trackThumbnailURLs}
-                    updateTrackThumbnailURLs={updateTrackThumbnailURLs}
-                  />
-                );
-                // }
-              })}
-            </Container>
-          </InfiniteScroll>
-        )}
+          }
+          threshold={150}
+        >
+          <SongsMenu>
+            <SelectMoodDropdown
+              tracksData={[...tracksData]}
+              // tracksData={tracksData}
+              updateTracks={updateTracks}
+              updateAllTracksByMood={updateAllTracksByMood}
+              updateSearching={updateSearching}
+            />
+            <SearchBar
+              searchTrack={searchTrack}
+              selectComp={props => (
+                <Select
+                  getTracks={getTracksByMood}
+                  options={[
+                    "sad",
+                    "happy",
+                    "confident-sassy",
+                    "angry",
+                    "in-love",
+                    "peaceful"
+                  ]}
+                />
+              )}
+            />
+          </SongsMenu>
+          <Container>
+            {tracks.map((track, index) => {
+              // if(index > 10) {              // TODO remove for production app
+              //   return;
+              // } else {
+              return (
+                <Track
+                  track={track}
+                  index={index}
+                  key={index}
+                  updateCurrentVideo={updateCurrentVideo}
+                  updateAutoPlay={updateAutoPlay}
+                  customAxios={cookieMonster}
+                  trackThumbnailURLs={trackThumbnailURLs}
+                  updateTrackThumbnailURLs={updateTrackThumbnailURLs}
+                />
+              );
+              // }
+            })}
+          </Container>
+        </InfiniteScroll>
+      )}
     </BrowserContainer>
   );
 
@@ -220,7 +222,6 @@ const Browser = props => {
     }
   }
 
-
   function playNext() {
     if (currentPlaylist) {
       const current = tracksCurrentPlaylist.filter(
@@ -266,13 +267,13 @@ const Browser = props => {
       )
       .then(res => {
         const data = res.data;
-        let newThumbnail = '';
+        let newThumbnail = "";
 
         let variable = {};
 
         res.data.forEach(track => {
           variable[track.video_id] = track.video_thumbnail;
-        })
+        });
         updateTrackThumbnailURLs(variable);
         const url = `https://moodibeats-recommender.herokuapp.com/api/predictions/`;
         getTracks(url);
@@ -293,7 +294,6 @@ const BrowserContainer = styled.div`
   width: 100%;
   min-height: 100%;
   padding-top: 50px;
-
 `;
 
 const Container = styled.div`
@@ -302,7 +302,7 @@ const Container = styled.div`
   flex-wrap: wrap;
   z-index: 5;
   margin: 0px auto;
-  padding: 0px ;
+  padding: 0px;
 `;
 
 const CurrentTrackContainer = styled.div`
@@ -314,7 +314,6 @@ const CurrentTrackContainer = styled.div`
     height: unset;
   }
 `;
-
 
 const Loading = styled.h3`
   font-size: 2rem;

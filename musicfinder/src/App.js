@@ -16,23 +16,22 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-        showMenu: false,
-    }
+      showMenu: false
+    };
   }
-  showMenu=(e)=>{
-      this.setState({showMenu :true}, ()=>{
-        document.addEventListener('click', this.closeMenu);
-        console.log("Hello")
-      })
-  }
-  closeMenu=(event)=>{
-    if (!this.dropdownMenu.contains(event.target)) { 
+  showMenu = e => {
+    this.setState({ showMenu: true }, () => {
+      document.addEventListener("click", this.closeMenu);
+      console.log("Hello");
+    });
+  };
+  closeMenu = event => {
+    if (!this.dropdownMenu.contains(event.target)) {
       this.setState({ showMenu: false }, () => {
-        document.removeEventListener('click', this.closeMenu);
-      });  
-      
+        document.removeEventListener("click", this.closeMenu);
+      });
     }
-  }
+  };
   signMeOut = () => {
     if (sessionStorage.getItem("token")) {
       sessionStorage.removeItem("token");
@@ -73,23 +72,31 @@ class App extends Component {
                 <img src={moodi} alt="logo" />{" "}
               </Link>
               <div className="dropdown">
-                <button onClick={this.showMenu} className="dropbtn"> Menu</button>
+                <button onClick={this.showMenu} className="dropbtn">
+                  {" "}
+                  Menu
+                </button>
                 {this.state.showMenu ? (
-                    <div className="dropdown-content" ref={(element)=>{this.dropdownMenu = element;}}>
-                        <Link to="/donation"> Support Us </Link>
-                        <Link to="/privacypolicy"> Privacy Policy </Link>
-                        <Link to="/termsofservice"> Term & Services </Link>
-                        <Link className="update" onClick={this.takeMetoUpdate}>
-                          {" "}
-                          Update Profile{" "}
-                        </Link>
-                        <Button className="signoutBtn" onClick={this.signMeOut}>
-                          {" "}
-                          Sign Out{" "}
-                        </Button>
-                    </div>
-                ):(null)}
-              </div>      
+                  <div
+                    className="dropdown-content"
+                    ref={element => {
+                      this.dropdownMenu = element;
+                    }}
+                  >
+                    <Link to="/donation"> Support Us </Link>
+                    <Link to="/privacypolicy"> Privacy Policy </Link>
+                    <Link to="/termsofservice"> Term & Services </Link>
+                    <Link className="update" onClick={this.takeMetoUpdate}>
+                      {" "}
+                      Update Profile{" "}
+                    </Link>
+                    <Button className="signoutBtn" onClick={this.signMeOut}>
+                      {" "}
+                      Sign Out{" "}
+                    </Button>
+                  </div>
+                ) : null}
+              </div>
             </nav>
           </NavDiv>
           {/* <GetUserPlaylists /> */}

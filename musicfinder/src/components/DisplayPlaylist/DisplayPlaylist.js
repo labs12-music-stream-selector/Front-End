@@ -25,24 +25,48 @@ const DisplayPlaylist = props => {
           addCurrentTrack(props.playlistId, props.currentTrack.video_id);
         }}
       >
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M12 8V16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M8 12H16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M12 8V16"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M8 12H16"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </AddBtn>
       <DragDropContext onDragEnd={handleOrderChange}>
         <ul>
-          <Droppable 
-            droppableId="droppable" 
-            direction={window.innerWidth < 700? 'horizontal' : 'vertical'}
-            >
+          <Droppable
+            droppableId="droppable"
+            direction={window.innerWidth < 700 ? "horizontal" : "vertical"}
+          >
             {(provided, snapshot) => (
-              <div 
-                id='listContainer'
-                {...provided.droppableProps} 
+              <div
+                id="listContainer"
+                {...provided.droppableProps}
                 ref={provided.innerRef}
-                >
+              >
                 {tracks.map((track, index) => (
                   <Draggable
                     key={`${track.video_id}${index}`}
@@ -85,12 +109,12 @@ const DisplayPlaylist = props => {
     axios
       .post(
         `https://fantabulous-music-finder.herokuapp.com/api/user/playlists/${playlistId}/song`,
-        { 
+        {
           song_id,
-          playlist_index: tracks.length+1
+          playlist_index: tracks.length + 1
         },
         {
-          headers: {Authorization: `${localStorage.getItem("token")}`}
+          headers: { Authorization: `${localStorage.getItem("token")}` }
         }
       )
       .then(res => {
@@ -107,13 +131,13 @@ const DisplayPlaylist = props => {
           props.playlistId
         }/songs`,
         {
-          headers: {Authorization: `${localStorage.getItem("token")}`}
+          headers: { Authorization: `${localStorage.getItem("token")}` }
         }
       )
       .then(res => {
-        if(res.data.length === 0){
+        if (res.data.length === 0) {
           setTracks([]);
-          return
+          return;
         }
         const newTracksArray = res.data.map(track => {
           let newTrack = { ...track, video_id: track.song_id };
@@ -133,9 +157,13 @@ const DisplayPlaylist = props => {
   function order(arr) {
     let newArr = [];
     // get all playlist indexes and sort them
-    const sortedIndexes = arr.map(track => track.playlist_index).sort((a,b) => a-b);
+    const sortedIndexes = arr
+      .map(track => track.playlist_index)
+      .sort((a, b) => a - b);
     // go through the sorted indexes and push the track that have the index and push it to newArr in the sorted order
-    sortedIndexes.forEach(index => newArr.push(arr.filter(track => track.playlist_index === index)[0]));
+    sortedIndexes.forEach(index =>
+      newArr.push(arr.filter(track => track.playlist_index === index)[0])
+    );
     return newArr;
   }
 
@@ -215,7 +243,7 @@ const DisplayPlaylistContainer = styled.div`
     text-align: center;
     color: #eff1f3;
   }
-  ul{
+  ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -228,9 +256,9 @@ const DisplayPlaylistContainer = styled.div`
       display: flex;
       overflow-y: unset;
       height: max-content;
-      width: 100%; 
+      width: 100%;
       overflow-y: unset;
-      #listContainer{
+      #listContainer {
         display: flex;
         overflow-x: scroll;
         width: 100%;

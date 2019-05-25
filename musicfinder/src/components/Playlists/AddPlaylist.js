@@ -22,8 +22,8 @@ const AddPlaylist = props => {
       .post(
         "https://fantabulous-music-finder.herokuapp.com/api/user/playlists",
         // "http://localhost:5000/api/user/playlists",
-        {name: `${inputData}`,user_id: localStorage.getItem("id"),
-        }, {headers: {Authorization: `${localStorage.getItem("token")}`}}
+        { name: `${inputData}`, user_id: localStorage.getItem("id") },
+        { headers: { Authorization: `${localStorage.getItem("token")}` } }
       )
       .then(res => {
         console.log(res.data);
@@ -42,7 +42,7 @@ const CreatePlaylistForm = styled.form`
   flex-direction: row;
   border-radius: 5px;
   margin-top: 10px;
-  height : 40px;
+  height: 40px;
 `;
 
 const CreatePlaylistInput = styled.input`
@@ -51,15 +51,14 @@ const CreatePlaylistInput = styled.input`
   width: 20%;
   min-height: 20px;
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   border-radius: 5px 0 0 5px;
   justify-content: flex-end;
-  align-content:right;
+  align-content: right;
   margin-left: 60%;
   @media (max-width: 500px) {
     width: 60%;
     margin-left: 9%;
-    
   }
 `;
 
@@ -71,7 +70,7 @@ const CreatePlaylistBtn = styled.button`
   border: none;
   border-radius: 0 5px 5px 0;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-  :hover{
+  :hover {
     cursor: pointer;
   }
 `;
