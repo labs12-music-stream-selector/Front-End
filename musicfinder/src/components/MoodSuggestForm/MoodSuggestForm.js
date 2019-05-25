@@ -21,18 +21,22 @@ export default class MoodSuggestForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const newMood = {
-      video_id: this.props.trackProps.track.video_id,
-      video_title: this.props.trackProps.track.video_title,
+      video_id: this.props.video_id,
+      video_title: this.props.video_title,
       correct_moods: this.state.suggestedMood
     };
+    // console.log({ ...newMood });
     axios
       .post(
         "https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/",
-        { ...newMood }
+        { ...newMood },
+        this.props.customAxios()
       )
-      .then(res => {})
+      .then(res => {
+        // console.log(res);
+      })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
     this.setState({ suggestedMood: "" });
   };
@@ -45,37 +49,37 @@ export default class MoodSuggestForm extends Component {
           <input
             type="button"
             onClick={this.changeHandler}
-            value="HAPPY"
+            value="Happy"
             name="Happy"
           />
           <input
             type="button"
             onClick={this.changeHandler}
-            value="SAD"
+            value="Sad"
             name="Sad"
           />
           <input
             type="button"
             onClick={this.changeHandler}
-            value="ANGRY"
+            value="Angry"
             name="Angry"
           />
           <input
             type="button"
             onClick={this.changeHandler}
-            value="CHILL"
+            value="Chill"
             name="Chill"
           />
           <input
             type="button"
             onClick={this.changeHandler}
-            value="IN-LOVE"
+            value="In-Love"
             name="In-Love"
           />
           <input
             type="button"
             onClick={this.changeHandler}
-            value="CONFIDENT/SASSY"
+            value="Confident/Sassy"
             name="Confident/Sassy"
           />
           <button>Submit</button>

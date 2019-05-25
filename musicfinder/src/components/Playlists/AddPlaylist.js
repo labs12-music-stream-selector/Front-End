@@ -26,6 +26,7 @@ const AddPlaylist = props => {
         { headers: { Authorization: `${localStorage.getItem("token")}` } }
       )
       .then(res => {
+        console.log(res.data);
         props.updatePlaylists(res.data);
       })
       .catch(error => {

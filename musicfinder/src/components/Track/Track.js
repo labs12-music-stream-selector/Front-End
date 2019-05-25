@@ -79,6 +79,11 @@ const Track = props => {
           </DeleteBtn>
         ) : null}
       </div>
+      {/* <MoodSuggestForm
+          video_id={props.track.url}
+          video_title={props.track.track_title}
+          customAxios={props.customAxios}
+        /> */}
     </TrackContainer>
   );
   function returnSearchResult() {
@@ -99,6 +104,7 @@ const Track = props => {
         { headers: { Authorization: `${localStorage.getItem("token")}` } }
       )
       .then(res => {
+        console.log("successfully deleted");
         props.fetchTracks();
       })
       .catch(err => console.log(err));

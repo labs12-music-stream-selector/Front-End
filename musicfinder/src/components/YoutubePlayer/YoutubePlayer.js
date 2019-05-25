@@ -16,14 +16,15 @@ const YoutubePlayer = props => {
           )}`}
           playing={true}
           controls={true}
-          onReady={() => {}}
-          onStart={() => {}}
-          onBuffer={() => {}}
-          onSeek={e => {}}
+          onReady={() => console.log("onReady")}
+          onStart={() => console.log("onStart")}
+          onBuffer={() => console.log("onBuffer")}
+          onSeek={e => console.log("onSeek", e)}
           onEnded={() => {
+            console.log("ended");
             props.playNext();
           }}
-          onError={e => console.log("onError", e)}
+          // onError={e => console.log('onError', e)}
         />
       </div>
     </PlayerContainer>

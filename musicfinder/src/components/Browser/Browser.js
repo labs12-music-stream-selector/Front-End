@@ -237,31 +237,28 @@ const Browser = props => {
   }
 
   // Get CSRF token from django cookie
-  // function cookieMonster() {
-  //   // let customAxios = axios.create({
-  //   //   headers: {
-  //   //     "X-CSRFToken":
-  //   //       "ICbMi48R3vY05o1jfqzrL65Yk8YeY5ozF4waZIm58t1Iif4nxpFllhX9YxCZaVtz"
-  //   //   }
-  //   // });
+  function cookieMonster() {
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-  // let customAxios = axios.create({
-  //   headers: {
-  //     "X-CSRFToken":
-  //       "ICbMi48R3vY05o1jfqzrL65Yk8YeY5ozF4waZIm58t1Iif4nxpFllhX9YxCZaVtz"
-  //   }
-  // });
+    let customAxios = axios.create({
+      headers: {
+        "X-CSRFToken":
+          "ICbMi48R3vY05o1jfqzrL65Yk8YeY5ozF4waZIm58t1Iif4nxpFllhX9YxCZaVtz"
+      }
+    });
 
-  // axios
-  //   .get("https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/")
-  //   .then(res => {
-  //     console.log(res);
-  //     console.log(Cookies.get("csrftoken"));
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
-  // return customAxios;
+    // axios
+    //   .get("https://moodibeats-recommender.herokuapp.com/api/new-videos-moods/")
+    //   .then(res => {
+    //     console.log(res);
+    //     console.log(Cookies.get("csrftoken"));
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    return customAxios;
+  }
 
   function getThumbnails() {
     axios

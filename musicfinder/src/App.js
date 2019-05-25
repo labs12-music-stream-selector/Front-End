@@ -22,6 +22,7 @@ class App extends Component {
   showMenu = e => {
     this.setState({ showMenu: true }, () => {
       document.addEventListener("click", this.closeMenu);
+      console.log("Hello");
     });
   };
   closeMenu = event => {
@@ -98,6 +99,7 @@ class App extends Component {
               </div>
             </nav>
           </NavDiv>
+          {/* <GetUserPlaylists /> */}
           <Route exact path="/" component={LandingPage} />
           <Route path="/termsofservice" component={TermsOfService} />
           <Route path="/privacypolicy" component={PrivacyPolicy} />

@@ -18,6 +18,7 @@ class User extends React.Component {
     // const url = `http://localhost:5000/api/users/${id}`;
     this.setState({ id: id });
     try {
+      console.log("User Info Res");
       axios
         .get(url, {
           headers: {
@@ -25,6 +26,7 @@ class User extends React.Component {
           }
         })
         .then(res => {
+          console.log("User Info Res", res);
           this.setState({ name: res.data.name, email: res.data.email });
         });
     } catch (err) {

@@ -118,6 +118,7 @@ const DisplayPlaylist = props => {
         }
       )
       .then(res => {
+        console.log("added successfully");
         fetchTracks();
       })
       .catch(err => console.log(err));
@@ -186,7 +187,9 @@ const DisplayPlaylist = props => {
           }/song/${track.id}`,
           { playlist_index: index }
         )
-        .then(res => {})
+        .then(res => {
+          console.log("successful");
+        })
         .catch(err => console.log(err));
       return track;
     });

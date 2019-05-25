@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 export default class PostPlaylist extends Component {
   constructor(props) {
@@ -27,7 +29,9 @@ export default class PostPlaylist extends Component {
           "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
         ]
       })
-      .then(res => {});
+      .then(res => {
+        console.log(window.gapi.client);
+      });
   };
 
   request = () => {
@@ -40,7 +44,9 @@ export default class PostPlaylist extends Component {
           mine: true
         }
       })
-      .execute(res => {});
+      .execute(res => {
+        console.log(res);
+      });
   };
 
   getPlaylists = () => {
@@ -53,6 +59,7 @@ export default class PostPlaylist extends Component {
       .then(
         function(response) {
           // Handle results here (response.result)
+          console.log("Response: ", response.result);
         },
         function(err) {
           console.error("Error: ", err);
