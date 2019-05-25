@@ -45,8 +45,9 @@ const LandingPage = props => {
         >
           <h2>Creator Friendly</h2>
           <p>
-            MoodiBeats the app designed for content creators who want royalty free music that doesn't cost an arm and a leg.
-            Make playlists  based on the mood you are looking for where the music is always fresh.
+            MoodiBeats the app designed for content creators who want royalty
+            free music that doesn't cost an arm and a leg. Make playlists based
+            on the mood you are looking for where the music is always fresh.
           </p>
         </Cell>
         <Cell height={1} center middle area="img-1" className="feature-img">
@@ -64,9 +65,11 @@ const LandingPage = props => {
         >
           <h2>Data Driven</h2>
           <p>
-            MoodiBeats cares about how you feel.  That's why we engineered content-based filtering on text meta-data of over 1000
-            copyright free YouTube music videos.  We then trained a classification machine learning algorithm to generate predictions
-            of moods from that meta-data.
+            MoodiBeats cares about how you feel. That's why we engineered
+            content-based filtering on text meta-data of over 1000 copyright
+            free YouTube music videos. We then trained a classification machine
+            learning algorithm to generate predictions of moods from that
+            meta-data.
           </p>
         </Cell>
         <Cell
@@ -77,7 +80,13 @@ const LandingPage = props => {
           className="feature-details"
         >
           <h2>Have Fun!</h2>
-          <p></p>
+          <p>
+            We know how hard it is to find the right music. We also know that if
+            you want to have a harmless stream to play games and interact with
+            your fans, finding music can hold you back. Browse a little! We add
+            music to keep up with uploads on Youtube. That way, you have one,
+            convenient place to search for music!
+          </p>
         </Cell>
         <Cell height={1} center middle area="img-3" className="feature-img">
           <img src={recordPlayer} alt="playlist" />
@@ -296,7 +305,7 @@ const LandingPageContainer = styled.div`
       overflow: hidden;
     }
   }
-  .linkedImg{
+  .linkedImg {
     height: 35px;
     width: 35px;
     margin: 4px;
@@ -401,7 +410,7 @@ const Team = styled.div`
     flex-direction: column;
     max-width: 275px;
     align-items: center;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
     transition: 0.3s;
     border-radius: 5px;
     margin: 15px;
@@ -425,7 +434,7 @@ const Team = styled.div`
     padding-bottom: 5px;
   }
   a {
-    font-weight:bold;
+    font-weight: bold;
     font-size: 15px;
     text-decoration: none;
     text-align: center;
@@ -445,7 +454,6 @@ const Team = styled.div`
     }
     li {
       align-self: unset;
-
     }
   }
   @media (max-width: 500px) {
@@ -455,7 +463,6 @@ const Team = styled.div`
       margin: 0 auto;
     }
     li {
-
       img {
         margin-bottom: 10px;
       }
@@ -470,12 +477,11 @@ const Team = styled.div`
     }
   }
 
-  @media(max-width: 300px) {
+  @media (max-width: 300px) {
     ul {
       h4 {
         font-size: 0.8rem;
       }
-
     }
   }
 `;
