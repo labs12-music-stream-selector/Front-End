@@ -279,6 +279,32 @@ const LandingPage = props => {
                 </a>
               </div>
             </li>
+            <li>
+              <img
+                src="https://avatars0.githubusercontent.com/u/13532991?s=400&v=4"
+                alt="Kevin Brack"
+              />
+              <h4>Kevin Brack</h4>
+              <p>Team Lead</p>
+              <div>
+                <a href="https://github.com/KevinBrack">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://github.com/favicon.ico"
+                    alt="github logo"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/kevin-brack-273a25a0/">
+                  {" "}
+                  <img
+                    className="linkedImg"
+                    src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca"
+                    alt="linkedin logo"
+                  />
+                </a>
+              </div>
+            </li>
           </ul>
         </div>
       </Team>
