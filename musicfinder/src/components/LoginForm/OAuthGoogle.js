@@ -13,19 +13,19 @@ class OAuthGoogle extends Component {
   }
   signup = (res, type) => {
     let postData;
-    if (type === "google" && res.w3.U3) {
-      console.log(res);
+    if (type === "google") {
+      const { googleId, name, email, imageUrl } = res.profileObj;
       postData = {
-        name: res.w3.ig,
+        name: name,
         provider: type,
-        email: res.w3.U3,
-        provider_id: res.El,
-        token: res.Zi.access_token,
-        provider_pic: res.w3.Paa
+        email: email,
+        provider_id: googleId,
+        token: res.accessToken,
+        provider_pic: imageUrl
       };
     }
     if (postData) {
-      // console.log(postData);
+      console.log({ postData });
       PostData(postData).then(result => {
         sessionStorage.setItem(
           "token",
@@ -36,7 +36,6 @@ class OAuthGoogle extends Component {
         this.setState({ redirect: true });
         this.props.history.push("/home");
       });
-    } else {
     }
   };
   render() {
@@ -50,17 +49,17 @@ class OAuthGoogle extends Component {
 
     // Logan's Client ID from Google
     // "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com"
-    const CLIENTID_LOGAN =
-      "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
+    // const CLIENTID_LOGAN =
+    //   "1023911349266-uh3fvbbt7d652443db15q3f477v3oa9v.apps.googleusercontent.com";
 
-    const CLIENTID_JON =
-      "609694193472-8raeak24684f9qq5jr8qthaerev50jht.apps.googleusercontent.com";
+    // const CLIENTID_JON =
+    //   "609694193472-8raeak24684f9qq5jr8qthaerev50jht.apps.googleusercontent.com";
 
     function keyChanger() {
       if (process.env.NODE_ENV !== "") {
         return (
           <GoogleLogin
-            clientId={CLIENTID_JON}
+            clientId={CLIENTID_MD}
             buttonText="Login with Google"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
